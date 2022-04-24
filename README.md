@@ -14,9 +14,9 @@ We are running a **Nusantara NLP Datasets hackathon** to centralize many NLP dat
 
 ## Goals of this hackathon
 
-Our goal is to **enable easy programatic access to these datasets** using Huggingface's (🤗) [`datasets` library](https://huggingface.co/docs/datasets/). To do this, we propose a unified schema for dataset extraction, with the intention of implementing as many biomedical datasets as possible to enable **reproducibility in data processing**. 
+Our goal is to **enable easy programatic access to these datasets** using Huggingface's (🤗) [`datasets` library](https://huggingface.co/docs/datasets/). To do this, we propose a unified schema for dataset extraction, with the intention of implementing as many datasets as possible to enable **reproducibility in data processing**. 
 
-There are two broad licensing categories for biomedical datasets:
+There are two broad licensing categories for datasets:
 
 ##### 1. Public Data (Public Domain, Creative Commons, Apache 2.0, etc.)
 ##### 2. External Data Use Agreements
@@ -130,7 +130,7 @@ Full details on how to handle offsets and text in the bigbio kb schema can be fo
 
 #### My dataset is complicated, can you help me?
 
-Yes! Please join the hack-a-thon [Biomedical Discord Server](https://discord.gg/Cwf3nT3ajP) and ask for help. 
+Yes! Please join the hack-a-thon [Slack Channel]() and ask for help. 
 
 #### My dataset is too complicated, can I switch?
 
@@ -138,7 +138,7 @@ Yes! Some datasets are easier to write dataloader scripts for than others. If yo
 
 #### Can I change the Nusantara schema?
 
-**No, please do not modify the Nusantara Schema.** The goal of this hackathon is to enable simple, programmatic access to a large variety of biomedical datasets. Part of this requires having a dependable interface. We developed our schema to address the most salient types of questions to ask of the datasets. We would be more than happy to discuss your suggestions, and you are welcome to implement it as a new config.
+**No, please do not modify the Nusantara Schema.** The goal of this hackathon is to enable simple, programmatic access to a large variety of datasets. Part of this requires having a dependable interface. We developed our schema to address the most salient types of questions to ask of the datasets. We would be more than happy to discuss your suggestions, and you are welcome to implement it as a new config.
 
 #### My dataset has multiple labels for a span of text - what do I do?
 
