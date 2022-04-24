@@ -8,7 +8,7 @@ Please do the following before getting started:
 
 - [Make](https://huggingface.co/join) an account on 🤗's Hub and [login](https://huggingface.co/login). **Choose a good password, as you'll need to authenticate your credentials**. 
 
-- Join the BigScience Biomedical initiative [here](https://huggingface.co/indobenchmark)
+- Join the Indobenchmark initiative [here](https://huggingface.co/indobenchmark)
     - click the "Request to join this org" button in the upper right corner.
 
 - Make a github account; you can follow instructions to install git [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). 

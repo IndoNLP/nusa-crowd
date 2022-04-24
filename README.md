@@ -1,18 +1,16 @@
-# Welcome to the BigScience🌸 Biomedical NLP Hackathon!
+# Welcome to the Nusantara NLP Hackathon!
 
 
-![progress claimed](https://progress-bar.dev/96/?title=Datasets%20Claimed)
+![progress claimed](https://progress-bar.dev/0/?title=Datasets%20Claimed)
 
-![tier1](https://progress-bar.dev/100/?title=Milestone%201%20(30%20Datasets%20Completed))
-![tier2](https://progress-bar.dev/67/?title=Milestone%202%20(60%20Datasets%20Completed))
-![tier3](https://progress-bar.dev/40/?title=Milestone%203%20(100%20Datasets%20Completed))
-![tier4](https://progress-bar.dev/24/?title=Milestone%204%20(All%20Datasets%20Completed))
+![tier1](https://progress-bar.dev/0/?title=Progress%201%20(30%20Datasets%20Completed))
+![tier2](https://progress-bar.dev/0/?title=Progress%202%20(60%20Datasets%20Completed))
+![tier3](https://progress-bar.dev/0/?title=Progress%203%20(100%20Datasets%20Completed))
+![tier4](https://progress-bar.dev/0/?title=Progress%204%20(150%20Datasets%20Completed))
 
+Nusantara NLP🌸 initative is an open scientific collaboration of hundreds Indonesian NLP researchers from various countries and institutions who collaborate on collecting and advancing natural language processing (NLP) resources for Indonesian and its 700+ local languages to broaden accessibility of language datasets while working on challenging scientific questions around language modeling.
 
-Huggingface's BigScience🌸 initative is an open scientific collaboration of nearly 600 researchers from 50 countries and 250 institutions who collaborate on various projects within the natural language processing (NLP) space to broaden accessibility of language datasets while working on challenging scientific questions around language modeling.  
-<!--- @Natasha From the Data_sourcing wiki  --->
-
-We are running a **Biomedical Datasets hackathon** to centralize many NLP datasets in the biological and medical space. Biological data is diverse, so a unified location that joins multiple sources while preserving the data closest to the original form can greatly help accessbility.
+We are running a **Nusantara NLP Datasets hackathon** to centralize many NLP datasets in Indonesian and local languages. Indonesian languages are diverse and scattered, so a unified location that joins multiple sources while preserving the data closest to the original form can greatly help accessibility.
 
 ## Goals of this hackathon
 
@@ -21,20 +19,19 @@ Our goal is to **enable easy programatic access to these datasets** using Huggin
 There are two broad licensing categories for biomedical datasets:
 
 ##### 1. Public Data (Public Domain, Creative Commons, Apache 2.0, etc.)
-##### 2. External Data Use Agreements (PhysioNet, i2b2/n2c2, etc.)
+##### 2. External Data Use Agreements
 
 We will accept data-loading scripts for either type; please see the [FAQs](#FAQs) for more explicit details on what we propose.
 
 ### Why is this important?
 
-Biomedical language data is highly specialized, requiring expert curation and annotation. Many great initiatives have created different language data sets across a variety of biological domains. A **centralized source that allows users to access relevant information reproducibly** greatly increases accessibility of these datasets, and promotes research.
+Textual data of Indonesian languages, especially for local languages, is extremely low-resource and under represented globally. Many great initiatives have created different language data sets across a variety of languages. A **centralized source that allows users to access relevant information reproducibly** greatly increases accessibility of these datasets, and promotes research.
 
 Our unified schema allows researchers and practioners to **access the same type of information across a variety of datasets with fixed keys**. This can enable researchers to quickly iterate, and write scripts without worrying about pre-processing nuances specific to a dataset.
 
-
 ## Contribution Guidelines
 
-To be considered a contributor, participants must implement an *accepted data-loading script* to the bigscience-biomedical collection for **at least 3 datasets**. 
+To be considered a contributor, participants must implement an *accepted data-loading script* to the nusantara-nlp collection for **at least 3 datasets**. 
 
 Explicit instructions are found in the next section, but the steps for getting a data-loading script accepted are as follows: <br>
 
@@ -51,7 +48,7 @@ Details for contributor acknowledgements and rewards can be found [here](#Thank-
 There are two options to choose a dataset to implement; you can choose either option, but **we recommend option A**. 
 
 **Option A: Assign yourself a dataset from our curated list**
-- Choose a dataset from the [list of Biomedical datasets](https://github.com/orgs/bigscience-workshop/projects/6/). 
+- Choose a dataset from the [list of Indonesian datasets](https://github.com/indobenchmark/nusantara-datasets/1/views/1). 
 <p align="center">
     <img src="./docs/_static/img/select-task.jpg" style="width: 80%;"/>
 </p>
@@ -61,22 +58,22 @@ There are two options to choose a dataset to implement; you can choose either op
     <img src="./docs/_static/img/self-assign.jpg" style="width: 80%;"/>
 </p>
 
-- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `bigbio` schema](https://github.com/bigscience-workshop/biomedical/blob/master/task_schemas.md). 
+- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/indobenchmark/nusantara-datasets/blob/master/task_schemas.md). 
 
 **Option B: Implement a new dataset not on the list**
 
-If you have a biomedical or clinical dataset you would like to propose in this collection, you are welcome to [make a new issue](https://github.com/bigscience-workshop/biomedical/issues/new/choose). Choose `Add Dataset` and fill out relevant information. **Make sure that your dataset does not exist in the 🤗 [Hub](https://huggingface.co/datasets).**
+If you have a Indonesian and local languages dataset you would like to propose in this collection, you are welcome to [make a new issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and fill out relevant information. **Make sure that your dataset does not exist in the 🤗 [Hub](https://huggingface.co/datasets).**
 
 If an admin approves it, then you are welcome to implement this dataset and it will count toward contribution credit.
 
 ### 2. Implement the data-loading script for your dataset and create a PR
 
-[Check out our step-by-step guide to implementing a dataloader with the bigbio schema](CONTRIBUTING.md).
+[Check out our step-by-step guide to implementing a dataloader with the nusantara schema](CONTRIBUTING.md).
 
 **Please do not upload the data directly; if you have a specific question or request, [reach out to an admin](#Community-channels)**
 
 As soon as you have opened a PR, the dataset will be marked as `In Progress` in the
-[list of Biomedical datasets](https://github.com/orgs/bigscience-workshop/projects/6/).
+[list of Indonesian datasets](https://github.com/orgs/indobenchmark/projects/1/views/1).
 When an admin accepts the PR and closes the corresponding issue, the dataset will be
 marked as `Done`.
 
@@ -84,14 +81,11 @@ marked as `Done`.
 
 We welcome contributions from a wide variety of backgrounds; we are more than happy to guide you through the process. For instructions on how to get involved or ask for help, check out the following options:
 
-#### Join BigScience
-Please join the BigScience initiative [here](https://bigscience.huggingface.co/); there is a [google form](https://docs.google.com/forms/d/e/1FAIpQLSdF68oPkylNhwrnyrdctdcs0831OULetgfYtr-aVxBg053zqA/viewform) to fill out to have access to the biomedical working group slack. Once you have filled out this form, you'll get access to BigScience's google drive. There is a document where you can fill your name next to a working group; be sure to fill your name on the "Biomedical" group. 
-
-#### Join our Discord Server
-Alternatively, you can ping us on the [Biomedical Discord Server](https://discord.gg/Cwf3nT3ajP). The Discord server can be used to share information quickly or ask code-related questions.
+#### Join our Slack Channel
+Alternatively, you can ping us on the [Slack Channel](https://discord.gg/Cwf3nT3ajP). The Slack channel can be used to share information quickly or ask code-related questions.
 
 #### Make a Github Issue
-For quick questions and clarifications, you can [make an issue via Github](https://github.com/bigscience-workshop/biomedical/issues/new/choose).
+For quick questions and clarifications, you can [make an issue via Github](https://github.com/indobenchmark/nusantara-datasets/issues/new).
 
 You are welcome to use any of the above resources as necessary. 
 
@@ -101,7 +95,6 @@ You are welcome to use any of the above resources as necessary.
 
 The license for a dataset is not always obvious. Here are some strategies to try in your search,
 
-* check the `Experiment A: Annotated Datasets` tab of the [google sheet](https://docs.google.com/spreadsheets/d/1eOa9NhNmgGLByWKZ9ioKmNErq824dGA-nV5WpRWZ4a8/edit?usp=sharing) we used while planning the hackathon 
 * check for files such as README or LICENSE that may be distributed with the dataset itself
 * check the dataset webpage
 * check publications that announce the release of the dataset
@@ -111,28 +104,15 @@ If no official license is listed anywhere, but you find a webpage that describes
 
 #### What if my dataset is not publicly available?
 
-We understand that some biomedical datasets are not publicly available due to data usage agreements or licensing. For these datasets, we recommend implementing a dataloader script that references a local directory containing the dataset. You can find examples in the [n2c2_2011](examples/n2c2_2011.py) and [bioasq](examples/bioasq.py) implementations. There are also local dataset specific instructions in  [template](templates/template.py).
-
-
-#### My dataset is in a standard format (e.g. BRAT, BioC). Do I have to write my own parser?
-
-If your dataset is in a standard format, please use a recommended parser if available:
-- BioC: Use the excellent [bioc](https://github.com/bionlplab/bioc) package for parsing. Example usage can be found in [examples/bc5cdr.py](examples/bc5cdr.py)
-- BRAT: Use [our custom brat parser](utils/parsing.py). Example usage can be found in [examples/mlee.py](examples/mlee.py).
-
-If the recommended parser does not work for you dataset, please alert us in Discord, Slack or the github issue.
-
-
+We understand that some datasets are not publicly available due to data usage agreements or licensing. For these datasets, we recommend implementing a dataloader script that references a local directory containing the dataset. You can find examples in the [n2c2_2011](examples/n2c2_2011.py) and [bioasq](examples/bioasq.py) implementations. There are also local dataset specific instructions in  [template](templates/template.py).
 
 #### What types of libraries can we import?
 
-Eventually, your dataloader script will need to run using only the packages supplied by the [datasets](https://github.com/huggingface/datasets) package. If you find a well supported package that makes your implementation easier (e.g. [bioc](https://github.com/bionlplab/bioc)), then feel free to use it. 
-
-We will address the specifics during review of your PR to the [BigScience biomedical repo](https://github.com/bigscience-workshop/biomedical) and find a way to make it usable in the final submission to [huggingface bigscience-biomedical](https://huggingface.co/bigscience-biomedical)
+Eventually, your dataloader script will need to run using only the packages supplied by the [datasets](https://github.com/huggingface/datasets) package. If you find a well supported package that makes your implementation easier, then feel free to use it.  We will address the specifics during review of your PR to the [Nusantara NLP repo](https://github.com/indobenchmark/nusantara-datasets).
 
 #### Can I upload my dataset anywhere?
 
-No. Please don't upload the dataset you're working on to the huggingface hub or anywhere else.  This is not the goal of the hackathon and some datasets have licensing agreements that prevent redistribution. If the dataset is public, include a downloading component in your dataset loader script. Otherwise, include only an "extraction from local files" component in your dataset loader script. If you have a custom dataset you would like to submit, please [make an issue](https://github.com/bigscience-workshop/biomedical/issues/new) and an admin will get back to you.  
+No. Please don't upload the dataset you're working on to the huggingface hub or anywhere else.  This is not the goal of the hackathon and some datasets have licensing agreements that prevent redistribution. If the dataset is public, include a downloading component in your dataset loader script. Otherwise, include only an "extraction from local files" component in your dataset loader script. If you have a custom dataset you would like to submit, please [make an issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and an admin will get back to you.  
 
 #### My dataset supports multiple tasks with different bigbio schemas. What should I do? 
 
@@ -146,7 +126,7 @@ Otherwise use the harmonization that you think is best.
 
 #### How should I handle offsets and text in the bigbio schema?
 
-Full details on how to handle offsets and text in the bigbio kb schema can be found in the [schema documentation](https://github.com/bigscience-workshop/biomedical/blob/master/task_schemas.md).
+Full details on how to handle offsets and text in the bigbio kb schema can be found in the [schema documentation](https://github.com/indobenchmark/nusantara-datasets/blob/master/task_schemas.md).
 
 #### My dataset is complicated, can you help me?
 
@@ -156,9 +136,9 @@ Yes! Please join the hack-a-thon [Biomedical Discord Server](https://discord.gg/
 
 Yes! Some datasets are easier to write dataloader scripts for than others. If you find yourself working on a dataset that you can not make progress on, please make a comment in the associated issue, asked to be un-assigned from the issue, and start the search for a new unclaimed dataset. 
 
-#### Can I change the Big-Bio schema?
+#### Can I change the Nusantara schema?
 
-**No, please do not modify the Big-Bio Schema.** The goal of this hackathon is to enable simple, programmatic access to a large variety of biomedical datasets. Part of this requires having a dependable interface. We developed our schema to address the most salient types of questions to ask of the datasets. We would be more than happy to discuss your suggestions, and you are welcome to implement it as a new config.
+**No, please do not modify the Nusantara Schema.** The goal of this hackathon is to enable simple, programmatic access to a large variety of biomedical datasets. Part of this requires having a dependable interface. We developed our schema to address the most salient types of questions to ask of the datasets. We would be more than happy to discuss your suggestions, and you are welcome to implement it as a new config.
 
 #### My dataset has multiple labels for a span of text - what do I do?
 
@@ -171,16 +151,18 @@ In order to keep turnaround time reasonable, and ensure datasets are being compl
 
 * Please claim a dataset only if you intend to work on it. We'll try to check in within 3 days to ensure you have the help you need. Don't hesitate to contact the admins! We are ready to help 💪!
 
-* If you have already claimed a dataset prior to (2022/04/05), we will check in on Friday (2022/04/08). If we do not hear back via GitHub issues OR a message to the Discord admins on general, we will make the dataset open for other participants by **Saturday (2022/04/09)**.
+* If you have already claimed a dataset prior to (2022/06/01), we will check in on **Friday (2022/06/10)**. If we do not hear back via GitHub issues OR a message to the Discord admins on general, we will make the dataset open for other participants by **Saturday (2022/06/11)**.
 
-* If things are taking longer than expected - that is totally ok! Please let us know via GitHub issues (preferred) or by pinging the @admins channel on Discord.
+* If things are taking longer than expected - that is totally ok! Please let us know via GitHub issues (preferred) or by pinging the @admins channel on Slack.
 
 ## Thank you!
 
 We greatly appreciate your help! 
 
-The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Implementing 3 or more dataset loaders will guarantee authorship. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
+The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Implementing **3 or more dataset loaders** will guarantee authorship. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
 
+<!-- 
 ## Acknowledgements
 
 This hackathon guide was heavily inspired by [the BigScience Datasets Hackathon](https://github.com/bigscience-workshop/data_tooling/wiki/datasets-hackathon).
+ -->
