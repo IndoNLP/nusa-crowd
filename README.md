@@ -48,7 +48,7 @@ Details for contributor acknowledgements and rewards can be found [here](#Thank-
 There are two options to choose a dataset to implement; you can choose either option, but **we recommend option A**. 
 
 **Option A: Assign yourself a dataset from our curated list**
-- Choose a dataset from the [list of Indonesian datasets](https://github.com/indobenchmark/nusantara-datasets/1/views/1). 
+- Choose a dataset from the [list of Nusantara datasets](https://github.com/orgs/indobenchmark/projects/1/views/1). 
 <p align="center">
     <img src="./docs/_static/img/select-task.jpg" style="width: 80%;"/>
 </p>
