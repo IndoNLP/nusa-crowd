@@ -1,5 +1,5 @@
 """
-Unit-tests to ensure tasks adhere to big-bio schema.
+Unit-tests to ensure tasks adhere to nusantara schema.
 """
 import argparse
 import importlib
@@ -76,7 +76,7 @@ OFFSET_ERROR_MSG = (
 
 class TestDataLoader(unittest.TestCase):
     """
-    Given a dataset script that has been implemented, check if it adheres to the `bigbio` schema.
+    Given a dataset script that has been implemented, check if it adheres to the `nusantara` schema.
 
     The test
     """
@@ -94,7 +94,7 @@ class TestDataLoader(unittest.TestCase):
              dataloading script has correct path format
          (2) setUp: Checks data and _SUPPORTED_TASKS can be loaded
          (3) print_statistics: Counts number of all possible schema keys/instances of the examples
-         (4) test_schema: confirms big-bio keys present
+         (4) test_schema: confirms nusantara keys present
          (5) test_are_ids_globally_unique: Checks if all examples have a unique identifier
 
          # KB-Specific tests
@@ -108,15 +108,15 @@ class TestDataLoader(unittest.TestCase):
         """  # noqa
 
         for schema in self.schemas_to_check:
-            dataset_bigbio = self.datasets_bigbio[schema]
+            dataset_nusantara = self.datasets_nusantara[schema]
             with self.subTest("IDs globally unique"):
-                self.test_are_ids_globally_unique(dataset_bigbio)
+                self.test_are_ids_globally_unique(dataset_nusantara)
             with self.subTest("Check schema validity"):
                 self.test_schema(schema)
 
             mapped_features = _SCHEMA_TO_FEATURES[schema]
             split_to_feature_statistics = self.get_feature_statistics(mapped_features, schema)
-            for split_name, split in self.datasets_bigbio[schema].items():
+            for split_name, split in self.datasets_nusantara[schema].items():
                 print(split_name)
                 print("=" * 10)
                 for k, v in split_to_feature_statistics[split_name].items():
@@ -125,23 +125,23 @@ class TestDataLoader(unittest.TestCase):
 
             if schema == "KB":
                 with self.subTest("Check referenced ids"):
-                    self.test_do_all_referenced_ids_exist(dataset_bigbio)
+                    self.test_do_all_referenced_ids_exist(dataset_nusantara)
                 with self.subTest("Check passage offsets"):
-                    self.test_passages_offsets(dataset_bigbio)
+                    self.test_passages_offsets(dataset_nusantara)
                 with self.subTest("Check entity offsets"):
-                    self.test_entities_offsets(dataset_bigbio)
+                    self.test_entities_offsets(dataset_nusantara)
                 with self.subTest("Check events offsets"):
-                    self.test_events_offsets(dataset_bigbio)
+                    self.test_events_offsets(dataset_nusantara)
                 with self.subTest("Check coref offsets"):
-                    self.test_coref_ids(dataset_bigbio)
+                    self.test_coref_ids(dataset_nusantara)
 
             elif schema == "QA":
                 with self.subTest("Check multiple choice"):
-                    self.test_multiple_choice(dataset_bigbio)
+                    self.test_multiple_choice(dataset_nusantara)
 
 
     def setUp(self) -> None:
-        """Load original and big-bio schema views"""
+        """Load original and nusantara schema views"""
 
         logger.info(f"self.PATH: {self.PATH}")
         logger.info(f"self.SUBSET_ID: {self.SUBSET_ID}")
@@ -180,11 +180,11 @@ class TestDataLoader(unittest.TestCase):
             use_auth_token=self.USE_AUTH_TOKEN,
         )
 
-        self.datasets_bigbio = {}
+        self.datasets_nusantara = {}
         for schema in self.schemas_to_check:
-            config_name = f"{self.SUBSET_ID}_bigbio_{schema.lower()}"
+            config_name = f"{self.SUBSET_ID}_nusantara_{schema.lower()}"
             logger.info(f"Checking load_dataset with config name {config_name}")
-            self.datasets_bigbio[schema] = datasets.load_dataset(
+            self.datasets_nusantara[schema] = datasets.load_dataset(
                 self.PATH,
                 name=config_name,
                 data_dir=self.DATA_DIR,
@@ -194,13 +194,13 @@ class TestDataLoader(unittest.TestCase):
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """
         Gets sample statistics, for each split and sample of the number of
-        features in the schema present; only works for the big-bio schema.
+        features in the schema present; only works for the nusantara schema.
 
         :param schema_type: Type of schema to reference features from
         """  # noqa
         logger.info("Gathering schema statistics")
         all_counters = {}
-        for split_name, split in self.datasets_bigbio[schema].items():
+        for split_name, split in self.datasets_nusantara[schema].items():
 
             counter = defaultdict(int)
             for example in split:
@@ -254,12 +254,12 @@ class TestDataLoader(unittest.TestCase):
             for elem in collection:
                 self._assert_ids_globally_unique(elem, ids_seen)
 
-    def test_are_ids_globally_unique(self, dataset_bigbio: DatasetDict):
+    def test_are_ids_globally_unique(self, dataset_nusantara: DatasetDict):
         """
         Tests each example in a split has a unique ID.
         """
         logger.info("Checking global ID uniqueness")
-        for split in dataset_bigbio.values():
+        for split in dataset_nusantara.values():
             ids_seen = set()
             for example in split:
                 self._assert_ids_globally_unique(example, ids_seen=ids_seen)
@@ -297,12 +297,12 @@ class TestDataLoader(unittest.TestCase):
 
         return existing_ids
 
-    def test_do_all_referenced_ids_exist(self, dataset_bigbio: DatasetDict):
+    def test_do_all_referenced_ids_exist(self, dataset_nusantara: DatasetDict):
         """
         Checks if referenced IDs are correctly labeled.
         """
         logger.info("Checking if referenced IDs are properly mapped")
-        for split in dataset_bigbio.values():
+        for split in dataset_nusantara.values():
             for example in split:
                 referenced_ids = set()
                 existing_ids = set()
@@ -322,17 +322,17 @@ class TestDataLoader(unittest.TestCase):
                                 f"Referenced element {(ref_id, ref_type)} could not be found in existing ids {existing_ids}. Please make sure that this is not because of a bug in your data loader."
                             )
 
-    def test_passages_offsets(self, dataset_bigbio: DatasetDict):
+    def test_passages_offsets(self, dataset_nusantara: DatasetDict):
         """
         Verify that the passages offsets are correct,
         i.e.: passage text == text extracted via the passage offsets
         """  # noqa
         logger.info("KB ONLY: Checking passage offsets")
-        for split in dataset_bigbio:
+        for split in dataset_nusantara:
 
-            if "passages" in dataset_bigbio[split].features:
+            if "passages" in dataset_nusantara[split].features:
 
-                for example in dataset_bigbio[split]:
+                for example in dataset_nusantara[split]:
 
                     example_text = _get_example_text(example)
 
@@ -408,7 +408,7 @@ class TestDataLoader(unittest.TestCase):
             if by_offset_text != text:
                 yield f" text:`{text}` != text_by_offset:`{by_offset_text}`"
 
-    def test_entities_offsets(self, dataset_bigbio: DatasetDict):
+    def test_entities_offsets(self, dataset_nusantara: DatasetDict):
         """
         Verify that the entities offsets are correct,
         i.e.: entity text == text extracted via the entity offsets
@@ -416,11 +416,11 @@ class TestDataLoader(unittest.TestCase):
         logger.info("KB ONLY: Checking entity offsets")
         errors = []
 
-        for split in dataset_bigbio:
+        for split in dataset_nusantara:
 
-            if "entities" in dataset_bigbio[split].features:
+            if "entities" in dataset_nusantara[split].features:
 
-                for example in dataset_bigbio[split]:
+                for example in dataset_nusantara[split]:
 
                     example_id = example["id"]
                     example_text = _get_example_text(example)
@@ -442,7 +442,7 @@ class TestDataLoader(unittest.TestCase):
             logger.warning(msg="\n".join(errors) + OFFSET_ERROR_MSG)
 
     # UNTESTED: no dataset example
-    def test_events_offsets(self, dataset_bigbio: DatasetDict):
+    def test_events_offsets(self, dataset_nusantara: DatasetDict):
         """
         Verify that the events' trigger offsets are correct,
         i.e.: trigger text == text extracted via the trigger offsets
@@ -450,11 +450,11 @@ class TestDataLoader(unittest.TestCase):
         logger.info("KB ONLY: Checking event offsets")
         errors = []
 
-        for split in dataset_bigbio:
+        for split in dataset_nusantara:
 
-            if "events" in dataset_bigbio[split].features:
+            if "events" in dataset_nusantara[split].features:
 
-                for example in dataset_bigbio[split]:
+                for example in dataset_nusantara[split]:
 
                     example_id = example["id"]
                     example_text = _get_example_text(example)
@@ -475,18 +475,18 @@ class TestDataLoader(unittest.TestCase):
         if len(errors) > 0:
             logger.warning(msg="\n".join(errors) + OFFSET_ERROR_MSG)
 
-    def test_coref_ids(self, dataset_bigbio: DatasetDict):
+    def test_coref_ids(self, dataset_nusantara: DatasetDict):
         """
         Verify that coreferences ids are entities
 
         from `examples/test_n2c2_2011_coref.py`
         """  # noqa
         logger.info("KB ONLY: Checking coref offsets")
-        for split in dataset_bigbio:
+        for split in dataset_nusantara:
 
-            if "coreferences" in dataset_bigbio[split].features:
+            if "coreferences" in dataset_nusantara[split].features:
 
-                for example in dataset_bigbio[split]:
+                for example in dataset_nusantara[split]:
                     example_id = example["id"]
                     entity_lookup = {ent["id"]: ent for ent in example["entities"]}
 
@@ -498,14 +498,14 @@ class TestDataLoader(unittest.TestCase):
                             ), f"Split:{split} - Example:{example_id} - Entity:{entity_id} not found!"
 
 
-    def test_multiple_choice(self, dataset_bigbio: DatasetDict):
+    def test_multiple_choice(self, dataset_nusantara: DatasetDict):
         """
         Verify that each answer in a multiple choice Q/A task is in choices.
         """  # noqa
         logger.info("QA ONLY: Checking multiple choice")
-        for split in dataset_bigbio:
+        for split in dataset_nusantara:
 
-            for example in dataset_bigbio[split]:
+            for example in dataset_nusantara[split]:
 
                 if len(example["choices"]) > 0:
                     assert(
@@ -524,7 +524,7 @@ class TestDataLoader(unittest.TestCase):
 
 
     def test_schema(self, schema: str):
-        """Search supported tasks within a dataset and verify big-bio schema"""
+        """Search supported tasks within a dataset and verify nusantara schema"""
 
 
         non_empty_features = set()
@@ -537,7 +537,7 @@ class TestDataLoader(unittest.TestCase):
             features = _SCHEMA_TO_FEATURES[schema]
 
         split_to_feature_counts = self.get_feature_statistics(features=features, schema=schema)
-        for split_name, split in self.datasets_bigbio[schema].items():
+        for split_name, split in self.datasets_nusantara[schema].items():
             self.assertEqual(split.info.features, features)
             for non_empty_feature in non_empty_features:
                 if split_to_feature_counts[split_name][non_empty_feature] == 0:
@@ -568,7 +568,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     parser = argparse.ArgumentParser(
-        description="Unit tests for BigBio datasets. Args are passed to `datasets.load_dataset`"
+        description="Unit tests for Nusantara datasets. Args are passed to `datasets.load_dataset`"
     )
 
     parser.add_argument("path", type=str, help="path to dataloader script (e.g. examples/n2c2_2011.py)")
@@ -578,13 +578,13 @@ if __name__ == "__main__":
         default=None,
         required=False,
         choices=list(_VALID_SCHEMAS),
-        help="by default, bigbio schemas will be discovered from _SUPPORTED_TASKS. use this to explicitly test only one schema.",
+        help="by default, nusantara schemas will be discovered from _SUPPORTED_TASKS. use this to explicitly test only one schema.",
     )
     parser.add_argument(
         "--subset_id",
         default=None,
         required=False,
-        help="by default, subset_id will be generated from path (e.g. if path=examples/n2c2_2011.py then subset_id=n2c2_2011). the config name is then constructed as config_name=<subset_id>_bigbio_<schema>. use this to explicitly set the subset_id for the config name you want to test (e.g. bioasq9b).",
+        help="by default, subset_id will be generated from path (e.g. if path=datasets/smsa.py then subset_id=smsa). the config name is then constructed as config_name=<subset_id>_nusantara_<schema>. use this to explicitly set the subset_id for the config name you want to test.",
     ),
     parser.add_argument("--data_dir", type=str, default=None)
     parser.add_argument("--use_auth_token", default=None)
