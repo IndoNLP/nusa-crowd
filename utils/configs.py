@@ -4,8 +4,8 @@ import datasets
 
 
 @dataclass
-class BigBioConfig(datasets.BuilderConfig):
-    """BuilderConfig for BigBio."""
+class NusantaraConfig(datasets.BuilderConfig):
+    """BuilderConfig for Nusantara."""
 
     name: str = None
     version: datasets.Version = None
