@@ -8,7 +8,7 @@ Please do the following before getting started:
 
 - [Make](https://huggingface.co/join) an account on 🤗's Hub and [login](https://huggingface.co/login). **Choose a good password, as you'll need to authenticate your credentials**. 
 
-- Join the Indobenchmark initiative [here](https://huggingface.co/indobenchmark)
+- Join the Indobenchmark initiative [here](https://huggingface.co/indobenchmark).
     - click the "Request to join this org" button in the upper right corner.
 
 - Make a github account; you can follow instructions to install git [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). 
@@ -18,9 +18,9 @@ Please do the following before getting started:
 
 ### 2) Activate the Huggingface hub
 
-You can find the official instructions [here](https://huggingface.co/welcome). We will provide what you need for the biomedical-datasets hackathon environment.
+You can find the official instructions [here](https://huggingface.co/welcome). We will provide what you need for the nusantara-datasets hackathon environment.
 
-With your active `bigscience-biomedical` environment, use the following command:
+With your active `nusantara` environment, use the following command:
 
 ```
 huggingface-cli login
@@ -30,7 +30,7 @@ Login with your 🤗 Hub account username and password.
 
 ### 3. Create a dataset repository
 
-Make a repository via the 🤗 Hub [here](https://huggingface.co/new-dataset) with the following details
+Make a repository via the 🤗 Hub [here](https://huggingface.co/new-dataset) with the following details.
 
 + Set Owner: nusantara-datasets
 + Set Dataset name: the name of the dataset 
@@ -52,7 +52,7 @@ git clone https://huggingface.co/datasets/indobenchmark/<your_dataset_name>
 
 ### 5. Commit your changes
 
-Run the following commands to add and push your work
+Run the following commands to add and push your work.
 
 ```
 git add <your_file_name.py>  # add the dataset
@@ -64,14 +64,14 @@ git push origin
 
 Run the following command **in a folder that does not include your data-loading script**:
 
-Test both the original dataset schema/config and the bigbio schema/config. 
+Test both the original dataset schema/config and the nusantara schema/config. 
 
 **Public Dataset**
 ```python
 from datasets import load_dataset
 
 dataset_orig = load_dataset("indobenchmark/<your_dataset_name>", name="source", use_auth_token=True)
-dataset_bigbio = load_dataset("indobenchmark/<your_dataset_name>", name="indobenchmark", use_auth_token=True)
+dataset_indobenchmark= load_dataset("indobenchmark/<your_dataset_name>", name="indobenchmark", use_auth_token=True)
 ```
 
 **Private Dataset**

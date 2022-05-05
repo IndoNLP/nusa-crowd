@@ -50,7 +50,7 @@ There are two options to choose a dataset to implement; you can choose either op
 **Option A: Assign yourself a dataset from our curated list**
 - Choose a dataset from the [list of Nusantara datasets](https://github.com/orgs/indobenchmark/projects/1/views/1). 
 <p align="center">
-    <img src="./docs/_static/img/select-task.jpg" style="width: 80%;"/>
+    <img src="./docs/_static/img/select-task.jpeg" style="width: 80%;"/>
 </p>
 
 - Assign yourself an issue by clicking the dataset in the project list, and comment `#self-assign` under the issue. **Please assign yourself to issues with no other collaborators assigned**. You should see your GitHub username associated to the issue within 1-2 minutes of making a comment.
@@ -77,12 +77,16 @@ As soon as you have opened a PR, the dataset will be marked as `In Progress` in 
 When an admin accepts the PR and closes the corresponding issue, the dataset will be
 marked as `Done`.
 
+## Contribution reward
+
+Coming soon.
+
 ## Community channels
 
 We welcome contributions from a wide variety of backgrounds; we are more than happy to guide you through the process. For instructions on how to get involved or ask for help, check out the following options:
 
 #### Join our Slack Channel
-Alternatively, you can ping us on the [Slack Channel](https://discord.gg/Cwf3nT3ajP). The Slack channel can be used to share information quickly or ask code-related questions.
+Alternatively, you can ping us on the [Slack Channel](). The Slack channel can be used to share information quickly or ask code-related questions.
 
 #### Make a Github Issue
 For quick questions and clarifications, you can [make an issue via Github](https://github.com/indobenchmark/nusantara-datasets/issues/new).
@@ -114,19 +118,19 @@ Eventually, your dataloader script will need to run using only the packages supp
 
 No. Please don't upload the dataset you're working on to the huggingface hub or anywhere else.  This is not the goal of the hackathon and some datasets have licensing agreements that prevent redistribution. If the dataset is public, include a downloading component in your dataset loader script. Otherwise, include only an "extraction from local files" component in your dataset loader script. If you have a custom dataset you would like to submit, please [make an issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and an admin will get back to you.  
 
-#### My dataset supports multiple tasks with different bigbio schemas. What should I do? 
+#### My dataset supports multiple tasks with different nusantara schemas. What should I do? 
 
-In some cases, a single dataset will support multiple tasks with different bigbio schemas. For example, the `muchmore` dataset can be used for a translation task (supported by the `Text to Text (T2T)` schema) and a named entity recognition task (supported by the `Knowledge Base (KB)` schema). In this case, please implement one config for each supported schema and name the config `<datasetname>_bigbio_<schema>`. In the `muchmore` example, this would mean one config called `muchmore_bigbio_t2t` and one config called `muchmore_bigbio_kb`.  
+In some cases, a single dataset will support multiple tasks with different nusantara schemas. For example, the `muchmore` dataset can be used for a translation task (supported by the `Text to Text (T2T)` schema) and a named entity recognition task (supported by the `Knowledge Base (KB)` schema). In this case, please implement one config for each supported schema and name the config `<datasetname>_nusantara_<schema>`. In the `muchmore` example, this would mean one config called `muchmore_nusantara_t2t` and one config called `muchmore_nusantara_kb`.  
 
 #### My dataset comes with multiple annotations per text and no/multiple harmonizations. How should I proceed?
 
 Please implement all different annotations and harmonizations as `source` versions (see [examples/bioasq.py](examples/bioasq.py) for an example).
-If the authors suggest a preferred harmonization, use that for the `bigbio` version.
+If the authors suggest a preferred harmonization, use that for the `nusantara` version.
 Otherwise use the harmonization that you think is best.
 
-#### How should I handle offsets and text in the bigbio schema?
+#### How should I handle offsets and text in the nusantara schema?
 
-Full details on how to handle offsets and text in the bigbio kb schema can be found in the [schema documentation](https://github.com/indobenchmark/nusantara-datasets/blob/master/task_schemas.md).
+Full details on how to handle offsets and text in the nusantara kb schema can be found in the [schema documentation](https://github.com/indobenchmark/nusantara-datasets/blob/master/task_schemas.md).
 
 #### My dataset is complicated, can you help me?
 
@@ -142,7 +146,7 @@ Yes! Some datasets are easier to write dataloader scripts for than others. If yo
 
 #### My dataset has multiple labels for a span of text - what do I do?
 
-In many of our schemas, we have a 1:1 mapping between a key and its label (i.e. in KB, entity and label). In some datasets, we've noticed that there are multiple labels assigned to a text entity. Generally speaking, if a big-bio key has multiple labels associated with it, please populate the list with multiple instances of (key, label) according to each label that correspond to it. 
+In many of our schemas, we have a 1:1 mapping between a key and its label (i.e. in KB, entity and label). In some datasets, we've noticed that there are multiple labels assigned to a text entity. Generally speaking, if a nusantara key has multiple labels associated with it, please populate the list with multiple instances of (key, label) according to each label that correspond to it. 
 
 So for instance if the dataset has an entity "copper" with the  types "Pharmacologic Substance" and "Biologically Active", please create one entity with type "Pharmacologic Substance" and an associated unique id *and* another entity with type "Biologically Active" with a different unique id. The rest of the inputs (text, offsets, and normalization) of both entities will be identical.
 
@@ -159,7 +163,7 @@ In order to keep turnaround time reasonable, and ensure datasets are being compl
 
 We greatly appreciate your help! 
 
-The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Implementing **3 or more dataset loaders** will guarantee authorship. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
+The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Please refer to [this section](#contribution-reward) for your contribution rewards for helping Nusantara NLP. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
 
 <!-- 
 ## Acknowledgements
