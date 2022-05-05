@@ -31,9 +31,13 @@ Our unified schema allows researchers and practioners to **access the same type 
 
 ## Contribution Guidelines
 
-To be considered a contributor, participants must implement an *accepted data-loading script* to the nusantara-nlp collection for **at least 3 datasets**. 
+To be considered a contributor, participants must collect **at least 10 points**.
 
-Explicit instructions are found in the next section, but the steps for getting a data-loading script accepted are as follows: <br>
+#### Rake up the contribution points!
+
+Details are coming soon.
+
+#### Steps for getting a data-loading script accepted
 
 - Fork this repo and write a data-loading script in a new branch
 - PR your branch back to this repo and ping the admins
@@ -76,10 +80,6 @@ As soon as you have opened a PR, the dataset will be marked as `In Progress` in 
 [list of Indonesian datasets](https://github.com/orgs/indobenchmark/projects/1/views/1).
 When an admin accepts the PR and closes the corresponding issue, the dataset will be
 marked as `Done`.
-
-## Contribution reward
-
-Coming soon.
 
 ## Community channels
 
@@ -163,7 +163,7 @@ In order to keep turnaround time reasonable, and ensure datasets are being compl
 
 We greatly appreciate your help! 
 
-The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Please refer to [this section](#contribution-reward) for your contribution rewards for helping Nusantara NLP. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
+The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Please refer to [this section](#contribution-guidelines) for your contribution rewards for helping Nusantara NLP. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
 
 <!-- 
 ## Acknowledgements
