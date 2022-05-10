@@ -43,7 +43,7 @@ Details are coming soon.
 - PR your branch back to this repo and ping the admins
 - An admin will review and approve your PR or ping you for changes
 
-Details for contributor acknowledgements and rewards can be found [here](#Thank-you)
+Details for contributor acknowledgements and rewards can be found [here](#Thank-you).
 
 ## Get started!
 
@@ -85,8 +85,8 @@ marked as `Done`.
 
 We welcome contributions from a wide variety of backgrounds; we are more than happy to guide you through the process. For instructions on how to get involved or ask for help, check out the following options:
 
-#### Join our Slack Channel
-Alternatively, you can ping us on the [Slack Channel](). The Slack channel can be used to share information quickly or ask code-related questions.
+#### Join our WhatsApp group.
+Alternatively, you can ping us on the [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv). The WhatsApp group can be used to share information quickly or ask code-related questions.
 
 #### Make a Github Issue
 For quick questions and clarifications, you can [make an issue via Github](https://github.com/indobenchmark/nusantara-datasets/issues/new).
@@ -134,7 +134,7 @@ Full details on how to handle offsets and text in the nusantara kb schema can be
 
 #### My dataset is complicated, can you help me?
 
-Yes! Please join the hack-a-thon [Slack Channel]() and ask for help. 
+Yes! Please join the hack-a-thon [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) and ask for help. 
 
 #### My dataset is too complicated, can I switch?
 
@@ -157,7 +157,7 @@ In order to keep turnaround time reasonable, and ensure datasets are being compl
 
 * If you have already claimed a dataset prior to (2022/06/01), we will check in on **Friday (2022/06/10)**. If we do not hear back via GitHub issues OR a message to the Discord admins on general, we will make the dataset open for other participants by **Saturday (2022/06/11)**.
 
-* If things are taking longer than expected - that is totally ok! Please let us know via GitHub issues (preferred) or by pinging the @admins channel on Slack.
+* If things are taking longer than expected - that is totally ok! Please let us know via GitHub issues (preferred) or by asking a question in the [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv).
 
 ## Thank you!
 
