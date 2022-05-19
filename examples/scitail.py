@@ -29,7 +29,7 @@ import pandas as pd
 
 import datasets
 from utils import schemas
-from utils.configs import BigBioConfig
+from utils.configs import NusantaraConfig
 from utils.constants import Tasks
 
 _CITATION = """\
@@ -75,18 +75,18 @@ class SciTailDataset(datasets.GeneratorBasedBuilder):
     BIGBIO_VERSION = datasets.Version(_BIGBIO_VERSION)
 
     BUILDER_CONFIGS = [
-        BigBioConfig(
+        NusantaraConfig(
             name="scitail_source",
             version=SOURCE_VERSION,
             description="SciTail source schema",
             schema="source",
             subset_id="scitail",
         ),
-        BigBioConfig(
-            name="scitail_bigbio_te",
+        NusantaraConfig(
+            name="scitail_nusantara_te",
             version=BIGBIO_VERSION,
-            description="SciTail BigBio schema",
-            schema="bigbio_te",
+            description="SciTail Nusantara schema",
+            schema="nusantara_te",
             subset_id="scitail",
         ),
     ]
@@ -105,7 +105,7 @@ class SciTailDataset(datasets.GeneratorBasedBuilder):
                 }
             )
 
-        elif self.config.schema == "bigbio_te":
+        elif self.config.schema == "nusantara_te":
             features = schemas.entailment_features
 
         return datasets.DatasetInfo(
