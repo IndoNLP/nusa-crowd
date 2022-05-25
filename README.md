@@ -8,13 +8,13 @@
 ![tier3](https://progress-bar.dev/0/?title=Progress%203%20(100%20Datasets%20Completed))
 ![tier4](https://progress-bar.dev/0/?title=Progress%204%20(150%20Datasets%20Completed))
 
-Nusantara NLP🌸 initative is an open scientific collaboration of hundreds Indonesian NLP researchers from various countries and institutions who collaborate on collecting and advancing natural language processing (NLP) resources for Indonesian and its 700+ local languages to broaden accessibility of language datasets while working on challenging scientific questions around language modeling.
+Nusantara NLP🌸 initiative is an open scientific collaboration of hundreds of Indonesian NLP researchers from various countries and institutions who collaborate on collecting and advancing natural language processing (NLP) resources for Indonesian and its 700+ local languages to broaden accessibility of language datasets while working on challenging scientific questions around language modeling.
 
 We are running a **Nusantara NLP Datasets hackathon** to centralize many NLP datasets in Indonesian and local languages. Indonesian languages are diverse and scattered, so a unified location that joins multiple sources while preserving the data closest to the original form can greatly help accessibility.
 
 ## Goals of this hackathon
 
-Our goal is to **enable easy programatic access to these datasets** using Huggingface's (🤗) [`datasets` library](https://huggingface.co/docs/datasets/). To do this, we propose a unified schema for dataset extraction, with the intention of implementing as many datasets as possible to enable **reproducibility in data processing**. 
+Our goal is to **enable easy programmatic access to these datasets** using Huggingface's (🤗) [`datasets` library](https://huggingface.co/docs/datasets/). To do this, we propose a unified schema for dataset extraction to implement as many datasets as possible to enable **reproducibility in data processing**. 
 
 There are two broad licensing categories for datasets:
 
@@ -25,9 +25,9 @@ We will accept data-loading scripts for either type; please see the [FAQs](#FAQs
 
 ### Why is this important?
 
-Textual data of Indonesian languages, especially for local languages, is extremely low-resource and under represented globally. Many great initiatives have created different language data sets across a variety of languages. A **centralized source that allows users to access relevant information reproducibly** greatly increases accessibility of these datasets, and promotes research.
+Textual data of Indonesian languages, especially for local languages, is extremely low-resource and underrepresented globally. Many great initiatives have created different language data sets across a variety of languages. A **centralized source that allows users to access relevant information reproducibly** greatly increases the accessibility of these datasets and promotes research.
 
-Our unified schema allows researchers and practioners to **access the same type of information across a variety of datasets with fixed keys**. This can enable researchers to quickly iterate, and write scripts without worrying about pre-processing nuances specific to a dataset.
+Our unified schema allows researchers and practitioners to **access the same type of information across various datasets with fixed keys**. This can enable researchers to iterate quickly and write scripts without worrying about pre-processing nuances specific to a dataset.
 
 ## Contribution Guidelines
 
@@ -43,13 +43,13 @@ Details are coming soon.
 - PR your branch back to this repo and ping the admins
 - An admin will review and approve your PR or ping you for changes
 
-Details for contributor acknowledgements and rewards can be found [here](#Thank-you).
+Details for contributor acknowledgments and rewards can be found [here](#Thank-you).
 
 ## Get started!
 
 ### 1. Choose a dataset to implement
 
-There are two options to choose a dataset to implement; you can choose either option, but **we recommend option A**. 
+There are two options for choosing a dataset to implement; you can choose either option, but **we recommend option A**. 
 
 **Option A: Assign yourself a dataset from our curated list**
 - Choose a dataset from the [list of Nusantara datasets](https://github.com/orgs/IndoNLP/projects/2/views/1). 
@@ -66,13 +66,13 @@ There are two options to choose a dataset to implement; you can choose either op
 
 **Option B: Implement a new dataset not on the list**
 
-If you have a Indonesian and local languages dataset you would like to propose in this collection, you are welcome to [make a new issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and fill out relevant information. **Make sure that your dataset does not exist in the 🤗 [Hub](https://huggingface.co/datasets).**
+If you have an Indonesian and local languages dataset you would like to propose in this collection, you are welcome to [make a new issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and fill out relevant information. **Make sure that your dataset does not exist in the 🤗 [Hub](https://huggingface.co/datasets).**
 
-If an admin approves it, then you are welcome to implement this dataset and it will count toward contribution credit.
+If an admin approves it, then you are welcome to implement this dataset, and it will count toward contribution credit.
 
 ### 2. Implement the data-loading script for your dataset and create a PR
 
-[Check out our step-by-step guide to implementing a dataloader with the nusantara schema](CONTRIBUTING.md).
+[Check out our step-by-step guide to implementing a data loader with the nusantara schema](CONTRIBUTING.md).
 
 **Please do not upload the data directly; if you have a specific question or request, [reach out to an admin](#Community-channels)**
 
@@ -104,19 +104,19 @@ The license for a dataset is not always obvious. Here are some strategies to try
 * check publications that announce the release of the dataset
 * check the website of the organization providing the dataset
 
-If no official license is listed anywhere, but you find a webpage that describes general data usage policies for the dataset, you can fall back to providing that URL in the `_LICENSE` variable. If you can't find any license information, please make a note in your PR and put `_LICENSE="Unknown"` in your dataset script.   
+If no official license is listed anywhere, but you find a webpage that describes general data usage policies for the dataset, you can fall back to providing that URL in the `_LICENSE` variable. If you can't find any license information, please note in your PR and put `_LICENSE="Unknown"` in your dataset script.   
 
 #### What if my dataset is not publicly available?
 
-We understand that some datasets are not publicly available due to data usage agreements or licensing. For these datasets, we recommend implementing a dataloader script that references a local directory containing the dataset. You can find examples in the [n2c2_2011](examples/n2c2_2011.py) and [bioasq](examples/bioasq.py) implementations. There are also local dataset specific instructions in  [template](templates/template.py).
+We understand that some datasets are not publicly available due to data usage agreements or licensing. For these datasets, we recommend implementing a data loader script that references a local directory containing the dataset. You can find examples in the [n2c2_2011](examples/n2c2_2011.py) and [bioasq](examples/bioasq.py) implementations. There are also local dataset-specific instructions in  [template](templates/template.py).
 
 #### What types of libraries can we import?
 
-Eventually, your dataloader script will need to run using only the packages supplied by the [datasets](https://github.com/huggingface/datasets) package. If you find a well supported package that makes your implementation easier, then feel free to use it.  We will address the specifics during review of your PR to the [Nusantara NLP repo](https://github.com/indobenchmark/nusantara-datasets).
+Eventually, your data loader script will need to run using only the packages supplied by the [datasets](https://github.com/huggingface/datasets) package. If you find a well-supported package that makes your implementation easier, then feel free to use it. We will address the specifics during the review of your PR to the [Nusantara NLP repo](https://github.com/indobenchmark/nusantara-datasets).
 
 #### Can I upload my dataset anywhere?
 
-No. Please don't upload the dataset you're working on to the huggingface hub or anywhere else.  This is not the goal of the hackathon and some datasets have licensing agreements that prevent redistribution. If the dataset is public, include a downloading component in your dataset loader script. Otherwise, include only an "extraction from local files" component in your dataset loader script. If you have a custom dataset you would like to submit, please [make an issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and an admin will get back to you.  
+No. Please don't upload the dataset you're working on to the huggingface hub or anywhere else. This is not the goal of the hackathon and some datasets have licensing agreements that prevent redistribution. If the dataset is public, include a downloading component in your dataset loader script. Otherwise, include only an "extraction from local files" component in your dataset loader script. If you have a custom dataset you would like to submit, please [make an issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and an admin will get back to you.  
 
 #### My dataset supports multiple tasks with different nusantara schemas. What should I do? 
 
@@ -136,9 +136,9 @@ Full details on how to handle offsets and text in the nusantara kb schema can be
 
 Yes! Please join the hack-a-thon [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) and ask for help. 
 
-#### My dataset is too complicated, can I switch?
+#### My dataset is too complicated. Can I switch?
 
-Yes! Some datasets are easier to write dataloader scripts for than others. If you find yourself working on a dataset that you can not make progress on, please make a comment in the associated issue, asked to be un-assigned from the issue, and start the search for a new unclaimed dataset. 
+Yes! Some datasets are easier to write data loader scripts for than others. If you find yourself working on a dataset that you can not make progress on, please make a comment in the associated issue, asked to be un-assigned from the issue, and start the search for a new unclaimed dataset. 
 
 #### Can I change the Nusantara schema?
 
@@ -155,7 +155,7 @@ In order to keep turnaround time reasonable, and ensure datasets are being compl
 
 * Please claim a dataset only if you intend to work on it. We'll try to check in within 3 days to ensure you have the help you need. Don't hesitate to contact the admins! We are ready to help 💪!
 
-* If you have already claimed a dataset prior to (2022/06/01), we will check in on **Friday (2022/06/10)**. If we do not hear back via GitHub issues OR a message to the Discord admins on general, we will make the dataset open for other participants by **Saturday (2022/06/11)**.
+* If you have already claimed a dataset prior to (2022/06/01), we will check in on **Friday (2022/06/10)**. If we do not hear back via GitHub issues OR a message to the Discord admins in general, we will make the dataset open for other participants by **Saturday (2022/06/11)**.
 
 * If things are taking longer than expected - that is totally ok! Please let us know via GitHub issues (preferred) or by asking a question in the [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv).
 
