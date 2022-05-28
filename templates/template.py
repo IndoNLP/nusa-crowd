@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """
-This template serves as a starting point for contributing a dataset to the BigScience Biomedical repo.
+This template serves as a starting point for contributing a dataset to the Nusantara Dataset repo.
 
 When modifying it for your dataset, look for TODO items that offer specific instructions.
 
@@ -28,7 +28,7 @@ To create a dataset loading script you will create a class and implement 3 metho
 
 TODO: Before submitting your script, delete this doc string and replace it with a description of your dataset.
 
-[bigbio_schema_name] = (kb, pairs, qa, text, t2t, entailment)
+[nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
 """
 
 import os
@@ -36,7 +36,7 @@ from typing import List, Tuple, Dict
 
 import datasets
 from utils import schemas
-from utils.configs import BigBioConfig
+from utils.configs import NusantaraConfig
 from utils.constants import Tasks
 
 # TODO: Add BibTeX citation
@@ -77,7 +77,7 @@ _LICENSE = ""
 #  For local datasets, this variable can be an empty dictionary.
 
 # For publicly available datasets you will most likely end up passing these URLs to dl_manager in _split_generators.
-# In most cases the URLs will be the same for the source and bigbio config.
+# In most cases the URLs will be the same for the source and nusantara config.
 # However, if you need to access different files for each config you can have multiple entries in this dict.
 # This can be an arbitrarily nested dict/list of URLs (see below in `_split_generators` method)
 _URLS = {
@@ -92,49 +92,48 @@ _SUPPORTED_TASKS = []  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNI
 #  provided by the original dataset as a version goes.
 _SOURCE_VERSION = ""
 
-_BIGBIO_VERSION = "1.0.0"
+_NUSANTARA_VERSION = "1.0.0"
 
 
 # TODO: Name the dataset class to match the script name using CamelCase instead of snake_case
-#  Append "Dataset" to the class name: BioASQ --> BioasqDataset
 class NewDataset(datasets.GeneratorBasedBuilder):
     """TODO: Short description of my dataset."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
-    BIGBIO_VERSION = datasets.Version(_BIGBIO_VERSION)
+    NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    # You will be able to load the "source" or "bigbio" configurations with
+    # You will be able to load the "source" or "nusanrata" configurations with
     # ds_source = datasets.load_dataset('my_dataset', name='source')
-    # ds_bigbio = datasets.load_dataset('my_dataset', name='bigbio')
+    # ds_nusantara = datasets.load_dataset('my_dataset', name='nusantara')
 
     # For local datasets you can make use of the `data_dir` and `data_files` kwargs
     # https://huggingface.co/docs/datasets/add_dataset.html#downloading-data-files-and-organizing-splits
     # ds_source = datasets.load_dataset('my_dataset', name='source', data_dir="/path/to/data/files")
-    # ds_bigbio = datasets.load_dataset('my_dataset', name='bigbio', data_dir="/path/to/data/files")
+    # ds_nusantara = datasets.load_dataset('my_dataset', name='nusantara', data_dir="/path/to/data/files")
 
-    # TODO: For each dataset, implement Config for Source and BigBio;
-    #  If dataset contains more than one subset (see examples/bioasq.py) implement for EACH of them.
+    # TODO: For each dataset, implement Config for Source and Nusantara;
+    #  If dataset contains more than one subset (see nusantara/nusa_datasets/smsa.py) implement for EACH of them.
     #  Each of them should contain:
-    #   - name: should be unique for each dataset config eg. bioasq10b_(source|bigbio)_[bigbio_schema_name]
-    #   - version: option = (SOURCE_VERSION|BIGBIO_VERSION)
+    #   - name: should be unique for each dataset config eg. smsa_(source|nusantara)_[nusantara_schema_name]
+    #   - version: option = (SOURCE_VERSION|NUSANTARA_VERSION)
     #   - description: one line description for the dataset
-    #   - schema: options = (source|bigbio_[bigbio_schema_name])
-    #   - subset_id: subset id is the canonical name for the dataset (eg. bioasq10b)
-    #  where [bigbio_schema_name] = (kb, pairs, qa, text, t2t, entailment)
+    #   - schema: options = (source|nusantara_[nusantara_schema_name])
+    #   - subset_id: subset id is the canonical name for the dataset (eg. smsa)
+    #  where [nusantara_schema_name] = (kb, pairs, qa, text, t2t)
 
     BUILDER_CONFIGS = [
-        BigBioConfig(
+        NusantaraConfig(
             name="[dataset_name]_source",
             version=SOURCE_VERSION,
             description="[dataset_name] source schema",
             schema="source",
             subset_id="[dataset_name]",
         ),
-        BigBioConfig(
-            name="[dataset_name]_bigbio_[bigbio_schema_name]",
-            version=BIGBIO_VERSION,
-            description="[dataset_name] BigBio schema",
-            schema="bigbio_[bigbio_schema_name]",
+        NusantaraConfig(
+            name="[dataset_name]_nusantara_[nusantara_schema_name]",
+            version=NUSANTARA_VERSION,
+            description="[dataset_name] Nusantara schema",
+            schema="nusantara_[nusantara_schema_name]",
             subset_id="[dataset_name]",
         ),
     ]
@@ -168,14 +167,14 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             #    }
             # )
 
-        # Choose the appropriate bigbio schema for your task and copy it here. You can find information on the schemas in the CONTRIBUTING guide.
+        # Choose the appropriate nusantara schema for your task and copy it here. You can find information on the schemas in the CONTRIBUTING guide.
 
-        # In rare cases you may get a dataset that supports multiple tasks requiring multiple schemas. In that case you can define multiple bigbio configs with a bigbio_[bigbio_schema_name] format.
+        # In rare cases you may get a dataset that supports multiple tasks requiring multiple schemas. In that case you can define multiple nusantara configs with a nusantara_[nusantara_schema_name] format.
 
-        # For example bigbio_kb, bigbio_t2t
-        elif self.config.schema == "bigbio_[bigbio_schema_name]":
+        # For example nusantara_kb, nusantara_t2t
+        elif self.config.schema == "nusantara_[nusantara_schema_name]":
             # e.g. features = schemas.kb_features
-            # TODO: Choose your big-bio schema here
+            # TODO: Choose your nusantara schema here
             raise NotImplementedError()
 
         return datasets.DatasetInfo(
@@ -190,7 +189,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         """Returns SplitGenerators."""
         # TODO: This method is tasked with downloading/extracting the data and defining the splits depending on the configuration
 
-        # If you need to access the "source" or "bigbio" config choice, that will be in self.config.name
+        # If you need to access the "source" or "nusantara" config choice, that will be in self.config.name
 
         # LOCAL DATASETS: You do not need the dl_manager; you can ignore this argument. Make sure `gen_kwargs` in the return gets passed the right filepath
 
@@ -255,8 +254,8 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             for key, example in thing:
                 yield key, example
 
-        elif self.config.schema == "bigbio_[bigbio_schema_name]":
-            # TODO: yield (key, example) tuples in the bigbio schema
+        elif self.config.schema == "nusantara_[nusantara_schema_name]":
+            # TODO: yield (key, example) tuples in the nusantara schema
             for key, example in thing:
                 yield key, example
 
