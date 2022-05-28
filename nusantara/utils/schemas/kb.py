@@ -19,7 +19,6 @@ import datasets
 features = datasets.Features(
     {
         "id": datasets.Value("string"),
-        "document_id": datasets.Value("string"),
         "passages": [
             {
                 "id": datasets.Value("string"),

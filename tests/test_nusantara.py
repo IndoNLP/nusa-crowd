@@ -11,9 +11,8 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 
 import datasets
 from datasets import DatasetDict, Features
-from utils.constants import Tasks
-from utils.schemas import (entailment_features, kb_features, pairs_features,
-                           qa_features, text2text_features, text_features)
+from nusantara.utils.constants import Tasks
+from nusantara.utils.schemas import (kb_features, pairs_features, qa_features, text2text_features, text_features)
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -24,17 +23,25 @@ logger = logging.getLogger(__name__)
 
 _TASK_TO_SCHEMA = {
     Tasks.NAMED_ENTITY_RECOGNITION: "KB",
-    Tasks.NAMED_ENTITY_DISAMBIGUATION: "KB",
-    Tasks.EVENT_EXTRACTION: "KB",
-    Tasks.RELATION_EXTRACTION: "KB",
+    Tasks.DEPENDENCY_PARSING: "KB",
+    Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
+    Tasks.KEYWORD_EXTRACTION: "KB",
     Tasks.COREFERENCE_RESOLUTION: "KB",
+    Tasks.POS_TAGGING: "KB",
+    
     Tasks.QUESTION_ANSWERING: "QA",
-    Tasks.TEXTUAL_ENTAILMENT: "TE",
+    
+    Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
     Tasks.SEMANTIC_SIMILARITY: "PAIRS",
+    
     Tasks.PARAPHRASING: "T2T",
-    Tasks.TRANSLATION: "T2T",
+    Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
-    Tasks.TEXT_CLASSIFICATION: "TEXT",
+    
+    Tasks.SENTIMENT_ANALYSIS: "TEXT",
+    Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT",
+
+    Tasks.DIALOGUE_SYSTEM: "KB"
 }
 
 _VALID_TASKS = set(_TASK_TO_SCHEMA.keys())
@@ -43,7 +50,6 @@ _VALID_SCHEMAS = set(_TASK_TO_SCHEMA.values())
 _SCHEMA_TO_FEATURES = {
     "KB": kb_features,
     "QA": qa_features,
-    "TE": entailment_features,
     "T2T": text2text_features,
     "TEXT": text_features,
     "PAIRS": pairs_features,
@@ -51,10 +57,10 @@ _SCHEMA_TO_FEATURES = {
 
 _TASK_TO_FEATURES = {
     Tasks.NAMED_ENTITY_RECOGNITION: {"entities"},
-    Tasks.RELATION_EXTRACTION: {"relations", "entities"},
-    Tasks.NAMED_ENTITY_DISAMBIGUATION: {"entities", "normalized"},
+    Tasks.DEPENDENCY_PARSING: {"relations", "entities"},
     Tasks.COREFERENCE_RESOLUTION: {"entities", "coreferences"},
-    Tasks.EVENT_EXTRACTION: {"events"}
+    # Tasks.NAMED_ENTITY_DISAMBIGUATION: {"entities", "normalized"},
+    # Tasks.EVENT_EXTRACTION: {"events"}
 }
 
 
