@@ -15,11 +15,20 @@ _UNIFIED_VIEW_NAME = "nusantara"
 _LANGUAGES = ['ind'] # We follow ISO639-3 langauge code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
-
+@INPROCEEDINGS{8904199,  
+    author={Purwarianti, Ayu and Crisdayanti, Ida Ayu Putu Ari},  
+    booktitle={2019 International Conference of Advanced Informatics: Concepts, Theory and Applications (ICAICTA)},   
+    title={Improving Bi-LSTM Performance for Indonesian Sentiment Analysis Using Paragraph Vector},  
+    year={2019},  
+    pages={1-5},  
+    doi={10.1109/ICAICTA.2019.8904199}
+}
 """
 
 _DESCRIPTION = """\
-
+SmSA is a sentence-level sentiment analysis dataset (Purwarianti and Crisdayanti, 2019) is a collection of comments and reviews 
+in Indonesian obtained from multiple online platforms. The text was crawled and then annotated by several Indonesian linguists 
+to construct this dataset. There are three possible sentiments on the SmSA dataset: positive, negative, and neutral
 """
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
@@ -40,7 +49,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 class SMSA(datasets.GeneratorBasedBuilder):
-    """SMSA is a sentiment analysis dataset consisting of 3 labels (positive, neutral, and negative) which is collected from news and food review platforms."""
+    """SMSA is a sentiment analysis dataset consisting of 3 labels (positive, neutral, and negative) which comes from comments and reviews collected from multiple online platforms."""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
