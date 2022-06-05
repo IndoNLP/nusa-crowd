@@ -4,8 +4,7 @@ from collections import defaultdict
 from enum import Enum
 from types import SimpleNamespace
 
-from bigbio.utils import resources
-from bigbio.utils.schemas import (kb_features, pairs_features, qa_features, text2text_features, text_features)
+from nusantara.utils.schemas import (kb_features, pairs_features, qa_features, text2text_features, text_features, seq_label_features)
 METADATA = ["_LOCAL", "_LANGUAGES"]
 
 NusantaraValues = SimpleNamespace(NULL="<NUSA_NULL_STR>")
