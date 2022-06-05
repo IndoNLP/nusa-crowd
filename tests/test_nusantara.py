@@ -12,7 +12,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks
-from nusantara.utils.schemas import (kb_features, pairs_features, qa_features, text2text_features, text_features)
+from nusantara.utils.schemas import (kb_features, pairs_features, qa_features, text2text_features, text_features, seq_label_features)
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -27,7 +27,7 @@ _TASK_TO_SCHEMA = {
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
     Tasks.KEYWORD_EXTRACTION: "KB",
     Tasks.COREFERENCE_RESOLUTION: "KB",
-    Tasks.POS_TAGGING: "KB",
+    Tasks.POS_TAGGING: "SEQ_LABEL",
     
     Tasks.QUESTION_ANSWERING: "QA",
     
@@ -53,6 +53,7 @@ _SCHEMA_TO_FEATURES = {
     "T2T": text2text_features,
     "TEXT": text_features,
     "PAIRS": pairs_features,
+    "SEQ_LABEL": seq_label_features,
 }
 
 _TASK_TO_FEATURES = {
@@ -160,6 +161,7 @@ class TestDataLoader(unittest.TestCase):
         if module.endswith(".py"):
             module = module[:-3]
         module = module.replace("/", ".")
+        print('module', module)
         self._SUPPORTED_TASKS = importlib.import_module(module)._SUPPORTED_TASKS
         logger.info(f"Found _SUPPORTED_TASKS={self._SUPPORTED_TASKS}")
         invalid_tasks = set(self._SUPPORTED_TASKS) - _VALID_TASKS
@@ -577,7 +579,7 @@ if __name__ == "__main__":
         description="Unit tests for Nusantara datasets. Args are passed to `datasets.load_dataset`"
     )
 
-    parser.add_argument("path", type=str, help="path to dataloader script (e.g. examples/n2c2_2011.py)")
+    parser.add_argument("--path", type=str, help="path to dataloader script (e.g. examples/n2c2_2011.py)")
     parser.add_argument(
         "--schema",
         type=str,
