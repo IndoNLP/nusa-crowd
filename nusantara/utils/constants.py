@@ -51,7 +51,7 @@ class Tasks(Enum):
 #     Tasks.SENTIMENT_ANALYSIS: "TEXT",
 # }
 
-# SCHEMA_TO_TASKS = defasultdict(set)
+# SCHEMA_TO_TASKS = defaultdict(set)
 # for task, schema in TASK_TO_SCHEMA.items():
 #     SCHEMA_TO_TASKS[schema].add(task)
 # SCHEMA_TO_TASKS = dict(SCHEMA_TO_TASKS)
