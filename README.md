@@ -108,7 +108,7 @@ If no official license is listed anywhere, but you find a webpage that describes
 
 #### What if my dataset is not publicly available?
 
-We understand that some datasets are not publicly available due to data usage agreements or licensing. For these datasets, we recommend implementing a data loader script that references a local directory containing the dataset. You can find examples in the [n2c2_2011](examples/n2c2_2011.py) and [bioasq](examples/bioasq.py) implementations. There are also local dataset-specific instructions in  [template](templates/template.py).
+We understand that some datasets are not publicly available due to data usage agreements or licensing. For these datasets, we recommend implementing a data loader script that references a local directory containing the dataset. You can find examples in the [smsa](nusantara/nusa_dataset/smsa/smsa.py) and [ted_mt](nusantara/nusa_dataset/ted_mt/ted_mt.py) implementations. There are also local dataset-specific instructions in [template](templates/template.py).
 
 #### What types of libraries can we import?
 

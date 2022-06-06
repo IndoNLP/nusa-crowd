@@ -1,5 +1,5 @@
 # Nusantara Schema Documentation
-We have defined a set of lightwieght, task-specific schema to help simplify programmatic access to common nusantara-nlp datasets. This schema should be implemented for each dataset in addition to a schema that preserves the original dataset format.
+We have defined a set of lightweight, task-specific schema to help simplify programmatic access to common `nusantara-nlp` datasets. This schema should be implemented for each dataset in addition to a schema that preserves the original dataset format.
 
 ### Example Schema and Associated Tasks
 
@@ -25,7 +25,7 @@ We have defined a set of lightwieght, task-specific schema to help simplify prog
 
 ## Knowledge Base
 
-[Schema Template](utils/schemas/kb.py)
+[Schema Template](nusantara/utils/schemas/kb.py)
 
 This is a simple container format with minimal nesting that supports a range of common knowledge base construction / information extraction tasks.
 
@@ -158,7 +158,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ## Question Answering
-- [Schema Template](utils/schemas/qa.py)
+- [Schema Template](nusantara/utils/schemas/qa.py)
 - Examples: [BioASQ Task B](examples/bioasq.py)
 
 ```
@@ -174,9 +174,74 @@ Passages capture document structure, such as the title and abstact sections of a
 }
 ```
 
+## Sequence Labeling
+- [Schema Template](nusantara/utils/schemas/seq_label.py)
+- Examples: [BaPOS] (nusantara/nusa_datasets/bapos/bapos.py)
+
+```
+{
+    {
+    "id": "0",
+    "tokens": [
+        "Seorang",
+        "penduduk",
+        "yang",
+        "tinggal",
+        "dekat",
+        "tempat",
+        "kejadian",
+        "mengatakan",
+        ",",
+        "dia",
+        "mendengar",
+        "suara",
+        "tabrakan",
+        "yang",
+        "keras",
+        "dan",
+        "melihat",
+        "mobil",
+        "ambulan",
+        "membawa",
+        "orang-orang",
+        "yang",
+        "berlumuran",
+        "darah",
+        "."
+    ],
+    "labels": [
+        "B-NND",
+        "B-NN",
+        "B-SC",
+        "B-VB",
+        "B-JJ",
+        "B-NN",
+        "B-NN",
+        "B-VB",
+        "B-Z",
+        "B-PRP",
+        "B-VB",
+        "B-NN",
+        "B-NN",
+        "B-SC",
+        "B-JJ",
+        "B-CC",
+        "B-VB",
+        "B-NN",
+        "B-NN",
+        "B-VB",
+        "B-NN",
+        "B-SC",
+        "B-VB",
+        "B-NN",
+        "B-Z"
+    ]
+}
+```
+
 ## Textual Entailment
 
-- [Schema Template](utils/schemas/entailment.py)
+- [Schema Template](nusantara/utils/schemas/entailment.py)
 - Examples: [SciTail](examples/scitail.py)
 
 ```
@@ -191,7 +256,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Text Pairs
 
-- [Schema Template](utils/schemas/pairs.py)
+- [Schema Template](nusantara/utils/schemas/pairs.py)
 - Examples: [MQP](examples/mqp.py)
 
 ```
@@ -207,7 +272,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Text to Text
 
-- [Schema Template](utils/schemas/text_to_text.py)
+- [Schema Template](nusantara/utils/schemas/text_to_text.py)
 - Examples: [ParaMed](examples/paramed.py)
 
 ```
@@ -223,13 +288,15 @@ Passages capture document structure, such as the title and abstact sections of a
 
 
 ## Text
-- [Schema Template](utils/schemas/text.py)
+- [Schema Template](nusantara/utils/schemas/text.py)
+- Examples: [SmSA] (nusantara/nusa_datasets/smsa/smsa.py)
 
 ```
 {
-	"id": "0",
-	"document_id": "NULL",
-	"text": "Am I over weight (192.9) for my age (39)?",
-	"labels": ["question"],
+    "id": "0",
+    "text": "meski masa kampanye sudah selesai , bukan berati habis pula upaya mengerek tingkat kedipilihan elektabilitas .",
+    "labels": [
+        "neutral"
+    ]
 }
 ```
