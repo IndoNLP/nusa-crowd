@@ -6,12 +6,12 @@ import pandas as pd
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 from nusantara.utils.common_parser import load_conll_data
 
 _DATASETNAME = "smsa"
-_SOURCE_VIEW_NAME = "source"
-_UNIFIED_VIEW_NAME = "nusantara"
+_SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
+_UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
 _LANGUAGES = ['ind'] # We follow ISO639-3 langauge code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False

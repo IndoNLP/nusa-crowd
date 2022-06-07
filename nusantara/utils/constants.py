@@ -9,6 +9,10 @@ METADATA = ["_LOCAL", "_LANGUAGES"]
 
 NusantaraValues = SimpleNamespace(NULL="<NUSA_NULL_STR>")
 
+# Default View Name
+DEFAULT_SOURCE_VIEW_NAME = 'source'
+DEFAULT_NUSANTARA_VIEW_NAME = 'nusantara'
+
 class Tasks(Enum):
     DEPENDENCY_PARSING = "DEP"   
     WORD_SENSE_DISAMBIGUATION = "WSD"

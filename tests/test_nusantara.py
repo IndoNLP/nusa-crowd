@@ -579,7 +579,7 @@ if __name__ == "__main__":
         description="Unit tests for Nusantara datasets. Args are passed to `datasets.load_dataset`"
     )
 
-    parser.add_argument("--path", type=str, help="path to dataloader script (e.g. examples/n2c2_2011.py)")
+    parser.add_argument("path", type=str, help="path to dataloader script (e.g. examples/n2c2_2011.py)")
     parser.add_argument(
         "--schema",
         type=str,
