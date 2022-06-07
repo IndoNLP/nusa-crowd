@@ -7,7 +7,6 @@ import pandas as pd
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
-from nusantara.utils.common_parser import load_conll_data
 
 _DATASETNAME = "smsa"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
@@ -16,13 +15,20 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _LANGUAGES = ['ind'] # We follow ISO639-3 langauge code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
-
+@INPROCEEDINGS{8904199,  
+    author={Purwarianti, Ayu and Crisdayanti, Ida Ayu Putu Ari},  
+    booktitle={2019 International Conference of Advanced Informatics: Concepts, Theory and Applications (ICAICTA)},   
+    title={Improving Bi-LSTM Performance for Indonesian Sentiment Analysis Using Paragraph Vector},  
+    year={2019},  
+    pages={1-5},  
+    doi={10.1109/ICAICTA.2019.8904199}
+}
 """
 
 _DESCRIPTION = """\
-BaPOS is a POS tagging dataset contains about 10,000 sentences, collected from the PAN Localization Project tagged with 23 POS tag classes.
-The POS tagset is created through a detailed study and analysis of existing tagsets and the manual tagging of an Indonesian corpus. 
-BaPOS dataset is splitted into 3 sets with 8000 train, 1000 validation, 1029 test data.
+SmSA is a sentence-level sentiment analysis dataset (Purwarianti and Crisdayanti, 2019) is a collection of comments and reviews 
+in Indonesian obtained from multiple online platforms. The text was crawled and then annotated by several Indonesian linguists 
+to construct this dataset. There are three possible sentiments on the SmSA dataset: positive, negative, and neutral
 """
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
@@ -30,51 +36,51 @@ _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
 _LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
 
 _URLs = {
-    "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/bapos_pos-idn/train_preprocess.txt",
-    "validation": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/bapos_pos-idn/valid_preprocess.txt",
-    "test": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/bapos_pos-idn/test_preprocess_masked_label.txt"
+    "train": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/train_preprocess.tsv",
+    "validation": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/valid_preprocess.tsv",
+    "test": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/test_preprocess_masked_label.tsv"
 }
 
 _SUPPORTED_TASKS = [
-    Tasks.POS_TAGGING
+    Tasks.SENTIMENT_ANALYSIS
 ]
 
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
-class BaPOSDataset(datasets.GeneratorBasedBuilder):
-    """BaPOS is a POS tagging dataset contains about 10,000 sentences, collected from the PAN Localization Project tagged with 23 POS tag classes."""
+class SMSA(datasets.GeneratorBasedBuilder):
+    """SMSA is a sentiment analysis dataset consisting of 3 labels (positive, neutral, and negative) which comes from comments and reviews collected from multiple online platforms."""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="bapos_source",
+            name="smsa_source",
             version=datasets.Version(_SOURCE_VERSION),
-            description="BaPOS source schema",
+            description="SMSA source schema",
             schema="source",
-            subset_id="bapos",
+            subset_id="smsa",
         ),
         NusantaraConfig(
-            name="bapos_nusantara_seq_label",
+            name="smsa_nusantara_text",
             version=datasets.Version(_NUSANTARA_VERSION),
-            description="BaPOS Nusantara schema",
-            schema="nusantara_seq_label",
-            subset_id="bapos",
+            description="SMSA Nusantara schema",
+            schema="nusantara_text",
+            subset_id="smsa",
         )
     ]
 
-    DEFAULT_CONFIG_NAME = "bapos_source"
+    DEFAULT_CONFIG_NAME = "smsa_source"
 
     def _info(self):
         if self.config.schema == "source":
             features = datasets.Features(
                 {
                     "index": datasets.Value("string"),
-                    "tokens": [datasets.Value("string")],
-                    "pos_tag": [datasets.Value("string")]
+                    "sentence": datasets.Value("string"),
+                    "label": datasets.Value("string")
                 }
             )
-        elif self.config.schema == "nusantara_seq_label":
-            features = schemas.seq_label_features
+        elif self.config.schema == "nusantara_text":
+            features = schemas.text_features
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -112,23 +118,24 @@ class BaPOSDataset(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path):
-        conll_dataset = load_conll_data(filepath) # [{'sentence': [T1, T2, ..., Tn], 'labels': [L1, L2, ..., Ln]}]
+        df = pd.read_csv(filepath, sep='\t', header=None).reset_index()
+        df.columns = ['id', 'sentence', 'label']
 
         if self.config.schema == "source":
-            for i, row in enumerate(conll_dataset):
+            for row in df.itertuples():
                 ex = {
-                    "index": str(i),
-                    "tokens": row['sentence'],
-                    "pos_tag": row['label']
-                }
-                yield i, ex
-        elif self.config.schema == "nusantara_seq_label":
-            for i, row in enumerate(conll_dataset):
+                    "index": str(row.id),
+                    "sentence": row.sentence,
+                    "label": row.label
+                }                
+                yield row.id, ex
+        elif self.config.schema == "nusantara_text":
+            for row in df.itertuples():
                 ex = {
-                    "id": str(i),
-                    "tokens": row['sentence'],
-                    "labels": row['label']
+                    "id": str(row.id),
+                    "text": row.sentence,
+                    "labels": [row.label]
                 }
-                yield i, ex
+                yield row.id, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
