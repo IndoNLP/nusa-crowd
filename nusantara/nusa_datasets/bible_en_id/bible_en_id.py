@@ -13,7 +13,7 @@ _DATASETNAME = "bible_en_id"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ['ind', 'eng'] # We follow ISO639-3 langauge code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ['ind', 'eng'] # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
 @inproceedings{cahyawijaya-etal-2021-indonlg,
