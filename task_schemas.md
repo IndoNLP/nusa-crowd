@@ -273,16 +273,15 @@ Passages capture document structure, such as the title and abstact sections of a
 ## Text to Text
 
 - [Schema Template](nusantara/utils/schemas/text_to_text.py)
-- Examples: [ParaMed](examples/paramed.py)
+- Examples: [ParaMed](nusantara/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
 
 ```
 {
 	"id": "0",
-	"document_id": "NULL",
-	"text_1": "也许 不能 : 分析 结果 提示 激素 疗法 在 维持 去 脂 体重 方面 作用 很小 .",
-	"text_2": "probably not : analysis suggests minimal effect of HT in maintaining lean body mass .",
-	"text_1_name": "zh",
-	"text_2_name": "en",
+	"text_1": "Pleasing God doesn"t mean that we must busy ourselves with a new set of "spiritual" activities\n",
+	"text_2": "Menyenangkan Allah tidaklah berarti bahwa kita harus menyibukkan diri sendiri dengan berbagai aktivitas rohani\n",
+	"text_1_name": "eng",
+	"text_2_name": "ind"
 }
 ```
 
