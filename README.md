@@ -62,11 +62,11 @@ There are two options for choosing a dataset to implement; you can choose either
     <img src="./docs/_static/img/self-assign.jpg" style="width: 80%;"/>
 </p>
 
-- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/indobenchmark/nusantara-datasets/blob/master/task_schemas.md). 
+- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-datasets/blob/master/task_schemas.md).
 
 **Option B: Implement a new dataset not on the list**
 
-If you have an Indonesian and local languages dataset you would like to propose in this collection, you are welcome to [make a new issue](https://github.com/indobenchmark/nusantara-datasets/issues/new) and fill out relevant information. **Make sure that your dataset does not exist in the 🤗 [Hub](https://huggingface.co/datasets).**
+If you have an Indonesian and local languages dataset you would like to propose in this collection, you are welcome to [make a new issue](https://github.com/IndoNLP/nusa-datasets/issues/new/choose) and fill out relevant information. **Make sure that your dataset does not exist in the 🤗 [Hub](https://huggingface.co/datasets).**
 
 If an admin approves it, then you are welcome to implement this dataset, and it will count toward contribution credit.
 
@@ -77,7 +77,7 @@ If an admin approves it, then you are welcome to implement this dataset, and it 
 **Please do not upload the data directly; if you have a specific question or request, [reach out to an admin](#Community-channels)**
 
 As soon as you have opened a PR, the dataset will be marked as `In Progress` in the
-[list of Indonesian datasets](https://github.com/orgs/indobenchmark/projects/1/views/1).
+[list of Indonesian datasets](https://github.com/orgs/IndoNLP/projects/2/views/1).
 When an admin accepts the PR and closes the corresponding issue, the dataset will be
 marked as `Done`.
 
@@ -89,7 +89,7 @@ We welcome contributions from a wide variety of backgrounds; we are more than ha
 Alternatively, you can ping us on the [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv). The WhatsApp group can be used to share information quickly or ask code-related questions.
 
 #### Make a Github Issue
-For quick questions and clarifications, you can [make an issue via Github](https://github.com/indobenchmark/nusantara-datasets/issues/new).
+For quick questions and clarifications, you can [make an issue via Github](https://github.com/IndoNLP/nusa-datasets/issues/new/choose).
 
 You are welcome to use any of the above resources as necessary. 
 
