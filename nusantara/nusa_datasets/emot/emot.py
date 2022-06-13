@@ -128,11 +128,11 @@ class EmoT(datasets.GeneratorBasedBuilder):
 
         if self.config.schema == "source":
             for row in df.itertuples():
-                ex = {"index": str(row.id), "tweet": row.sentence, "label": row.label}
+                ex = {"index": str(row.id), "tweet": row.tweet, "label": row.label}
                 yield row.id, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
-                ex = {"id": str(row.id), "text": row.sentence, "labels": [row.label]}
+                ex = {"id": str(row.id), "text": row.tweet, "labels": [row.label]}
                 yield row.id, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
