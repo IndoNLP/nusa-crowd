@@ -123,12 +123,12 @@ class EmoT(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path):
-        df = pd.read_csv(filepath, sep=",", header=None).reset_index()
-        df.columns = ["id", "sentence", "label"]
+        df = pd.read_csv(filepath, sep=",", header="infer").reset_index()
+        df.columns = ["id", "tweet", "label"]
 
         if self.config.schema == "source":
             for row in df.itertuples():
-                ex = {"index": str(row.id), "sentence": row.sentence, "label": row.label}
+                ex = {"index": str(row.id), "tweet": row.sentence, "label": row.label}
                 yield row.id, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
