@@ -82,7 +82,7 @@ class EmoT(datasets.GeneratorBasedBuilder):
             features = datasets.Features(
                 {
                     "index": datasets.Value("string"),
-                    "sentence": datasets.Value("string"),
+                    "tweet": datasets.Value("string"),
                     "label": datasets.Value("string"),
                 }
             )
@@ -124,7 +124,7 @@ class EmoT(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path):
         df = pd.read_csv(filepath, sep=",", header="infer").reset_index()
-        df.columns = ["id", "tweet", "label"]
+        df.columns = ["id", "label", "tweet"]
 
         if self.config.schema == "source":
             for row in df.itertuples():
