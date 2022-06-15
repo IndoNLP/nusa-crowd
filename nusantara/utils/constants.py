@@ -22,6 +22,7 @@ class Tasks(Enum):
     # Single Text Classification
     SENTIMENT_ANALYSIS = "SA"
     ASPECT_BASED_SENTIMENT_ANALYSIS = "ABSA"
+    EMOTION_CLASSIFICATION = "EC"
     
     # Single Text Sequence Labeling
     POS_TAGGING = "POS"    
