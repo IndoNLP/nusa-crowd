@@ -1,4 +1,4 @@
-# Welcome to the Nusantara NLP Hackathon!
+# Welcome to the NusaCrowd!
 
 
 ![progress claimed](https://progress-bar.dev/0/?title=Datasets%20Claimed)
