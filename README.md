@@ -8,20 +8,20 @@
 ![tier3](https://progress-bar.dev/0/?title=Progress%203%20(100%20Datasets%20Completed))
 ![tier4](https://progress-bar.dev/0/?title=Progress%204%20(150%20Datasets%20Completed))
 
-Indonesian NLP is underrepresented in research community, and one of the reasons is the lack of access to public datasets (Aji et al 2022).
-**NusaCrowd** is a joint initiative to collect NLP datasets for Indonesian languages. Help us collect and centralize Indonesian NLP datasets, and be a co-author of our upcoming paper.
+Indonesian NLP is underrepresented in research community, and one of the reasons is the lack of access to public datasets ([Aji et al., 2022](https://aclanthology.org/2022.acl-long.500/)). To address this issue, we initiate
+**NusaCrowd**, a joint collaboration to collect NLP datasets for Indonesian languages. Help us collect and centralize Indonesian NLP datasets, and be a co-author of our upcoming paper.
 
 ## How to contribute?
 
-You can contribute by proposing unregistered NLP dataset on our record. You can also propose datasets from your past work that have not been released to the public. Just fill out this form, and we will check and approve your entry. 
+You can contribute by proposing unregistered NLP dataset on our record. You can also propose datasets from your past work that have not been released to the public. [Just fill out this form](https://forms.gle/31dMGZik25DPFYFd6), and we will check and approve your entry. 
 
 We will give **contribution points** based on several factors, including: **dataset quality**, **language scarcity**, or **task scarcity**.
 
-You can submit multiple entries, and if the total **contribution points** is already above the threshold, we will include you as a co-author (Generally it is enough to only propose 1-2 datasets). Read the full method of calculating points.
+You can submit multiple entries, and if the total **contribution points** is already above the threshold, we will include you as a co-author (Generally it is enough to only propose 1-2 datasets). Read the full method of calculating points [here](https://github.com/IndoNLP/nusa-crowd/blob/master/POINTS.md).
 
 ## Any other way to help?
 
-Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that here.
+Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](https://github.com/IndoNLP/nusa-crowd/blob/master/UPLOADING.md).
 
 ## FAQs
 
