@@ -19,11 +19,11 @@ Anda dapat berkontribusi dengan mengajukan **set data NLP yang tidak terdaftar**
 
 Kami akan memberikan **poin kontribusi** berdasarkan beberapa faktor, antara lain: **kualitas kdataset**, **kelangkaan bahasa**, atau **kelangkaan downstream task**.
 
-Anda dapat mengirimkan beberapa entri, dan jika total **poin kontribusi** sudah di atas ambang batas, kami akan menyertakan Anda sebagai rekan penulis (Umumnya cukup mengajukan 1-2 dataset). Baca metode penghitungan poin selengkapnya [di sini](https://github.com/IndoNLP/nusa-crowd/blob/master/POINTS.md).
+Anda dapat mengirimkan beberapa entri, dan jika total **poin kontribusi** sudah di atas ambang batas, kami akan menyertakan Anda sebagai rekan penulis (Umumnya cukup mengajukan 1-2 dataset). Baca metode penghitungan poin selengkapnya [di sini](https://github.com/IndoNLP/nusa-crowd/blob/master/POINTS.id.md).
 
 ## Ada cara lain untuk membantu?
 
-Ya! Selain pengumpulan dataset baru, kami juga memusatkan dataset yang ada dalam satu skema yang memudahkan peneliti untuk menggunakan dataset NLP Indonesia. Anda dapat membantu kami di sana dengan membuat pemuat dataset. Detail lebih lanjut tentang itu [di sini](https://github.com/IndoNLP/nusa-crowd/blob/master/UPLOADING.md).
+Ya! Selain pengumpulan dataset baru, kami juga memusatkan dataset yang ada dalam satu skema yang memudahkan peneliti untuk menggunakan dataset NLP Indonesia. Anda dapat membantu kami di sana dengan membuat pemuat dataset. Detail lebih lanjut tentang itu [di sini](https://github.com/IndoNLP/nusa-crowd/blob/master/UPLOADING.id.md).
 
 ## FAQ
 
