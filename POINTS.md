@@ -38,7 +38,7 @@ We can have 4 different levels: Small, Medium, Large, XL
 ## Examples
 
 Let's assume a new sentiment analysis for one of Papuan language, consisting of 500 sentences. 
-For data size, it is considered small (+1 pts). While sentiment analysis is common, but the language itself is extremely rare and underrepresented, therefore we got +6 pts for this. Lastly, assuming the data is in high-quality, we'll obtain a total of (1 + 6) * 1.5 pts = 13.5pts, which is enough for authorship.
+For data size, it is considered small (+1 pts). While sentiment analysis is common, but the language itself is extremely rare and underrepresented, therefore we got +6 pts for this. Lastly, assuming the data is in high-quality, we'll obtain a total of (1 + 6) * 1.5 pts = 10.5pts, which is enough for authorship.
 
 Another example, let's assume a new Natural Language Inference (NLI) dataset for Javanese. NLI by itself is not new for Indonesian languages, and Javanese resource is available. However, Javanese NLI is the first one even, hence it is still considered rare (+6 pts). Assuming the dataset is Small size, with Good quality, we end up with a total of 7 pts. By additionally, implementing the data loader for this dataset, we'll have a total of 10 pts, which is enough for authorship.
 
