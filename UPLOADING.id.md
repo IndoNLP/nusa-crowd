@@ -47,7 +47,7 @@ Jika tidak ada lisensi yang sesuai yang tersedia dalam opsi yang disediakan (mis
 Menggunakan akses terminal, temukan lokasi untuk menempatkan repositori github Anda. Di lokasi ini, gunakan perintah berikut:
 
 ```
-git clone https://huggingface.co/datasets/indobenchmark/<your_dataset_name>
+git clone https://huggingface.co/datasets/indobenchmark/<nama_dataset_anda>
 ```
 
 ### 5. Lakukan perubahan Anda
