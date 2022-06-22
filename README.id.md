@@ -17,7 +17,7 @@ NLP Indonesia kurang terwakili dalam komunitas riset, dan salah satu alasannya a
 
 Anda dapat berkontribusi dengan mengajukan **set data NLP yang tidak terdaftar** di [catatan kami](https://indonlp.github.io/nusa-catalogue/). Anda juga dapat mengusulkan dataset dari pekerjaan Anda sebelumnya yang belum dirilis ke publik. [Cukup isi formulir ini](https://forms.gle/31dMGZik25DPFYFd6), dan kami akan memeriksa dan menyetujui entri Anda.
 
-Kami akan memberikan **poin kontribusi** berdasarkan beberapa faktor, antara lain: **kualitas kdataset**, **kelangkaan bahasa**, atau **kelangkaan downstream task**.
+Kami akan memberikan **poin kontribusi** berdasarkan beberapa faktor, antara lain: **kualitas dataset**, **kelangkaan bahasa**, atau **kelangkaan downstream task**.
 
 Anda dapat mengirimkan beberapa entri, dan jika total **poin kontribusi** sudah di atas ambang batas, kami akan menyertakan Anda sebagai rekan penulis (Umumnya cukup mengajukan 1-2 dataset). Baca metode penghitungan poin selengkapnya [di sini](POINTS.id.md).
 
