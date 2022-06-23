@@ -19,11 +19,11 @@ You can contribute by proposing **unregistered NLP dataset** on [our record](htt
 
 We will give **contribution points** based on several factors, including: **dataset quality**, **language scarcity**, or **task scarcity**.
 
-You can submit multiple entries, and if the total **contribution points** is already above the threshold, we will include you as a co-author (Generally it is enough to only propose 1-2 datasets). Read the full method of calculating points [here](https://github.com/IndoNLP/nusa-crowd/blob/master/POINTS.md).
+You can submit multiple entries, and if the total **contribution points** is already above the threshold, we will include you as a co-author (Generally it is enough to only propose 1-2 datasets). Read the full method of calculating points [here](POINTS.md).
 
 ## Any other way to help?
 
-Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](https://github.com/IndoNLP/nusa-crowd/blob/master/DATALOADER.md).
+Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](DATALOADER.md).
 
 ## FAQs
 

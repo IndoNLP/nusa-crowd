@@ -23,7 +23,7 @@ Anda dapat mengirimkan beberapa entri, dan jika total **poin kontribusi** sudah 
 
 ## Ada cara lain untuk membantu?
 
-Ya! Selain pengumpulan dataset baru, kami juga memusatkan dataset yang ada dalam satu skema yang memudahkan peneliti untuk menggunakan dataset NLP Indonesia. Anda dapat membantu kami di sana dengan membuat pemuat dataset. Untuk detail lebih lanjut tentang itu, bisa ditemukan [di sini](UPLOADING.id.md).
+Ya! Selain pengumpulan dataset baru, kami juga memusatkan dataset yang ada dalam satu skema yang memudahkan peneliti untuk menggunakan dataset NLP Indonesia. Anda dapat membantu kami di sana dengan membuat pemuat dataset. Untuk detail lebih lanjut tentang itu, bisa ditemukan [di sini](DATALOADER.md).
 
 ## FAQ
 

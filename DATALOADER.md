@@ -1,4 +1,4 @@
-# Guide to Implementing a dataloader
+# Guide for contributing a dataloader implementation
 
 ## Pre-Requisites
 
@@ -122,11 +122,11 @@ Populate the information in the dataset according to this schema; some fields ma
 To enable quality control, please add the following line in your file before the class definition:
 ```python
 from utils.constants import Tasks
-_SUPPORTED_TASKS = [Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
+_SUPPORTED_TASKS = [Tasks.NAMED_ENTITY_RECOGNITION, Tasks.DEPENDENCY_PARSING]
 ```
 
 ##### Example scripts:
-To help you implement a dataset, we offer [example scripts](examples/).
+To help you implement a dataset, we offer [example scripts](nusantara/nusa_datasets).
 
 #### Running & Debugging:
 You can run your data loader script during development by appending the following
