@@ -8,6 +8,8 @@
 ![tier3](https://progress-bar.dev/0/?title=Progress%203%20(100%20Datasets%20Completed))
 ![tier4](https://progress-bar.dev/0/?title=Progress%204%20(150%20Datasets%20Completed))
 
+*Baca README ini dalam [Bahasa Indonesia](README.id.md).*
+
 Indonesian NLP is underrepresented in research community, and one of the reasons is the lack of access to public datasets ([Aji et al., 2022](https://aclanthology.org/2022.acl-long.500/)). To address this issue, we initiate
 **NusaCrowd**, a joint collaboration to collect NLP datasets for Indonesian languages. Help us collect and centralize Indonesian NLP datasets, and be a co-author of our upcoming paper.
 
