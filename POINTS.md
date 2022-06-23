@@ -4,7 +4,7 @@ To be considered as co-author, 10 contribution points is required.
 
 ## Data Loader
 
-Implementing any data loader is granted +3 pts.
+Implementing any data loader is granted +3 pts. More detais [here](https://github.com/IndoNLP/nusa-crowd/blob/master/DATALOADER.md).
 
 ## Dataset Proposal
 

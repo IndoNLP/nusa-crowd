@@ -1,4 +1,4 @@
-# Guide to Implementing a dataset
+# Guide to Implementing a dataloader
 
 ## Pre-Requisites
 
@@ -8,7 +8,20 @@ You will also need at least Python 3.6+. If you are installing python, we recomm
 
 **Optional** Setup your GitHub account with SSH ([instructions here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).)
 
-### 1. **Setup a local version of the nusantara-datasets repo**
+### 1. **Assigning a dataloader**
+- Choose a dataset from the [list of Nusantara datasets](https://github.com/orgs/IndoNLP/projects/2). 
+<p align="center">
+    <img src="./docs/_static/img/select-task.jpeg" style="width: 80%;"/>
+</p>
+
+- Assign yourself an issue by clicking the dataset in the project list, and comment `#self-assign` under the issue. **Please assign yourself to issues with no other collaborators assigned**. You should see your GitHub username associated to the issue within 1-2 minutes of making a comment.
+<p align="center">
+    <img src="./docs/_static/img/self-assign.jpg" style="width: 80%;"/>
+</p>
+
+- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-datasets/blob/master/task_schemas.md).
+
+### 2. **Setup a local version of the nusantara-datasets repo**
 Fork the nusantara-datasets [repository](https://github.com/indobenchmark/nusantara-datasets) to your local github account. To do this, click the link to the repository and click "fork" in the upper-right corner. You should get an option to fork to your account, provided you are signed into Github.
 
 After you fork, clone the repository locally. You can do so as follows:

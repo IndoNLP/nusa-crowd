@@ -23,7 +23,7 @@ You can submit multiple entries, and if the total **contribution points** is alr
 
 ## Any other way to help?
 
-Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](https://github.com/IndoNLP/nusa-crowd/blob/master/UPLOADING.md).
+Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](https://github.com/IndoNLP/nusa-crowd/blob/master/DATALOADER.md).
 
 ## FAQs
 
