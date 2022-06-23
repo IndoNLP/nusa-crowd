@@ -44,7 +44,7 @@ Anda dapat mengunggah dataset Anda secara publik terlebih dahulu, mis. di Github
 
 #### Saya bingung, dapatkah Anda membantu saya?
 
-Ya! Silakan bergabung dengan [grup WhatsApp kami](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) dan minta bantuan.
+Ya, kamu dapat kirimkan pertanyaanmu di kanal komunitas NusaCrowd! Silakan bergabung ke kanal komunitas NusaCrowd di [grup WhatsApp kami](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) dan [server Slack](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
 
 
 ## Terima kasih!

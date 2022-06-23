@@ -44,7 +44,7 @@ You can upload your dataset publicly first, eg. on Github.
 
 #### I am confused, can you help me?
 
-Yes! Please join our [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) and ask for help. 
+Yes, you can ask for helps in NusaCrowd's community channel! Please join our [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) or [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
 
 
 ## Thank you!
