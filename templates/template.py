@@ -31,13 +31,12 @@ TODO: Before submitting your script, delete this doc string and replace it with 
 [nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
 """
 
-import os
 from typing import List, Tuple, Dict
 
 import datasets
-from utils import schemas
-from utils.configs import NusantaraConfig
-from utils.constants import Tasks
+from nusantara.utils import schemas
+from nusantara.utils.configs import NusantaraConfig
+from nusantara.utils.constants import Tasks
 
 # TODO: Add BibTeX citation
 _CITATION = """\
