@@ -192,6 +192,9 @@ Then, run the following commands to incorporate any new changes in the master br
     git fetch upstream
     git rebase upstream/master
 
+Or you can install the pre-commit hooks to automatically pre-check before commit by:
+
+    pre-commit install
 **Run these commands in your custom branch**.
 
 Push these changes to **your fork** with the following command:
