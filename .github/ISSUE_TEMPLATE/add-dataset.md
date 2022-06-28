@@ -20,4 +20,3 @@ assignees: ''
 - **Is Synthetic:** *Yes/No. Put yes if the dataset is generated synthetically somehow, for example by translating from other languages, or by generating from language models, or CFG, etc2.*
 - **License:** *Type of license; please provide public for new datasets*
 - **Motivation:** *what are some good reasons to have this dataset*
-

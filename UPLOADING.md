@@ -4,14 +4,14 @@
 
 ### 1. Make an account on the Hub
 
-Please do the following before getting started: 
+Please do the following before getting started:
 
-- [Make](https://huggingface.co/join) an account on 🤗's Hub and [login](https://huggingface.co/login). **Choose a good password, as you'll need to authenticate your credentials**. 
+- [Make](https://huggingface.co/join) an account on 🤗's Hub and [login](https://huggingface.co/login). **Choose a good password, as you'll need to authenticate your credentials**.
 
 - Join the Indobenchmark initiative [here](https://huggingface.co/indobenchmark).
     - click the "Request to join this org" button in the upper right corner.
 
-- Make a github account; you can follow instructions to install git [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). 
+- Make a github account; you can follow instructions to install git [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 
 **Note - your permissions will be set to READ. Please contact an admin in your dataset's github issue to be granted WRITE access; this should be given after your PR is accepted**.
@@ -26,21 +26,21 @@ With your active `nusantara` environment, use the following command:
 huggingface-cli login
 ```
 
-Login with your 🤗 Hub account username and password. 
+Login with your 🤗 Hub account username and password.
 
 ### 3. Create a dataset repository
 
 Make a repository via the 🤗 Hub [here](https://huggingface.co/new-dataset) with the following details.
 
 + Set Owner: nusantara-datasets
-+ Set Dataset name: the name of the dataset 
++ Set Dataset name: the name of the dataset
 + Set License: the license that applies to this dataset
 + Select Private
 + Click `Create dataset`
 
 **Please name your dataloading script with the same name as the dataset.** For example, if your dataset loader script is called `absa_prosa.py`, then your dataset name should be `absa_prosa`.
 
-If there is no appropriate license available in the provided options (for example for datasets with specific data user agreements) you should select "other". 
+If there is no appropriate license available in the provided options (for example for datasets with specific data user agreements) you should select "other".
 
 ### 4. Clone the dataset repository
 
@@ -60,11 +60,11 @@ git commit -m "Adds <your_dataset_name>"
 git push origin
 ```
 
-## 6) Test your data-loader 
+## 6) Test your data-loader
 
 Run the following command **in a folder that does not include your data-loading script**:
 
-Test both the original dataset schema/config and the nusantara schema/config. 
+Test both the original dataset schema/config and the nusantara schema/config.
 
 **Public Dataset**
 ```python
@@ -80,16 +80,16 @@ dataset_indobenchmark= load_dataset("indobenchmark/<your_dataset_name>", name="i
 from datasets import load_dataset
 
 dataset_orig = load_dataset(
-    "indobenchmark/<your_dataset_name>", 
-    name="source", 
+    "indobenchmark/<your_dataset_name>",
+    name="source",
     data_dir="/local/path/to/data/files",
     use_auth_token=True)
 
 dataset_indobenchmark = load_dataset(
-    "indobenchmark/<your_dataset_name>", 
-    name="indobenchmark", 
+    "indobenchmark/<your_dataset_name>",
+    name="indobenchmark",
     data_dir="/local/path/to/data/files",
     use_auth_token=True)
 ```
 
-And with that, you have successfully contributed a data-loading script! 
+And with that, you have successfully contributed a data-loading script!

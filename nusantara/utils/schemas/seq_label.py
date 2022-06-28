@@ -1,4 +1,4 @@
-""" 
+"""
 Seq Labeling Schema
 
 Several tasks boil down to transforming sequence of tokens into annother sequence of tokens with the same length, including:
@@ -9,10 +9,11 @@ Several tasks boil down to transforming sequence of tokens into annother sequenc
 """
 import datasets
 
-features = datasets.Features(
-    {
-        "id": datasets.Value("string"),
-        "tokens": [datasets.Value("string")],
-        "labels": [datasets.Value("string")]
-    }
-)
+def features(label_names = ["Yes", "No"]):
+    return datasets.Features(
+        {
+            "id": datasets.Value("string"),
+            "tokens": [datasets.Value("string")],
+            "labels": [datasets.ClassLabel(names=label_names)],
+        }
+    )

@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -68,7 +67,7 @@ class IdHatespeech(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"tweet": datasets.Value("string"), "label": datasets.Value("string")})
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features(["HS", "Non_HS"])
+            features = schemas.text_features(["Non_HS", "HS"])
    
 
         return datasets.DatasetInfo(
