@@ -40,6 +40,9 @@ class Tasks(Enum):
     
     # Multi Text Generation
     DIALOGUE_SYSTEM = "DS"
+    
+    # Self Supervised Pretraining
+    SELF_SUPERVISED_PRETRAINING = "SSP"
 
     
 # TASK_TO_SCHEMA = {
