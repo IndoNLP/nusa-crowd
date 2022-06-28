@@ -9,7 +9,7 @@ You will also need at least Python 3.6+. If you are installing python, we recomm
 **Optional** Setup your GitHub account with SSH ([instructions here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).)
 
 ### 1. **Assigning a dataloader**
-- Choose a dataset from the [list of Nusantara datasets](https://github.com/orgs/IndoNLP/projects/2). 
+- Choose a dataset from the [list of Nusantara datasets](https://github.com/orgs/IndoNLP/projects/2).
 <p align="center">
     <img src="./docs/_static/img/select-task.jpeg" style="width: 80%;"/>
 </p>
@@ -104,7 +104,7 @@ Make a new directory within the `nusa-crowd/nusantara/nusa_datasets` directory:
 
     mkdir nusantara/nusa_datasets/<dataset_name>
 
-Please use lowercase letters and underscores when choosing a `<dataset_name>`. 
+Please use lowercase letters and underscores when choosing a `<dataset_name>`.
 To implement your dataset, there are three key methods that are important:
 
   * `_info`: Specifies the schema of the expected dataloader
@@ -141,9 +141,9 @@ if __name__ == "__main__":
 ```
 
 If you want to use an interactive debugger during development, you will have to use
-`breakpoint()` instead of setting breakpoints directly in your IDE. Most IDEs will 
+`breakpoint()` instead of setting breakpoints directly in your IDE. Most IDEs will
 recognize the `breakpoint()` statement and pause there during debugging. If your prefered
-IDE doesn't support this, you can always run the script in your terminal and debug with 
+IDE doesn't support this, you can always run the script in your terminal and debug with
 `pdb`.
 
 
@@ -192,6 +192,9 @@ Then, run the following commands to incorporate any new changes in the master br
     git fetch upstream
     git rebase upstream/master
 
+Or you can install the pre-commit hooks to automatically pre-check before commit by:
+
+    pre-commit install
 **Run these commands in your custom branch**.
 
 Push these changes to **your fork** with the following command:

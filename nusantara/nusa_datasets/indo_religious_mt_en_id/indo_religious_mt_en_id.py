@@ -2,8 +2,6 @@ from pathlib import Path
 from typing import List
 
 import datasets
-import json
-import pandas as pd
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
@@ -13,7 +11,7 @@ _DATASETNAME = "indo_religious_mt_en_id"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ['ind', 'eng'] # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["ind", "eng"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
 @inproceedings{guntara-etal-2020-benchmarking,
@@ -53,12 +51,11 @@ _URLs = {
     "train.id.1": "https://raw.githubusercontent.com/gunnxx/indonesian-mt-data/master/religious/train.id.1",
 }
 
-_SUPPORTED_TASKS = [
-    Tasks.MACHINE_TRANSLATION
-]
+_SUPPORTED_TASKS = [Tasks.MACHINE_TRANSLATION]
 
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
+
 
 class IndoReligiousMTEnId(datasets.GeneratorBasedBuilder):
     """Indonesian Religious Domain MT En-Id is a machine translation dataset containing English-Indonesian parallel sentences collected from the religious manuscripts."""
@@ -77,7 +74,7 @@ class IndoReligiousMTEnId(datasets.GeneratorBasedBuilder):
             description="Bible En-Id Nusantara schema",
             schema="nusantara_t2t",
             subset_id="indo_religious_mt_en_id",
-        )
+        ),
     ]
 
     DEFAULT_CONFIG_NAME = "indo_religious_mt_en_id_source"
@@ -101,9 +98,7 @@ class IndoReligiousMTEnId(datasets.GeneratorBasedBuilder):
             citation=_CITATION,
         )
 
-    def _split_generators(
-        self, dl_manager: datasets.DownloadManager
-    ) -> List[datasets.SplitGenerator]:
+    def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         data_files = {
             "test.en": Path(dl_manager.download_and_extract(_URLs["test.en"])),
             "test.id": Path(dl_manager.download_and_extract(_URLs["test.id"])),
@@ -118,24 +113,30 @@ class IndoReligiousMTEnId(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
-                gen_kwargs={"filepath": {
-                    "en": [data_files["test.en"]],
-                    "id": [data_files["test.id"]],
-                }},
+                gen_kwargs={
+                    "filepath": {
+                        "en": [data_files["test.en"]],
+                        "id": [data_files["test.id"]],
+                    }
+                },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
-                gen_kwargs={"filepath": {
-                    "en": [data_files["valid.en"]],
-                    "id": [data_files["valid.id"]],
-                }},
+                gen_kwargs={
+                    "filepath": {
+                        "en": [data_files["valid.en"]],
+                        "id": [data_files["valid.id"]],
+                    }
+                },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                gen_kwargs={"filepath": {
-                    "en": [data_files["train.en.0"], data_files["train.en.1"]],
-                    "id": [data_files["train.id.0"], data_files["train.id.1"]],
-                }},
+                gen_kwargs={
+                    "filepath": {
+                        "en": [data_files["train.en.0"], data_files["train.en.1"]],
+                        "id": [data_files["train.id.0"], data_files["train.id.1"]],
+                    }
+                },
             ),
         ]
 
@@ -160,7 +161,7 @@ class IndoReligiousMTEnId(datasets.GeneratorBasedBuilder):
                 ex = {
                     "text_1": row_en,
                     "text_2": row_id,
-                }                
+                }
                 yield id, ex
         elif self.config.schema == "nusantara_t2t":
             for id, (row_en, row_id) in enumerate(zip(data_en, data_id)):
@@ -168,8 +169,8 @@ class IndoReligiousMTEnId(datasets.GeneratorBasedBuilder):
                     "id": id,
                     "text_1": row_en,
                     "text_2": row_id,
-                    "text_1_name": 'eng',
-                    "text_2_name": 'ind',
+                    "text_1_name": "eng",
+                    "text_2_name": "ind",
                 }
                 yield id, ex
         else:
