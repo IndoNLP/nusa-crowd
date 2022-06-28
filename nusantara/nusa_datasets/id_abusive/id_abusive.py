@@ -94,7 +94,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
         # Dataset does not have predetermined split, putting all as TRAIN
         urls = _URLS[_DATASETNAME]
         base_dir = Path(dl_manager.download_and_extract(urls))
-        data_files = {"train":  base_dir}
+        data_files = {"train": base_dir}
 
         return [
             datasets.SplitGenerator(
