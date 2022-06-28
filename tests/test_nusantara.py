@@ -22,7 +22,6 @@ logger = logging.getLogger(__name__)
 
 
 _TASK_TO_SCHEMA = {
-    Tasks.NAMED_ENTITY_RECOGNITION: "KB",
     Tasks.DEPENDENCY_PARSING: "KB",
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
     Tasks.KEYWORD_EXTRACTION: "KB",
