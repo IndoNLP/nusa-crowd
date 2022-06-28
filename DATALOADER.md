@@ -22,7 +22,7 @@ You will also need at least Python 3.6+. If you are installing python, we recomm
 
 - Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-crowd/blob/master/task_schemas.md).
 
-- If not, find the dataset online, usually uploaded in Gihtub or Google drive.
+- If not, find the dataset online, usually uploaded in Github or Google drive.
 
 ### 2. **Setup a local version of the nusa-crowd repo**
 Fork the nusa-crowd [repository](https://github.com/IndoNLP/nusa-crowd) to your local github account. To do this, click the link to the repository and click "fork" in the upper-right corner. You should get an option to fork to your account, provided you are signed into Github.
