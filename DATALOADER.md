@@ -16,6 +16,10 @@ You will also need at least Python 3.6+. If you are installing python, we recomm
 
 - Assign yourself an issue by commenting `#self-assign` under the issue. **Please assign yourself to issues with no other collaborators assigned**. You should see your GitHub username associated to the issue within 1-2 minutes of making a comment.
 
+<p align="center">
+    <img src="./docs/_static/img/self-assign.jpg" style="width: 80%;"/>
+</p>
+
 - Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-crowd/blob/master/task_schemas.md).
 
 - If not, find the dataset online, usually uploaded in Gihtub or Google drive.
