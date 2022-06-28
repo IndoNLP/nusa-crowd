@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List, Tuple, TypedDict, Literal
+from typing import Dict, List, Literal, Tuple, TypedDict
 
 import datasets
 
@@ -48,12 +48,7 @@ class IdPanlBppt(datasets.GeneratorBasedBuilder):
         # seems to be the number of words in the file
         words: Literal["150K", "100K"]
 
-    TOPICS: List[Topic] = [
-        {"name": "Economy", "words": "150K"},
-        {"name": "International", "words": "150K"},
-        {"name": "Science", "words": "100K"},
-        {"name": "Sport", "words": "100K"}
-    ]
+    TOPICS: List[Topic] = [{"name": "Economy", "words": "150K"}, {"name": "International", "words": "150K"}, {"name": "Science", "words": "100K"}, {"name": "Sport", "words": "100K"}]
 
     SOURCE_LANGUAGE = "en"
     TARGET_LANGUAGE = "id"
@@ -117,9 +112,7 @@ class IdPanlBppt(datasets.GeneratorBasedBuilder):
         for topic in self.TOPICS:
             src_path = f"PANL-BPPT-{topic['name'][:3].upper()}-{self.SOURCE_LANGUAGE.upper()}-{topic['words']}w.txt"
             tgt_path = f"PANL-BPPT-{topic['name'][:3].upper()}-{self.TARGET_LANGUAGE.upper()}-{topic['words']}w.txt"
-            with open(os.path.join(dir, src_path), encoding="utf-8") as f1, open(
-                os.path.join(dir, tgt_path), encoding="utf-8"
-            ) as f2:
+            with open(os.path.join(dir, src_path), encoding="utf-8") as f1, open(os.path.join(dir, tgt_path), encoding="utf-8") as f2:
                 src = f1.read().split("\n")[:-1]
                 tgt = f2.read().split("\n")[:-1]
                 for s, t in zip(src, tgt):
