@@ -21,6 +21,7 @@ class Tasks(Enum):
     WORD_SENSE_DISAMBIGUATION = "WSD"
     KEYWORD_EXTRACTION = "KE"
     COREFERENCE_RESOLUTION = "COREF"
+    TEXT = "TEXT"
 
     # Single Text Classification
     SENTIMENT_ANALYSIS = "SA"
