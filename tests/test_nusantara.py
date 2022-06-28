@@ -521,7 +521,10 @@ class TestDataLoader(unittest.TestCase):
 
         split_to_feature_counts = self.get_feature_statistics(features=features, schema=schema)
         for split_name, split in self.datasets_nusantara[schema].items():
+            self.assertEqual(len(features), len(split.info.features))
             for key in features:
+                if key not in split.info.features:
+                    raise AssertionError(f"Required feature '{key}' does not exist")
                 self.assertEqual(type(features[key]), type(split.info.features[key]))
             # self.assertEqual(split.info.features, features)
             for non_empty_feature in non_empty_features:
