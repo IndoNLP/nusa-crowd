@@ -68,7 +68,8 @@ class IdHatespeech(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"tweet": datasets.Value("string"), "label": datasets.Value("string")})
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = schemas.text_features(["HS", "Non_HS"])
+   
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -114,7 +115,7 @@ class IdHatespeech(datasets.GeneratorBasedBuilder):
                 ex = {
                     "id": str(row.id),
                     "text": row.tweet,
-                    "labels": [row.label],
+                    "label": row.label,
                 }
                 yield row.id, ex
         else:

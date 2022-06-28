@@ -72,7 +72,7 @@ class IdClickbait(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"title": datasets.Value("string"), "label": datasets.Value("string"), "label_score": datasets.Value("int8")})
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = schemas.text_features(["non-clickbait", "clickbait"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -118,6 +118,6 @@ class IdClickbait(datasets.GeneratorBasedBuilder):
                 ex = {
                     "id": str(row_index),
                     "text": row["title"],
-                    "labels": [row["label"]],
+                    "label": row["label"],
                 }
                 yield row_index, ex

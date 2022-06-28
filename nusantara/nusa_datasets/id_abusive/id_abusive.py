@@ -53,8 +53,8 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
     LABEL_STRING_MAP = {
         1: "not_abusive",
-        2: "abusive_but_not_offensive",
-        3: "offensive",
+        2: "abusive",
+        3: "abusive_and_offensive",
     }
 
     BUILDER_CONFIGS = [
@@ -80,7 +80,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"tweet": datasets.Value("string"), "label": datasets.Value("string")})
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = schemas.text_features(["not_abusive", "abusive", "abusive_and_offensive"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -117,7 +117,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {
                     "tweet": row.tweet,
-                    "label": str(row.label),
+                    "label": self.LABEL_STRING_MAP[row.label],
                 }
                 yield row.id, ex
 
@@ -126,7 +126,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
                 ex = {
                     "id": str(row.id),
                     "text": row.tweet,
-                    "labels": [str(row.label)],
+                    "label": self.LABEL_STRING_MAP[row.label],
                 }
                 yield row.id, ex
         else:

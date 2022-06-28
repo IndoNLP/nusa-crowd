@@ -80,7 +80,7 @@ class SMSA(datasets.GeneratorBasedBuilder):
                 }
             )
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = schemas.text_features(["negative", "neutral", "positive"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -134,7 +134,7 @@ class SMSA(datasets.GeneratorBasedBuilder):
                 ex = {
                     "id": str(row.id),
                     "text": row.sentence,
-                    "labels": [row.label]
+                    "label": row.label
                 }
                 yield row.id, ex
         else:

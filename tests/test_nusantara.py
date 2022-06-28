@@ -22,13 +22,11 @@ logger = logging.getLogger(__name__)
 
 
 _TASK_TO_SCHEMA = {
+    Tasks.NAMED_ENTITY_RECOGNITION: "KB",
     Tasks.DEPENDENCY_PARSING: "KB",
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
     Tasks.KEYWORD_EXTRACTION: "KB",
     Tasks.COREFERENCE_RESOLUTION: "KB",
-    Tasks.DIALOGUE_SYSTEM: "KB",
-
-    Tasks.NAMED_ENTITY_RECOGNITION: "SEQ_LABEL",
     Tasks.POS_TAGGING: "SEQ_LABEL",
     
     Tasks.QUESTION_ANSWERING: "QA",
@@ -43,8 +41,8 @@ _TASK_TO_SCHEMA = {
     Tasks.SENTIMENT_ANALYSIS: "TEXT",
     Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT",
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
-    Tasks.SELF_SUPERVISED_PRETRAINING: "TEXT"
 
+    Tasks.DIALOGUE_SYSTEM: "KB"
 }
 
 _VALID_TASKS = set(_TASK_TO_SCHEMA.keys())
@@ -54,7 +52,7 @@ _SCHEMA_TO_FEATURES = {
     "KB": kb_features,
     "QA": qa_features,
     "T2T": text2text_features,
-    "TEXT": text_features,
+    "TEXT": text_features(),
     "PAIRS": pairs_features,
     "SEQ_LABEL": seq_label_features,
 }
@@ -201,6 +199,7 @@ class TestDataLoader(unittest.TestCase):
                 data_dir=self.DATA_DIR,
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
+            logger.info(f"Dataset sample\n{self.datasets_nusantara[schema]['train'][0]}")
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """
@@ -217,7 +216,7 @@ class TestDataLoader(unittest.TestCase):
             for example in split:
                 for feature_name, feature in features.items():
                     if example.get(feature_name, None) is not None:
-                        if isinstance(feature, datasets.Value):
+                        if isinstance(feature, datasets.ClassLabel) or isinstance(feature, datasets.Value):
                             if example[feature_name]:
                                 counter[feature_name] += 1
                         else:
@@ -549,7 +548,9 @@ class TestDataLoader(unittest.TestCase):
 
         split_to_feature_counts = self.get_feature_statistics(features=features, schema=schema)
         for split_name, split in self.datasets_nusantara[schema].items():
-            self.assertEqual(split.info.features, features)
+            for key in features:
+                self.assertEqual(type(features[key]), type(split.info.features[key]))
+            # self.assertEqual(split.info.features, features)
             for non_empty_feature in non_empty_features:
                 if split_to_feature_counts[split_name][non_empty_feature] == 0:
                     raise AssertionError(f"Required key '{non_empty_feature}' does not have any instances")
