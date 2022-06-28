@@ -14,12 +14,11 @@ You will also need at least Python 3.6+. If you are installing python, we recomm
     <img src="./docs/_static/img/select-task.jpeg" style="width: 80%;"/>
 </p>
 
-- Assign yourself an issue by clicking the dataset in the project list, and comment `#self-assign` under the issue. **Please assign yourself to issues with no other collaborators assigned**. You should see your GitHub username associated to the issue within 1-2 minutes of making a comment.
-<p align="center">
-    <img src="./docs/_static/img/self-assign.jpg" style="width: 80%;"/>
-</p>
+- Assign yourself an issue by commenting `#self-assign` under the issue. **Please assign yourself to issues with no other collaborators assigned**. You should see your GitHub username associated to the issue within 1-2 minutes of making a comment.
 
 - Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-crowd/blob/master/task_schemas.md).
+
+- If not, find the dataset online, usually uploaded in Gihtub or Google drive.
 
 ### 2. **Setup a local version of the nusa-crowd repo**
 Fork the nusa-crowd [repository](https://github.com/IndoNLP/nusa-crowd) to your local github account. To do this, click the link to the repository and click "fork" in the upper-right corner. You should get an option to fork to your account, provided you are signed into Github.
@@ -95,7 +94,7 @@ pip install -r requirements.txt # Install this while in the datasets folder
 ```
 Make sure your `pip` package points to your environment's source.
 
-### 3. Implement your dataset
+### 3. Implement your dataloader
 
 Make a new directory within the `nusa-crowd/nusantara/nusa_datasets` directory:
 
@@ -126,7 +125,7 @@ _SUPPORTED_TASKS = [Tasks.NAMED_ENTITY_RECOGNITION, Tasks.DEPENDENCY_PARSING]
 ```
 
 ##### Example scripts:
-To help you implement a dataset, we offer [example scripts](nusantara/nusa_datasets).
+To help you implement a dataset, you can see the implementation of [other dataset scripts](nusantara/nusa_datasets).
 
 #### Running & Debugging:
 You can run your data loader script during development by appending the following
