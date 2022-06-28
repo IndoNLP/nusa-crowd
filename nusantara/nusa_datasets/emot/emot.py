@@ -6,8 +6,7 @@ import pandas as pd
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
-                                       DEFAULT_SOURCE_VIEW_NAME, Tasks)
+from nusantara.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
 
 _DATASETNAME = "emot"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME

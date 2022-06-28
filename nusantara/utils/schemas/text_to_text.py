@@ -1,11 +1,11 @@
-""" 
+"""
 Text to Text Schema
 
 Several tasks boil down to transforming 1 string into annother string, including:
 
 - Translation
 - Summarization
-- Paraphrasing 
+- Paraphrasing
 """
 import datasets
 
