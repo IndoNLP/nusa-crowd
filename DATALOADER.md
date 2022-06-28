@@ -19,19 +19,19 @@ You will also need at least Python 3.6+. If you are installing python, we recomm
     <img src="./docs/_static/img/self-assign.jpg" style="width: 80%;"/>
 </p>
 
-- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-datasets/blob/master/task_schemas.md).
+- Search to see if the dataset exists in the 🤗 [Hub](https://huggingface.co/datasets). If it exists, please use the current implementation as the `source` and focus on implementing the [task-specific `nusantara` schema](https://github.com/IndoNLP/nusa-crowd/blob/master/task_schemas.md).
 
-### 2. **Setup a local version of the nusantara-datasets repo**
-Fork the nusantara-datasets [repository](https://github.com/indobenchmark/nusantara-datasets) to your local github account. To do this, click the link to the repository and click "fork" in the upper-right corner. You should get an option to fork to your account, provided you are signed into Github.
+### 2. **Setup a local version of the nusa-crowd repo**
+Fork the nusa-crowd [repository](https://github.com/IndoNLP/nusa-crowd) to your local github account. To do this, click the link to the repository and click "fork" in the upper-right corner. You should get an option to fork to your account, provided you are signed into Github.
 
 After you fork, clone the repository locally. You can do so as follows:
 
-    git clone git@github.com:<your_github_username>/nusantara-datasets.git
-    cd nusantara-datasets  # enter the directory
+    git clone git@github.com:<your_github_username>/nusa-crowd.git
+    cd nusa-crowd  # enter the directory
 
 Next, you want to set your `upstream` location to enable you to push/pull (add or receive updates). You can do so as follows:
 
-    git remote add upstream git@github.com:indobenchmark/nusantara-datasets.git
+    git remote add upstream git@github.com:IndoNLP/nusa-crowd.git
 
 You can optionally check that this was set properly by running the following command:
 
@@ -39,14 +39,14 @@ You can optionally check that this was set properly by running the following com
 
 The output of this command should look as follows:
 
-    origin  git@github.com:<your_github_username>/nusantara-datasets.git (fetch)
-    origin  git@github.com:<your_github_username>/nusantara-datasets.git (push)
-    upstream    git@github.com:indobenchmark/nusantara-datasets.git (fetch)
-    upstream    git@github.com:indobenchmark/nusantara-datasets.git (push)
+    origin  git@github.com:<your_github_username>/nusa-crowd.git (fetch)
+    origin  git@github.com:<your_github_username>/nusa-crowd.git (push)
+    upstream    git@github.com:IndoNLP/nusa-crowd.git (fetch)
+    upstream    git@github.com:IndoNLP/nusa-crowd.git (push)
 
 If you do NOT have an `origin` for whatever reason, then run:
 
-    git remote add origin git@github.com:<your_github_username>/nusantara-datasets.git
+    git remote add origin git@github.com:<your_github_username>/nusa-crowd.git
 
 The goal of `upstream` is to keep your repository up-to-date to any changes that are made officially to the datasets library. You can do this as follows by running the following commands:
 
@@ -97,9 +97,9 @@ Make sure your `pip` package points to your environment's source.
 
 ### 3. Implement your dataset
 
-Make a new directory within the `nusantara-datasets/datasets` directory:
+Make a new directory within the `nusa-crowd/nusantara/nusa_datasets` directory:
 
-    mkdir datasets/<dataset_name>
+    mkdir nusantara/nusa_datasets/<dataset_name>
 
 Please use lowercase letters and underscores when choosing a `<dataset_name>`. 
 To implement your dataset, there are three key methods that are important:
@@ -108,9 +108,9 @@ To implement your dataset, there are three key methods that are important:
   * `_split_generators`: Downloads and extracts data for each split (e.g. train/val/test) or associate local data with each split.
   * `_generate_examples`: Create examples from data that conform to each schema defined in `_info`.
 
-To start, copy [templates/template.py](templates/template.py) to your `nusantara-datasets/datasets/<dataset_name>` directory with the name `<dataset_name>.py`. Within this file, fill out all the TODOs.
+To start, copy [templates/template.py](templates/template.py) to your `nusa-crowd/nusantara/nusa_datasets/<dataset_name>` directory with the name `<dataset_name>.py`. Within this file, fill out all the TODOs.
 
-    cp templates/template.py datasets/<dataset_name>/<dataset_name>.py
+    cp templates/template.py nusantara/nusa_datasets/<dataset_name>/<dataset_name>.py
 
 For the `_info_` function, you will need to define `features` for your
 `DatasetInfo` object. For the `bigbio` config, choose the right schema from our list of examples. You can find a description of these in the [Task Schemas Document](task_schemas.md). You can find the actual schemas in the [schemas directory](utils/schemas/).
@@ -151,15 +151,15 @@ Make sure your dataset is implemented correctly by checking in python the follow
 ```python
 from datasets import load_dataset
 
-data = load_dataset("datasets/<dataset_name>/<dataset_name>.py", name="<dataset_name>_nusantara_<schema>")
+data = load_dataset("nusantara/nusa_datasets/<dataset_name>/<dataset_name>.py", name="<dataset_name>_nusantara_<schema>")
 ```
 
-Run these commands from the top level of the `nusantara-datasets` repo (i.e. the same directory that contains the `requirements.txt` file).
+Run these commands from the top level of the `nusa-crowd` repo (i.e. the same directory that contains the `requirements.txt` file).
 
 Once this is done, please also check if your dataloader satisfies our unit tests as follows by using this command in the terminal:
 
 ```bash
-python -m tests.test_nusantara datasets/<dataset_name>/<dataset_name>.py [--data_dir /path/to/local/data]
+python -m tests.test_nusantara nusantara/nusa_datasets/<dataset_name>/<dataset_name>.py [--data_dir /path/to/local/data]
 ```
 
 Your particular dataset may require use of some of the other command line args in the test script.
@@ -173,7 +173,7 @@ python -m tests.test_nusantara --help
 
 From the main directory, run the Makefile via the following command:
 
-    make check_file=datasets/<dataset_name>/<dataset_name>.py
+    make check_file=nusantara/nusa_datasets/<dataset_name>/<dataset_name>.py
 
 This runs the black formatter, isort, and lints to ensure that the code is readable and looks nice. Flake8 linting errors may require manual changes.
 
@@ -181,7 +181,7 @@ This runs the black formatter, isort, and lints to ensure that the code is reada
 
 First, commit your changes to the branch to "add" the work:
 
-    git add datasets/<dataset_name>/<dataset_name>.py
+    git add nusantara/nusa_datasets/<dataset_name>/<dataset_name>.py
     git commit -m "A message describing your commits"
 
 Then, run the following commands to incorporate any new changes in the master branch of datasets as follows:
@@ -197,6 +197,6 @@ Push these changes to **your fork** with the following command:
 
 ### 7. **Make a pull request**
 
-Make a Pull Request to implement your changes on the main repository [here](https://github.com/indobenchmark/nusantara-datasets/pulls). To do so, click "New Pull Request". Then, choose your branch from your fork to push into "base:master".
+Make a Pull Request to implement your changes on the main repository [here](https://github.com/IndoNLP/nusa-crowd/pulls). To do so, click "New Pull Request". Then, choose your branch from your fork to push into "base:master".
 
-When opening a PR, please link the [issue](https://github.com/indobenchmark/nusantara-datasets/issues) corresponding to your dataset using [closing keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) in the PR's description, e.g. `resolves #17`.
+When opening a PR, please link the [issue](https://github.com/IndoNLP/nusa-crowd/issues) corresponding to your dataset using [closing keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) in the PR's description, e.g. `resolves #17`.
