@@ -124,8 +124,8 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {
                     "id": str(row.id),
-                    "text": row["tweet"],
-                    "labels": [str(row["label"])],
+                    "text": row.tweet,
+                    "labels": [str(row.label)],
                 }
                 yield row.id, ex
         else:
