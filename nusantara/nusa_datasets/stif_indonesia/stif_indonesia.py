@@ -2,8 +2,6 @@ from pathlib import Path
 from typing import List
 
 import datasets
-import json
-import pandas as pd
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
@@ -13,7 +11,7 @@ _DATASETNAME = "stif_indonesia"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ['ind'] # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
 @inproceedings{wibowo2020semi,
@@ -36,20 +34,19 @@ _LICENSE = "MIT"
 
 _BASEURL = "https://raw.githubusercontent.com/haryoa/stif-indonesia/main/data/labelled/"
 _URLs = {
-        "dev.for": _BASEURL + "dev.for",
-        "dev.inf": _BASEURL + "dev.inf",
-        "test.for": _BASEURL + "test.for",
-        "test.inf": _BASEURL + "test.inf",
-        "train.for": _BASEURL + "train.for",
-        "train.inf": _BASEURL + "train.inf",
+    "dev.for": _BASEURL + "dev.for",
+    "dev.inf": _BASEURL + "dev.inf",
+    "test.for": _BASEURL + "test.for",
+    "test.inf": _BASEURL + "test.inf",
+    "train.for": _BASEURL + "train.for",
+    "train.inf": _BASEURL + "train.inf",
 }
 
-_SUPPORTED_TASKS = [
-    Tasks.PARAPHRASING
-]
+_SUPPORTED_TASKS = [Tasks.PARAPHRASING]
 
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
+
 
 class STIFIndonesia(datasets.GeneratorBasedBuilder):
     """STIF-Indonesia is formal-informal/colloquial style transfer for Indonesian."""
@@ -68,20 +65,14 @@ class STIFIndonesia(datasets.GeneratorBasedBuilder):
             description="STIF Indonesia Nusantara schema",
             schema="nusantara_t2t",
             subset_id="stif_indonesia",
-        )
+        ),
     ]
 
     DEFAULT_CONFIG_NAME = "stif_indonesia_source"
 
     def _info(self):
         if self.config.schema == "source":
-            features = datasets.Features(
-                {
-                    "id": datasets.Value("string"),
-                    "formal": datasets.Value("string"),
-                    "informal": datasets.Value("string")
-                }
-            )
+            features = datasets.Features({"id": datasets.Value("string"), "formal": datasets.Value("string"), "informal": datasets.Value("string")})
         elif self.config.schema == "nusantara_t2t":
             features = schemas.text2text_features
 
@@ -93,9 +84,7 @@ class STIFIndonesia(datasets.GeneratorBasedBuilder):
             citation=_CITATION,
         )
 
-    def _split_generators(
-        self, dl_manager: datasets.DownloadManager
-    ) -> List[datasets.SplitGenerator]:
+    def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         data_files = {}
         for key in _URLs:
             data_files[key] = Path(dl_manager.download_and_extract(_URLs[key]))
@@ -103,38 +92,40 @@ class STIFIndonesia(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
-                gen_kwargs={"filepath": {
-                    "formal": data_files["test.for"],
-                    "informal": data_files["test.inf"],
-                }},
+                gen_kwargs={
+                    "filepath": {
+                        "formal": data_files["test.for"],
+                        "informal": data_files["test.inf"],
+                    }
+                },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
-                gen_kwargs={"filepath": {
-                    "formal": data_files["dev.for"],
-                    "informal": data_files["dev.inf"],
-                }},
+                gen_kwargs={
+                    "filepath": {
+                        "formal": data_files["dev.for"],
+                        "informal": data_files["dev.inf"],
+                    }
+                },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                gen_kwargs={"filepath": {
-                    "formal": data_files["train.for"],
-                    "informal": data_files["train.inf"],
-                }},
+                gen_kwargs={
+                    "filepath": {
+                        "formal": data_files["train.for"],
+                        "informal": data_files["train.inf"],
+                    }
+                },
             ),
         ]
 
     def _generate_examples(self, filepath: Path):
-        data_for = open(filepath["formal"], 'r').readlines()
-        data_inf = open(filepath["informal"], 'r').readlines()
+        data_for = open(filepath["formal"], "r").readlines()
+        data_inf = open(filepath["informal"], "r").readlines()
 
         if self.config.schema == "source":
             for id, (row_for, row_inf) in enumerate(zip(data_for, data_inf)):
-                ex = {
-                    "id": id,
-                    "formal": row_for.strip(),
-                    "informal": row_inf.strip()
-                }                
+                ex = {"id": id, "formal": row_for.strip(), "informal": row_inf.strip()}
                 yield id, ex
         elif self.config.schema == "nusantara_t2t":
             for id, (row_for, row_inf) in enumerate(zip(data_for, data_inf)):
@@ -142,9 +133,9 @@ class STIFIndonesia(datasets.GeneratorBasedBuilder):
                     "id": id,
                     "text_1": row_for.strip(),
                     "text_2": row_inf.strip(),
-                    "text_1_name": 'formal',
-                    "text_2_name": 'informal',
-                }                
+                    "text_1_name": "formal",
+                    "text_2_name": "informal",
+                }
                 yield id, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")

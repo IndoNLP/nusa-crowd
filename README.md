@@ -15,7 +15,7 @@ Indonesian NLP is underrepresented in research community, and one of the reasons
 
 ## How to contribute?
 
-You can contribute by proposing **unregistered NLP dataset** on [our record](https://indonlp.github.io/nusa-catalogue/). You can also propose datasets from your past work that have not been released to the public. [Just fill out this form](https://forms.gle/31dMGZik25DPFYFd6), and we will check and approve your entry. 
+You can contribute by proposing **unregistered NLP dataset** on [our record](https://indonlp.github.io/nusa-catalogue/). You can also propose datasets from your past work that have not been released to the public. [Just fill out this form](https://forms.gle/31dMGZik25DPFYFd6), and we will check and approve your entry.
 
 We will give **contribution points** based on several factors, including: **dataset quality**, **language scarcity**, or **task scarcity**.
 
@@ -36,7 +36,7 @@ The license for a dataset is not always obvious. Here are some strategies to try
 * check publications that announce the release of the dataset
 * check the website of the organization providing the dataset
 
-If no official license is listed anywhere, but you find a webpage that describes general data usage policies for the dataset, you can fall back to providing that URL in the `_LICENSE` variable. If you can't find any license information, please note in your PR and put `_LICENSE="Unknown"` in your dataset script.   
+If no official license is listed anywhere, but you find a webpage that describes general data usage policies for the dataset, you can fall back to providing that URL in the `_LICENSE` variable. If you can't find any license information, please note in your PR and put `_LICENSE="Unknown"` in your dataset script.
 
 #### What if my dataset is not yet publicly available?
 
@@ -49,11 +49,11 @@ Yes, you can ask for helps in NusaCrowd's community channel! Please join our [Wh
 
 ## Thank you!
 
-We greatly appreciate your help! 
+We greatly appreciate your help!
 
 The artifacts of this hackathon will be described in a forthcoming academic paper targeting a machine learning or NLP audience. Please refer to [this section](#contribution-guidelines) for your contribution rewards for helping Nusantara NLP. We recognize that some datasets require more effort than others, so please reach out if you have questions. Our goal is to be inclusive with credit!
 
-<!-- 
+<!--
 ## Acknowledgements
 
 This hackathon guide was heavily inspired by [the BigScience Datasets Hackathon](https://github.com/bigscience-workshop/data_tooling/wiki/datasets-hackathon).

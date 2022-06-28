@@ -4,7 +4,7 @@ Untuk dianggap sebagai co-author, diperlukan 10 poin kontribusi.
 
 ## Data Loader
 
-Menerapkan data loader apa pun diberikan +3 poin. 
+Menerapkan data loader apa pun diberikan +3 poin.
 Info lebih lanjut dapat ditemukan [di sini](DATALOADER.md).
 
 ## Proposal Dataset

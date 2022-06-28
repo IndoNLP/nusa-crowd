@@ -30,14 +30,13 @@ TODO: Before submitting your script, delete this doc string and replace it with 
 
 [nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
 """
-
 import os
-from typing import List, Tuple, Dict
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 import datasets
-from utils import schemas
-from utils.configs import NusantaraConfig
-from utils.constants import Tasks
+
+from nusantara.utils.configs import NusantaraConfig
 
 # TODO: Add BibTeX citation
 _CITATION = """\
@@ -185,7 +184,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             citation=_CITATION,
         )
 
-    def _split_generators(self, dl_manager) -> List[datasets.SplitGenerator]:
+    def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
         # TODO: This method is tasked with downloading/extracting the data and defining the splits depending on the configuration
 
@@ -241,7 +240,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
 
     # TODO: change the args of this function to match the keys in `gen_kwargs`. You may add any necessary kwargs.
 
-    def _generate_examples(self, filepath, split: str) -> Tuple[int, Dict]:
+    def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
         # TODO: This method handles input defined in _split_generators to yield (key, example) tuples from the dataset.
 

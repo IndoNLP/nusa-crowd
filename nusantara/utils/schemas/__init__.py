@@ -5,11 +5,4 @@ from .text import features as text_features
 from .text_to_text import features as text2text_features
 from .seq_label import features as seq_label_features
 
-__all__ = [
-    "kb_features",
-    "qa_features",
-    "text2text_features",
-    "text_features",
-    "pairs_features",
-    "seq_label_features"
-]
+__all__ = ["kb_features", "qa_features", "text2text_features", "text_features", "pairs_features", "seq_label_features"]
