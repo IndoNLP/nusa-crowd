@@ -132,7 +132,7 @@ _URLS = {
     _DATASETNAME: "https://data.statmt.org/cc-100/su.txt.xz",
 }
 
-_SUPPORTED_TASKS = [Tasks.TEXT]
+_SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]
 
 _SOURCE_VERSION = "2018.12.01"
 

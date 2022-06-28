@@ -3,23 +3,20 @@ Unit-tests to ensure tasks adhere to nusantara schema.
 """
 import argparse
 import importlib
-import logging
 import sys
 import unittest
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Optional, Union
+from typing import Iterable, Iterator, List, Optional, Union, Dict
 
 import datasets
 from datasets import DatasetDict, Features
-
 from nusantara.utils.constants import Tasks
-from nusantara.utils.schemas import (kb_features, pairs_features, qa_features,
-                                     seq_label_features, text2text_features,
-                                     text_features)
+from nusantara.utils.schemas import (kb_features, pairs_features, qa_features, text2text_features, text_features, seq_label_features)
 
 sys.path.append(str(Path(__file__).parent.parent))
 
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -33,25 +30,21 @@ _TASK_TO_SCHEMA = {
 
     Tasks.NAMED_ENTITY_RECOGNITION: "SEQ_LABEL",
     Tasks.POS_TAGGING: "SEQ_LABEL",
-<<<<<<< HEAD
-=======
-    Tasks.TEXT: "TEXT",
->>>>>>> 4f61cd20916717e9b0113346785278755bf06bb4
+    
     Tasks.QUESTION_ANSWERING: "QA",
+    
     Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
     Tasks.SEMANTIC_SIMILARITY: "PAIRS",
+    
     Tasks.PARAPHRASING: "T2T",
     Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
+    
     Tasks.SENTIMENT_ANALYSIS: "TEXT",
     Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT",
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
-<<<<<<< HEAD
     Tasks.SELF_SUPERVISED_PRETRAINING: "TEXT"
 
-=======
->>>>>>> 4f61cd20916717e9b0113346785278755bf06bb4
-    Tasks.DIALOGUE_SYSTEM: "KB",
 }
 
 _VALID_TASKS = set(_TASK_TO_SCHEMA.keys())
@@ -83,7 +76,12 @@ def _get_example_text(example: dict) -> str:
     return " ".join([t for p in example["passages"] for t in p["text"]])
 
 
-OFFSET_ERROR_MSG = "\n\n" "There are features with wrong offsets!" " This is not a hard failure, as it is common for this type of datasets." " However, if the error list is long (e.g. >10) you should double check your code. \n\n"
+OFFSET_ERROR_MSG = (
+    "\n\n"
+    "There are features with wrong offsets!"
+    " This is not a hard failure, as it is common for this type of datasets."
+    " However, if the error list is long (e.g. >10) you should double check your code. \n\n"
+)
 
 
 class TestDataLoader(unittest.TestCase):
@@ -151,6 +149,7 @@ class TestDataLoader(unittest.TestCase):
                 with self.subTest("Check multiple choice"):
                     self.test_multiple_choice(dataset_nusantara)
 
+
     def setUp(self) -> None:
         """Load original and nusantara schema views"""
 
@@ -165,7 +164,7 @@ class TestDataLoader(unittest.TestCase):
         if module.endswith(".py"):
             module = module[:-3]
         module = module.replace("/", ".")
-        print("module", module)
+        print('module', module)
         self._SUPPORTED_TASKS = importlib.import_module(module)._SUPPORTED_TASKS
         logger.info(f"Found _SUPPORTED_TASKS={self._SUPPORTED_TASKS}")
         invalid_tasks = set(self._SUPPORTED_TASKS) - _VALID_TASKS
@@ -325,10 +324,14 @@ class TestDataLoader(unittest.TestCase):
                 for ref_id, ref_type in referenced_ids:
                     if ref_type == "event":
                         if not ((ref_id, "entity") in existing_ids or (ref_id, "event") in existing_ids):
-                            logger.warning(f"Referenced element ({ref_id}, entity/event) could not be found in existing ids {existing_ids}. Please make sure that this is not because of a bug in your data loader.")
+                            logger.warning(
+                                f"Referenced element ({ref_id}, entity/event) could not be found in existing ids {existing_ids}. Please make sure that this is not because of a bug in your data loader."
+                            )
                     else:
                         if not (ref_id, ref_type) in referenced_ids:
-                            logger.warning(f"Referenced element {(ref_id, ref_type)} could not be found in existing ids {existing_ids}. Please make sure that this is not because of a bug in your data loader.")
+                            logger.warning(
+                                f"Referenced element {(ref_id, ref_type)} could not be found in existing ids {existing_ids}. Please make sure that this is not because of a bug in your data loader."
+                            )
 
     def test_passages_offsets(self, dataset_nusantara: DatasetDict):
         """
@@ -389,7 +392,9 @@ class TestDataLoader(unittest.TestCase):
         """  # noqa
 
         if len(texts) != len(offsets):
-            logger.warning(f"Split:{split} - Example:{example_id} - Number of texts {len(texts)} != number of offsets {len(offsets)}. Please make sure that this error already exists in the original data and was not introduced in the data loader.")
+            logger.warning(
+                f"Split:{split} - Example:{example_id} - Number of texts {len(texts)} != number of offsets {len(offsets)}. Please make sure that this error already exists in the original data and was not introduced in the data loader."
+            )
 
         self._test_is_list(
             msg=f"Split:{split} - Example:{example_id} - Text fields paired with offsets must be in the form [`text`, ...]",
@@ -499,7 +504,10 @@ class TestDataLoader(unittest.TestCase):
                     # check all coref entity ids are in entity lookup
                     for coref in example["coreferences"]:
                         for entity_id in coref["entity_ids"]:
-                            assert entity_id in entity_lookup, f"Split:{split} - Example:{example_id} - Entity:{entity_id} not found!"
+                            assert (
+                                entity_id in entity_lookup
+                            ), f"Split:{split} - Example:{example_id} - Entity:{entity_id} not found!"
+
 
     def test_multiple_choice(self, dataset_nusantara: DatasetDict):
         """
@@ -511,20 +519,24 @@ class TestDataLoader(unittest.TestCase):
             for example in dataset_nusantara[split]:
 
                 if len(example["choices"]) > 0:
-                    assert (
-                        # can change this to "in" if we include ranking
-                        example["type"]
-                        == "multiple_choice"
+                    assert(
+                        example["type"] == "multiple_choice"  # can change this to "in" if we include ranking
                     ), f"example has populated choices, but is not type 'multiple_choice' {example}"
 
                 if example["type"] == "multiple_choice":
-                    assert len(example["choices"]) > 0, f"example has type 'multiple_choice' but no values in 'choices' {example}"
+                    assert(
+                        len(example["choices"]) > 0
+                    ), f"example has type 'multiple_choice' but no values in 'choices' {example}"
 
                     for answer in example["answer"]:
-                        assert answer in example["choices"], f"example has an answer that is not present in 'choices' {example}"
+                        assert(
+                            answer in example["choices"]
+                        ), f"example has an answer that is not present in 'choices' {example}"
+
 
     def test_schema(self, schema: str):
         """Search supported tasks within a dataset and verify nusantara schema"""
+
 
         non_empty_features = set()
         if schema == "KB":
@@ -546,6 +558,8 @@ class TestDataLoader(unittest.TestCase):
                 if count > 0 and feature not in non_empty_features and feature in set().union(*_TASK_TO_FEATURES.values()):
                     logger.warning(f"Found instances of '{feature}' but there seems to be no task in 'SUPPORTED_TASKS' for them. Is 'SUPPORTED_TASKS' correct?")
 
+
+
     def _test_is_list(self, msg: str, field: list):
         with self.subTest(
             msg,
@@ -564,7 +578,9 @@ class TestDataLoader(unittest.TestCase):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
-    parser = argparse.ArgumentParser(description="Unit tests for Nusantara datasets. Args are passed to `datasets.load_dataset`")
+    parser = argparse.ArgumentParser(
+        description="Unit tests for Nusantara datasets. Args are passed to `datasets.load_dataset`"
+    )
 
     parser.add_argument("path", type=str, help="path to dataloader script (e.g. examples/n2c2_2011.py)")
     parser.add_argument(
