@@ -122,7 +122,7 @@ _URLS = {
 }
 
 # TODO: add supported task by dataset. One dataset may support multiple tasks
-_SUPPORTED_TASKS = [Tasks.RELATION_EXTRACTION]  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
+_SUPPORTED_TASKS = [Tasks.SENTENCE_ORDERING]  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
 
 # TODO: set this to a version that is associated with the dataset. if none exists use "1.0.0"
 #  This version doesn't have to be consistent with semantic versioning. Anything that is
@@ -167,10 +167,10 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
             subset_id="indolem_tweet_ordering",
         ),
         NusantaraConfig(
-            name="indolem_tweet_ordering_nusantara_text",
+            name="indolem_tweet_ordering_nusantara_seq_label",
             version=NUSANTARA_VERSION,
             description="indolem_tweet_ordering Nusantara schema",
-            schema="nusantara_text",
+            schema="nusantara_seq_label",
             subset_id="indolem_tweet_ordering",
         ),
     ]
@@ -209,7 +209,7 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
         # In rare cases you may get a dataset that supports multiple tasks requiring multiple schemas. In that case you can define multiple nusantara configs with a nusantara_[nusantara_schema_name] format.
 
         # For example nusantara_kb, nusantara_t2t
-        elif self.config.schema == "nusantara_[nusantara_schema_name]":
+        elif self.config.schema == "nusantara_seq_label":
             # e.g. features = schemas.kb_features
             # TODO: Choose your nusantara schema here
             raise NotImplementedError()

@@ -25,6 +25,7 @@ class Tasks(Enum):
     # Single Text Sequence Labeling
     POS_TAGGING = "POS"
     NAMED_ENTITY_RECOGNITION = "NER"
+    SENTENCE_ORDERING = "SO"
 
     # Pair Text Classification
     QUESTION_ANSWERING = "QA"
