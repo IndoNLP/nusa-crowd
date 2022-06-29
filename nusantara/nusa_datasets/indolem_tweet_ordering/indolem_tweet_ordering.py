@@ -30,13 +30,14 @@ TODO: Before submitting your script, delete this doc string and replace it with 
 
 [nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
 """
-import os
+import json
 from pathlib import Path
 from typing import Dict, List, Tuple
 
 import datasets
 
 from nusantara.utils import schemas
+from nusantara.utils.common_parser import load_conll_data
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
 
@@ -180,22 +181,13 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
     def _info(self) -> datasets.DatasetInfo:
 
         # Create the source schema; this schema will keep all keys/information/labels as close to the original dataset as possible.
-
         # You can arbitrarily nest lists and dictionaries.
         # For iterables, use lists over tuples or `datasets.Sequence`
 
         if self.config.schema == "source":
-            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "pos_tag": [datasets.Value("string")]})
+            features = datasets.Features({"tweets": datasets.Value("string"), "order": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features
-
-        return datasets.DatasetInfo(
-            description=_DESCRIPTION,
-            features=features,
-            homepage=_HOMEPAGE,
-            license=_LICENSE,
-            citation=_CITATION,
-        )
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -208,15 +200,10 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
         # TODO: This method is tasked with downloading/extracting the data and defining the splits depending on the configuration
-
         # If you need to access the "source" or "nusantara" config choice, that will be in self.config.name
-
         # LOCAL DATASETS: You do not need the dl_manager; you can ignore this argument. Make sure `gen_kwargs` in the return gets passed the right filepath
-
         # PUBLIC DATASETS: Assign your data-dir based on the dl_manager.
-
         # dl_manager is a datasets.download.DownloadManager that can be used to download and extract URLs; many examples use the download_and_extract method; see the DownloadManager docs here: https://huggingface.co/docs/datasets/package_reference/builder_classes.html#datasets.DownloadManager
-
         # dl_manager can accept any type of nested list/dict and will give back the same structure with the url replaced with the path to local files.
 
         # TODO: KEEP if your dataset is PUBLIC; remove if not
@@ -227,7 +214,7 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
                 data_dir[key] = []
 
             for file in urls[key]:
-                filepath = Path(dl_manager.download_and_extract(file))
+                filepath = Path(dl_manager.download(file))
                 data_dir[key].append(filepath)
         
         # Not all datasets have predefined canonical train/val/test splits.
@@ -238,54 +225,48 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
                 name=datasets.Split.TRAIN,
                 # Whatever you put in gen_kwargs will be passed to _generate_examples
                 gen_kwargs={
-                    "filepath": data_dir['train'],
+                    "filepaths": data_dir['train'],
                     "split": "train",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
-                    "filepath": data_dir['test'],
+                    "filepaths": data_dir['test'],
                     "split": "test",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={
-                    "filepath": data_dir['dev'],
+                    "filepaths": data_dir['dev'],
                     "split": "dev",
                 },
             ),
         ]
 
     # method parameters are unpacked from `gen_kwargs` as given in `_split_generators`
-
     # TODO: change the args of this function to match the keys in `gen_kwargs`. You may add any necessary kwargs.
 
-    def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
+    def _generate_examples(self, filepaths: List[Path], split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
         # TODO: This method handles input defined in _split_generators to yield (key, example) tuples from the dataset.
-
         # The `key` is for legacy reasons (tfds) and is not important in itself, but must be unique for each example.
-
         # NOTE: For local datasets you will have access to self.config.data_dir and self.config.data_files
 
-        if self.config.schema == "source":
-            # TODO: yield (key, example) tuples in the original dataset schema
-            for key, example in thing:
-                yield key, example
+        source_data = []
+        for path in filepaths:
+            source_data += json.loads(path.read_text())
 
-        elif self.config.schema == "nusantara_[nusantara_schema_name]":
-            # TODO: yield (key, example) tuples in the nusantara schema
-            for key, example in thing:
-                yield key, example
+        for i in range(len(source_data)):
+            if self.config.schema == 'source':
+                yield i, {'tweets': source_data[i]['tweets'], 'order': source_data[i]['order']}
+            elif self.config.schema == 'nusantara_seq_label':
+                ex = {"id": str(i), "tokens": source_data[i]['tweets'], "labels": source_data[i]['order']}
+                yield i, ex
+            else:
+                raise ValueError(f"Invalid config: {self.config.name}")
 
 
 # This template is based on the following template from the datasets package:
 # https://github.com/huggingface/datasets/blob/master/templates/new_dataset_script.py
-
-
-# This allows you to run your dataloader with `python [dataset_name].py` during development
-# TODO: Remove this before making your PR
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
