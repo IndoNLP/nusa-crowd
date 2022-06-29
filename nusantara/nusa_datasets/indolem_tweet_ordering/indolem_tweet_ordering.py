@@ -185,34 +185,17 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
         # For iterables, use lists over tuples or `datasets.Sequence`
 
         if self.config.schema == "source":
-            # TODO: Create your source schema here
-            raise NotImplementedError()
-
-            # EX: Arbitrary NER type dataset
-            # features = datasets.Features(
-            #    {
-            #        "doc_id": datasets.Value("string"),
-            #        "text": datasets.Value("string"),
-            #        "entities": [
-            #            {
-            #                "offsets": [datasets.Value("int64")],
-            #                "text": datasets.Value("string"),
-            #                "type": datasets.Value("string"),
-            #                "entity_id": datasets.Value("string"),
-            #            }
-            #        ],
-            #    }
-            # )
-
-        # Choose the appropriate nusantara schema for your task and copy it here. You can find information on the schemas in the CONTRIBUTING guide.
-
-        # In rare cases you may get a dataset that supports multiple tasks requiring multiple schemas. In that case you can define multiple nusantara configs with a nusantara_[nusantara_schema_name] format.
-
-        # For example nusantara_kb, nusantara_t2t
+            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "pos_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
-            # e.g. features = schemas.kb_features
-            # TODO: Choose your nusantara schema here
-            raise NotImplementedError()
+            features = schemas.seq_label_features
+
+        return datasets.DatasetInfo(
+            description=_DESCRIPTION,
+            features=features,
+            homepage=_HOMEPAGE,
+            license=_LICENSE,
+            citation=_CITATION,
+        )
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -238,14 +221,15 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
 
         # TODO: KEEP if your dataset is PUBLIC; remove if not
         urls = _URLS[_DATASETNAME]
-        data_dir = dl_manager.download_and_extract(urls)
+        data_dir = {}
+        for key in urls:
+            if key not in data_dir:
+                data_dir[key] = []
 
-        # TODO: KEEP if your dataset is LOCAL; remove if NOT
-        if self.config.data_dir is None:
-            raise ValueError("This is a local dataset. Please pass the data_dir kwarg to load_dataset.")
-        else:
-            data_dir = self.config.data_dir
-
+            for file in urls[key]:
+                filepath = Path(dl_manager.download_and_extract(file))
+                data_dir[key].append(filepath)
+        
         # Not all datasets have predefined canonical train/val/test splits.
         # If your dataset has no predefined splits, use datasets.Split.TRAIN for all of the data.
 
@@ -254,21 +238,21 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
                 name=datasets.Split.TRAIN,
                 # Whatever you put in gen_kwargs will be passed to _generate_examples
                 gen_kwargs={
-                    "filepath": os.path.join(data_dir, "train.jsonl"),
+                    "filepath": data_dir['train'],
                     "split": "train",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
-                    "filepath": os.path.join(data_dir, "test.jsonl"),
+                    "filepath": data_dir['test'],
                     "split": "test",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={
-                    "filepath": os.path.join(data_dir, "dev.jsonl"),
+                    "filepath": data_dir['dev'],
                     "split": "dev",
                 },
             ),
