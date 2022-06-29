@@ -49,7 +49,7 @@ _LICENSE = "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Internatio
 _URLS = {
     _DATASETNAME: "https://raw.githubusercontent.com/okkyibrohim/id-multi-label-hate-speech-and-abusive-language-detection/master/re_dataset.csv",
 }
-_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
+_SUPPORTED_TASKS = [Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS]
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
@@ -69,10 +69,10 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
             subset_id="id_multilabel_hs",
         ),
         NusantaraConfig(
-            name="id_multilabel_hs_nusantara_text",
+            name="id_multilabel_hs_nusantara_text_multi",
             version=NUSANTARA_VERSION,
             description="ID Multilabel HS Nusantara schema",
-            schema="nusantara_text",
+            schema="nusantara_text_multi",
             subset_id="id_multilabel_hs",
         ),
     ]
@@ -81,9 +81,23 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
-            features = datasets.Features({"tweet": datasets.Value("string"), "labels": [datasets.Value("string")]})
-        elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = datasets.Features({
+                "tweet": datasets.Value("string"), 
+                "HS": datasets.Value("bool"),
+                "Abusive": datasets.Value("bool"), 
+                "HS_Individual": datasets.Value("bool"), 
+                "HS_Group": datasets.Value("bool"), 
+                "HS_Religion": datasets.Value("bool"), 
+                "HS_Race": datasets.Value("bool"), 
+                "HS_Physical": datasets.Value("bool"), 
+                "HS_Gender": datasets.Value("bool"), 
+                "HS_Other": datasets.Value("bool"), 
+                "HS_Weak": datasets.Value("bool"), 
+                "HS_Moderate": datasets.Value("bool"), 
+                "HS_Strong": datasets.Value("bool"),
+                })
+        elif self.config.schema == "nusantara_text_multi":
+            features = schemas.text_multi_features([0, 1])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -116,22 +130,22 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
         label_cols = ["HS", "Abusive", "HS_Individual", "HS_Group", "HS_Religion", "HS_Race", "HS_Physical", "HS_Gender", "HS_Other", "HS_Weak", "HS_Moderate", "HS_Strong"]
         df = pd.read_csv(filepath, encoding="ISO-8859-1").reset_index()
         df.columns = ["id", "tweet"] + label_cols
-        df["labels"] = df[label_cols].apply(lambda x: x.index[x == 1].tolist(), axis=1)
 
         if self.config.schema == "source":
             for row in df.itertuples():
                 ex = {
                     "tweet": row.tweet,
-                    "labels": row.labels,
                 }
+                for label in label_cols:
+                    ex[label] = getattr(row, label)
                 yield row.id, ex
 
-        elif self.config.schema == "nusantara_text":
+        elif self.config.schema == "nusantara_text_multi":
             for row in df.itertuples():
                 ex = {
                     "id": str(row.id),
                     "text": row.tweet,
-                    "labels": row.labels,
+                    "labels": [label for label in row[3:]],
                 }
                 yield row.id, ex
         else:
