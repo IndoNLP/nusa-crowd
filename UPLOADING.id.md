@@ -33,7 +33,7 @@ Masuk dengan nama pengguna dan kata sandi akun 🤗 Hub Anda.
 Buat repositori melalui Hub [di sini](https://huggingface.co/new-dataset) dengan detail berikut.
 
 + Set Owner: nusantara-datasets
-+ Set Dataset name: the name of the dataset 
++ Set Dataset name: the name of the dataset
 + Set License: the license that applies to this dataset
 + Select Private
 + Click `Create dataset`
@@ -80,14 +80,14 @@ dataset_indobenchmark= load_dataset("indobenchmark/<nama_dataset_anda>", name="i
 from datasets import load_dataset
 
 dataset_orig = load_dataset(
-    "indobenchmark/<nama_dataset_anda>", 
-    name="source", 
+    "indobenchmark/<nama_dataset_anda>",
+    name="source",
     data_dir="/local/path/menuju/data/files",
     use_auth_token=True)
 
 dataset_indobenchmark = load_dataset(
-    "indobenchmark/<nama_dataset_anda>", 
-    name="indobenchmark", 
+    "indobenchmark/<nama_dataset_anda>",
+    name="indobenchmark",
     data_dir="/local/path/menuju/data/files",
     use_auth_token=True)
 ```

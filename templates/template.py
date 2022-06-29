@@ -36,9 +36,7 @@ from typing import Dict, List, Tuple
 
 import datasets
 
-from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
 
 # TODO: Add BibTeX citation
 _CITATION = """\
