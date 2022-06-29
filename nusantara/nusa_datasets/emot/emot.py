@@ -86,7 +86,7 @@ class EmoT(datasets.GeneratorBasedBuilder):
                 }
             )
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = schemas.text_features(["happy", "love", "fear", "anger", "sadness"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -131,7 +131,7 @@ class EmoT(datasets.GeneratorBasedBuilder):
                 yield row.id, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
-                ex = {"id": str(row.id), "text": row.tweet, "labels": [row.label]}
+                ex = {"id": str(row.id), "text": row.tweet, "label": row.label}
                 yield row.id, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")

@@ -42,6 +42,49 @@ _NUSANTARA_VERSION = "1.0.0"
 
 class BaPOSDataset(datasets.GeneratorBasedBuilder):
     """BaPOS is a POS tagging dataset contains about 10,000 sentences, collected from the PAN Localization Project tagged with 23 POS tag classes."""
+    label_classes=[
+                "B-PR",
+                "B-CD",
+                "I-PR",
+                "B-SYM",
+                "B-JJ",
+                "B-DT",
+                "I-UH",
+                "I-NND",
+                "B-SC",
+                "I-WH",
+                "I-IN",
+                "I-NNP",
+                "I-VB",
+                "B-IN",
+                "B-NND",
+                "I-CD",
+                "I-JJ",
+                "I-X",
+                "B-OD",
+                "B-RP",
+                "B-RB",
+                "B-NNP",
+                "I-RB",
+                "I-Z",
+                "B-CC",
+                "B-NEG",
+                "B-VB",
+                "B-NN",
+                "B-MD",
+                "B-UH",
+                "I-NN",
+                "B-PRP",
+                "I-SC",
+                "B-Z",
+                "I-PRP",
+                "I-OD",
+                "I-SYM",
+                "B-WH",
+                "B-FW",
+                "I-CC",
+                "B-X",
+            ]
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
@@ -66,7 +109,7 @@ class BaPOSDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "pos_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
-            features = schemas.seq_label_features
+            features = schemas.seq_label_features(self.label_classes)
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
