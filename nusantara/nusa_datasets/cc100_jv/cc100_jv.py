@@ -221,6 +221,7 @@ class CC100Jv(datasets.GeneratorBasedBuilder):
                         {
                             "id": str(counter),
                             "text": row,
+                            "label": "",
                         },
                     )
 
