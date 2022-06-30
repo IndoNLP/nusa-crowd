@@ -164,7 +164,7 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
         # For iterables, use lists over tuples or `datasets.Sequence`
 
         if self.config.schema == "source":
-            features = datasets.Features({"tweets": datasets.Value("string"), "order": [datasets.Value("string")]})
+            features = datasets.Features({"tweets":[datasets.Value("string")], "order": [datasets.Value("int32")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features
 
