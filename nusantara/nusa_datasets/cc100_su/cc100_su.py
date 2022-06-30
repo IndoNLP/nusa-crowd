@@ -175,8 +175,7 @@ class CC100Su(datasets.GeneratorBasedBuilder):
             )
 
         elif self.config.schema == "nusantara_text":
-            features = schemas.text.features
-        print(features)
+            features = schemas.text.features([""])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -222,7 +221,7 @@ class CC100Su(datasets.GeneratorBasedBuilder):
                         {
                             "id": str(counter),
                             "text": row,
-                            "labels": [],
+                            "label": "",
                         },
                     )
 
