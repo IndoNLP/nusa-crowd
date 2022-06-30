@@ -116,7 +116,7 @@ _NUSANTARA_VERSION = "1.0.0"
 # TODO: Name the dataset class to match the script name using CamelCase instead of snake_case
 class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
     """This task is based on the sentence ordering task of Barzilay and Lapata (2008) to assess text relatedness. We construct the data by shuffling Twitter threads (containing 3 to 5 tweets), and assessing the predicted ordering in terms of rank correlation (p) with the original."""
-
+    label_classes = [0,1,2,3,4]
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
@@ -167,7 +167,7 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"tweets":[datasets.Value("string")], "order": [datasets.Value("int32")]})
         elif self.config.schema == "nusantara_seq_label":
-            features = schemas.seq_label_features
+            features = schemas.seq_label_features(self.label_classes)
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
