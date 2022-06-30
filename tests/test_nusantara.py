@@ -12,7 +12,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks
-from nusantara.utils.schemas import kb_features, pairs_features, qa_features, text2text_features, text_features, seq_label_features
+from nusantara.utils.schemas import kb_features, pairs_features, qa_features, text2text_features, text_features, text_multi_features, seq_label_features
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -36,7 +36,7 @@ _TASK_TO_SCHEMA = {
     Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
     Tasks.SENTIMENT_ANALYSIS: "TEXT",
-    Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT",
+    Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT_MULTI",
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
     Tasks.SELF_SUPERVISED_PRETRAINING: "TEXT",
 }
@@ -49,6 +49,7 @@ _SCHEMA_TO_FEATURES = {
     "QA": qa_features,
     "T2T": text2text_features,
     "TEXT": text_features(),
+    "TEXT_MULTI": text_multi_features(),
     "PAIRS": pairs_features(),
     "SEQ_LABEL": seq_label_features(),
 }
@@ -189,7 +190,17 @@ class TestDataLoader(unittest.TestCase):
                 data_dir=self.DATA_DIR,
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
-            logger.info(f"Dataset sample\n{self.datasets_nusantara[schema]['train'][0]}")
+        
+        # check dataset samples
+        for schema in ['source'] + [f"nusantara_{s.lower()}" for s in self.schemas_to_check]:
+            dataset = datasets.load_dataset(
+                self.PATH,
+                name=f"{self.SUBSET_ID}_{schema}",
+                data_dir=self.DATA_DIR,
+                use_auth_token=self.USE_AUTH_TOKEN,
+            )
+            logger.info(f"Dataset sample [{schema}]\n{dataset['train'][0]}")
+        
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """
