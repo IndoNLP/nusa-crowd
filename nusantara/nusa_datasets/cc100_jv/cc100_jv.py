@@ -24,7 +24,7 @@ by a newline. The data is generated using the open source CC-Net repository. No
 claims of intellectual property are made on the work of preparation of the
 corpus.
 
-This contains the Javanese (jvn) subset.
+This contains the Javanese (jav) subset.
 
 [nusantara_schema_name] = text
 """
@@ -124,7 +124,7 @@ _DESCRIPTION = """\
 
 _HOMEPAGE = "https://data.statmt.org/cc-100/"
 
-_LANGUAGES = ["jvn"]
+_LANGUAGES = ["jav"]
 
 _LICENSE = "MIT"
 
