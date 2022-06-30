@@ -49,9 +49,9 @@ _SCHEMA_TO_FEATURES = {
     "KB": kb_features,
     "QA": qa_features,
     "T2T": text2text_features,
-    "TEXT": text_features,
-    "PAIRS": pairs_features,
-    "SEQ_LABEL": seq_label_features,
+    "TEXT": text_features(),
+    "PAIRS": pairs_features(),
+    "SEQ_LABEL": seq_label_features(),
 }
 
 _TASK_TO_FEATURES = {
@@ -190,6 +190,7 @@ class TestDataLoader(unittest.TestCase):
                 data_dir=self.DATA_DIR,
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
+            logger.info(f"Dataset sample\n{self.datasets_nusantara[schema]['train'][0]}")
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """
@@ -206,7 +207,7 @@ class TestDataLoader(unittest.TestCase):
             for example in split:
                 for feature_name, feature in features.items():
                     if example.get(feature_name, None) is not None:
-                        if isinstance(feature, datasets.Value):
+                        if isinstance(feature, datasets.ClassLabel) or isinstance(feature, datasets.Value):
                             if example[feature_name]:
                                 counter[feature_name] += 1
                         else:
@@ -521,7 +522,12 @@ class TestDataLoader(unittest.TestCase):
 
         split_to_feature_counts = self.get_feature_statistics(features=features, schema=schema)
         for split_name, split in self.datasets_nusantara[schema].items():
-            self.assertEqual(split.info.features, features)
+            self.assertEqual(len(features), len(split.info.features))
+            for key in features:
+                if key not in split.info.features:
+                    raise AssertionError(f"Required feature '{key}' does not exist")
+                self.assertEqual(type(features[key]), type(split.info.features[key]))
+            # self.assertEqual(split.info.features, features)
             for non_empty_feature in non_empty_features:
                 if split_to_feature_counts[split_name][non_empty_feature] == 0:
                     raise AssertionError(f"Required key '{non_empty_feature}' does not have any instances")

@@ -73,7 +73,7 @@ class SMSA(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features({"index": datasets.Value("string"), "sentence": datasets.Value("string"), "label": datasets.Value("string")})
         elif self.config.schema == "nusantara_text":
-            features = schemas.text_features
+            features = schemas.text_features(["negative", "neutral", "positive"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -118,7 +118,11 @@ class SMSA(datasets.GeneratorBasedBuilder):
                 yield row.id, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
-                ex = {"id": str(row.id), "text": row.sentence, "labels": [row.label]}
+                ex = {
+                    "id": str(row.id),
+                    "text": row.sentence,
+                    "label": row.label
+                }
                 yield row.id, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
