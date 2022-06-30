@@ -30,6 +30,7 @@ TODO: Before submitting your script, delete this doc string and replace it with 
 
 [nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
 """
+from base64 import encode
 import json
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -230,13 +231,15 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
 
         data = json.loads(filepath.read_text())
         for i in range(len(data)):
+            ex = {}
             if self.config.schema == 'source':
-                yield i, {'tweets': data[i]['tweets'], 'order': data[i]['order']}
+                ex = {'tweets': data[i]['tweets'], 'order': data[i]['order']}
             elif self.config.schema == 'nusantara_seq_label':
                 ex = {"id": str(i), "tokens": data[i]['tweets'], "labels": data[i]['order']}
-                yield i, ex
             else:
                 raise ValueError(f"Invalid config: {self.config.name}")
+
+            yield i, ex
             
 
 
