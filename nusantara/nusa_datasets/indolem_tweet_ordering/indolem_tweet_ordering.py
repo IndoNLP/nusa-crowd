@@ -30,6 +30,7 @@ TODO: Before submitting your script, delete this doc string and replace it with 
 
 [nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
 """
+from base64 import encode
 import json
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -70,10 +71,7 @@ _DATASETNAME = "indolem_tweet_ordering"
 # You can copy an official description
 _DESCRIPTION = """\
 IndoLEM (Indonesian Language Evaluation Montage) is a comprehensive Indonesian benchmark that comprises of seven tasks for the Indonesian language. This benchmark is categorized into three pillars of NLP tasks: morpho-syntax, semantics, and discourse.
-
-This task is based on the sentence ordering task of Barzilay and Lapata (2008) to assess text relatedness. We construct the data by shuffling Twitter threads (containing 3 to 5 tweets), and assessing the predicted ordering in terms of rank correlation (p) with the original.
-
-The experiment is based on 5-fold cross validation. The splits are provided in data/, with distribution:
+This task is based on the sentence ordering task of Barzilay and Lapata (2008) to assess text relatedness. We construct the data by shuffling Twitter threads (containing 3 to 5 tweets), and assessing the predicted ordering in terms of rank correlation (p) with the original. The experiment is based on 5-fold cross validation.
 
 Train: 4327 threads
 Development: 760 threads
@@ -98,27 +96,9 @@ _LICENSE = "Creative Commons Attribution 4.0"
 # This can be an arbitrarily nested dict/list of URLs (see below in `_split_generators` method)
 _URLS = {
     _DATASETNAME: {
-        "train": [
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/train0.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/train1.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/train2.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/train3.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/train4.json"
-        ],
-        "dev": [
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/dev0.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/dev1.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/dev2.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/dev3.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/dev4.json",
-        ],
-        "test": [
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/test0.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/test1.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/test2.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/test3.json",
-            "https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/test4.json"
-        ]
+        'train': 'https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/train0.json',
+        'dev': 'https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/dev0.json',
+        'test': 'https://raw.githubusercontent.com/indolem/indolem/main/tweet_ordering/data/test0.json'
     }
 }
 
@@ -136,7 +116,7 @@ _NUSANTARA_VERSION = "1.0.0"
 # TODO: Name the dataset class to match the script name using CamelCase instead of snake_case
 class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
     """This task is based on the sentence ordering task of Barzilay and Lapata (2008) to assess text relatedness. We construct the data by shuffling Twitter threads (containing 3 to 5 tweets), and assessing the predicted ordering in terms of rank correlation (p) with the original."""
-
+    label_classes = [0,1,2,3,4]
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
@@ -185,9 +165,9 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
         # For iterables, use lists over tuples or `datasets.Sequence`
 
         if self.config.schema == "source":
-            features = datasets.Features({"tweets": datasets.Value("string"), "order": [datasets.Value("string")]})
+            features = datasets.Features({"tweets":[datasets.Value("string")], "order": [datasets.Value("int32")]})
         elif self.config.schema == "nusantara_seq_label":
-            features = schemas.seq_label_features
+            features = schemas.seq_label_features(self.label_classes)
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -208,14 +188,9 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
 
         # TODO: KEEP if your dataset is PUBLIC; remove if not
         urls = _URLS[_DATASETNAME]
-        data_dir = {}
-        for key in urls:
-            if key not in data_dir:
-                data_dir[key] = []
-
-            for file in urls[key]:
-                filepath = Path(dl_manager.download(file))
-                data_dir[key].append(filepath)
+        train_data = Path(dl_manager.download(urls['train']))
+        test_data = Path(dl_manager.download(urls['test']))
+        dev_data = Path(dl_manager.download(urls['dev']))
         
         # Not all datasets have predefined canonical train/val/test splits.
         # If your dataset has no predefined splits, use datasets.Split.TRAIN for all of the data.
@@ -225,21 +200,21 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
                 name=datasets.Split.TRAIN,
                 # Whatever you put in gen_kwargs will be passed to _generate_examples
                 gen_kwargs={
-                    "filepaths": data_dir['train'],
+                    "filepath": train_data,
                     "split": "train",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
-                    "filepaths": data_dir['test'],
+                    "filepath": test_data,
                     "split": "test",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={
-                    "filepaths": data_dir['dev'],
+                    "filepath": dev_data,
                     "split": "dev",
                 },
             ),
@@ -248,24 +223,24 @@ class IndolemTweetOrderingDataset(datasets.GeneratorBasedBuilder):
     # method parameters are unpacked from `gen_kwargs` as given in `_split_generators`
     # TODO: change the args of this function to match the keys in `gen_kwargs`. You may add any necessary kwargs.
 
-    def _generate_examples(self, filepaths: List[Path], split: str) -> Tuple[int, Dict]:
+    def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
         # TODO: This method handles input defined in _split_generators to yield (key, example) tuples from the dataset.
         # The `key` is for legacy reasons (tfds) and is not important in itself, but must be unique for each example.
         # NOTE: For local datasets you will have access to self.config.data_dir and self.config.data_files
 
-        source_data = []
-        for path in filepaths:
-            source_data += json.loads(path.read_text())
-
-        for i in range(len(source_data)):
+        data = json.loads(filepath.read_text())
+        for i in range(len(data)):
+            ex = {}
             if self.config.schema == 'source':
-                yield i, {'tweets': source_data[i]['tweets'], 'order': source_data[i]['order']}
+                ex = {'tweets': data[i]['tweets'], 'order': data[i]['order']}
             elif self.config.schema == 'nusantara_seq_label':
-                ex = {"id": str(i), "tokens": source_data[i]['tweets'], "labels": source_data[i]['order']}
-                yield i, ex
+                ex = {"id": str(i), "tokens": data[i]['tweets'], "labels": data[i]['order']}
             else:
                 raise ValueError(f"Invalid config: {self.config.name}")
+
+            yield i, ex
+            
 
 
 # This template is based on the following template from the datasets package:
