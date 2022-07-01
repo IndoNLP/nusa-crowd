@@ -299,3 +299,14 @@ Passages capture document structure, such as the title and abstact sections of a
     ]
 }
 ```
+
+## Self-supervised pretraining
+- [Schema Template](nusantara/utils/schemas/self_supervised_pretraining.py)
+- Examples: [CC100] (nusantara/nusa_datasets/cc100/cc100.py)
+
+```
+{
+    "id": "0",
+    "text": "Placeholder text. Will change to a real example soon."
+}
+```
