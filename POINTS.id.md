@@ -36,6 +36,10 @@ Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
 - Poor (P): mis. data sepenuhnya dibuat oleh mesin, tanpa verifikasi. (poin x0,5)
 
 
+### Maksimal Jumlah Kontributor
+
+- Kontribusi untuk dataset baru terbatas pada 2 author utama. Harap tentukan nama author utama yang ingin Anda tambahkan ke PR.
+
 ## Contoh
 
 Mari kita asumsikan analisis sentimen baru untuk salah satu bahasa Papua, terdiri dari 500 kalimat.
