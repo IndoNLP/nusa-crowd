@@ -20,6 +20,8 @@ Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
 - Large (L): 10K<=x<1M (+3 poin)
 - Extra Large (XL): >=1M (+4 poin)
 
+x adalah jumlah sampel (train + val + test).
+
 ### Downstream task dan Bahasa Kelangkaan
 
 - Langka / Tidak ada sumber daya: Tidak ada dataset publik pada bahasa / downstream task ini. Dataset ini akan menjadi yang baru untuk bahasa/ downstream task tertentu. (+6 poin)
