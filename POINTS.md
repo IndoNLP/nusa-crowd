@@ -8,7 +8,7 @@ We might adjust the point requirement lower to accomodate more co-authorship, if
 ## Data Loader
 
 Implementing any data loader is granted +3 pts.
-More detais[here](DATALOADER.md).
+More details [here](DATALOADER.md).
 
 ## Dataset Proposal
 
@@ -22,6 +22,8 @@ We can have 4 different levels: Small, Medium, Large, XL
 - Medium (M): 1K<=x<10K (+ 2pts)
 - Large (L): 10K<=x<1M (+3 pts)
 - Extra Large (XL): >=1M (+4 pts)
+
+where x is the number of samples (train + val + test).
 
 ### Task and Language Rarity
 
