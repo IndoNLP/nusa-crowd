@@ -317,14 +317,15 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ```
 {
-    "id": "0",
-    "path": "Placeholder path. Will change to a real example soon.",
-    "audio": ["Placeholder audio.", "Will change to a real example soon."],
-    "text": "Placeholder text. Will change to a real example soon.",
-    "speaker": "0",
-    "metadata": {
-        "speaker_age": 25,
-        "speaker_gender": "female",
-    }
+    {"id": "01-001",
+    "path": ".cache/huggingface/datasets/downloads/extracted/ecbf4ad46b3db9b85aa9108272c39dc75a268b4c0b92f2827866ef17dea97585/01/01-001.wav",
+    "audio": {
+        "path": ".cache/huggingface/datasets/downloads/extracted/ecbf4ad46b3db9b85aa9108272c39dc75a268b4c0b92f2827866ef17dea97585/01/01-001.wav",
+        "array": array([-0.0005188 , -0.00018311, -0.00021362, ..., -0.00018311, -0.00033569, -0.00015259], dtype=float32),
+        "sampling_rate": 16000
+    },
+    "text": "hai selamat pagi apa kabar",
+    "speaker": "01",
+    "metadata": {"speaker_age": 25, "speaker_gender": "female"}}
 }
 ```
