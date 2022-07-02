@@ -39,6 +39,7 @@ Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
 ### Maksimal Jumlah Kontributor
 
 - Kontribusi untuk dataset baru terbatas pada 2 author utama. Harap tentukan nama author utama yang ingin Anda tambahkan ke PR.
+- Kontribusi untuk dataloader yang dihitung hanya pembuat PR.
 
 ## Contoh
 
