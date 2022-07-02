@@ -23,7 +23,7 @@ We can have 4 different levels: Small, Medium, Large, XL
 - Large (L): 10K<=x<1M (+3 pts)
 - Extra Large (XL): >=1M (+4 pts)
 
-where x is the number of samples (train + val + test). For the dataset with k-fold setting, we will only count one of the folds.
+where x is the number of samples (train + val + test). For the dataset with k-fold evaluation setting, we will only count one of the folds.
 
 ### Task and Language Rarity
 
