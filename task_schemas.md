@@ -310,3 +310,21 @@ Passages capture document structure, such as the title and abstact sections of a
     "text": "Placeholder text. Will change to a real example soon."
 }
 ```
+
+## Speech recognition
+- [Schema Template](nusantara/utils/schemas/speech_recognition.py)
+- Examples: [Coming soon] (nusantara/nusa_datasets/coming_soon/coming_soon.py)
+
+```
+{
+    "id": "0",
+    "path": "Placeholder path. Will change to a real example soon.",
+    "audio": ["Placeholder audio.", "Will change to a real example soon."],
+    "text": "Placeholder text. Will change to a real example soon.",
+    "speaker": "0",
+    "metadata": {
+        "speaker_age": 25,
+        "speaker_gender": "female",
+    }
+}
+```

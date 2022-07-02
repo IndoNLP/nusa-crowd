@@ -43,6 +43,9 @@ class Tasks(Enum):
     # Self Supervised Pretraining
     SELF_SUPERVISED_PRETRAINING = "SSP"
 
+    # Speech Recognition
+    SPEECH_RECOGNITION = "ASR"
+
 
 # TASK_TO_SCHEMA = {
 #     Tasks.NAMED_ENTITY_RECOGNITION: "KB",
