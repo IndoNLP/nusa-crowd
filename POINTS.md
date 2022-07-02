@@ -38,6 +38,9 @@ We can have 4 different levels: Small, Medium, Large, XL
 
 - Poor (P): eg. data is fully machine-generated, with no verification. (pts x0.5)
 
+### Maximum number of contributor
+
+- The contribution of the new dataset is limited to 2 primary authors. Please specify the names of the main authors you want to add to the PR.
 
 ## Examples
 
