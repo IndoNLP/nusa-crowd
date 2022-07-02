@@ -40,7 +40,8 @@ We can have 4 different levels: Small, Medium, Large, XL
 
 ### Maximum number of contributor
 
-- The contribution of the new dataset is limited to 2 primary authors. Please specify the names of the main authors you want to add to the PR.
+- The number of contributor for a new dataset is limited to 2 primary authors. Please specify the names of the main authors you want to add to the PR.
+- For new dataloader creation, we only count the contribution from the PR creator.
 
 ## Examples
 
