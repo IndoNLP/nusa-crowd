@@ -20,7 +20,7 @@ Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
 - Large (L): 10K<=x<1M (+3 poin)
 - Extra Large (XL): >=1M (+4 poin)
 
-x adalah jumlah sampel (train + val + test).
+x adalah jumlah sampel (train + val + test). Untuk data yang menggunakan evaluasi k-fold, jumlah data yang dihitung hanya salah satu fold.
 
 ### Downstream task dan Bahasa Kelangkaan
 
