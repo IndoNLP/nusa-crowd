@@ -1,12 +1,16 @@
 # Selamat datang di NusaCrowd!
 
+<h3>60 datasets telah terdaftar di NusaCrowd</h3>
 
-![progress claimed](https://progress-bar.dev/0/?title=Datasets%20Claimed)
+![Dataset claimed](https://progress-bar.dev/37/?title=Datasets%20Claimed%20(22%20Datasets%20Claimed))
 
-![tier1](https://progress-bar.dev/0/?title=Progress%201%20(30%20Datasets%20Completed))
-![tier2](https://progress-bar.dev/0/?title=Progress%202%20(60%20Datasets%20Completed))
-![tier3](https://progress-bar.dev/0/?title=Progress%203%20(100%20Datasets%20Completed))
-![tier4](https://progress-bar.dev/0/?title=Progress%204%20(150%20Datasets%20Completed))
+![Milestone 1](https://progress-bar.dev/50/?title=Milestone%201%20(30%20Datasets%20Completed))
+
+![Milestone 2](https://progress-bar.dev/25/?title=Milestone%202%20(60%20Datasets%20Completed))
+
+![Milestone 3](https://progress-bar.dev/15/?title=Milestone%203%20(100%20Datasets%20Completed))
+
+![Milestone 4](https://progress-bar.dev/10/?title=Milestone%204%20(150%20Datasets%20Completed))
 
 *Read this README in [English](README.md).*
 
