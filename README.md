@@ -1,8 +1,8 @@
 # Welcome to the NusaCrowd!
 
-<h3>58 datasets registered</h3>
+<h3>60 datasets registered</h3>
 
-![Dataset claimed](https://progress-bar.dev/38/?title=Datasets%20Claimed%20(22%20Datasets%20Claimed))
+![Dataset claimed](https://progress-bar.dev/37/?title=Datasets%20Claimed%20(22%20Datasets%20Claimed))
 
 ![Milestone 1](https://progress-bar.dev/50/?title=Milestone%201%20(30%20Datasets%20Completed))
 
