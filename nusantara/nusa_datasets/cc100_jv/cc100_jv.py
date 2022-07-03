@@ -26,7 +26,7 @@ corpus.
 
 This contains the Javanese (jav) subset.
 
-[nusantara_schema_name] = text
+[nusantara_schema_name] = self_supervised_pretraining
 """
 
 from typing import Dict, List, Tuple
@@ -154,10 +154,10 @@ class CC100Jv(datasets.GeneratorBasedBuilder):
             subset_id="cc100_jv",
         ),
         NusantaraConfig(
-            name="cc100_jv_nusantara_text",
+            name="cc100_jv_nusantara_ssp",
             version=NUSANTARA_VERSION,
             description="cc100_jv Nusantara schema",
-            schema="nusantara_text",
+            schema="nusantara_ssp",
             subset_id="cc100_jv",
         ),
     ]
@@ -174,8 +174,8 @@ class CC100Jv(datasets.GeneratorBasedBuilder):
                 }
             )
 
-        elif self.config.schema == "nusantara_text":
-            features = schemas.text.features
+        elif self.config.schema == "nusantara_ssp":
+            features = schemas.self_supervised_pretraining.features
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -214,17 +214,12 @@ class CC100Jv(datasets.GeneratorBasedBuilder):
                             "text": row,
                         },
                     )
-            elif self.config.schema == "nusantara_text":
+            elif self.config.schema == "nusantara_ssp":
                 for counter, row in enumerate(f):
                     yield (
                         counter,
                         {
                             "id": str(counter),
                             "text": row,
-                            "label": "",
                         },
                     )
-
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
