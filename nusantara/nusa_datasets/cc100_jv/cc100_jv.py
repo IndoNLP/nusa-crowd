@@ -175,7 +175,7 @@ class CC100Jv(datasets.GeneratorBasedBuilder):
             )
 
         elif self.config.schema == "nusantara_text":
-            features = schemas.text.features([""])
+            features = schemas.text.features
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -221,7 +221,11 @@ class CC100Jv(datasets.GeneratorBasedBuilder):
                         {
                             "id": str(counter),
                             "text": row,
+<<<<<<< HEAD
                             "label": "",
+=======
+                            "labels": [],
+>>>>>>> Adding the cc100 Javanese dataloader
                         },
                     )
 
