@@ -29,11 +29,11 @@ _DESCRIPTION = """\
 IndoLVCSR is collected to build a pioneering Indonesian Large Vocabulary Continuous Speech Recognition (LVCSR) System. In order to build an LVCSR system, high accurate acoustic models and large-scale language models are essential. Since Indonesian speech corpus was not available yet, we tried to collect speech data from 20 Indonesian native speakers (11 males and 9 females) to construct a speech corpus for training the acoustic model based on Hidden Markov Models (HMMs). A text corpus which was collected by ILPS, Informatics Institute, University of Amsterdam, was used to build a 40K-vocabulary dictionary and a n-gram language model.
 """
 
-_HOMEPAGE = "https://www.researchgate.net/publication/228829709_A_large_vocabulary_continuous_speech_recognition_system_for_Indonesian_language"
+_HOMEPAGE = "http://research.nii.ac.jp/src/en/TITML-IDN.html"
 
-_LICENSE = "Unknown" # Still confirming
+_LICENSE = "For research purposes only"
 
-_URLs = {"indo-lvcsr": "https://github.com/holylovenia/indo-lvcsr/raw/main/data/IndoLVCSR.zip"}
+_URLs = {"indo-lvcsr": "https://media.githubusercontent.com/media/holylovenia/indo-lvcsr/main/data/IndoLVCSR.zip"}
 
 _SUPPORTED_TASKS = [Tasks.SPEECH_RECOGNITION]
 
