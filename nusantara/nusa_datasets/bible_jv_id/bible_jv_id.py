@@ -9,11 +9,11 @@ from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 
-_DATASETNAME = "bible_en_id"
+_DATASETNAME = "bible_jv_id"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ['jav', 'eng'] # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["ind", "jav"] # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
 @inproceedings{cahyawijaya-etal-2021-indonlg,
@@ -43,7 +43,14 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-Bible Jv-Id is a machine translation dataset containing Indonesian-Javanese parallel sentences collected from the bible. We also add a Bible dataset to the Javanese Indonesian translation task. Specifically, we collect an Indonesian and an Javanese language Bible and generate a verse-aligned parallel corpus for the Javanese-Indonesian machine translation task. We split the dataset and use 75% as the training set, 10% as the validation set, and 15% as the test set. Each of the datasets is evaluated in both directions, i.e., Javanese to Indonesian (En → Id) and Indonesian to Javanese (Id → En) translations.
+Analogous to the En ↔ Id and Su ↔ Id datasets, we create a new dataset
+for Javanese and Indonesian translation generated
+from the verse-aligned Bible parallel corpus with
+the same split setting. In terms of size, both the
+Su ↔ Id and Jv ↔ Id datasets are much smaller
+compared to the En ↔ Id dataset, because there are
+Bible chapters for which translations are available
+for Indonesian, albeit not for the local languages.
 """
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlg"
@@ -106,7 +113,7 @@ class BibleEnId(datasets.GeneratorBasedBuilder):
     def _split_generators(
         self, dl_manager: datasets.DownloadManager
     ) -> List[datasets.SplitGenerator]:
-        base_path = Path(dl_manager.download_and_extract(_URLs['indonlg'])) / 'IndoNLG_downstream_tasks' / 'MT_ENGKJV_INZNTV'
+        base_path = Path(dl_manager.download_and_extract(_URLs['indonlg'])) / 'IndoNLG_downstream_tasks' / 'MT_JAVNRF_INZNTV'
         data_files = {
             "train": base_path / 'train_preprocess.json',
             "validation": base_path / 'valid_preprocess.json',
