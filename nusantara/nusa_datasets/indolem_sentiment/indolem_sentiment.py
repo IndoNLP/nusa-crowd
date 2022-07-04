@@ -40,7 +40,7 @@ import datasets
 from nusantara.utils import schemas
 from nusantara.utils.common_parser import load_conll_data
 from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 
 # TODO: Add BibTeX citation
 _CITATION = """\
@@ -66,6 +66,11 @@ _CITATION = """\
 # TODO: create a module level variable with your dataset name (should match script name)
 #  E.g. Hallmarks of Cancer: [dataset_name] --> hallmarks_of_cancer
 _DATASETNAME = "indolem_sentiment"
+_SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
+_UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
+
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
 
 # TODO: Add description of the dataset here
 # You can copy an official description
