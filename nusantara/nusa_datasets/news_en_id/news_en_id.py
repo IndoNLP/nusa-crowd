@@ -15,29 +15,20 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _LANGUAGES = ["ind", "eng"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
-@inproceedings{cahyawijaya-etal-2021-indonlg,
-    title = "{I}ndo{NLG}: Benchmark and Resources for Evaluating {I}ndonesian Natural Language Generation",
-    author = "Cahyawijaya, Samuel  and
-      Winata, Genta Indra  and
-      Wilie, Bryan  and
-      Vincentio, Karissa  and
-      Li, Xiaohong  and
-      Kuncoro, Adhiguna  and
-      Ruder, Sebastian  and
-      Lim, Zhi Yuan  and
-      Bahar, Syafri  and
-      Khodra, Masayu  and
-      Purwarianti, Ayu  and
-      Fung, Pascale",
-    booktitle = "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
-    month = nov,
-    year = "2021",
-    address = "Online and Punta Cana, Dominican Republic",
-    publisher = "Association for Computational Linguistics",
-    url = "https://aclanthology.org/2021.emnlp-main.699",
-    doi = "10.18653/v1/2021.emnlp-main.699",
-    pages = "8875--8898",
-    abstract = "Natural language generation (NLG) benchmarks provide an important avenue to measure progress and develop better NLG systems. Unfortunately, the lack of publicly available NLG benchmarks for low-resource languages poses a challenging barrier for building NLG systems that work well for languages with limited amounts of data. Here we introduce IndoNLG, the first benchmark to measure natural language generation (NLG) progress in three low-resource{---}yet widely spoken{---}languages of Indonesia: Indonesian, Javanese, and Sundanese. Altogether, these languages are spoken by more than 100 million native speakers, and hence constitute an important use case of NLG systems today. Concretely, IndoNLG covers six tasks: summarization, question answering, chit-chat, and three different pairs of machine translation (MT) tasks. We collate a clean pretraining corpus of Indonesian, Sundanese, and Javanese datasets, Indo4B-Plus, which is used to pretrain our models: IndoBART and IndoGPT. We show that IndoBART and IndoGPT achieve competitive performance on all tasks{---}despite using only one-fifth the parameters of a larger multilingual model, mBART-large (Liu et al., 2020). This finding emphasizes the importance of pretraining on closely related, localized languages to achieve more efficient learning and faster inference at very low-resource languages like Javanese and Sundanese.",
+@inproceedings{guntara-etal-2020-benchmarking,
+    title = "Benchmarking Multidomain {E}nglish-{I}ndonesian Machine Translation",
+    author = "Guntara, Tri Wahyu  and
+      Aji, Alham Fikri  and
+      Prasojo, Radityo Eko",
+    booktitle = "Proceedings of the 13th Workshop on Building and Using Comparable Corpora",
+    month = may,
+    year = "2020",
+    address = "Marseille, France",
+    publisher = "European Language Resources Association",
+    url = "https://aclanthology.org/2020.bucc-1.6",
+    pages = "35--43",
+    language = "English",
+    ISBN = "979-10-95546-42-9",
 }
 """
 
@@ -45,7 +36,7 @@ _DESCRIPTION = """\
 News En-Id is a machine translation dataset containing Indonesian-English parallel sentences collected from the news. The news dataset is collected from multiple sources: Pan Asia Networking Localization (PANL), Bilingual BBC news articles, Berita Jakarta, and GlobalVoices. We split the dataset and use 75% as the training set, 10% as the validation set, and 15% as the test set. Each of the datasets is evaluated in both directions, i.e., English to Indonesian (En → Id) and Indonesian to English (Id → En) translations.
 """
 
-_HOMEPAGE = "https://github.com/IndoNLP/indonlg"
+_HOMEPAGE = "https://github.com/gunnxx/indonesian-mt-data"
 
 _LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
 
