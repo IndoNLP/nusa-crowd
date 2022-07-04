@@ -23,14 +23,6 @@ _CITATION = """\
   year={2014},
   organization={IEEE}
 }
-
-@inproceedings{wilie2020indonlu,
-  title={IndoNLU: Benchmark and Resources for Evaluating Indonesian Natural Language Understanding},
-  author={Wilie, Bryan and Vincentio, Karissa and Winata, Genta Indra and Cahyawijaya, Samuel and Li, Xiaohong and Lim, Zhi Yuan and Soleman, Sidik and Mahendra, Rahmad and Fung, Pascale and Bahar, Syafri and others},
-  booktitle={Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing},
-  pages={843--857},
-  year={2020}
-}
 """
 
 _DESCRIPTION = """\
@@ -39,7 +31,7 @@ The POS tagset is created through a detailed study and analysis of existing tags
 BaPOS dataset is splitted into 3 sets with 8000 train, 1000 validation, 1029 test data.
 """
 
-_HOMEPAGE = "https://github.com/IndoNLP/indonlu"
+_HOMEPAGE = "https://bahasa.cs.ui.ac.id/postag/corpus"
 
 _LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
 
