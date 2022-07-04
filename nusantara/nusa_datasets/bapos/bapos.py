@@ -15,7 +15,22 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
+@inproceedings{dinakaramani2014designing,
+  title={Designing an Indonesian part of speech tagset and manually tagged Indonesian corpus},
+  author={Dinakaramani, Arawinda and Rashel, Fam and Luthfi, Andry and Manurung, Ruli},
+  booktitle={2014 International Conference on Asian Language Processing (IALP)},
+  pages={66--69},
+  year={2014},
+  organization={IEEE}
+}
 
+@inproceedings{wilie2020indonlu,
+  title={IndoNLU: Benchmark and Resources for Evaluating Indonesian Natural Language Understanding},
+  author={Wilie, Bryan and Vincentio, Karissa and Winata, Genta Indra and Cahyawijaya, Samuel and Li, Xiaohong and Lim, Zhi Yuan and Soleman, Sidik and Mahendra, Rahmad and Fung, Pascale and Bahar, Syafri and others},
+  booktitle={Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing},
+  pages={843--857},
+  year={2020}
+}
 """
 
 _DESCRIPTION = """\

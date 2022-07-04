@@ -16,6 +16,14 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _LANGUAGES = ["ind", "eng"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
+@inproceedings{qi2018and,
+  title={When and Why Are Pre-Trained Word Embeddings Useful for Neural Machine Translation?},
+  author={Qi, Ye and Sachan, Devendra and Felix, Matthieu and Padmanabhan, Sarguna and Neubig, Graham},
+  booktitle={Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)},
+  pages={529--535},
+  year={2018}
+}
+
 @inproceedings{cahyawijaya-etal-2021-indonlg,
     title = "{I}ndo{NLG}: Benchmark and Resources for Evaluating {I}ndonesian Natural Language Generation",
     author = "Cahyawijaya, Samuel  and
