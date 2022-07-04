@@ -33,7 +33,7 @@ _HOMEPAGE = "http://research.nii.ac.jp/src/en/TITML-IDN.html"
 
 _LICENSE = "For research purposes only"
 
-_URLs = {"indo-lvcsr": "https://media.githubusercontent.com/media/holylovenia/indo-lvcsr/main/data/IndoLVCSR.zip"}
+_URLs = {"indo-lvcsr": "https://huggingface.co/datasets/holylovenia/IndoLVCSR/resolve/main/IndoLVCSR.zip"}
 
 _SUPPORTED_TASKS = [Tasks.SPEECH_RECOGNITION]
 
