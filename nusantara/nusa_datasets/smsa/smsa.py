@@ -23,6 +23,14 @@ _CITATION = """\
     pages={1-5},
     doi={10.1109/ICAICTA.2019.8904199}
 }
+
+@inproceedings{wilie2020indonlu,
+  title={IndoNLU: Benchmark and Resources for Evaluating Indonesian Natural Language Understanding},
+  author={Wilie, Bryan and Vincentio, Karissa and Winata, Genta Indra and Cahyawijaya, Samuel and Li, Xiaohong and Lim, Zhi Yuan and Soleman, Sidik and Mahendra, Rahmad and Fung, Pascale and Bahar, Syafri and others},
+  booktitle={Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing},
+  pages={843--857},
+  year={2020}
+}
 """
 
 _DESCRIPTION = """\
