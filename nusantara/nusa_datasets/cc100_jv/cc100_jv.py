@@ -24,7 +24,7 @@ by a newline. The data is generated using the open source CC-Net repository. No
 claims of intellectual property are made on the work of preparation of the
 corpus.
 
-This contains the Sundanese (sun) subset.
+This contains the Javanese (jav) subset.
 
 [nusantara_schema_name] = text
 """
@@ -124,12 +124,12 @@ _DESCRIPTION = """\
 
 _HOMEPAGE = "https://data.statmt.org/cc-100/"
 
-_LANGUAGES = ["sun"]
+_LANGUAGES = ["jav"]
 
 _LICENSE = "MIT"
 
 _URLS = {
-    _DATASETNAME: "https://data.statmt.org/cc-100/su.txt.xz",
+    _DATASETNAME: "https://data.statmt.org/cc-100/jv.txt.xz",
 }
 
 _SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]
@@ -140,21 +140,21 @@ _NUSANTARA_VERSION = "1.0.0"
 
 
 class CC100Su(datasets.GeneratorBasedBuilder):
-    """Monolingual Sundanese Datasets from Web Crawl Data."""
+    """Monolingual Javanese Datasets from Web Crawl Data."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="cc100_su_source",
+            name="cc100_jv_source",
             version=SOURCE_VERSION,
             description="cc100_su source schema",
             schema="source",
             subset_id="cc100_su",
         ),
         NusantaraConfig(
-            name="cc100_su_nusantara_ssp",
+            name="cc100_jv_nusantara_ssp",
             version=NUSANTARA_VERSION,
             description="cc100_su Nusantara schema",
             schema="nusantara_ssp",
@@ -162,7 +162,7 @@ class CC100Su(datasets.GeneratorBasedBuilder):
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "cc100_su_source"
+    DEFAULT_CONFIG_NAME = "cc100_jv_source"
 
     def _info(self) -> datasets.DatasetInfo:
 

@@ -20,6 +20,8 @@ Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
 - Large (L): 10K<=x<1M (+3 poin)
 - Extra Large (XL): >=1M (+4 poin)
 
+x adalah jumlah sampel (train + val + test). Untuk data yang menggunakan evaluasi k-fold, jumlah data yang dihitung hanya salah satu fold.
+
 ### Downstream task dan Bahasa Kelangkaan
 
 - Langka / Tidak ada sumber daya: Tidak ada dataset publik pada bahasa / downstream task ini. Dataset ini akan menjadi yang baru untuk bahasa/ downstream task tertentu. (+6 poin)
@@ -35,6 +37,11 @@ Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
 
 - Poor (P): mis. data sepenuhnya dibuat oleh mesin, tanpa verifikasi. (poin x0,5)
 
+
+### Maksimal Jumlah Kontributor
+
+- Kontribusi untuk dataset baru terbatas pada 2 author utama. Harap tentukan nama author utama yang ingin Anda tambahkan ke PR.
+- Kontribusi untuk dataloader yang dihitung hanya pembuat PR.
 
 ## Contoh
 
