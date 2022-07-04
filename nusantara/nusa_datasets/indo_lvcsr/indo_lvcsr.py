@@ -68,7 +68,7 @@ class IndoLVCSR(datasets.GeneratorBasedBuilder):
             features = datasets.Features(
                 {
                     "id": datasets.Value("string"),
-                    "speaker": datasets.Value("string"),
+                    "speaker_id": datasets.Value("string"),
                     "path": datasets.Value("string"),
                     "audio": datasets.Audio(sampling_rate=16_000),
                     "text": datasets.Value("string"),
@@ -115,7 +115,7 @@ class IndoLVCSR(datasets.GeneratorBasedBuilder):
                             if self.config.schema == "source":
                                 ex = {
                                     "id": audio_id,
-                                    "speaker": speaker_id,
+                                    "speaker_id": speaker_id,
                                     "path": wav_path,
                                     "audio": wav_path,
                                     "text": text,
@@ -124,7 +124,7 @@ class IndoLVCSR(datasets.GeneratorBasedBuilder):
                             elif self.config.schema == "nusantara_asr":
                                 ex = {
                                     "id": audio_id,
-                                    "speaker": speaker_id,
+                                    "speaker_id": speaker_id,
                                     "path": wav_path,
                                     "audio": wav_path,
                                     "text": text,
