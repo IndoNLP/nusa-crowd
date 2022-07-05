@@ -31,7 +31,7 @@ x adalah jumlah sampel (train + val + test). Untuk data yang menggunakan evaluas
 
 ### Kualitas (untuk Dataset berlabel)
 
-- Excellent (E): Dataset berkualitas tinggi, mis. berlabel/tertulis/beranotasi **dan** dievaluasi oleh manusia dengan persetujuan annotator yang terhormat. Protokol anotasi didokumentasikan secara menyeluruh dalam makalah. (poin x1.5)
+- Excellent (E): Dataset berkualitas tinggi, mis. berlabel/tertulis/beranotasi **dan** dievaluasi oleh manusia dengan persetujuan expert annotator. Protokol anotasi didokumentasikan secara menyeluruh dalam makalah. (poin x1.5)
 
 - Good (G): mis. data dihasilkan secara otomatis (yaitu dengan merangkak), tetapi diverifikasi oleh manusia. Atau, data dapat diberi label oleh manusia dengan verifikasi minimal/tanpa verifikasi. (poin x1)
 
