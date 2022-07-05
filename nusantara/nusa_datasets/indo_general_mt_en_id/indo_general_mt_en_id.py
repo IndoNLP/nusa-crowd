@@ -141,6 +141,9 @@ class IndoGeneralMTEnId(datasets.GeneratorBasedBuilder):
             else:
                 data_id += open(file, "r").readlines()
 
+        data_en = list(map(str.strip, data_en))
+        data_id = list(map(str.strip, data_id))
+
         if self.config.schema == "source":
             for id, (src, tgt) in enumerate(zip(data_en, data_id)):
                 row = {
