@@ -38,7 +38,7 @@ News En-Id is a machine translation dataset containing Indonesian-English parall
 
 _HOMEPAGE = "https://github.com/gunnxx/indonesian-mt-data"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {"indonlg": "https://storage.googleapis.com/babert-pretraining/IndoNLG_finals/downstream_task/downstream_task_datasets.zip"}
 

@@ -41,7 +41,7 @@ to construct this dataset. There are three possible sentiments on the SmSA datas
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {
     "train": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/train_preprocess.tsv",

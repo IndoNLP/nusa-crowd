@@ -33,7 +33,7 @@ BaPOS dataset is splitted into 3 sets with 8000 train, 1000 validation, 1029 tes
 
 _HOMEPAGE = "https://bahasa.cs.ui.ac.id/postag/corpus"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {
     "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/bapos_pos-idn/train_preprocess.txt",
