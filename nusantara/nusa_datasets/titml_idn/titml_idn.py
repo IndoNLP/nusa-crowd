@@ -9,14 +9,14 @@ from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 
-_DATASETNAME = "indo_lvcsr"
+_DATASETNAME = "titml_idn"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
-@inproceedings{lestari2006indolvcsr,
+@inproceedings{lestari2006titmlidn,
   title={A large vocabulary continuous speech recognition system for Indonesian language},
   author={Lestari, Dessi Puji and Iwano, Koji and Furui, Sadaoki},
   booktitle={15th Indonesian Scientific Conference in Japan Proceedings},
@@ -26,14 +26,14 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-IndoLVCSR is collected to build a pioneering Indonesian Large Vocabulary Continuous Speech Recognition (LVCSR) System. In order to build an LVCSR system, high accurate acoustic models and large-scale language models are essential. Since Indonesian speech corpus was not available yet, we tried to collect speech data from 20 Indonesian native speakers (11 males and 9 females) to construct a speech corpus for training the acoustic model based on Hidden Markov Models (HMMs). A text corpus which was collected by ILPS, Informatics Institute, University of Amsterdam, was used to build a 40K-vocabulary dictionary and a n-gram language model.
+TITML-IDN (Tokyo Institute of Technology Multilingual - Indonesian) is collected to build a pioneering Indonesian Large Vocabulary Continuous Speech Recognition (LVCSR) System. In order to build an LVCSR system, high accurate acoustic models and large-scale language models are essential. Since Indonesian speech corpus was not available yet, we tried to collect speech data from 20 Indonesian native speakers (11 males and 9 females) to construct a speech corpus for training the acoustic model based on Hidden Markov Models (HMMs). A text corpus which was collected by ILPS, Informatics Institute, University of Amsterdam, was used to build a 40K-vocabulary dictionary and a n-gram language model.
 """
 
 _HOMEPAGE = "http://research.nii.ac.jp/src/en/TITML-IDN.html"
 
-_LICENSE = "For research purposes only"
+_LICENSE = "For research purposes only. If you use this corpus, you have to cite (Lestari et al, 2006)."
 
-_URLs = {"indo-lvcsr": "https://huggingface.co/datasets/holylovenia/IndoLVCSR/resolve/main/IndoLVCSR.zip"}
+_URLs = {"titml-idn": "https://huggingface.co/datasets/holylovenia/TITML-IDN/resolve/main/IndoLVCSR.zip"}
 
 _SUPPORTED_TASKS = [Tasks.SPEECH_RECOGNITION]
 
@@ -41,27 +41,27 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class IndoLVCSR(datasets.GeneratorBasedBuilder):
-    """IndoLVCSR is a speech recognition dataset containing Indonesian speech collected with transcriptions from newpaper and magazine articles."""
+class TitmlIdn(datasets.GeneratorBasedBuilder):
+    """TITML-IDN is a speech recognition dataset containing Indonesian speech collected with transcriptions from newpaper and magazine articles."""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="indo_lvcsr_source",
+            name="titml_idn_source",
             version=datasets.Version(_SOURCE_VERSION),
-            description="IndoLVCSR source schema",
+            description="TITML-IDN source schema",
             schema="source",
-            subset_id="indo_lvcsr",
+            subset_id="titml_idn",
         ),
         NusantaraConfig(
-            name="indo_lvcsr_nusantara_asr",
+            name="titml_idn_nusantara_asr",
             version=datasets.Version(_NUSANTARA_VERSION),
-            description="IndoLVCSR Nusantara schema",
+            description="TITML-IDN Nusantara schema",
             schema="nusantara_asr",
-            subset_id="indo_lvcsr",
+            subset_id="titml_idn",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "indo_lvcsr_source"
+    DEFAULT_CONFIG_NAME = "titml_idn_source"
 
     def _info(self):
         if self.config.schema == "source":
@@ -87,7 +87,7 @@ class IndoLVCSR(datasets.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
-        base_path = dl_manager.download_and_extract(_URLs["indo-lvcsr"])
+        base_path = dl_manager.download_and_extract(_URLs["titml-idn"])
 
         return [
             datasets.SplitGenerator(
