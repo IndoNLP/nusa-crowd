@@ -2,7 +2,7 @@
 
 To be considered as co-author, 10 contribution points is required.
 
-> *Note*: The purpose of the point system is not to barrier collaboration, but to reward rare and high-quality dataset entries.
+> **Note**: The purpose of the point system is not to barrier collaboration, but to reward rare and high-quality dataset entries.
 We might adjust the point requirement lower to accomodate more co-authorship, if needed.
 
 ## Data Loader
