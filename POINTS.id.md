@@ -2,6 +2,9 @@
 
 Untuk dianggap sebagai co-author, diperlukan 10 poin kontribusi.
 
+> **Catatan**: Tujuan adanya sistem poin kontribusi bukan untuk menghalangi kolaborasi, melainkan untuk mengapresiasi dataset langka dan berkualitas tinggi. 
+Oleh karena itu, kami mungkin menurunkan syarat poin untuk mengakomodasi lebih banyak co-author, jika diperlukan.
+
 ## Data Loader
 
 Menerapkan data loader apa pun diberikan +3 poin.
