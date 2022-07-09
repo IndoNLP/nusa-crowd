@@ -125,7 +125,7 @@ class IndoNli(datasets.GeneratorBasedBuilder):
                 "label": datasets.Value("string"),
             })
         elif self.config.schema == "nusantara_pairs":
-            features = schemas.text_features(self.labels)
+            features = schemas.pairs_features(self.labels)
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -180,7 +180,8 @@ class IndoNli(datasets.GeneratorBasedBuilder):
                 for example in f.iter():
                     if example["pair_id"] not in skip:
                         skip.append(example["pair_id"])
-                        nu_eg = {"id": str(example["pair_id"]), "text_1": example["premise"],
+                        nu_eg = {"id": str(example["pair_id"]),
+                                 "text_1": example["premise"],
                                  "text_2": example["hypothesis"],
                                  "label": example["label"]}
                         yield example["pair_id"], nu_eg
