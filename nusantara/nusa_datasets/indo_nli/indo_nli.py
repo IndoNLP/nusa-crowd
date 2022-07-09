@@ -14,7 +14,10 @@
 # limitations under the License.
 
 """
-IndoNLI is the first human-elicited Natural Language Inference (NLI) dataset for Indonesian. IndoNLI is annotated by both crowd workers and experts. The expert-annotated data is used exclusively as a test set. It is designed to provide a challenging test-bed for Indonesian NLI by explicitly incorporating various linguistic phenomena such as numerical reasoning, structural changes, idioms, or temporal and spatial reasoning.
+IndoNLI is the first human-elicited Natural Language Inference (NLI) dataset for Indonesian.
+IndoNLI is annotated by both crowd workers and experts. The expert-annotated data is used exclusively as a test set.
+It is designed to provide a challenging test-bed for Indonesian NLI by explicitly incorporating various linguistic
+phenomena such as numerical reasoning, structural changes, idioms, or temporal and spatial reasoning.
 
 The data is split across train, valid, test_lay, and test_expert.
 
@@ -26,11 +29,11 @@ The data was produced by humans.
 
 """
 
-import jsonlines
 from pathlib import Path
 from typing import List
 
 import datasets
+import jsonlines
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
@@ -53,7 +56,9 @@ _CITATION = """\
 _DATASETNAME = "indo_nli"
 
 _DESCRIPTION = """\
-This dataset is designed for Natural Language Inference NLP task.  It is designed to provide a challenging test-bed for Indonesian NLI by explicitly incorporating various linguistic phenomena such as numerical reasoning, structural changes, idioms, or temporal and spatial reasoning.
+This dataset is designed for Natural Language Inference NLP task.  It is designed to provide a challenging test-bed
+for Indonesian NLI by explicitly incorporating various linguistic phenomena such as numerical reasoning, structural
+changes, idioms, or temporal and spatial reasoning.
 """
 
 _HOMEPAGE = "https://github.com/ir-nlp-csui/indonli"
@@ -76,8 +81,9 @@ _URLS = {
     _DATASETNAME: {
         "train": "https://raw.githubusercontent.com/ir-nlp-csui/indonli/main/data/indonli/train.jsonl",
         "valid": "https://raw.githubusercontent.com/ir-nlp-csui/indonli/main/data/indonli/val.jsonl",
-        "test": "https://raw.githubusercontent.com/ir-nlp-csui/indonli/main/data/indonli/test.jsonl"
-    }}
+        "test": "https://raw.githubusercontent.com/ir-nlp-csui/indonli/main/data/indonli/test.jsonl",
+    }
+}
 
 _SUPPORTED_TASKS = [Tasks.TEXTUAL_ENTAILMENT]
 
@@ -115,15 +121,17 @@ class IndoNli(datasets.GeneratorBasedBuilder):
     def _info(self) -> datasets.DatasetInfo:
 
         if self.config.schema == "source":
-            features = datasets.Features({
-                "pair_id": datasets.Value("int32"),
-                "premise_id": datasets.Value("int32"),
-                "premise": datasets.Value("string"),
-                "hypothesis": datasets.Value("string"),
-                "annotator_type": datasets.Value("string"),
-                "sentence_size": datasets.Value("string"),
-                "label": datasets.Value("string"),
-            })
+            features = datasets.Features(
+                {
+                    "pair_id": datasets.Value("int32"),
+                    "premise_id": datasets.Value("int32"),
+                    "premise": datasets.Value("string"),
+                    "hypothesis": datasets.Value("string"),
+                    "annotator_type": datasets.Value("string"),
+                    "sentence_size": datasets.Value("string"),
+                    "label": datasets.Value("string"),
+                }
+            )
         elif self.config.schema == "nusantara_pairs":
             features = schemas.pairs_features(self.labels)
 
@@ -137,14 +145,15 @@ class IndoNli(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         urls = _URLS[_DATASETNAME]
-        train_data_path = Path(dl_manager.download_and_extract(urls['train']))
-        valid_data_path = Path(dl_manager.download_and_extract(urls['valid']))
-        test_data_path = Path(dl_manager.download_and_extract(urls['test']))
+        train_data_path = Path(dl_manager.download_and_extract(urls["train"]))
+        valid_data_path = Path(dl_manager.download_and_extract(urls["valid"]))
+        test_data_path = Path(dl_manager.download_and_extract(urls["test"]))
 
-        return [datasets.SplitGenerator(
-            name=datasets.Split.TRAIN,
-            gen_kwargs={"filepath": train_data_path},
-        ),
+        return [
+            datasets.SplitGenerator(
+                name=datasets.Split.TRAIN,
+                gen_kwargs={"filepath": train_data_path},
+            ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={"filepath": valid_data_path},
@@ -152,7 +161,8 @@ class IndoNli(datasets.GeneratorBasedBuilder):
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={"filepath": test_data_path},
-            )]
+            ),
+        ]
 
     def _generate_examples(self, filepath: Path):
 
@@ -163,14 +173,15 @@ class IndoNli(datasets.GeneratorBasedBuilder):
                 for example in f.iter():
                     if example["pair_id"] not in skip:
                         skip.append(example["pair_id"])
-                        example = {"pair_id": example["pair_id"],
-                                   "premise_id": example["premise_id"],
-                                   "premise": example["premise"],
-                                   "hypothesis": example["hypothesis"],
-                                   "annotator_type": example["annotator_type"],
-                                   "sentence_size": example["sentence_size"],
-                                   "label": example["label"]
-                                   }
+                        example = {
+                            "pair_id": example["pair_id"],
+                            "premise_id": example["premise_id"],
+                            "premise": example["premise"],
+                            "hypothesis": example["hypothesis"],
+                            "annotator_type": example["annotator_type"],
+                            "sentence_size": example["sentence_size"],
+                            "label": example["label"],
+                        }
                         yield example["pair_id"], example
 
         elif self.config.schema == "nusantara_pairs":
@@ -180,10 +191,7 @@ class IndoNli(datasets.GeneratorBasedBuilder):
                 for example in f.iter():
                     if example["pair_id"] not in skip:
                         skip.append(example["pair_id"])
-                        nu_eg = {"id": str(example["pair_id"]),
-                                 "text_1": example["premise"],
-                                 "text_2": example["hypothesis"],
-                                 "label": example["label"]}
+                        nu_eg = {"id": str(example["pair_id"]), "text_1": example["premise"], "text_2": example["hypothesis"], "label": example["label"]}
                         yield example["pair_id"], nu_eg
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
