@@ -33,6 +33,7 @@ _TASK_TO_SCHEMA = {
     Tasks.QUESTION_ANSWERING: "QA",
     Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
     Tasks.SEMANTIC_SIMILARITY: "PAIRS",
+    Tasks.NEXT_SENTENCE_PREDICTION: "PAIRS",
     Tasks.PARAPHRASING: "T2T",
     Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
@@ -194,7 +195,7 @@ class TestDataLoader(unittest.TestCase):
                 data_dir=self.DATA_DIR,
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
-        
+
         # check dataset samples
         for schema in ['source'] + [f"nusantara_{s.lower()}" for s in self.schemas_to_check]:
             dataset = datasets.load_dataset(
@@ -204,7 +205,7 @@ class TestDataLoader(unittest.TestCase):
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
             logger.info(f"Dataset sample [{schema}]\n{dataset['train'][0]}")
-        
+
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """
