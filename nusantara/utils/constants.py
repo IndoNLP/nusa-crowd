@@ -31,6 +31,7 @@ class Tasks(Enum):
     QUESTION_ANSWERING = "QA"
     TEXTUAL_ENTAILMENT = "TE"
     SEMANTIC_SIMILARITY = "STS"
+    NEXT_SENTENCE_PREDICTION = "NSP"
 
     # Single Text Generation
     MACHINE_TRANSLATION = "MT"
