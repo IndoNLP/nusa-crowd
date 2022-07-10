@@ -4,9 +4,10 @@ from typing import List
 import datasets
 
 from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 from nusantara.utils.common_parser import load_conll_data
+from nusantara.utils.configs import NusantaraConfig
+from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
+                                       DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "nerp"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
@@ -31,7 +32,7 @@ The NERP dataset (Hoesen and Purwarianti, 2018) contains texts collected from se
 - LOC (name of location)
 - IND (name of product or brand)
 - EVT (name of the event)
-- FNB (name of food and beverage). 
+- FNB (name of food and beverage).
 NERP makes use of the IOB chunking format, just like the TermA dataset.
 """
 
@@ -53,6 +54,7 @@ _NUSANTARA_VERSION = "1.0.0"
 
 class NerpDataset(datasets.GeneratorBasedBuilder):
     """NERP is an NER tagging dataset contains about (train=6720,valid=840,test=840) sentences, with 11 classes."""
+
     label_classes = ["B-PPL", "B-PLC", "B-EVT", "B-IND", "B-FNB", "I-PPL", "I-PLC", "I-EVT", "I-IND", "I-FNB", "O"]
 
     BUILDER_CONFIGS = [
@@ -76,8 +78,7 @@ class NerpDataset(datasets.GeneratorBasedBuilder):
 
     def _info(self):
         if self.config.schema == "source":
-            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")],
-                                          "ner_tag": [datasets.Value("string")]})
+            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "ner_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features(self.label_classes)
 
