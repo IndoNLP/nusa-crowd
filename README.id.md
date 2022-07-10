@@ -19,17 +19,29 @@ NLP Indonesia kurang terwakili dalam komunitas riset, dan salah satu alasannya a
 
 ## Bagaimana cara berkontribusi?
 
-Anda dapat berkontribusi dengan mengajukan **set data NLP yang tidak terdaftar** di [catatan kami](https://indonlp.github.io/nusa-catalogue/). Anda juga dapat mengusulkan dataset dari pekerjaan Anda sebelumnya yang belum dirilis ke publik. [Cukup isi formulir ini](https://forms.gle/31dMGZik25DPFYFd6), dan kami akan memeriksa dan menyetujui entri Anda.
+Anda dapat berkontribusi dengan mengajukan **set data NLP yang tidak terdaftar** di [catatan kami](https://indonlp.github.io/nusa-catalogue/). [Cukup isi formulir ini](https://forms.gle/31dMGZik25DPFYFd6), dan kami akan memeriksa dan menyetujui entri Anda.
 
 Kami akan memberikan **poin kontribusi** berdasarkan beberapa faktor, antara lain: **kualitas dataset**, **kelangkaan bahasa**, atau **kelangkaan downstream task**.
 
+Anda juga dapat mengajukan dataset dari pekerjaan Anda yang lampau, yang masih belum terbuka untuk umum. Pada kasus ini, Anda harus membuat dataset Anda terbuka dengan cara meng-uploadnya ke publik, misalnya melalui Github atau Google Drive.
+
 Anda dapat mengirimkan beberapa entri, dan jika total **poin kontribusi** sudah di atas ambang batas, kami akan menyertakan Anda sebagai rekan penulis (Umumnya cukup mengajukan 1-2 dataset). Baca metode penghitungan poin selengkapnya [di sini](POINTS.id.md).
+
+> **Catatan**: Kami tidak mengambil kepemilikan dari dataset yang disubmit. Lihat FAQ di bawah.
 
 ## Ada cara lain untuk membantu?
 
 Ya! Selain pengumpulan dataset baru, kami juga memusatkan dataset yang ada dalam satu skema yang memudahkan peneliti untuk menggunakan dataset NLP Indonesia. Anda dapat membantu kami di sana dengan membuat pemuat dataset. Untuk detail lebih lanjut tentang itu, bisa ditemukan [di sini](DATALOADER.md).
 
+Sebagai alternatif, kami juga mendata paper-paper riset NLP di bahasa-bahasa Indonesia yang mana mereka masih belum membuka datasetnya. Kami akan menghubungi para penulis paper-paper tersebut nanti untuk terlibat di NusaCrowd. Lebih lanjut tentang ini ada di [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g) kami.
+
+
 ## FAQ
+
+#### Siapa yang menjadi pemilik dataset yang disubmit?
+
+NusaCrowd **tidak** membuat duplikat atau salinan dari dataset yang disubmit. Maka, pemilik dataset yang disubmit tetap berada di author asli. NusaCrowd hanya sebatas membuat dataloader, yaitu pengunduh file dan pembaca data untuk menyederhanakan dan mengstandarisasi proses pembacaan data. Kami juga hanya mengumpulkan metadata dari dataset yang disubmit untuk ditampilkan di [katalog kami](https://indonlp.github.io/nusa-catalogue/) agar dataset Anda lebih mudah ditemukan!
+Sitasi ke pemilik data asli juga disediakan baik di NusaCrowd atau di katalog kami.
 
 #### Bagaimana cara menemukan lisensi yang sesuai untuk dataset saya?
 

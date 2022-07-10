@@ -19,17 +19,29 @@ Indonesian NLP is underrepresented in research community, and one of the reasons
 
 ## How to contribute?
 
-You can contribute by proposing **unregistered NLP dataset** on [our record](https://indonlp.github.io/nusa-catalogue/). You can also propose datasets from your past work that have not been released to the public. [Just fill out this form](https://forms.gle/31dMGZik25DPFYFd6), and we will check and approve your entry.
+You can contribute by proposing **unregistered NLP dataset** on [our record](https://indonlp.github.io/nusa-catalogue/). [Just fill out this form](https://forms.gle/31dMGZik25DPFYFd6), and we will check and approve your entry.
 
 We will give **contribution points** based on several factors, including: **dataset quality**, **language scarcity**, or **task scarcity**.
 
+You can also propose datasets from your past work that have not been released to the public.
+In that case, you must first make your dataset open by uploading it publicly, i.e. via Github or Google Drive.
+
 You can submit multiple entries, and if the total **contribution points** is already above the threshold, we will include you as a co-author (Generally it is enough to only propose 1-2 datasets). Read the full method of calculating points [here](POINTS.md).
+
+> **Note**: We are not taking any ownership of the submitted dataset. See FAQ below.
 
 ## Any other way to help?
 
 Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](DATALOADER.md).
 
+Alternatively, we're also listing NLP research papers of Indonesian languages where they do not open their dataset yet. We will contact the authors of these papers later to be involved in NusaCrowd. More about this is available in our [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
+
 ## FAQs
+
+#### Who will be the owner of the submitted dataset?
+
+NusaCrowd **do not** make a clone or copy of the submitted dataset. Therefore, the owner of any submitted dataset will remain to the original author. NusaCrowd simply build a dataloader, i.e. a file downloader + reader so simplify and standardize the data reading process. We also only collect and centralize metadata of the submitted dataset to be listed in [our catalogue](https://indonlp.github.io/nusa-catalogue/) for better discoverability of your dataset!
+Citation to the original data owner is also provided for both NusaCrowd and in our catalogue.
 
 #### How can I find the appropriate license for my dataset?
 
