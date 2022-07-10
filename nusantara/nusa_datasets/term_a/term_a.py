@@ -4,9 +4,10 @@ from typing import List
 import datasets
 
 from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 from nusantara.utils.common_parser import load_conll_data
+from nusantara.utils.configs import NusantaraConfig
+from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
+                                       DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "term_a"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
@@ -35,7 +36,7 @@ _DESCRIPTION = """\
 TermA is a span-extraction dataset collected from the hotel aggregator platform, AiryRooms
 (Septiandri and Sutiono, 2019; Fernando et al.,
 2019) consisting of thousands of hotel reviews,each containing a span label for aspect
-and sentiment words representing the opinion of the reviewer on the corresponding aspect. 
+and sentiment words representing the opinion of the reviewer on the corresponding aspect.
 The labels use Inside-Outside-Beginning tagging (IOB) with two kinds of tags, aspect and
 sentiment.
 """
@@ -58,7 +59,8 @@ _NUSANTARA_VERSION = "1.0.0"
 
 class BaPOSDataset(datasets.GeneratorBasedBuilder):
     """TermA is a span-extraction dataset containing 3k, 1k, 1k colloquial sentences in train, valid & test respectively of hotel domain with a total of 5 tags."""
-    label_classes=["B-ASPECT","I-ASPECT","B-SENTIMENT","I-SENTIMENT","O"]
+
+    label_classes = ["B-ASPECT", "I-ASPECT", "B-SENTIMENT", "I-SENTIMENT", "O"]
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
@@ -131,6 +133,3 @@ class BaPOSDataset(datasets.GeneratorBasedBuilder):
                 yield i, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
