@@ -1,35 +1,3 @@
-# coding=utf-8
-# Copyright 2022 The HuggingFace Datasets Authors and the current dataset script contributor.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""
-This template serves as a starting point for contributing a dataset to the Nusantara Dataset repo.
-
-When modifying it for your dataset, look for TODO items that offer specific instructions.
-
-Full documentation on writing dataset loading scripts can be found here:
-https://huggingface.co/docs/datasets/add_dataset.html
-
-To create a dataset loading script you will create a class and implement 3 methods:
-  * `_info`: Establishes the schema for the dataset, and returns a datasets.DatasetInfo object.
-  * `_split_generators`: Downloads and extracts data for each split (e.g. train/val/test) or associate local data with each split.
-  * `_generate_examples`: Creates examples from data on disk that conform to each schema defined in `_info`.
-
-TODO: Before submitting your script, delete this doc string and replace it with a description of your dataset.
-
-[nusantara_schema_name] = (kb, pairs, qa, text, t2t, entailment)
-"""
 import os
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -38,33 +6,26 @@ import datasets
 
 from nusantara.utils.configs import NusantaraConfig
 
-# TODO: Add BibTeX citation
 _CITATION = """\
-@article{,
-  author    = {},
-  title     = {},
-  journal   = {},
-  volume    = {},
-  year      = {},
-  url       = {},
-  doi       = {},
-  biburl    = {},
-  bibsource = {}
+@misc{winata2022nusax,
+      title={NusaX: Multilingual Parallel Sentiment Dataset for 10 Indonesian Local Languages}, 
+      author={Winata, Genta Indra and Aji, Alham Fikri and Cahyawijaya, Samuel and Mahendra, Rahmad and Koto, Fajri and Romadhony, Ade and Kurniawan, Kemal and Moeljadi, David and Prasojo, Radityo Eko and Fung, Pascale and Baldwin, Timothy and Lau, Jey Han and Sennrich, Rico and Ruder, Sebastian},
+      year={2022},
+      eprint={2205.15960},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 """
 
-# TODO: create a module level variable with your dataset name (should match script name)
-#  E.g. Hallmarks of Cancer: [dataset_name] --> hallmarks_of_cancer
-_DATASETNAME = "[dataset_name]"
+_DATASETNAME = "nusax_senti"
 
-# TODO: Add description of the dataset here
-# You can copy an official description
 _DESCRIPTION = """\
-This dataset is designed for XXX NLP task.
+NusaX is a high-quality multilingual parallel corpus that covers 12 languages, Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak.
+
+NusaX-Senti is a 3-labels (positive, neutral, negative) sentiment analysis dataset for 10 Indonesian local languages + Indonesian and English.
 """
 
-# TODO: Add a link to an official homepage for the dataset here (if possible)
-_HOMEPAGE = ""
+_HOMEPAGE = "https://github.com/IndoNLP/nusax/tree/main/datasets/sentiment"
 
 # TODO: Add the licence for the dataset here (if possible)
 # Note that this doesn't have to be a common open source license.
@@ -101,7 +62,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    # You will be able to load the "source" or "nusantara" configurations with
+    # You will be able to load the "source" or "nusanrata" configurations with
     # ds_source = datasets.load_dataset('my_dataset', name='source')
     # ds_nusantara = datasets.load_dataset('my_dataset', name='nusantara')
 
