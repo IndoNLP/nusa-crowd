@@ -1,10 +1,18 @@
-import os
 from pathlib import Path
 from typing import Dict, List, Tuple
 
 import datasets
+import pandas as pd
 
+from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
+from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
+
+_DATASETNAME = "nusax_senti"
+_SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
+_UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
+
+_LANGUAGES = ["ind", "ace", "ban", "bjn", "bbc", "bug", "jav", "mad", "min", "nij", "sun", "eng"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 
 _CITATION = """\
 @misc{winata2022nusax,
@@ -17,8 +25,6 @@ _CITATION = """\
 }
 """
 
-_DATASETNAME = "nusax_senti"
-
 _DESCRIPTION = """\
 NusaX is a high-quality multilingual parallel corpus that covers 12 languages, Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak.
 
@@ -27,115 +33,65 @@ NusaX-Senti is a 3-labels (positive, neutral, negative) sentiment analysis datas
 
 _HOMEPAGE = "https://github.com/IndoNLP/nusax/tree/main/datasets/sentiment"
 
-# TODO: Add the licence for the dataset here (if possible)
-# Note that this doesn't have to be a common open source license.
-# Some datasets have custom licenses. In this case, simply put the full license terms
-# into `_LICENSE`
-_LICENSE = ""
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
-# TODO: Add links to the urls needed to download your dataset files.
-#  For local datasets, this variable can be an empty dictionary.
+_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
 
-# For publicly available datasets you will most likely end up passing these URLs to dl_manager in _split_generators.
-# In most cases the URLs will be the same for the source and nusantara config.
-# However, if you need to access different files for each config you can have multiple entries in this dict.
-# This can be an arbitrarily nested dict/list of URLs (see below in `_split_generators` method)
-_URLS = {
-    _DATASETNAME: "url or list of urls or ... ",
-}
-
-# TODO: add supported task by dataset. One dataset may support multiple tasks
-_SUPPORTED_TASKS = []  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
-
-# TODO: set this to a version that is associated with the dataset. if none exists use "1.0.0"
-#  This version doesn't have to be consistent with semantic versioning. Anything that is
-#  provided by the original dataset as a version goes.
-_SOURCE_VERSION = ""
+_SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
+_URLS = {
+    "train": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/train.csv",
+    "validation": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/valid.csv",
+    "test": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/test.csv",
+}
 
-# TODO: Name the dataset class to match the script name using CamelCase instead of snake_case
-class NewDataset(datasets.GeneratorBasedBuilder):
-    """TODO: Short description of my dataset."""
+def builder_config_constructor(lang, schema, version):
+    if schema != "source" and schema != "nusantara_text":
+        raise ValueError(f"Invalid schema: {schema}")
 
-    SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
-    NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
+    return NusantaraConfig(
+        name="nusax_senti_{lang}_{schema}".format(lang=lang, schema=schema),
+        version=datasets.Version(version),
+        description="nusax_senti with {schema} schema for language {lang}".format(lang=lang, schema=schema),
+        schema=schema,
+        subset_id="nusax_senti",
+    )
 
-    # You will be able to load the "source" or "nusanrata" configurations with
-    # ds_source = datasets.load_dataset('my_dataset', name='source')
-    # ds_nusantara = datasets.load_dataset('my_dataset', name='nusantara')
+LANGUAGES = {
+        "ace": "acehnese",
+        "ban": "balinese",
+        "bjn": "banjarese",
+        "bug": "buginese",
+        "eng": "english",
+        "ind": "indonesian",
+        "jav": "javanese",
+        "mad": "madurese",
+        "min": "minangkabau",
+        "nij": "ngaju",
+        "sun": "sundanese",
+        "bbc": "toba_batak",
+    }
 
-    # For local datasets you can make use of the `data_dir` and `data_files` kwargs
-    # https://huggingface.co/docs/datasets/add_dataset.html#downloading-data-files-and-organizing-splits
-    # ds_source = datasets.load_dataset('my_dataset', name='source', data_dir="/path/to/data/files")
-    # ds_nusantara = datasets.load_dataset('my_dataset', name='nusantara', data_dir="/path/to/data/files")
+class NusaXSenti(datasets.GeneratorBasedBuilder):
+    """NusaX-Senti is a 3-labels (positive, neutral, negative) sentiment analysis dataset for 10 Indonesian local languages + Indonesian and English."""
 
-    # TODO: For each dataset, implement Config for Source and Nusantara;
-    #  If dataset contains more than one subset (see nusantara/nusa_datasets/smsa.py) implement for EACH of them.
-    #  Each of them should contain:
-    #   - name: should be unique for each dataset config eg. smsa_(source|nusantara)_[nusantara_schema_name]
-    #   - version: option = (SOURCE_VERSION|NUSANTARA_VERSION)
-    #   - description: one line description for the dataset
-    #   - schema: options = (source|nusantara_[nusantara_schema_name])
-    #   - subset_id: subset id is the canonical name for the dataset (eg. smsa)
-    #  where [nusantara_schema_name] = (kb, pairs, qa, text, t2t)
+    BUILDER_CONFIGS = [builder_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES] + [builder_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES]
 
-    BUILDER_CONFIGS = [
-        NusantaraConfig(
-            name="[dataset_name]_source",
-            version=SOURCE_VERSION,
-            description="[dataset_name] source schema",
-            schema="source",
-            subset_id="[dataset_name]",
-        ),
-        NusantaraConfig(
-            name="[dataset_name]_nusantara_[nusantara_schema_name]",
-            version=NUSANTARA_VERSION,
-            description="[dataset_name] Nusantara schema",
-            schema="nusantara_[nusantara_schema_name]",
-            subset_id="[dataset_name]",
-        ),
-    ]
-
-    DEFAULT_CONFIG_NAME = "[dataset_name]_source"
+    DEFAULT_CONFIG_NAME = "nusax_senti_ind_source"
 
     def _info(self) -> datasets.DatasetInfo:
-
-        # Create the source schema; this schema will keep all keys/information/labels as close to the original dataset as possible.
-
-        # You can arbitrarily nest lists and dictionaries.
-        # For iterables, use lists over tuples or `datasets.Sequence`
-
         if self.config.schema == "source":
-            # TODO: Create your source schema here
-            raise NotImplementedError()
-
-            # EX: Arbitrary NER type dataset
-            # features = datasets.Features(
-            #    {
-            #        "doc_id": datasets.Value("string"),
-            #        "text": datasets.Value("string"),
-            #        "entities": [
-            #            {
-            #                "offsets": [datasets.Value("int64")],
-            #                "text": datasets.Value("string"),
-            #                "type": datasets.Value("string"),
-            #                "entity_id": datasets.Value("string"),
-            #            }
-            #        ],
-            #    }
-            # )
-
-        # Choose the appropriate nusantara schema for your task and copy it here. You can find information on the schemas in the CONTRIBUTING guide.
-
-        # In rare cases you may get a dataset that supports multiple tasks requiring multiple schemas. In that case you can define multiple nusantara configs with a nusantara_[nusantara_schema_name] format.
-
-        # For example nusantara_kb, nusantara_t2t
-        elif self.config.schema == "nusantara_[nusantara_schema_name]":
-            # e.g. features = schemas.kb_features
-            # TODO: Choose your nusantara schema here
-            raise NotImplementedError()
+            features = datasets.Features(
+                {
+                    "id": datasets.Value("string"),
+                    "text": datasets.Value("string"),
+                    "label": datasets.Value("string"),
+                }
+            )
+        elif self.config.schema == "nusantara_text":
+            features = schemas.text_features(["negative", "neutral", "positive"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -147,84 +103,35 @@ class NewDataset(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
-        # TODO: This method is tasked with downloading/extracting the data and defining the splits depending on the configuration
-
-        # If you need to access the "source" or "nusantara" config choice, that will be in self.config.name
-
-        # LOCAL DATASETS: You do not need the dl_manager; you can ignore this argument. Make sure `gen_kwargs` in the return gets passed the right filepath
-
-        # PUBLIC DATASETS: Assign your data-dir based on the dl_manager.
-
-        # dl_manager is a datasets.download.DownloadManager that can be used to download and extract URLs; many examples use the download_and_extract method; see the DownloadManager docs here: https://huggingface.co/docs/datasets/package_reference/builder_classes.html#datasets.DownloadManager
-
-        # dl_manager can accept any type of nested list/dict and will give back the same structure with the url replaced with the path to local files.
-
-        # TODO: KEEP if your dataset is PUBLIC; remove if not
-        urls = _URLS[_DATASETNAME]
-        data_dir = dl_manager.download_and_extract(urls)
-
-        # TODO: KEEP if your dataset is LOCAL; remove if NOT
-        if self.config.data_dir is None:
-            raise ValueError("This is a local dataset. Please pass the data_dir kwarg to load_dataset.")
-        else:
-            data_dir = self.config.data_dir
-
-        # Not all datasets have predefined canonical train/val/test splits.
-        # If your dataset has no predefined splits, use datasets.Split.TRAIN for all of the data.
+        lang = self.config.name[12:15]
+        train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES[lang])))
+        validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES[lang])))
+        test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES[lang])))
 
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                # Whatever you put in gen_kwargs will be passed to _generate_examples
-                gen_kwargs={
-                    "filepath": os.path.join(data_dir, "train.jsonl"),
-                    "split": "train",
-                },
-            ),
-            datasets.SplitGenerator(
-                name=datasets.Split.TEST,
-                gen_kwargs={
-                    "filepath": os.path.join(data_dir, "test.jsonl"),
-                    "split": "test",
-                },
+                gen_kwargs={"filepath": train_csv_path},
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
-                gen_kwargs={
-                    "filepath": os.path.join(data_dir, "dev.jsonl"),
-                    "split": "dev",
-                },
+                gen_kwargs={"filepath": validation_csv_path},
+            ),
+            datasets.SplitGenerator(
+                name=datasets.Split.TEST,
+                gen_kwargs={"filepath": test_csv_path},
             ),
         ]
 
-    # method parameters are unpacked from `gen_kwargs` as given in `_split_generators`
+    def _generate_examples(self, filepath: Path) -> Tuple[int, Dict]:
+        if self.config.schema != "source" and self.config.schema != "nusantara_text":
+            raise ValueError(f"Invalid config: {self.config.name}")
 
-    # TODO: change the args of this function to match the keys in `gen_kwargs`. You may add any necessary kwargs.
-
-    def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
-        """Yields examples as (key, example) tuples."""
-        # TODO: This method handles input defined in _split_generators to yield (key, example) tuples from the dataset.
-
-        # The `key` is for legacy reasons (tfds) and is not important in itself, but must be unique for each example.
-
-        # NOTE: For local datasets you will have access to self.config.data_dir and self.config.data_files
-
-        if self.config.schema == "source":
-            # TODO: yield (key, example) tuples in the original dataset schema
-            for key, example in thing:
-                yield key, example
-
-        elif self.config.schema == "nusantara_[nusantara_schema_name]":
-            # TODO: yield (key, example) tuples in the nusantara schema
-            for key, example in thing:
-                yield key, example
-
-
-# This template is based on the following template from the datasets package:
-# https://github.com/huggingface/datasets/blob/master/templates/new_dataset_script.py
-
-
-# This allows you to run your dataloader with `python [dataset_name].py` during development
-# TODO: Remove this before making your PR
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
+        df = pd.read_csv(filepath).reset_index()
+        for row in df.itertuples():
+            ex = {
+                "id": str(row.id),
+                "text": row.text,
+                "label": row.label
+            }
+            yield row.id, ex
