@@ -6,7 +6,8 @@ import pandas as pd
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
+from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
+                                       DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "nusax_senti"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
@@ -16,8 +17,12 @@ _LANGUAGES = ["ind", "ace", "ban", "bjn", "bbc", "bug", "jav", "mad", "min", "ni
 
 _CITATION = """\
 @misc{winata2022nusax,
-      title={NusaX: Multilingual Parallel Sentiment Dataset for 10 Indonesian Local Languages}, 
-      author={Winata, Genta Indra and Aji, Alham Fikri and Cahyawijaya, Samuel and Mahendra, Rahmad and Koto, Fajri and Romadhony, Ade and Kurniawan, Kemal and Moeljadi, David and Prasojo, Radityo Eko and Fung, Pascale and Baldwin, Timothy and Lau, Jey Han and Sennrich, Rico and Ruder, Sebastian},
+      title={NusaX: Multilingual Parallel Sentiment Dataset for 10 Indonesian Local Languages},
+      author={Winata, Genta Indra and Aji, Alham Fikri and Cahyawijaya,
+      Samuel and Mahendra, Rahmad and Koto, Fajri and Romadhony,
+      Ade and Kurniawan, Kemal and Moeljadi, David and Prasojo,
+      Radityo Eko and Fung, Pascale and Baldwin, Timothy and Lau,
+      Jey Han and Sennrich, Rico and Ruder, Sebastian},
       year={2022},
       eprint={2205.15960},
       archivePrefix={arXiv},
@@ -47,37 +52,41 @@ _URLS = {
     "test": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/test.csv",
 }
 
-def builder_config_constructor(lang, schema, version):
+
+def nusantara_config_constructor(lang, schema, version):
+    """Contruct NusantaraConfig with nusax_senti_{lang}_{schema} as the name format"""
     if schema != "source" and schema != "nusantara_text":
         raise ValueError(f"Invalid schema: {schema}")
 
     return NusantaraConfig(
         name="nusax_senti_{lang}_{schema}".format(lang=lang, schema=schema),
         version=datasets.Version(version),
-        description="nusax_senti with {schema} schema for language {lang}".format(lang=lang, schema=schema),
+        description="nusax_senti with {schema} schema for {lang} language".format(lang=lang, schema=schema),
         schema=schema,
         subset_id="nusax_senti",
     )
 
-LANGUAGES = {
-        "ace": "acehnese",
-        "ban": "balinese",
-        "bjn": "banjarese",
-        "bug": "buginese",
-        "eng": "english",
-        "ind": "indonesian",
-        "jav": "javanese",
-        "mad": "madurese",
-        "min": "minangkabau",
-        "nij": "ngaju",
-        "sun": "sundanese",
-        "bbc": "toba_batak",
-    }
+
+LANGUAGES_MAP = {
+    "ace": "acehnese",
+    "ban": "balinese",
+    "bjn": "banjarese",
+    "bug": "buginese",
+    "eng": "english",
+    "ind": "indonesian",
+    "jav": "javanese",
+    "mad": "madurese",
+    "min": "minangkabau",
+    "nij": "ngaju",
+    "sun": "sundanese",
+    "bbc": "toba_batak",
+}
+
 
 class NusaXSenti(datasets.GeneratorBasedBuilder):
     """NusaX-Senti is a 3-labels (positive, neutral, negative) sentiment analysis dataset for 10 Indonesian local languages + Indonesian and English."""
 
-    BUILDER_CONFIGS = [builder_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES] + [builder_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES]
+    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP] + [nusantara_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
 
     DEFAULT_CONFIG_NAME = "nusax_senti_ind_source"
 
@@ -104,9 +113,9 @@ class NusaXSenti(datasets.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
         lang = self.config.name[12:15]
-        train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES[lang])))
-        validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES[lang])))
-        test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES[lang])))
+        train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES_MAP[lang])))
+        validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES_MAP[lang])))
+        test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES_MAP[lang])))
 
         return [
             datasets.SplitGenerator(
@@ -129,9 +138,5 @@ class NusaXSenti(datasets.GeneratorBasedBuilder):
 
         df = pd.read_csv(filepath).reset_index()
         for row in df.itertuples():
-            ex = {
-                "id": str(row.id),
-                "text": row.text,
-                "label": row.label
-            }
+            ex = {"id": str(row.id), "text": row.text, "label": row.label}
             yield row.id, ex
