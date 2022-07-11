@@ -58,9 +58,9 @@ Jika tidak ada lisensi resmi yang tercantum di mana pun, tetapi Anda menemukan h
 
 Anda dapat mengunggah dataset Anda secara publik terlebih dahulu, mis. di Github.
 
-#### Bisakah saya membuat PR jika saya punya ide yang ingin diinisiasi?
+#### Bisakah saya membuat PR jika saya punya ide / mengajukan perubahan kode pada repository nusa-crowd?
 
-Jika Anda memiliki ide untuk menambahkan informasi atau kode utama repositori nusa-crowd, silakan buat `issue` dan mintalah `umpan balik` sebelum memulai PR apa pun.
+Jika Anda memiliki ide untuk repositori nusa-crowd, silakan buat `issue` dan mintalah `umpan balik` sebelum memulai PR apa pun.
 
 #### Saya bingung, dapatkah Anda membantu saya?
 
