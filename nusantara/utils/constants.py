@@ -24,6 +24,7 @@ class Tasks(Enum):
 
     # Single Text Sequence Labeling
     POS_TAGGING = "POS"
+    KEYWORD_TAGGING = "KT"
     NAMED_ENTITY_RECOGNITION = "NER"
     SENTENCE_ORDERING = "SO"
 
