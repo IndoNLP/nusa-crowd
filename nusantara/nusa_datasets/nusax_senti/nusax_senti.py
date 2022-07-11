@@ -54,17 +54,26 @@ _URLS = {
 
 
 def nusantara_config_constructor(lang, schema, version):
-    """Contruct NusantaraConfig with nusax_senti_{lang}_{schema} as the name format"""
+    """Construct NusantaraConfig with nusax_senti_{lang}_{schema} as the name format"""
     if schema != "source" and schema != "nusantara_text":
         raise ValueError(f"Invalid schema: {schema}")
 
-    return NusantaraConfig(
-        name="nusax_senti_{lang}_{schema}".format(lang=lang, schema=schema),
-        version=datasets.Version(version),
-        description="nusax_senti with {schema} schema for {lang} language".format(lang=lang, schema=schema),
-        schema=schema,
-        subset_id="nusax_senti",
-    )
+    if lang == "":
+        return NusantaraConfig(
+            name="nusax_senti_{schema}".format(schema=schema),
+            version=datasets.Version(version),
+            description="nusax_senti with {schema} schema for all 12 languages".format(schema=schema),
+            schema=schema,
+            subset_id="nusax_senti",
+        )
+    else:
+        return NusantaraConfig(
+            name="nusax_senti_{lang}_{schema}".format(lang=lang, schema=schema),
+            version=datasets.Version(version),
+            description="nusax_senti with {schema} schema for {lang} language".format(lang=lang, schema=schema),
+            schema=schema,
+            subset_id="nusax_senti",
+        )
 
 
 LANGUAGES_MAP = {
@@ -86,7 +95,11 @@ LANGUAGES_MAP = {
 class NusaXSenti(datasets.GeneratorBasedBuilder):
     """NusaX-Senti is a 3-labels (positive, neutral, negative) sentiment analysis dataset for 10 Indonesian local languages + Indonesian and English."""
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP] + [nusantara_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
+    BUILDER_CONFIGS = (
+        [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
+        + [nusantara_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
+        + [nusantara_config_constructor("", "source", _SOURCE_VERSION), nusantara_config_constructor("", "nusantara_text", _NUSANTARA_VERSION)]
+    )
 
     DEFAULT_CONFIG_NAME = "nusax_senti_ind_source"
 
@@ -112,10 +125,16 @@ class NusaXSenti(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
-        lang = self.config.name[12:15]
-        train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES_MAP[lang])))
-        validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES_MAP[lang])))
-        test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES_MAP[lang])))
+        if self.config.name == "nusax_senti_source" or self.config.name == "nusax_senti_nusantara_text":
+            # Load all 12 languages
+            train_csv_path = dl_manager.download_and_extract([_URLS["train"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
+            validation_csv_path = dl_manager.download_and_extract([_URLS["validation"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
+            test_csv_path = dl_manager.download_and_extract([_URLS["test"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
+        else:
+            lang = self.config.name[12:15]
+            train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES_MAP[lang])))
+            validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES_MAP[lang])))
+            test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES_MAP[lang])))
 
         return [
             datasets.SplitGenerator(
@@ -136,7 +155,16 @@ class NusaXSenti(datasets.GeneratorBasedBuilder):
         if self.config.schema != "source" and self.config.schema != "nusantara_text":
             raise ValueError(f"Invalid config: {self.config.name}")
 
-        df = pd.read_csv(filepath).reset_index()
+        if self.config.name == "nusax_senti_source" or self.config.name == "nusax_senti_nusantara_text":
+            ldf = []
+            for fp in filepath:
+                ldf.append(pd.read_csv(fp))
+            df = pd.concat(ldf, axis=0, ignore_index=True).reset_index()
+            # Have to use index instead of id to avoid duplicated key
+            df = df.drop(columns=["id"]).rename(columns={"index": "id"})
+        else:
+            df = pd.read_csv(filepath).reset_index()
+
         for row in df.itertuples():
             ex = {"id": str(row.id), "text": row.text, "label": row.label}
             yield row.id, ex
