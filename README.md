@@ -60,7 +60,7 @@ You can upload your dataset publicly first, eg. on Github.
 
 #### Can I create a PR if I have an idea?
 
-If you have an idea to improve the nusa-crowd repository, please create an `issue` and ask for `feedback` before starting any PRs. 
+If you have an idea to improve or change the code of the nusa-crowd repository, please create an `issue` and ask for `feedback` before starting any PRs. 
 
 #### I am confused, can you help me?
 
