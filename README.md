@@ -58,6 +58,10 @@ If no official license is listed anywhere, but you find a webpage that describes
 
 You can upload your dataset publicly first, eg. on Github.
 
+#### Can I create a PR if I have an idea?
+
+If you have an idea to improve or change the code of the nusa-crowd repository, please create an `issue` and ask for `feedback` before starting any PRs. 
+
 #### I am confused, can you help me?
 
 Yes, you can ask for helps in NusaCrowd's community channel! Please join our [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) or [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).

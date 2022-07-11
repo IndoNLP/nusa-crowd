@@ -58,6 +58,10 @@ Jika tidak ada lisensi resmi yang tercantum di mana pun, tetapi Anda menemukan h
 
 Anda dapat mengunggah dataset Anda secara publik terlebih dahulu, mis. di Github.
 
+#### Bisakah saya membuat PR jika saya punya ide / mengajukan perubahan kode pada repository nusa-crowd?
+
+Jika Anda memiliki ide untuk repositori nusa-crowd, silakan buat `issue` dan mintalah `umpan balik` sebelum memulai PR apa pun.
+
 #### Saya bingung, dapatkah Anda membantu saya?
 
 Ya, kamu dapat kirimkan pertanyaanmu di kanal komunitas NusaCrowd! Silakan bergabung ke kanal komunitas NusaCrowd di [grup WhatsApp kami](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) dan [server Slack](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
