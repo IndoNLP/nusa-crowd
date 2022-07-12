@@ -34,7 +34,7 @@ You can submit multiple entries, and if the total **contribution points** is alr
 
 Yes! Aside from new dataset collection, we are also centralizing existing datasets in a single schema that makes it easier for researchers to use Indonesian NLP datasets. You can help us there by building dataset loader. More details about that [here](DATALOADER.md).
 
-Alternatively, we're also listing NLP research papers of Indonesian languages where they do not open their dataset yet. We will contact the authors of these papers later to be involved in NusaCrowd. More about this is available in our [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
+Alternatively, we're also listing NLP research papers of Indonesian languages where they do not open their dataset yet. We will contact the authors of these papers later to be involved in NusaCrowd. More about this is available in our [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1bbvt4och-JkC7tzeL_eUk4UD6tl3kDg).
 
 ## FAQs
 
@@ -64,7 +64,7 @@ If you have an idea to improve or change the code of the nusa-crowd repository, 
 
 #### I am confused, can you help me?
 
-Yes, you can ask for helps in NusaCrowd's community channel! Please join our [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) or [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
+Yes, you can ask for helps in NusaCrowd's community channel! Please join our [WhatsApp group](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) or [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1bbvt4och-JkC7tzeL_eUk4UD6tl3kDg).
 
 
 ## Thank you!

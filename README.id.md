@@ -33,7 +33,7 @@ Anda dapat mengirimkan beberapa entri, dan jika total **poin kontribusi** sudah 
 
 Ya! Selain pengumpulan dataset baru, kami juga memusatkan dataset yang ada dalam satu skema yang memudahkan peneliti untuk menggunakan dataset NLP Indonesia. Anda dapat membantu kami di sana dengan membuat pemuat dataset. Untuk detail lebih lanjut tentang itu, bisa ditemukan [di sini](DATALOADER.md).
 
-Sebagai alternatif, kami juga mendata paper-paper riset NLP di bahasa-bahasa Indonesia yang mana mereka masih belum membuka datasetnya. Kami akan menghubungi para penulis paper-paper tersebut nanti untuk terlibat di NusaCrowd. Lebih lanjut tentang ini ada di [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g) kami.
+Sebagai alternatif, kami juga mendata paper-paper riset NLP di bahasa-bahasa Indonesia yang mana mereka masih belum membuka datasetnya. Kami akan menghubungi para penulis paper-paper tersebut nanti untuk terlibat di NusaCrowd. Lebih lanjut tentang ini ada di [Slack server](https://join.slack.com/t/nusacrowd/shared_invite/zt-1bbvt4och-JkC7tzeL_eUk4UD6tl3kDg) kami.
 
 
 ## FAQ
@@ -64,7 +64,7 @@ Jika Anda memiliki ide untuk repositori nusa-crowd, silakan buat `issue` dan min
 
 #### Saya bingung, dapatkah Anda membantu saya?
 
-Ya, kamu dapat kirimkan pertanyaanmu di kanal komunitas NusaCrowd! Silakan bergabung ke kanal komunitas NusaCrowd di [grup WhatsApp kami](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) dan [server Slack](https://join.slack.com/t/nusacrowd/shared_invite/zt-1b61t06zn-rf2rWw8WFZCpjVp3iLXf0g).
+Ya, kamu dapat kirimkan pertanyaanmu di kanal komunitas NusaCrowd! Silakan bergabung ke kanal komunitas NusaCrowd di [grup WhatsApp kami](https://chat.whatsapp.com/Jn4nM6l3kSn3p4kJVESTwv) dan [server Slack](https://join.slack.com/t/nusacrowd/shared_invite/zt-1bbvt4och-JkC7tzeL_eUk4UD6tl3kDg).
 
 
 ## Terima kasih!
