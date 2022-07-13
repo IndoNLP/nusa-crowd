@@ -21,6 +21,11 @@ Untuk mendukung pengembangan dataset bahasa daerah:
 - Untuk dataset bahasa Sunda, Jawa, atau Minang, akan diberikan nilai +2
 - Untuk dataset dari bahasa daerah lain, akan diberikan nilai +4
 
+Kami menyadari bahwa kualitas dari sebuah dataset sangatlah beragam. Sebagai bentuk keadilan dalam penilaian dataset, bagi dataset yang tidak memenuhi standar kualitas yang ditentukan, akan diberikan pengurangan nilai sebesar 50%. Ketentuan ini berlaku bagi dataset yang dikumpulkan dengan:
+- Crawling tanpa dilakukan pengecekan ulang secara manual
+- Pelabelan menggunakan mesin atau aturan heuristik, tanpa dilakukan pengecekan ulang secara manual
+- Translasi menggunakan mesin dari dataset bahasa lain tanpa adanya pengecekan ulang secara manual
+
 > **Catatan**: Jika terdapat lebih dari 1 Author dalam pembangunan dataset, Author utama dapat menominasikan 1 orang Author untuk mendapatkan nilai kontribusi yang sama.
 
 ### Proposal Datasheet dari Dataset orang lain
