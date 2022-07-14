@@ -29,7 +29,7 @@ We understand that the quality of a dataset varies a lot. To support fairness in
 > **Note**: if there is more than 1 Author for a dataset, main Author will be eligible for nominating 1 more Author to be granted the same contribution score.
 
 ### Datasheet Proposal not as the Dataset's Author(s)
-Proposing a datasheet of other people dataset is granted +1 pt. Contribution score will be granted after the original Author agrees to put the dataset in NusaCatalogue.
+Proposing a datasheet of other people dataset is granted +1 pt.
 
 ## Listing Private Dataset
 Each private dataset listed is granted +1 pt.
