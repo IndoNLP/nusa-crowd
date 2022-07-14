@@ -24,7 +24,7 @@ by a newline. The data is generated using the open source CC-Net repository. No
 claims of intellectual property are made on the work of preparation of the
 corpus.
 
-This contains the Javanese (jav) subset.
+This contains the Indonesian (ind) subset.
 
 [nusantara_schema_name] = text
 """
@@ -124,12 +124,12 @@ _DESCRIPTION = """\
 
 _HOMEPAGE = "https://data.statmt.org/cc-100/"
 
-_LANGUAGES = ["jav"]
+_LANGUAGES = ["ind"]
 
 _LICENSE = "MIT"
 
 _URLS = {
-    _DATASETNAME: "https://data.statmt.org/cc-100/jv.txt.xz",
+    _DATASETNAME: "https://data.statmt.org/cc-100/id.txt.xz",
 }
 
 _SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]
@@ -147,22 +147,22 @@ class CC100Su(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="cc100_jv_source",
+            name="cc100_id_source",
             version=SOURCE_VERSION,
-            description="cc100_jv source schema",
+            description="cc100_id source schema",
             schema="source",
-            subset_id="cc100_jv",
+            subset_id="cc100_id",
         ),
         NusantaraConfig(
-            name="cc100_jv_nusantara_ssp",
+            name="cc100_id_nusantara_ssp",
             version=NUSANTARA_VERSION,
-            description="cc100_jv Nusantara schema",
+            description="cc100_id Nusantara schema",
             schema="nusantara_ssp",
-            subset_id="cc100_jv",
+            subset_id="cc100_id",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "cc100_jv_source"
+    DEFAULT_CONFIG_NAME = "cc100_id_source"
 
     def _info(self) -> datasets.DatasetInfo:
 
