@@ -38,7 +38,7 @@ Indonesian Religious Domain MT En-Id consists of religious manuscripts or articl
 
 _HOMEPAGE = "https://github.com/gunnxx/indonesian-mt-data/tree/master/religious"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {
     "test.en": "https://raw.githubusercontent.com/gunnxx/indonesian-mt-data/master/religious/test.en",

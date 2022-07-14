@@ -95,7 +95,7 @@ _HOMEPAGE = "https://indolem.github.io/"
 # Note that this doesn't have to be a common open source license.
 # Some datasets have custom licenses. In this case, simply put the full license terms
 # into `_LICENSE`
-_LICENSE = "Creative Commons Attribution 4.0"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 # TODO: Add links to the urls needed to download your dataset files.
 #  For local datasets, this variable can be an empty dictionary.

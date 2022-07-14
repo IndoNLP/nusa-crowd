@@ -40,7 +40,7 @@ EmoT dataset is splitted into 3 sets with 3521 train, 440 validation, 442 test d
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {
     "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/emot_emotion-twitter/train_preprocess.csv",

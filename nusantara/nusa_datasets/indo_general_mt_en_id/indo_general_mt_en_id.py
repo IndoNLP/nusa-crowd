@@ -37,7 +37,7 @@ and perform comparably with Google Translate. Our datasets (with the standard sp
 
 _HOMEPAGE = "https://github.com/gunnxx/indonesian-mt-data"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLS = {
     _DATASETNAME: "https://github.com/gunnxx/indonesian-mt-data/archive/refs/heads/master.zip",

@@ -8,7 +8,7 @@ from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 from nusantara.utils.common_parser import load_conll_data
 
-_DATASETNAME = "smsa"
+_DATASETNAME = "bapos"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
@@ -33,7 +33,7 @@ BaPOS dataset is splitted into 3 sets with 8000 train, 1000 validation, 1029 tes
 
 _HOMEPAGE = "https://bahasa.cs.ui.ac.id/postag/corpus"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {
     "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/bapos_pos-idn/train_preprocess.txt",

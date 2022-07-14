@@ -101,7 +101,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    # You will be able to load the "source" or "nusanrata" configurations with
+    # You will be able to load the "source" or "nusantara" configurations with
     # ds_source = datasets.load_dataset('my_dataset', name='source')
     # ds_nusantara = datasets.load_dataset('my_dataset', name='nusantara')
 

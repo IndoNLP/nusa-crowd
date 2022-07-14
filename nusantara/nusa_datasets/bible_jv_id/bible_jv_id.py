@@ -55,7 +55,7 @@ for Indonesian, albeit not for the local languages.
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlg"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
 _URLs = {
     "indonlg": "https://storage.googleapis.com/babert-pretraining/IndoNLG_finals/downstream_task/downstream_task_datasets.zip"
