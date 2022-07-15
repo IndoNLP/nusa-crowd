@@ -102,9 +102,10 @@ def nusantara_config_constructor(lang, schema, version):
 
 
 LANGUAGES_MAP = {
-    "en": "english",
-    "id": "indonesian",
+    "eng": "english",
+    "ind": "indonesian",
 }
+LANG_CODES = {"eng": "en", "ind": "id"}
 
 
 class WikiAnnDataset(datasets.GeneratorBasedBuilder):
@@ -114,18 +115,16 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
     label_classes = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
 
     BUILDER_CONFIGS = (
-            [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
-            + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
-            + [nusantara_config_constructor("", "source", _SOURCE_VERSION),
-               nusantara_config_constructor("", "nusantara_seq_label", _NUSANTARA_VERSION)]
+        [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
+        + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
+        + [nusantara_config_constructor("", "source", _SOURCE_VERSION), nusantara_config_constructor("", "nusantara_seq_label", _NUSANTARA_VERSION)]
     )
 
     DEFAULT_CONFIG_NAME = "wiki_ann_source"
 
     def _info(self):
         if self.config.schema == "source":
-            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")],
-                                          "ner_tag": [datasets.Value("string")]})
+            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "ner_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features(self.label_classes)
 
@@ -139,11 +138,10 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         path = Path(dl_manager.download_and_extract(_URLs["wiki_ann"]))
-        print(self.config.name + "--->")
         if self.config.name == "wiki_ann_source" or self.config.name == "wiki_ann_nusantara_seq_label":
-            wikiann_dl_dir = path / f"id.tar.gz"
+            wikiann_dl_dir = path / "id.tar.gz"
         else:
-            lang = self.config.name[15:18]
+            lang = self.LANG_CODES[self.config.name[15:18]]
             wikiann_dl_dir = path / f"{lang}.tar.gz"
         return [
             datasets.SplitGenerator(
@@ -194,4 +192,3 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
                         else:
                             # examples have no label in test set
                             ner_tags.append("O")
-
