@@ -53,7 +53,7 @@ _CITATION = """\
 }
 """
 
-_DATASETNAME = "indo_nli"
+_DATASETNAME = "indonli"
 
 _DESCRIPTION = """\
 This dataset is designed for Natural Language Inference NLP task.  It is designed to provide a challenging test-bed
@@ -100,22 +100,22 @@ class IndoNli(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="indo_nli_source",
+            name="indonli_source",
             version=SOURCE_VERSION,
-            description="indo_nli source schema",
+            description="indonli source schema",
             schema="source",
-            subset_id="indo_nli",
+            subset_id="indonli",
         ),
         NusantaraConfig(
-            name="indo_nli_nusantara_pairs",
+            name="indonli_nusantara_pairs",
             version=NUSANTARA_VERSION,
-            description="indo_nli Nusantara schema",
+            description="indonli Nusantara schema",
             schema="nusantara_pairs",
-            subset_id="indo_nli",
+            subset_id="indonli",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "indo_nli_source"
+    DEFAULT_CONFIG_NAME = "indonli_source"
     labels = ["c", "e", "n"]
 
     def _info(self) -> datasets.DatasetInfo:

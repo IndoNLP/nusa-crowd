@@ -11,3 +11,4 @@ aiohttp==3.8.1
 pre-commit==2.19.0
 soundfile
 librosa
+jsonlines>=3.1.0

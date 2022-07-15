@@ -224,7 +224,7 @@ class TestDataLoader(unittest.TestCase):
                 for feature_name, feature in features.items():
                     if example.get(feature_name, None) is not None:
                         if isinstance(feature, datasets.ClassLabel) or isinstance(feature, datasets.Value):
-                            if example[feature_name]:
+                            if example[feature_name] is not None:
                                 counter[feature_name] += 1
                         else:
                             counter[feature_name] += len(example[feature_name])
