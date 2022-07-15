@@ -12,7 +12,7 @@ _DATASETNAME = "wiki_ann"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["ind"]
+_LANGUAGES = ["id", "en"]
 _LOCAL = False
 _CITATION = """\
 @inproceedings{pan-etal-2017-cross,
@@ -79,33 +79,53 @@ _SOURCE_VERSION = "1.1.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
+def nusantara_config_constructor(lang, schema, version):
+    if schema != "source" and schema != "nusantara_seq_label":
+        raise ValueError(f"Invalid schema: {schema}")
+
+    if lang == "":
+        return NusantaraConfig(
+            name="wiki_ann_{schema}".format(schema=schema),
+            version=datasets.Version(version),
+            description="wiki_ann with {schema} schema for all the languages".format(schema=schema),
+            schema=schema,
+            subset_id="wiki_ann",
+        )
+    else:
+        return NusantaraConfig(
+            name="wiki_ann_{lang}_{schema}".format(lang=lang, schema=schema),
+            version=datasets.Version(version),
+            description="wiki_ann with {schema} schema for {lang} language".format(lang=lang, schema=schema),
+            schema=schema,
+            subset_id="wiki_ann",
+        )
+
+
+LANGUAGES_MAP = {
+    "en": "english",
+    "id": "indonesian",
+}
+
+
 class WikiAnnDataset(datasets.GeneratorBasedBuilder):
-    """wiki_ann is an NER tagging dataset consisting of Wikipedia articles annotated with LOC, PER, and ORG tags"""
+    """wiki_ann is an NER tagging dataset consisting of Wikipedia articles annotated with LOC, PER, and ORG tags
+    for multiple Indonesian language. If the language is not specified, it loads the Indonesian subset."""
 
     label_classes = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
 
-    BUILDER_CONFIGS = [
-        NusantaraConfig(
-            name="wiki_ann_source",
-            version=datasets.Version(_SOURCE_VERSION),
-            description="wiki_ann source schema",
-            schema="source",
-            subset_id="wiki_ann",
-        ),
-        NusantaraConfig(
-            name="wiki_ann_nusantara_seq_label",
-            version=datasets.Version(_NUSANTARA_VERSION),
-            description="wiki_ann Nusantara schema",
-            schema="nusantara_seq_label",
-            subset_id="wiki_ann",
-        ),
-    ]
+    BUILDER_CONFIGS = (
+            [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
+            + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
+            + [nusantara_config_constructor("", "source", _SOURCE_VERSION),
+               nusantara_config_constructor("", "nusantara_seq_label", _NUSANTARA_VERSION)]
+    )
 
     DEFAULT_CONFIG_NAME = "wiki_ann_source"
 
     def _info(self):
         if self.config.schema == "source":
-            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "ner_tag": [datasets.Value("string")]})
+            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")],
+                                          "ner_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features(self.label_classes)
 
@@ -118,12 +138,17 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
-        wikiann_dl_dir = Path(dl_manager.download_and_extract(_URLs["wiki_ann"])) / "id.tar.gz"
-        # paths = list(dl_manager.iter_archive(wikiann_dl_dir))
+        path = Path(dl_manager.download_and_extract(_URLs["wiki_ann"]))
+        print(self.config.name + "--->")
+        if self.config.name == "wiki_ann_source" or self.config.name == "wiki_ann_nusantara_seq_label":
+            wikiann_dl_dir = path / f"id.tar.gz"
+        else:
+            lang = self.config.name[15:18]
+            wikiann_dl_dir = path / f"{lang}.tar.gz"
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
-                gen_kwargs={"split": "validtion", "filepath": dl_manager.iter_archive(wikiann_dl_dir)},
+                gen_kwargs={"split": "validation", "filepath": dl_manager.iter_archive(wikiann_dl_dir)},
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
@@ -137,11 +162,12 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path, split):
         """Based on https://github.com/huggingface/datasets/blob/main/datasets/wikiann/wikiann.py"""
+        fps = filepath
         tokens = []
         ner_tags = []
         langs = []
-        guid_index = 1
-        for k, file in filepath:
+        guid_index = 0
+        for k, file in fps:
             if k == split:
                 for line in file:
                     line = line.decode("utf-8")
@@ -168,3 +194,4 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
                         else:
                             # examples have no label in test set
                             ner_tags.append("O")
+
