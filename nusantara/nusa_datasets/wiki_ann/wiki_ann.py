@@ -59,6 +59,10 @@ _CITATION = """\
 
 _DESCRIPTION = """\
 The wiki_ann dataset contains NER tags with labels from O (0), B-PER (1), I-PER (2), B-ORG (3), I-ORG (4), B-LOC (5), I-LOC (6). The Indonesian subset is used.
+WikiANN (sometimes called PAN-X) is a multilingual named entity recognition dataset consisting of Wikipedia articles
+ annotated with LOC (location), PER (person), and ORG (organisation)
+ tags in the IOB2 format. This version corresponds to the balanced train, dev, and test splits of
+  Rahimi et al. (2019), which supports 176 of the 282 languages from the original WikiANN corpus.
 """
 
 _HOMEPAGE = "https://github.com/afshinrahimi/mmner"
