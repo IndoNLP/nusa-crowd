@@ -4,7 +4,6 @@ from typing import List
 import datasets
 
 from nusantara.utils import schemas
-from nusantara.utils.common_parser import load_conll_data
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
@@ -32,7 +31,16 @@ _CITATION = """\
     url = "https://www.aclweb.org/anthology/P17-1178",
     doi = "10.18653/v1/P17-1178",
     pages = "1946--1958",
-    abstract = "The ambitious goal of this work is to develop a cross-lingual name tagging and linking framework for 282 languages that exist in Wikipedia. Given a document in any of these languages, our framework is able to identify name mentions, assign a coarse-grained or fine-grained type to each mention, and link it to an English Knowledge Base (KB) if it is linkable. We achieve this goal by performing a series of new KB mining methods: generating {``}silver-standard{''} annotations by transferring annotations from English to other languages through cross-lingual links and KB properties, refining annotations through self-training and topic selection, deriving language-specific morphology features from anchor links, and mining word translation pairs from cross-lingual links. Both name tagging and linking results for 282 languages are promising on Wikipedia data and on-Wikipedia data.",
+    abstract = "The ambitious goal of this work is to develop a cross-lingual name tagging and linking framework
+    for 282 languages that exist in Wikipedia. Given a document in any of these languages, our framework is able
+    to identify name mentions, assign a coarse-grained or fine-grained type to each mention, and link it to
+    an English Knowledge Base (KB) if it is linkable. We achieve this goal by performing a series of
+    new KB mining methods: generating {``}silver-standard{''} annotations by
+    transferring annotations from English to other languages through cross-lingual links and KB properties,
+    refining annotations through self-training and topic selection,
+    deriving language-specific morphology features from anchor links, and mining word translation pairs from
+    cross-lingual links. Both name tagging and linking results for 282 languages are promising
+    on Wikipedia data and on-Wikipedia data.",
 }
 @inproceedings{rahimi-etal-2019-massively,
     title = "Massively Multilingual Transfer for {NER}",
@@ -93,8 +101,7 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
 
     def _info(self):
         if self.config.schema == "source":
-            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")],
-                                          "ner_tag": [datasets.Value("string")]})
+            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "ner_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features(self.label_classes)
 
@@ -124,61 +131,6 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
             ),
         ]
 
-    def _tags_to_spans(self, tags):
-        """Convert tags to spans. Based on https://github.com/huggingface/datasets/blob/main/datasets/wikiann/wikiann.py"""
-        spans = set()
-        span_start = 0
-        span_end = 0
-        active_conll_tag = None
-        for index, string_tag in enumerate(tags):
-            # Actual BIO tag.
-            bio_tag = string_tag[0]
-            assert bio_tag in ["B", "I", "O"], "Invalid Tag"
-            conll_tag = string_tag[2:]
-            if bio_tag == "O":
-                # The span has ended.
-                if active_conll_tag:
-                    spans.add((active_conll_tag, (span_start, span_end)))
-                active_conll_tag = None
-                # We don't care about tags we are
-                # told to ignore, so we do nothing.
-                continue
-            elif bio_tag == "B":
-                # We are entering a new span; reset indices and active tag to new span.
-                if active_conll_tag:
-                    spans.add((active_conll_tag, (span_start, span_end)))
-                active_conll_tag = conll_tag
-                span_start = index
-                span_end = index
-            elif bio_tag == "I" and conll_tag == active_conll_tag:
-                # We're inside a span.
-                span_end += 1
-            else:
-                # This is the case the bio label is an "I", but either:
-                # 1) the span hasn't started - i.e. an ill formed span.
-                # 2) We have IOB1 tagging scheme.
-                # We'll process the previous span if it exists, but also include this
-                # span. This is important, because otherwise, a model may get a perfect
-                # F1 score whilst still including false positive ill-formed spans.
-                if active_conll_tag:
-                    spans.add((active_conll_tag, (span_start, span_end)))
-                active_conll_tag = conll_tag
-                span_start = index
-                span_end = index
-        # Last token might have been a part of a valid span.
-        if active_conll_tag:
-            spans.add((active_conll_tag, (span_start, span_end)))
-        # Return sorted list of spans
-        return sorted(list(spans), key=lambda x: x[1][0])
-
-    def _get_spans(self, tokens, tags):
-        """Convert tags to textspans. Based on https://github.com/huggingface/datasets/blob/main/datasets/wikiann/wikiann.py"""
-        spans = self._tags_to_spans(tags)
-        text_spans = [x[0] + ": " + " ".join([tokens[i] for i in range(x[1][0], x[1][1] + 1)]) for x in spans]
-        if not text_spans:
-            text_spans = ["None"]
-        return text_spans
-
     def _generate_examples(self, filepath: Path, split):
         """Based on https://github.com/huggingface/datasets/blob/main/datasets/wikiann/wikiann.py"""
         tokens = []
@@ -191,7 +143,6 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
                     line = line.decode("utf-8")
                     if line == "" or line == "\n":
                         if tokens:
-                            spans = self._get_spans(tokens, ner_tags)
                             if self.config.schema == "source":
                                 yield guid_index, {"index": str(guid_index), "tokens": tokens, "ner_tag": ner_tags}
                             elif self.config.schema == "nusantara_seq_label":
