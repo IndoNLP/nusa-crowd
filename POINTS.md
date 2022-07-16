@@ -5,49 +5,31 @@ To be considered as co-author, 10 contribution points is required.
 > **Note**: The purpose of the point system is not to barrier collaboration, but to reward rare and high-quality dataset entries.
 We might adjust the point requirement lower to accomodate more co-authorship, if needed.
 
-## Data Loader
+## Implementing Data Loader
 
-Implementing any data loader is granted +3 pts.
+Implementing any data loader is granted +3 pts, unless otherwise specified on the Github issue.
 More details [here](DATALOADER.md).
 
-## Dataset Proposal
+## NusaCatalogue's Datasheet Proposal
 
-Point from dataset proposal depends on various factors:
+### Datasheet Proposal as the Dataset's Author(s)
+Proposing a datasheet of your own dataset is granted +4 pts.
 
-### Size
+As a support for data openness, for any data that is previously private, if Author(s) agree to make the dataset publicly available then additional +2 pts will be granted.
 
-We can have 4 different levels: Small, Medium, Large, XL
+As a support for the development of local languages datasets:
+- For dataset in Sundanese, Javanese, or Minangkabau, +2 pts will be granted
+- For dataset in other local language, +4 pts will be granted
 
-- Small (S): <1K (+1 pts)
-- Medium (M): 1K<=x<10K (+ 2pts)
-- Large (L): 10K<=x<1M (+3 pts)
-- Extra Large (XL): >=1M (+4 pts)
+We understand that the quality of a dataset varies a lot. To support fairness in scoring datasets with different quality, for any dataset that does not achieve a certain minimum standard, 50% contribution score of the dataset will be penalized. This policy affects dataset that is collected with:
+- Crawling without any manual validation process
+- Machine / heuristic-rule labelled dataset, without any manual validation
+- Machine translated dataset without any manual validation.
 
-where x is the number of samples (train + val + test). For the dataset with k-fold evaluation setting, we will only count one of the folds.
+> **Note**: if there is more than 1 Author for a dataset, main Author will be eligible for nominating 1 more Author to be granted the same contribution score.
 
-### Task and Language Rarity
+### Datasheet Proposal not as the Dataset's Author(s)
+Proposing a datasheet of other people dataset is granted +1 pt.
 
-- Rare / No resource: No public dataset on this language / task. This dataset will be the new one for the particular language/task. (+6 pts)
-- Uncommon: There are some resources on this local language, but they are very hard to find. (+ 3 pts)
-- Common: Dataset for common task & language. (+1 pts)
-
-
-### Quality (for labeled dataset)
-
-- Excellent (E): High-quality dataset, eg. labelled/written/annotated **and** evaluated by humans with respectable annotator agreement. Annotation protocol is documented thoroughly in the paper. (pts x1.5)
-
-- Good (G): eg. data is generated automatically (i.e. by crawling), but verified by human. Alternatively, data can be labelled by human with minimal/no verification. (pts x1)
-
-- Poor (P): eg. data is fully machine-generated, with no verification. (pts x0.5)
-
-### Maximum number of contributor
-
-- The number of contributor for a new dataset is limited to 2 primary authors. Please specify the names of the main authors you want to add to the PR.
-- For new dataloader creation, we only count the contribution from the PR creator.
-
-## Examples
-
-Let's assume a new sentiment analysis for one of Papuan language, consisting of 500 sentences.
-For data size, it is considered small (+1 pts). While sentiment analysis is common, but the language itself is extremely rare and underrepresented, therefore we got +6 pts for this. Lastly, assuming the data is in high-quality, we'll obtain a total of (1 + 6) * 1.5 pts = 10.5pts, which is enough for authorship.
-
-Another example, let's assume a new Natural Language Inference (NLI) dataset for Javanese. NLI by itself is not new for Indonesian languages, and Javanese resource is available. However, Javanese NLI is the first one even, hence it is still considered rare (+6 pts). Assuming the dataset is Small size, with Good quality, we end up with a total of 7 pts. By additionally, implementing the data loader for this dataset, we'll have a total of 10 pts, which is enough for authorship.
+## Listing Private Dataset
+Each private dataset listed is granted +1 pt.

@@ -5,50 +5,31 @@ Untuk dianggap sebagai co-author, diperlukan 10 poin kontribusi.
 > **Catatan**: Tujuan adanya sistem poin kontribusi bukan untuk menghalangi kolaborasi, melainkan untuk mengapresiasi dataset langka dan berkualitas tinggi. 
 Oleh karena itu, kami mungkin menurunkan syarat poin untuk mengakomodasi lebih banyak co-author, jika diperlukan.
 
-## Data Loader
+## Implementasi Data Loader
 
-Menerapkan data loader apa pun diberikan +3 poin.
+Menerapkan data loader apa pun diberikan +3 poin, atau sesuai yang ditentukan di Github issue.
 Info lebih lanjut dapat ditemukan [di sini](DATALOADER.md).
 
-## Proposal Dataset
+## Proposal Datasheet di NusaCatalogue
 
-Poin dari proposal dataset tergantung pada berbagai faktor:
+### Proposal Datasheet sebagai Author Dataset
+Mencatatkan datasheet dari sebuah dataset yang dibangun sendiri akan mendapatkan nilai +4.
 
-### Ukuran
+Untuk mendukung keterbukaan dataset, untuk dataset yang tertutup dan akan diubah aksesnya menjadi publik, maka akan diberikan nilai tambahan +2.
 
-Kami dapat memiliki 4 level berbeda: Small, Medium, Large, XL
+Untuk mendukung pengembangan dataset bahasa daerah:
+- Untuk dataset bahasa Sunda, Jawa, atau Minang, akan diberikan nilai +2
+- Untuk dataset dari bahasa daerah lain, akan diberikan nilai +4
 
-- Small (S): <1K (+1 poin)
-- Medium (M): 1K<=x<10K (+ 2 poin)
-- Large (L): 10K<=x<1M (+3 poin)
-- Extra Large (XL): >=1M (+4 poin)
+Kami menyadari bahwa kualitas dari sebuah dataset sangatlah beragam. Sebagai bentuk keadilan dalam penilaian dataset, bagi dataset yang tidak memenuhi standar kualitas yang ditentukan, akan diberikan pengurangan nilai sebesar 50%. Ketentuan ini berlaku bagi dataset yang dikumpulkan dengan:
+- Crawling tanpa dilakukan pengecekan ulang secara manual
+- Pelabelan menggunakan mesin atau aturan heuristik, tanpa dilakukan pengecekan ulang secara manual
+- Translasi menggunakan mesin dari dataset bahasa lain tanpa adanya pengecekan ulang secara manual
 
-x adalah jumlah sampel (train + val + test). Untuk data yang menggunakan evaluasi k-fold, jumlah data yang dihitung hanya salah satu fold.
+> **Catatan**: Jika terdapat lebih dari 1 Author dalam pembangunan dataset, Author utama dapat menominasikan 1 orang Author untuk mendapatkan nilai kontribusi yang sama.
 
-### Downstream task dan Bahasa Kelangkaan
+### Proposal Datasheet dari Dataset orang lain
+Mengajukan datasheet dari sebuah dataset yang dibangun orang lain akan mendapatkan nilai +1.
 
-- Langka / Tidak ada sumber daya: Tidak ada dataset publik pada bahasa / downstream task ini. Dataset ini akan menjadi yang baru untuk bahasa/ downstream task tertentu. (+6 poin)
-- Jarang: Ada beberapa sumber dalam bahasa lokal ini, tetapi sangat sulit ditemukan. (+ 3 poin)
-- Umum: dataset untuk downstream task & bahasa umum. (+1 poin)
-
-
-### Kualitas (untuk Dataset berlabel)
-
-- Excellent (E): Dataset berkualitas tinggi, mis. berlabel/tertulis/beranotasi **dan** dievaluasi oleh manusia dengan persetujuan expert annotator. Protokol anotasi didokumentasikan secara menyeluruh dalam makalah. (poin x1.5)
-
-- Good (G): mis. data dihasilkan secara otomatis (yaitu dengan crawling), tetapi diverifikasi oleh manusia. Atau, data dapat diberi label oleh manusia dengan verifikasi minimal/tanpa verifikasi. (poin x1)
-
-- Poor (P): mis. data sepenuhnya dibuat oleh mesin, tanpa verifikasi. (poin x0,5)
-
-
-### Maksimal Jumlah Kontributor
-
-- Kontribusi untuk dataset baru terbatas pada 2 author utama. Harap tentukan nama author utama yang ingin Anda tambahkan ke PR.
-- Kontribusi untuk dataloader yang dihitung hanya pembuat PR.
-
-## Contoh
-
-Mari kita asumsikan analisis sentimen baru untuk salah satu bahasa Papua, terdiri dari 500 kalimat.
-Untuk ukuran data, 500 kalimat ini akan dianggap kecil (+1 pts). Meskipun analisis sentimen adalah umum, tetapi bahasa itu sendiri sangat jarang dan kurang terwakili, oleh karena itu kami mendapat +6 poin untuk ini. Terakhir, dengan asumsi data dalam kualitas tinggi, kita akan mendapatkan total (1 + 6) * 1,5 pts = 10,5 pts, dan ini cukup untuk mendapatkan authorship.
-
-Contoh lain, mari kita asumsikan dataset Natural Language Inference (NLI) baru untuk bahasa Jawa. NLI sendiri bukanlah hal baru untuk bahasa Indonesia, dan tersedia sumber daya bahasa Jawa. Namun NLI Jawa adalah yang pertama, sehingga masih tergolong langka (+6 poin). Dengan asumsi dataset berukuran kecil, dengan kualitas yang baik, kita akan mendapatkan total 7 poin. Dengan tambahan, menerapkan data loader untuk dataset ini, kita akan memiliki total 10 poin, dan ini sudah cukup untuk mendapatkan authorship.
+## Listing Private Dataset
+Mencatatkan dataset yang tertutup akan mendapatkan nilai +1 untuk setiap dataset yang dicatatkan.
