@@ -23,6 +23,16 @@ _CITATION = """\
   year={2014},
   organization={IEEE}
 }
+
+@inproceedings{kurniawan2018towards,
+  author={Kurniawan, Kemal and Aji, Alham Fikri},
+  booktitle={2018 International Conference on Asian Language Processing (IALP)}, 
+  title={Toward a Standardized and More Accurate Indonesian Part-of-Speech Tagging}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={303-307},
+  doi={10.1109/IALP.2018.8629236}}
 """
 
 _DESCRIPTION = """\
