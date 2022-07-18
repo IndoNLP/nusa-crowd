@@ -100,25 +100,40 @@ class IndolemNERUIDataset(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name=f"indolem_nerui_fold0{i}_source",
+            name=f"indolem_nerui_source",
             version=datasets.Version(_SOURCE_VERSION),
             description="Indolem NER UI source schema",
             schema="source",
-            subset_id=f"indolem_nerui_fold0{i}",
-        )
-        for i in range(1, 6)
-    ] + [
+            subset_id=f"indolem_nerui",
+        ),
         NusantaraConfig(
-            name=f"indolem_nerui_fold0{i}_nusantara_seq_label",
+            name=f"indolem_nerui_nusantara_seq_label",
             version=datasets.Version(_NUSANTARA_VERSION),
             description="Indolem NER UI Nusantara schema",
             schema="nusantara_seq_label",
-            subset_id=f"indolem_nerui_fold0{i}",
+            subset_id=f"indolem_nerui",
         )
-        for i in range(1, 6)
+    ] + [
+        NusantaraConfig(
+            name=f"indolem_nerui_fold{i}_source",
+            version=datasets.Version(_SOURCE_VERSION),
+            description="Indolem NER UI source schema",
+            schema="source",
+            subset_id=f"indolem_nerui_fold{i}",
+        )
+        for i in range(5)
+    ] + [
+        NusantaraConfig(
+            name=f"indolem_nerui_fold{i}_nusantara_seq_label",
+            version=datasets.Version(_NUSANTARA_VERSION),
+            description="Indolem NER UI Nusantara schema",
+            schema="nusantara_seq_label",
+            subset_id=f"indolem_nerui_fold{i}",
+        )
+        for i in range(5)
     ]
 
-    DEFAULT_CONFIG_NAME = "indolem_nerui_fold01_source"
+    DEFAULT_CONFIG_NAME = "indolem_nerui_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
@@ -193,8 +208,9 @@ class IndolemNERUIDataset(datasets.GeneratorBasedBuilder):
     def _get_fold_index(self):
         try:
             subset_id = self.config.subset_id
-            file_id = subset_id[-2:]
-            return int(file_id) - 1
+            idx_fold = subset_id.index("_fold")
+            file_id = subset_id[(idx_fold + 5):]
+            return int(file_id)
         except:
-            # get default: fold01 (index 0)
+            # get default: fold0 (index 0)
             return 0
