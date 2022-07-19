@@ -205,7 +205,7 @@ class TestDataLoader(unittest.TestCase):
                 data_dir=self.DATA_DIR,
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
-            logger.info(f"Dataset sample [{schema}]\n{dataset['train'][0]}")
+            logger.info(f"Dataset sample [{schema}]\n{dataset[list(dataset.keys())[0]][0]}")
 
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
