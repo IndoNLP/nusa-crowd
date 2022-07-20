@@ -72,11 +72,8 @@ Minangkabau	min	min
 Sundanese	su	sun
 Acehnese	ace	ace
 Malay	ms	mly
-Banyumasan	bms	map-bms
+Banyumasan	map-bms	map-bms
 
-The 3-letter code of Banyumasan has been kept changing from map-bms to bms.
-So, the configuration to access Banyumasan would be:
-"wikiann_bms_source"
 
 """
 
@@ -110,8 +107,8 @@ def nusantara_config_constructor(lang, schema, version):
     )
 
 
-LANGUAGES_MAP = {"eng": "english", "ind": "indonesian", "jav": "javanese", "min": "minangkabau", "sun": "sundanese", "ace": "acehnese", "mly": "malay", "bms": "banyumasan"}  # Actual code is map-bms
-LANG_CODES = {"eng": "en", "ind": "id", "jav": "jv", "min": "min", "sun": "su", "ace": "ace", "mly": "ms", "bms": "map-bms"}
+LANGUAGES_MAP = {"eng": "english", "ind": "indonesian", "jav": "javanese", "min": "minangkabau", "sun": "sundanese", "ace": "acehnese", "mly": "malay", "map_bms": "banyumasan"}  # Actual code is map-bms
+LANG_CODES = {"eng": "en", "ind": "id", "jav": "jv", "min": "min", "sun": "su", "ace": "ace", "mly": "ms", "map_bms": "map-bms"}
 
 
 class WikiAnnDataset(datasets.GeneratorBasedBuilder):
@@ -138,9 +135,12 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
             citation=_CITATION,
         )
 
+    def get_lang(self, name):
+        return name.removesuffix("_source").removesuffix("_nusantara_seq_label").removeprefix("wikiann_")
+
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         path = Path(dl_manager.download_and_extract(_URLs["wikiann"]))
-        lang = LANG_CODES[self.config.name[8:11]]
+        lang = LANG_CODES[self.get_lang(self.config.name)]
         wikiann_dl_dir = path / f"{lang}.tar.gz"
         return [
             datasets.SplitGenerator(
