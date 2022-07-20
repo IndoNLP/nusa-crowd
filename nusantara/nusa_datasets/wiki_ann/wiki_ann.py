@@ -12,7 +12,7 @@ _DATASETNAME = "wiki_ann"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["id", "en"]
+_LANGUAGES = ["ind", "eng"]
 _LOCAL = False
 _CITATION = """\
 @inproceedings{pan-etal-2017-cross,
