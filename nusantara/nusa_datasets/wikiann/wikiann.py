@@ -63,7 +63,17 @@ The wikiann dataset contains NER tags with labels from O (0), B-PER (1), I-PER (
 WikiANN (sometimes called PAN-X) is a multilingual named entity recognition dataset consisting of Wikipedia articles
  annotated with LOC (location), PER (person), and ORG (organisation)
  tags in the IOB2 format. This version corresponds to the balanced train, dev, and test splits of
-  Rahimi et al. (2019), and uses the Indonesian subset from the original WikiANN corpus.
+  Rahimi et al. (2019), and uses the following subsets from the original WikiANN corpus
+
+Language	WikiAnn	ISO 639-3
+Indonesian	id	ind
+Javanese	jv	jav
+Minangkabau	min	min
+Sundanese	su	sun
+Acehnese	ace	ace
+Malay	ms	mly
+Banyumasan	bms	map-bms
+
 """
 
 _HOMEPAGE = "https://github.com/afshinrahimi/mmner"
@@ -99,8 +109,21 @@ def nusantara_config_constructor(lang, schema, version):
 LANGUAGES_MAP = {
     "eng": "english",
     "ind": "indonesian",
+    "jav": "javanese",
+    "min": "minangkabau",
+    "sun": "sundanese",
+    "ace": "acehnese",
+    "mly": "malay",
+    "bms": "banyumasan" # Actual code is map-bms
 }
-LANG_CODES = {"eng": "en", "ind": "id"}
+LANG_CODES = {"eng": "en",
+              "ind": "id",
+              "jav": "jv",
+              "min": "min",
+              "sun": "su",
+              "ace": "ace",
+              "mly": "ms",
+              "bms": "map-bms"}
 
 
 class WikiAnnDataset(datasets.GeneratorBasedBuilder):
@@ -111,7 +134,7 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP] + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
 
-    DEFAULT_CONFIG_NAME = "wikiann_ind_source"
+    DEFAULT_CONFIG_NAME = "wikiann_bms_source"
 
     def _info(self):
         if self.config.schema == "source":
