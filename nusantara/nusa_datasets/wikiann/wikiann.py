@@ -133,7 +133,7 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
-                gen_kwargs={"split": "validation", "filepath": dl_manager.iter_archive(wikiann_dl_dir)},
+                gen_kwargs={"split": "dev", "filepath": dl_manager.iter_archive(wikiann_dl_dir)},
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
@@ -179,3 +179,7 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
                         else:
                             # examples have no label in test set
                             ner_tags.append("O")
+
+if __name__ == "__main__":
+    d = datasets.load_dataset(__file__)
+    print(d)
