@@ -122,7 +122,7 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP] + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
 
-    DEFAULT_CONFIG_NAME = "wikiann_bms_source"
+    DEFAULT_CONFIG_NAME = "wikiann_ind_source"
 
     def _info(self):
         if self.config.schema == "source":
