@@ -74,6 +74,10 @@ Acehnese	ace	ace
 Malay	ms	mly
 Banyumasan	bms	map-bms
 
+The 3-letter code of Banyumasan has been kept changing from map-bms to bms.
+So, the configuration to access Banyumasan would be:
+"wikiann_bms_source"
+
 """
 
 _HOMEPAGE = "https://github.com/afshinrahimi/mmner"
@@ -106,24 +110,8 @@ def nusantara_config_constructor(lang, schema, version):
     )
 
 
-LANGUAGES_MAP = {
-    "eng": "english",
-    "ind": "indonesian",
-    "jav": "javanese",
-    "min": "minangkabau",
-    "sun": "sundanese",
-    "ace": "acehnese",
-    "mly": "malay",
-    "bms": "banyumasan" # Actual code is map-bms
-}
-LANG_CODES = {"eng": "en",
-              "ind": "id",
-              "jav": "jv",
-              "min": "min",
-              "sun": "su",
-              "ace": "ace",
-              "mly": "ms",
-              "bms": "map-bms"}
+LANGUAGES_MAP = {"eng": "english", "ind": "indonesian", "jav": "javanese", "min": "minangkabau", "sun": "sundanese", "ace": "acehnese", "mly": "malay", "bms": "banyumasan"}  # Actual code is map-bms
+LANG_CODES = {"eng": "en", "ind": "id", "jav": "jv", "min": "min", "sun": "su", "ace": "ace", "mly": "ms", "bms": "map-bms"}
 
 
 class WikiAnnDataset(datasets.GeneratorBasedBuilder):
@@ -207,7 +195,3 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
                         else:
                             # examples have no label in test set
                             ner_tags.append("O")
-
-if __name__ == "__main__":
-    d = datasets.load_dataset(__file__)
-    print(d)
