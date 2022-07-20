@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import List
 
 import datasets
+from datasets import NamedSplit
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
@@ -142,6 +143,10 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
                 gen_kwargs={"split": "train", "filepath": dl_manager.iter_archive(wikiann_dl_dir)},
+            ),
+            datasets.SplitGenerator(
+                name=NamedSplit("extra"),
+                gen_kwargs={"split": "extra", "filepath": dl_manager.iter_archive(wikiann_dl_dir)},
             ),
         ]
 
