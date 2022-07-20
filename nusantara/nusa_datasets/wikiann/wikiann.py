@@ -80,16 +80,19 @@ _NUSANTARA_VERSION = "1.0.0"
 
 
 def nusantara_config_constructor(lang, schema, version):
-    if lang == "" or (schema != "source" and schema != "nusantara_seq_label"):
+    if lang == "":
+        raise ValueError(f"Invalid lang {lang}")
+
+    if schema != "source" and schema != "nusantara_seq_label":
         raise ValueError(f"Invalid schema: {schema}")
 
     return NusantaraConfig(
-            name="wikiann_{lang}_{schema}".format(lang=lang, schema=schema),
-            version=datasets.Version(version),
-            description="wikiann with {schema} schema for {lang} language".format(lang=lang, schema=schema),
-            schema=schema,
-            subset_id="wikiann",
-        )
+        name="wikiann_{lang}_{schema}".format(lang=lang, schema=schema),
+        version=datasets.Version(version),
+        description="wikiann with {schema} schema for {lang} language".format(lang=lang, schema=schema),
+        schema=schema,
+        subset_id="wikiann",
+    )
 
 
 LANGUAGES_MAP = {
@@ -105,10 +108,7 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
 
     label_classes = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
 
-    BUILDER_CONFIGS = (
-        [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
-        + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
-    )
+    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP] + [nusantara_config_constructor(lang, "nusantara_seq_label", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
 
     DEFAULT_CONFIG_NAME = "wikiann_ind_source"
 
@@ -179,5 +179,3 @@ class WikiAnnDataset(datasets.GeneratorBasedBuilder):
                         else:
                             # examples have no label in test set
                             ner_tags.append("O")
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
