@@ -52,7 +52,10 @@ This dataset consists of 41,297, 14,770, and 82,179 tokens of entity (respective
 
 _HOMEPAGE = "https://github.com/ir-nlp-csui/singgalang"
 
-_LICENSE = ""  # unknown
+_LICENSE = """\
+You can use this dataset for free. You don't need our permission to use it. Please cite our paper if your work uses our data in your publication.
+Please note that you are not allowed to create a copy of this dataset and share it publicly in your own repository without our permission.\
+"""
 
 _URLS = {
     _DATASETNAME: "https://raw.githubusercontent.com/ir-nlp-csui/singgalang/main/SINGGALANG.tsv",
