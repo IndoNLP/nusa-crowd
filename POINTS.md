@@ -19,7 +19,7 @@ As a support for data openness, for any data that is previously private, if Auth
 
 As a support for the development of local languages datasets:
 - For dataset in Sundanese, Javanese, or Minangkabau, +2 pts will be granted
-- For dataset in other local language, +4 pts will be granted
+- For dataset in other local language, +3 pts will be granted
 
 Based on our observation, we find that the common NLP tasks in Indonesian languages include: machine translation (MT), language modeling (LM), sentiment analysis (SA), and named entity recognition (NER). To encoureage more diverse NLP corpora, all other NLP tasks are considered rare and corresponding submission are eligible for the +2 contribution points. 
 
