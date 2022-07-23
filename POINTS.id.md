@@ -19,7 +19,7 @@ Untuk mendukung keterbukaan dataset, untuk dataset yang tertutup dan akan diubah
 
 Untuk mendukung pengembangan dataset bahasa daerah:
 - Untuk dataset bahasa Sunda, Jawa, atau Minang, akan diberikan nilai +2
-- Untuk dataset dari bahasa daerah lain, akan diberikan nilai +4
+- Untuk dataset dari bahasa daerah lain, akan diberikan nilai +3
 
 Berdasarkan hasil observasi, kami menemukan bahwa terdapat beberapa jenis task NLP yang banyak ditemukan dalam bahasa-bahasa di Indonesia, antara lain: machine translation (MT), language modeling (LM), sentiment analysis (SA), dan named entity recognition (NER). Untuk mendukung pengembangan korpora NLP dalam task lainnya, semua datasheet yang mencakup task selain yang disebutkan diatas, akan diberikan nilai tambahan +2. 
 
