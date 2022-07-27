@@ -8,7 +8,7 @@ def features(label_names = ["Yes", "No"]):
         {
             "id": datasets.Value("string"),
             "text": datasets.Value("string"),
-            "labels": [datasets.ClassLabel(names=label_names)],
+            "labels": datasets.Sequence(datasets.ClassLabel(names=label_names)),
         }
     )
 
