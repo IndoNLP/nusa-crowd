@@ -4,6 +4,7 @@ from typing import Dict, List, Tuple
 
 import datasets
 import pandas as pd
+import ast
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
@@ -77,6 +78,7 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features(
                 {
+                    "index" : datasets.Value("int64"),
                     "question" : [datasets.Value("string")],
                     "passage" : [datasets.Value("string")],
                     "seq_label" : [datasets.Value("string")],
@@ -131,30 +133,29 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
         df = pd.read_csv(filepath, sep=",", header="infer").reset_index()
-
         if self.config.schema == "source":
             for row in df.itertuples():
                 entry  = {
-                    "index" : row['index'],
-                    "question" : row['question'],
-                    "passage" : row['passage'],
-                    "seq_label" : row['seq_label']
+                    "index" : row.index,
+                    "question" : ast.literal_eval(row.question),
+                    "passage" : ast.literal_eval(row.passage),
+                    "seq_label" : ast.literal_eval(row.seq_label)
                 }
-                yield row['index'], entry
+                yield row.index, entry
 
-        elif self.config.schema == "nusantara_qa":
+        elif self.config.schema == "nusantara_facqa":
             for row in df.itertuples():
                 entry = {
-                    "id": str(row['index']),
-                    "question_id": str(row['index']),
-                    "document_id": str(row['index']),
-                    "question": listToString(row['question']),
+                    "id": str(row.index),
+                    "question_id": str(row.index),
+                    "document_id": str(row.index),
+                    "question": listToString(ast.literal_eval(row.question)),
                     "type": "DELETETHIS", # TODO: nanya? wkwkwk
-                    "choices": "DELETETHIS", # TODO: nanya? wkwkwk
-                    "context": listToString(row['passage']),
-                    "answer": getAnswerString(row['passage'], row['seq_label'])
+                    "choices": [], # TODO: nanya? wkwkwk
+                    "context": listToString(ast.literal_eval(row.passage)),
+                    "answer": [getAnswerString(ast.literal_eval(row.passage), ast.literal_eval(row.seq_label))]
                 }
-                yield row['index'], entry
+                yield row.index, entry
 
 if __name__ == "__main__":
     datasets.load_dataset(__file__)
