@@ -13,22 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-IndoNLI is the first human-elicited Natural Language Inference (NLI) dataset for Indonesian.
-IndoNLI is annotated by both crowd workers and experts. The expert-annotated data is used exclusively as a test set.
-It is designed to provide a challenging test-bed for Indonesian NLI by explicitly incorporating various linguistic
-phenomena such as numerical reasoning, structural changes, idioms, or temporal and spatial reasoning.
-
-The data is split across train, valid, test_lay, and test_expert.
-
-A small subset of test_expert is used as a diasnostic tool. For more info, please visit https://github.com/ir-nlp-csui/indonli
-
-The premise were collected from Indonesian Wikipedia and from other public Indonesian dataset: Indonesian PUD and GSD treebanks provided by the Universal Dependencies 2.5 and IndoSum
-
-The data was produced by humans.
-
-"""
-
 from pathlib import Path
 from typing import List
 
@@ -95,15 +79,7 @@ randomly split off 15% of the training data and use it as the test set.
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlg"
 
-_LICENSE = "CC-BY-SA 4.0. \
-\
-Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. \
-\
-ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\
-\
-No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.\
-\
-Please contact authors for any information on the dataset."
+_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
 
 # For publicly available datasets you will most likely end up passing these URLs to dl_manager in _split_generators.
 # In most cases the URLs will be the same for the source and nusantara config.
