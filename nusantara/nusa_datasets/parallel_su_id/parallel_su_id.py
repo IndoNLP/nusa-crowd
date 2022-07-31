@@ -35,7 +35,7 @@ _HOMEPAGE = "https://dataverse.telkomuniversity.ac.id/dataset.xhtml?persistentId
 _LICENSE = "Creative Commons CC0 - No Rights Reserved"
 
 _URLs = {"ind": "https://dataverse.telkomuniversity.ac.id/api/access/datafile/:persistentId?persistentId=doi:10.34820/FK2/HDYWXW/032QZD",
-         "sun": "https://dataverse.telkomuniversity.ac.id/api/access/datafile/:persistentId?persistentId=doi:10.34820/FK2/HDYWXW/032QZD"}
+         "sun": "https://dataverse.telkomuniversity.ac.id/api/access/datafile/:persistentId?persistentId=doi:10.34820/FK2/HDYWXW/IVP3G5"}
 
 _SUPPORTED_TASKS = [Tasks.MACHINE_TRANSLATION]
 
@@ -97,7 +97,7 @@ class ParallelSuId(datasets.GeneratorBasedBuilder):
     def _generate_examples(self, filepath_dict):
         data = {}
         for lang, path in filepath_dict.items():
-            file = open("Korpus Paralel Sunda Indonesia_ind.txt", "r")
+            file = open(path, "r")
             data[lang] = []
             for line in file:
                 data[lang].append(line)
