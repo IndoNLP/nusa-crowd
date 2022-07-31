@@ -98,9 +98,9 @@ _LICENSE = "Creative Commons Attribution 4.0"
 
 _URLS = {
     _DATASETNAME: {
-        "train": f"https://raw.githubusercontent.com/indolem/indolem/main/dependency_parsing/UD_Indonesian_GSD/id_gsd-ud-train.conllu",
-        "validation": f"https://raw.githubusercontent.com/indolem/indolem/main/dependency_parsing/UD_Indonesian_GSD/id_gsd-ud-dev.conllu",
-        "test": f"https://raw.githubusercontent.com/indolem/indolem/main/dependency_parsing/UD_Indonesian_GSD/id_gsd-ud-test.conllu",
+        "train": "https://raw.githubusercontent.com/indolem/indolem/main/dependency_parsing/UD_Indonesian_GSD/id_gsd-ud-train.conllu",
+        "validation": "https://raw.githubusercontent.com/indolem/indolem/main/dependency_parsing/UD_Indonesian_GSD/id_gsd-ud-dev.conllu",
+        "test": "https://raw.githubusercontent.com/indolem/indolem/main/dependency_parsing/UD_Indonesian_GSD/id_gsd-ud-test.conllu",
     },
 }
 
