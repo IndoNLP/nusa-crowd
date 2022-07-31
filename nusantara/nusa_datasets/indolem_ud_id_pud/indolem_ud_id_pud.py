@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from itertools import chain, repeat
 from pathlib import Path
 from typing import Dict, List, Tuple
-from itertools import chain, repeat
 
 import datasets
 
@@ -28,7 +28,8 @@ _CITATION = """\
 @conference{2f8c7438a7f44f6b85b773586cff54e8,
     title = "A gold standard dependency treebank for Indonesian",
     author = "Ika Alfina and Arawinda Dinakaramani and Fanany, {Mohamad Ivan} and Heru Suhartanto",
-    note = "Publisher Copyright: {\textcopyright} 2019 Proceedings of the 33rd Pacific Asia Conference on Language, Information and Computation, PACLIC 2019. All rights reserved.; 33rd Pacific Asia Conference on Language, Information and Computation, PACLIC 2019 ; Conference date: 13-09-2019 Through 15-09-2019",
+    note = "Publisher Copyright: {\textcopyright} 2019 Proceedings of the 33rd Pacific Asia Conference on Language, Information and Computation, PACLIC 2019. All rights reserved.; \
+33rd Pacific Asia Conference on Language, Information and Computation, PACLIC 2019 ; Conference date: 13-09-2019 Through 15-09-2019",
     year = "2019",
     month = jan,
     day = "1",
