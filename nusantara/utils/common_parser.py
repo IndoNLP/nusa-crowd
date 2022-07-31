@@ -25,7 +25,7 @@ def load_ud_data(filepath):
     """
     Load and parse conllu data.
 
-    Proposed by @fhudi for issue #xxx and #xxx.
+    Proposed by @fhudi for issue #34 and #9.
 
     :param filepath: file path
     :return: generator with schema following CONLLU
@@ -38,7 +38,7 @@ def load_ud_data_as_nusantara_kb(filepath):
     """
     Load and parse conllu data, followed by mapping its elements to Nusantara Knowledge Base schema.
 
-    Proposed by @fhudi for issue #xxx and #xxx.
+    Proposed by @fhudi for issue #34 and #9.
 
     :param filepath: file path
     :return: generator for Nusantara KB schema
