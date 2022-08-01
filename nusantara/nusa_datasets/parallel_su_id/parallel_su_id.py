@@ -103,14 +103,18 @@ class ParallelSuId(datasets.GeneratorBasedBuilder):
                 data[lang].append(line)
         if self.config.schema == "source":
             for i in range(len(data[lang])):
-                ex = {"id": i, "text": data['sun'][i], "label": data['ind'][i]}
+                ex = {
+                      "id": i, 
+                      "text": data['sun'][i].replace("\n",""),
+                      "label": data['ind'][i].replace("\n","")
+                }
                 yield i, ex
         elif self.config.schema == "nusantara_t2t":
             for i in range(len(data[lang])):
                 ex = {
                     "id": i,
-                    "text_1": data['sun'][i],
-                    "text_2": data['ind'][i],
+                    "text_1": data['sun'][i].replace("\n",""),
+                    "text_2": data['ind'][i].replace("\n",""),
                     "text_1_name": "sun",
                     "text_2_name": "ind",
                 }
