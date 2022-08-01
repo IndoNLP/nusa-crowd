@@ -1,16 +1,15 @@
-import os
+import ast
 from pathlib import Path
 from typing import Dict, List, Tuple
 
 import datasets
 import pandas as pd
-import ast
 
+from nusantara.nusa_datasets.facqa.utils.facqa_utils import (getAnswerString,
+                                                             listToString)
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
-from nusantara.utils.common_parser import load_conll_data
-from nusantara.nusa_datasets.facqa.utils.facqa_utils import *
 
 _CITATION = """
 @inproceedings{purwarianti2007machine,
@@ -37,17 +36,18 @@ _LICENSE = "CC-BY-SA 4.0"
 
 _URLS = {
     _DATASETNAME: {
-        "test" : "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/facqa_qa-factoid-itb/test_preprocess.csv",
-        "train" : "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/facqa_qa-factoid-itb/train_preprocess.csv",
-        "validation" : "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/facqa_qa-factoid-itb/valid_preprocess.csv",
+        "test": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/facqa_qa-factoid-itb/test_preprocess.csv",
+        "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/facqa_qa-factoid-itb/train_preprocess.csv",
+        "validation": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/facqa_qa-factoid-itb/valid_preprocess.csv",
     }
 }
 
-_SUPPORTED_TASKS = [Tasks.QUESTION_ANSWERING] 
+_SUPPORTED_TASKS = [Tasks.QUESTION_ANSWERING]
 
 _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
+
 
 class FacqaDataset(datasets.GeneratorBasedBuilder):
     """FacQA dataset is a labeled dataset for indonesian question answering task"""
@@ -78,10 +78,10 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features(
                 {
-                    "index" : datasets.Value("int64"),
-                    "question" : [datasets.Value("string")],
-                    "passage" : [datasets.Value("string")],
-                    "seq_label" : [datasets.Value("string")],
+                    "index": datasets.Value("int64"),
+                    "question": [datasets.Value("string")],
+                    "passage": [datasets.Value("string")],
+                    "seq_label": [datasets.Value("string")],
                 }
             )
         elif self.config.schema == "nusantara_facqa":
@@ -110,21 +110,21 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
                 gen_kwargs={
-                    "filepath": data_files['train'],
+                    "filepath": data_files["train"],
                     "split": "train",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
-                    "filepath": data_files['test'],
+                    "filepath": data_files["test"],
                     "split": "test",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={
-                    "filepath": data_files['validation'],
+                    "filepath": data_files["validation"],
                     "split": "dev",
                 },
             ),
@@ -135,12 +135,7 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
         df = pd.read_csv(filepath, sep=",", header="infer").reset_index()
         if self.config.schema == "source":
             for row in df.itertuples():
-                entry  = {
-                    "index" : row.index,
-                    "question" : ast.literal_eval(row.question),
-                    "passage" : ast.literal_eval(row.passage),
-                    "seq_label" : ast.literal_eval(row.seq_label)
-                }
+                entry = {"index": row.index, "question": ast.literal_eval(row.question), "passage": ast.literal_eval(row.passage), "seq_label": ast.literal_eval(row.seq_label)}
                 yield row.index, entry
 
         elif self.config.schema == "nusantara_facqa":
@@ -150,12 +145,9 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
                     "question_id": str(row.index),
                     "document_id": str(row.index),
                     "question": listToString(ast.literal_eval(row.question)),
-                    "type": "DELETETHIS", # TODO: nanya? wkwkwk
-                    "choices": [], # TODO: nanya? wkwkwk
+                    "type": "extractive",
+                    "choices": [],
                     "context": listToString(ast.literal_eval(row.passage)),
-                    "answer": [getAnswerString(ast.literal_eval(row.passage), ast.literal_eval(row.seq_label))]
+                    "answer": [getAnswerString(ast.literal_eval(row.passage), ast.literal_eval(row.seq_label))],
                 }
                 yield row.index, entry
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
