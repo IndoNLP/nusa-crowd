@@ -70,12 +70,12 @@ _TASK_TO_FEATURES = {
 }
 
 
-def _get_example_text(example: dict) -> str:
+def _get_example_text(example: dict, subcomponent: str = "passages") -> str:
     """
-    Concatenate all text from passages in an example of a KB schema
+    Concatenate all text from subcomponent (i.e.: passages) in an example of a KB schema
     :param example: An instance of the KB schema
     """
-    return " ".join([t for p in example["passages"] for t in p["text"]])
+    return " ".join([t for p in example[subcomponent] for t in p["text"]])
 
 
 OFFSET_ERROR_MSG = "\n\n" "There are features with wrong offsets!" " This is not a hard failure, as it is common for this type of datasets." " However, if the error list is long (e.g. >10) you should double check your code. \n\n"
@@ -434,7 +434,7 @@ class TestDataLoader(unittest.TestCase):
                 for example in dataset_nusantara[split]:
 
                     example_id = example["id"]
-                    example_text = _get_example_text(example)
+                    example_text = _get_example_text(example, "entities")
 
                     for entity in example["entities"]:
 
