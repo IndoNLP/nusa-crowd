@@ -47,6 +47,7 @@ def load_ud_data_as_nusantara_kb(filepath):
 
     def as_nusa_kb(tokens):
         sent_id = tokens["sent_id"]
+        offsets = get_span_offsets(tokens["form"], tokens["text"])
         return {
             "id": sent_id,
             "entities": [
@@ -54,7 +55,7 @@ def load_ud_data_as_nusantara_kb(filepath):
                     "id": f"{sent_id}_EntID_{ent_id}",
                     "type": ent_type,
                     "text": [ent_text],
-                    "offsets": [],
+                    "offsets": [offset],
                     "normalized": [
                         {
                             "db_name": norm_text,
@@ -62,7 +63,7 @@ def load_ud_data_as_nusantara_kb(filepath):
                         }
                     ],
                 }
-                for (ent_id, ent_type, ent_text, norm_text) in zip(tokens["id"], tokens["upos"], tokens["form"], tokens["lemma"])
+                for (ent_id, ent_type, ent_text, offset, norm_text) in zip(tokens["id"], tokens["upos"], tokens["form"], offsets, tokens["lemma"])
             ],
             "relations": [
                 {
@@ -80,3 +81,42 @@ def load_ud_data_as_nusantara_kb(filepath):
         }
 
     return map(as_nusa_kb, dataset_source)
+
+
+def get_span_offsets(spans_inorder, text_concatenated, delimiters={" "}):
+    """
+    Getting the offset of each span assuming spans_inorder is retrieved by splitting text_concatenated using one of delimiters.
+
+    :param spans_inorder: Iterable<String>
+    :param text_concatenated: String
+    :param delimiters: Set<char>
+    :return: List of pair (lo, hi) indicating the start index (inclusive) and end index (exclusive) of original text, respectively.
+    """
+    offsets = []
+    span_idx, span = None, None
+
+    def iter_char():
+        nonlocal span_idx, span
+        for span_idx, span in enumerate(spans_inorder):
+            for st, ch in enumerate(span):
+                yield len(span) if st == 0 else None, ch
+
+    iterchar = iter(iter_char())
+    try:
+        span_len, cur_char = next(iterchar)
+    except StopIteration:
+        return offsets
+
+    for offset, j in enumerate(text_concatenated):
+        if cur_char != j:
+            if j in delimiters:
+                continue
+            else:
+                raise AssertionError(f"Char '{j}' at pos {offset} does not match char '{cur_char}' from span #{span_idx} ('{span}'), and is not in delimiters {delimiters};")
+        else:
+            if span_len is not None:
+                offsets.append((offset, offset + span_len))
+            try:
+                span_len, cur_char = next(iterchar)
+            except StopIteration:
+                return offsets
