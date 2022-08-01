@@ -60,7 +60,7 @@ class XLSum(datasets.GeneratorBasedBuilder):
             version=datasets.Version(_NUSANTARA_VERSION),
             description="xl_sum Nusantara schema",
             schema="nusantara_t2t",
-            subset_id="emot",
+            subset_id="xl_sum",
         ),
     ]
 
