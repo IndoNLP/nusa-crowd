@@ -40,25 +40,25 @@ _HOMEPAGE = "https://github.com/IndoNLP/nusax/tree/main/datasets/mt"
 
 _LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
-_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
+_SUPPORTED_TASKS = [Tasks.MACHINE_TRANSLATION]
 
 _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
 _URLS = {
-    "train": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/mt/{lang}/train.csv",
-    "validation": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/mt/{lang}/valid.csv",
-    "test": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/mt/{lang}/test.csv",
+    "train": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/mt/train.csv",
+    "validation": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/mt/valid.csv",
+    "test": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/mt/test.csv",
 }
 
 
 def nusantara_config_constructor(lang_source, lang_target, schema, version):
     """Construct NusantaraConfig with nusax_mt_{lang_source}_{lang_target}_{schema} as the name format"""
-    if schema != "source" and schema != "nusantara_text":
+    if schema != "source" and schema != "nusantara_t2t":
         raise ValueError(f"Invalid schema: {schema}")
 
-    if lang == "":
+    if lang_source == "" and lang_target == "":
         return NusantaraConfig(
             name="nusax_mt_{schema}".format(schema=schema),
             version=datasets.Version(version),
@@ -70,7 +70,7 @@ def nusantara_config_constructor(lang_source, lang_target, schema, version):
         return NusantaraConfig(
             name="nusax_mt_{lang_source}_{lang_target}_{schema}".format(lang_source=lang_source, lang_target=lang_target, schema=schema),
             version=datasets.Version(version),
-            description="nusax_mt with {schema} schema for {lang} language".format(lang=lang, schema=schema),
+            description="nusax_mt with {schema} schema for {lang_source} source language and  {lang_target} target language".format(lang_source=lang_source, lang_target=lang_target, schema=schema),
             schema=schema,
             subset_id="nusax_mt",
         )
@@ -96,24 +96,18 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
     """NusaX-MT is a parallel corpus for training and benchmarking machine translation models across 10 Indonesian local languages + Indonesian and English. The data is presented in csv format with 12 columns, one column for each language."""
 
     BUILDER_CONFIGS = (
-        [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
-        + [nusantara_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
-        + [nusantara_config_constructor("", "source", _SOURCE_VERSION), nusantara_config_constructor("", "nusantara_text", _NUSANTARA_VERSION)]
+        [nusantara_config_constructor(lang1, lang2, "source", _SOURCE_VERSION) for lang1 in LANGUAGES_MAP for lang2 in LANGUAGES_MAP if lang1 != lang2]
+        + [nusantara_config_constructor(lang1, lang2, "nusantara_t2t", _NUSANTARA_VERSION) for lang1 in LANGUAGES_MAP for lang2 in LANGUAGES_MAP if lang1 != lang2]
+        + [nusantara_config_constructor("", "", "source", _SOURCE_VERSION), nusantara_config_constructor("", "", "nusantara_t2t", _NUSANTARA_VERSION)]
     )
 
-    DEFAULT_CONFIG_NAME = "nusax_senti_ind_source"
+    DEFAULT_CONFIG_NAME = "nusax_senti_ind_eng_source"
 
     def _info(self) -> datasets.DatasetInfo:
-        if self.config.schema == "source":
-            features = datasets.Features(
-                {
-                    "id": datasets.Value("string"),
-                    "text": datasets.Value("string"),
-                    "label": datasets.Value("string"),
-                }
-            )
-        elif self.config.schema == "nusantara_text":
-            features = schemas.text_features(["negative", "neutral", "positive"])
+        if self.config.schema == "source" or self.config.schema == "nusantara_t2t":
+            features = schemas.text2text_features
+        else:
+            raise ValueError(f"Invalid config: {self.config.name}")
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -125,16 +119,9 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
-        if self.config.name == "nusax_senti_source" or self.config.name == "nusax_senti_nusantara_text":
-            # Load all 12 languages
-            train_csv_path = dl_manager.download_and_extract([_URLS["train"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
-            validation_csv_path = dl_manager.download_and_extract([_URLS["validation"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
-            test_csv_path = dl_manager.download_and_extract([_URLS["test"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
-        else:
-            lang = self.config.name[12:15]
-            train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES_MAP[lang])))
-            validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES_MAP[lang])))
-            test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES_MAP[lang])))
+        train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"]))
+        validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"]))
+        test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"]))
 
         return [
             datasets.SplitGenerator(
@@ -152,19 +139,40 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path) -> Tuple[int, Dict]:
-        if self.config.schema != "source" and self.config.schema != "nusantara_text":
+        if self.config.schema != "source" and self.config.schema != "nusantara_t2t":
             raise ValueError(f"Invalid config: {self.config.name}")
 
-        if self.config.name == "nusax_senti_source" or self.config.name == "nusax_senti_nusantara_text":
-            ldf = []
-            for fp in filepath:
-                ldf.append(pd.read_csv(fp))
-            df = pd.concat(ldf, axis=0, ignore_index=True).reset_index()
-            # Have to use index instead of id to avoid duplicated key
-            df = df.drop(columns=["id"]).rename(columns={"index": "id"})
+        df = pd.read_csv(filepath).reset_index()
+        if self.config.name == "nusax_mt_source" or self.config.name == "nusax_mt_nusantara_t2t":
+            # load all 132 language pairs
+            id_count = -1
+            for lang_source in LANGUAGES_MAP:
+                for lang_target in LANGUAGES_MAP:
+                    if lang_source == lang_target:
+                        continue
+
+                    for _, row in df.iterrows():
+                        id_count += 1
+                        ex = {
+                            "id": str(id_count),
+                            "text_1": row[LANGUAGES_MAP[lang_source]],
+                            "text_2": row[LANGUAGES_MAP[lang_target]],
+                            "text_1_name": LANGUAGES_MAP[lang_source],
+                            "text_2_name": LANGUAGES_MAP[lang_target],
+                        }
+                        yield id_count, ex
+
         else:
             df = pd.read_csv(filepath).reset_index()
+            lang_source = self.config.name[9:12]
+            lang_target = self.config.name[13:16]
 
-        for row in df.itertuples():
-            ex = {"id": str(row.id), "text": row.text, "label": row.label}
-            yield row.id, ex
+            for index, row in df.iterrows():
+                ex = {
+                    "id": str(index),
+                    "text_1": row[LANGUAGES_MAP[lang_source]],
+                    "text_2": row[LANGUAGES_MAP[lang_target]],
+                    "text_1_name": LANGUAGES_MAP[lang_source],
+                    "text_2_name": LANGUAGES_MAP[lang_target],
+                }
+                yield str(index), ex
