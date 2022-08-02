@@ -20,7 +20,7 @@ _CITATION = """\
 }
 """
 
-_DATASETNAME = "para_cotta"
+_DATASETNAME = "paracotta_id"
 
 _DESCRIPTION = """\
 ParaCotta is a synthetic parallel paraphrase corpus across 17 languages: Arabic, Catalan, Czech, German, English, Spanish, Estonian, French, Hindi, Indonesian, Italian, Dutch, Ro- manian, Russian, Swedish, Vietnamese, and Chinese.
@@ -50,22 +50,22 @@ class ParaCotta(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="para_cotta_source",
+            name="paracotta_id_source",
             version=SOURCE_VERSION,
-            description="para_cotta source schema",
+            description="paracotta_id source schema",
             schema="source",
-            subset_id="para_cotta",
+            subset_id="paracotta_id",
         ),
         NusantaraConfig(
-            name="para_cotta_nusantara_t2t",
+            name="paracotta_id_nusantara_t2t",
             version=NUSANTARA_VERSION,
-            description="para_cotta Nusantara schema",
+            description="paracotta_id Nusantara schema",
             schema="nusantara_t2t",
-            subset_id="para_cotta",
+            subset_id="paracotta_id",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "para_cotta_source"
+    DEFAULT_CONFIG_NAME = "paracotta_id_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
@@ -108,6 +108,7 @@ class ParaCotta(datasets.GeneratorBasedBuilder):
           data = f.readlines()
           id = 0
           for each_data in data:
+            each_data = each_data.strip('\n')
             ex = {
                 "id": id,
                 "src": each_data.split('\t')[1],
@@ -121,6 +122,7 @@ class ParaCotta(datasets.GeneratorBasedBuilder):
             data = f.readlines()
             id = 0
             for each_data in data:
+                each_data = each_data.strip('\n')
                 ex = {
                     "id": id,
                     "text_1": each_data.split('\t')[1],
