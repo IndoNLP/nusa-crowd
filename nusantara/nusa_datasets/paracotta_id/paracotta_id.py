@@ -94,7 +94,7 @@ class ParaCotta(datasets.GeneratorBasedBuilder):
         data_dir = Path(dl_manager.download(urls))
         return [
             datasets.SplitGenerator(
-                name=datasets.Split.TEST,
+                name=datasets.Split.TRAIN,
                 gen_kwargs={
                     "filepath": data_dir,
                     "split": "test",
