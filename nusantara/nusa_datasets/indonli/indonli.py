@@ -63,7 +63,15 @@ changes, idioms, or temporal and spatial reasoning.
 
 _HOMEPAGE = "https://github.com/ir-nlp-csui/indonli"
 
-_LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
+_LICENSE = "CC-BY-SA 4.0. \
+\
+Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. \
+\
+ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\
+\
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.\
+\
+Please contact authors for any information on the dataset."
 
 # For publicly available datasets you will most likely end up passing these URLs to dl_manager in _split_generators.
 # In most cases the URLs will be the same for the source and nusantara config.
