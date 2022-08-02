@@ -105,7 +105,7 @@ class IMDbJv(datasets.GeneratorBasedBuilder):
                 },
             ),
             datasets.SplitGenerator(
-                name=datasets.Split.VALIDATION,
+                name="unsupervised",
                 gen_kwargs={
                     "filepath": os.path.join(data_dir, data_files["unsupervised"]),
                     "split": "unsupervised",
