@@ -4,9 +4,9 @@ from typing import Dict, List, Tuple
 import datasets
 import pandas as pd
 
+from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
-from nusantara.utils import schemas
 
 _CITATION = """
 @inproceedings{azhar2019multi,
@@ -44,6 +44,7 @@ _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
+
 class HoASA(datasets.GeneratorBasedBuilder):
     """HoASA is an aspect based sentiment analysis dataset"""
 
@@ -68,22 +69,25 @@ class HoASA(datasets.GeneratorBasedBuilder):
     ]
 
     DEFAULT_CONFIG_NAME = "hoasa_source"
+
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
-            features = datasets.Features({
-                "index": datasets.Value("int64"),
-                "review": datasets.Value("string"),
-                "ac": datasets.Value("string"),
-                "air_panas": datasets.Value("string"),
-                "bau": datasets.Value("string"),
-                "general": datasets.Value("string"),
-                "kebersihan": datasets.Value("string"),
-                "linen": datasets.Value("string"),
-                "service": datasets.Value("string"),
-                "sunrise_meal": datasets.Value("string"),
-                "tv": datasets.Value("string"),
-                "wifi": datasets.Value("string"),
-            })
+            features = datasets.Features(
+                {
+                    "index": datasets.Value("int64"),
+                    "review": datasets.Value("string"),
+                    "ac": datasets.Value("string"),
+                    "air_panas": datasets.Value("string"),
+                    "bau": datasets.Value("string"),
+                    "general": datasets.Value("string"),
+                    "kebersihan": datasets.Value("string"),
+                    "linen": datasets.Value("string"),
+                    "service": datasets.Value("string"),
+                    "sunrise_meal": datasets.Value("string"),
+                    "tv": datasets.Value("string"),
+                    "wifi": datasets.Value("string"),
+                }
+            )
 
         elif self.config.schema == "nusantara_text_multi":
             features = schemas.text_multi_features(["pos", "neut", "neg", "neg_pos"])
@@ -102,30 +106,30 @@ class HoASA(datasets.GeneratorBasedBuilder):
         test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"]))
 
         data_dir = {
-            "train" : train_csv_path,
-            "validation" : validation_csv_path,
-            "test" : test_csv_path,
+            "train": train_csv_path,
+            "validation": validation_csv_path,
+            "test": test_csv_path,
         }
 
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
                 gen_kwargs={
-                    "filepath": data_dir['train'],
+                    "filepath": data_dir["train"],
                     "split": "train",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
-                    "filepath": data_dir['test'],
+                    "filepath": data_dir["test"],
                     "split": "test",
                 },
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.VALIDATION,
                 gen_kwargs={
-                    "filepath": data_dir['validation'],
+                    "filepath": data_dir["validation"],
                     "split": "dev",
                 },
             ),
@@ -160,6 +164,7 @@ class HoASA(datasets.GeneratorBasedBuilder):
                     "labels": [label for label in row[3:]],
                 }
                 yield row.index, entry
+
 
 if __name__ == "__main__":
     datasets.load_dataset(__file__)
