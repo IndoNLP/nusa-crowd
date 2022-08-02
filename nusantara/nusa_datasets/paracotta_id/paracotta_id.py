@@ -103,34 +103,34 @@ class ParaCotta(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
-      if self.config.schema == "source":
-        with open(filepath, 'r') as f:
-          data = f.readlines()
-          id = 0
-          for each_data in data:
-            each_data = each_data.strip('\n')
-            ex = {
-                "id": id,
-                "src": each_data.split('\t')[1],
-                "tgt": each_data.split('\t')[2],
-            }
-            id += 1
-            yield id, ex
+        if self.config.schema == "source":
+            with open(filepath, 'r') as f:
+                data = f.readlines()
+                id = 0
+                for each_data in data:
+                    each_data = each_data.strip('\n')
+                    ex = {
+                        "id": id,
+                        "src": each_data.split('\t')[1],
+                        "tgt": each_data.split('\t')[2],
+                    }
+                    id += 1
+                    yield id, ex
 
-      elif self.config.schema == "nusantara_t2t":
-          with open(filepath, 'r') as f:
-            data = f.readlines()
-            id = 0
-            for each_data in data:
-                each_data = each_data.strip('\n')
-                ex = {
-                    "id": id,
-                    "text_1": each_data.split('\t')[1],
-                    "text_2": each_data.split('\t')[2],
-                    "text_1_name": "src",
-                    "text_2_name": "tgt"
-                }
-                id += 1
-                yield id, ex
-      else:
-          raise ValueError(f"Invalid config: {self.config.name}")
+        elif self.config.schema == "nusantara_t2t":
+            with open(filepath, 'r') as f:
+                data = f.readlines()
+                id = 0
+                for each_data in data:
+                    each_data = each_data.strip('\n')
+                    ex = {
+                        "id": id,
+                        "text_1": each_data.split('\t')[1],
+                        "text_2": each_data.split('\t')[2],
+                        "text_1_name": "src",
+                        "text_2_name": "tgt"
+                    }
+                    id += 1
+                    yield id, ex
+        else:
+            raise ValueError(f"Invalid config: {self.config.name}")
