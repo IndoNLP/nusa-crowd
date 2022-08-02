@@ -101,22 +101,20 @@ def get_span_offsets(spans_inorder, text_concatenated, delimiters={" "}):
             for st, ch in enumerate(span):
                 yield len(span) if st == 0 else None, ch
 
-    iterchar = iter(iter_char())
     try:
+        iterchar = iter(iter_char())
         span_len, cur_char = next(iterchar)
+        for offset, j in enumerate(text_concatenated):
+            if cur_char != j:
+                if j in delimiters:
+                    continue
+                else:
+                    raise AssertionError(f"Char '{j}' at pos {offset} does not match char '{cur_char}' from span #{span_idx} ('{span}'), and is not in delimiters {delimiters};")
+            else:
+                if span_len is not None:
+                    offsets.append((offset, offset + span_len))
+                span_len, cur_char = next(iterchar)
+        raise AssertionError("Text is too short, not enough character for whole spans.")
+
     except StopIteration:
         return offsets
-
-    for offset, j in enumerate(text_concatenated):
-        if cur_char != j:
-            if j in delimiters:
-                continue
-            else:
-                raise AssertionError(f"Char '{j}' at pos {offset} does not match char '{cur_char}' from span #{span_idx} ('{span}'), and is not in delimiters {delimiters};")
-        else:
-            if span_len is not None:
-                offsets.append((offset, offset + span_len))
-            try:
-                span_len, cur_char = next(iterchar)
-            except StopIteration:
-                return offsets
