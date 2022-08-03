@@ -28,7 +28,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class IdAbusive(datasets.GeneratorBasedBuilder):
+class Netifier(datasets.GeneratorBasedBuilder):
     """Netifier dataset is a collection of scraped posts on famous social media sites in Indonesia,
     such as Instagram, Twitter, and Kaskus aimed to do multi-label toxicity classification."""
 
