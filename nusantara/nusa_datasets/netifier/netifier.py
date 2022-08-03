@@ -109,7 +109,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             for row in df.itertuples():
                 ex = {
-                    "text": row.original_text,
+                    "text": row.text,
                 }
                 for label in label_cols:
                     ex[label] = getattr(row, label)
@@ -119,7 +119,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {
                     "id": str(row.id),
-                    "text": row.original_text,
+                    "text": row.text,
                     "labels": [label for label in row[4:]],
                 }
                 yield row.id, ex
