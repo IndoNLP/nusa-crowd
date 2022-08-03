@@ -50,6 +50,14 @@ def load_ud_data_as_nusantara_kb(filepath):
         offsets = get_span_offsets(tokens["form"], tokens["text"])
         return {
             "id": sent_id,
+            "passages": [
+                {
+                    "id": f"{sent_id}_passages",
+                    "type": "",
+                    "text": [tokens["text"]],
+                    "offsets": [(0, len(tokens["text"]))],
+                }
+            ],
             "entities": [
                 {
                     "id": f"{sent_id}_EntID_{ent_id}",
@@ -76,7 +84,6 @@ def load_ud_data_as_nusantara_kb(filepath):
                 for rel_id, (rel_type, rel_child, rel_parent) in enumerate(zip(tokens["deprel"], tokens["id"], tokens["head"]))
             ],
             "events": [],
-            "passages": [],
             "coreferences": [],
         }
 
