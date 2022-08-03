@@ -60,7 +60,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
                 {
                     "text": datasets.Value("string"),
                     "pornography": datasets.Value("bool"),
-                    "blasphemy/racism": datasets.Value("bool"),
+                    "blasphemy_racism_discrimination": datasets.Value("bool"),
                     "radicalism": datasets.Value("bool"),
                     "defamation": datasets.Value("bool"),
                 }
@@ -102,7 +102,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
         # Dataset does not have id, using row index as id
-        label_cols = ["pornography", "blasphemy/racism", "radicalism", "defamation"]
+        label_cols = ["pornography", "blasphemy_racism_discrimination", "radicalism", "defamation"]
         df = pd.read_csv(filepath, encoding="ISO-8859-1").reset_index()
         df.columns = ["id", "original_text", "text"] + label_cols
 
@@ -120,7 +120,7 @@ class IdAbusive(datasets.GeneratorBasedBuilder):
                 ex = {
                     "id": str(row.id),
                     "text": row.original_text,
-                    "labels": [label for label in row[3:]],
+                    "labels": [label for label in row[4:]],
                 }
                 yield row.id, ex
         else:
