@@ -72,7 +72,6 @@ class SentimentNathasaReview(datasets.GeneratorBasedBuilder):
                {
                     "id": datasets.Value("string"),
                     "usr": datasets.Value("string"),
-                    "source": datasets.Value("string"),
                     "text": datasets.Value("string"),
                     "label": datasets.Value("string"),
                }
@@ -94,6 +93,13 @@ class SentimentNathasaReview(datasets.GeneratorBasedBuilder):
 
         return [
             datasets.SplitGenerator(
+                name=datasets.Split.TRAIN,
+                gen_kwargs={
+                    "filepath": data_dir,
+                    "split": "train",
+                },
+            ),
+            datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
                     "filepath": data_dir,
@@ -111,14 +117,22 @@ class SentimentNathasaReview(datasets.GeneratorBasedBuilder):
                         row_data = eval(row[0].replace(';',','))[0]
                     except:
                         continue
-                    ex = {
-                        "id": row_data[0],
-                        "usr": row_data[1],
-                        "source": row_data[3],
-                        "text": row_data[4],
-                        "label": row_data[2],
-                    }
-                    yield row_data[0], ex
+                    if split == "train" and row_data[3] == "DATA LATIH":
+                        ex = {
+                            "id": row_data[0],
+                            "usr": row_data[1],
+                            "text": row_data[4],
+                            "label": row_data[2],
+                        }
+                        yield row_data[0], ex
+                    elif split == "test" and row_data[3] == "DATA UJI":
+                        ex = {
+                            "id": row_data[0],
+                            "usr": row_data[1],
+                            "text": row_data[4],
+                            "label": row_data[2],
+                        }
+                        yield row_data[0], ex
 
         elif self.config.schema == "nusantara_text":
             with open(filepath, "r") as F:
@@ -128,11 +142,19 @@ class SentimentNathasaReview(datasets.GeneratorBasedBuilder):
                         row_data = eval(row[0].replace(';',','))[0]
                     except:
                         continue
-                    ex = {
-                        "id": row_data[0],
-                        "text": row_data[4],
-                        "label": row_data[2],
-                    }
-                    yield row_data[0], ex
+                    if split == "train" and row_data[3] == "DATA LATIH":
+                        ex = {
+                            "id": row_data[0],
+                            "text": row_data[4],
+                            "label": row_data[2],
+                        }
+                        yield row_data[0], ex
+                    elif split == "test" and row_data[3] == "DATA UJI":
+                        ex = {
+                            "id": row_data[0],
+                            "text": row_data[4],
+                            "label": row_data[2],
+                        }
+                        yield row_data[0], ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
