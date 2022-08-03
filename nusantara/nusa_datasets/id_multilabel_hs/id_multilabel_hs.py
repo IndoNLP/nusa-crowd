@@ -24,6 +24,8 @@ _CITATION = """\
 }
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "id_multilabel_hs"
 
 _DESCRIPTION = """\

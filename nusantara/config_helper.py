@@ -17,6 +17,18 @@ from datasets import load_dataset
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, SCHEMA_TO_TASKS
 
+_LARGE_CONFIG_NAMES = [
+    
+]
+
+_RESOURCE_CONFIG_NAMES = [
+
+]
+
+_CURRENTLY_BROKEN_NAMES = [
+
+]
+
 @dataclass
 class NusantaraMetadata:
     """Metadata for one config of a dataset."""
@@ -27,7 +39,6 @@ class NusantaraMetadata:
     languages: List[str]
     config: NusantaraConfig
     is_local: bool
-    is_pubmed: bool
     is_nusantara_schema: bool
     nusantara_schema_caps: Optional[str]
     is_large: bool
@@ -39,7 +50,6 @@ class NusantaraMetadata:
     citation: str
     description: str
     homepage: str
-    display_name: str
     license: str
 
     _ds_module: datasets.load.DatasetModule = field(repr=False)
@@ -80,7 +90,6 @@ class NusantaraMetadata:
 def default_is_keeper(metadata: NusantaraMetadata) -> bool:
     return not metadata.is_large and not metadata.is_resource and metadata.is_nusantara_schema
 
-
 class NusantaraConfigHelper:
     """
     Handles creating and filtering BigBioDatasetConfigHelper instances.
@@ -93,7 +102,7 @@ class NusantaraConfigHelper:
     ):
 
         path_to_here = pathlib.Path(__file__).parent.absolute()
-        self.path_to_biodatasets = (path_to_here / "biodatasets").resolve()
+        self.path_to_biodatasets = (path_to_here / "nusa_datasets").resolve()
         self.dataloader_scripts = sorted(
             self.path_to_biodatasets.glob(os.path.join("*", "*.py"))
         )
@@ -126,6 +135,8 @@ class NusantaraConfigHelper:
                 is_nusantara_schema = config.schema.startswith("nusantara")
                 if is_nusantara_schema:
                     nusantara_schema_caps = config.schema.split("_")[1].upper()
+                    if nusantara_schema_caps == 'SEQ':
+                        nusantara_schema_caps = 'SEQ_LABEL'
                     tasks = SCHEMA_TO_TASKS[nusantara_schema_caps] & set(
                         py_module._SUPPORTED_TASKS
                     )
@@ -141,7 +152,6 @@ class NusantaraConfigHelper:
                         languages=py_module._LANGUAGES,
                         config=config,
                         is_local=py_module._LOCAL,
-                        is_pubmed=py_module._PUBMED,
                         is_nusantara_schema=is_nusantara_schema,
                         nusantara_schema_caps=nusantara_schema_caps,
                         is_large=config.name in _LARGE_CONFIG_NAMES,
@@ -153,7 +163,6 @@ class NusantaraConfigHelper:
                         citation=py_module._CITATION,
                         description=py_module._DESCRIPTION,
                         homepage=py_module._HOMEPAGE,
-                        display_name=py_module._DISPLAYNAME,
                         license=py_module._LICENSE,
                         _ds_module=ds_module,
                         _py_module=py_module,
@@ -230,40 +239,3 @@ class NusantaraConfigHelper:
             return self._helpers[key]
         else:
             raise TypeError("Invalid argument type.")
-
-
-if __name__ == "__main__":
-
-    conhelps = NusantaraConfigHelper()
-
-    # filter and load datasets
-    # ====================================================================
-    tmvar_datasets = [
-        helper.load_dataset()
-        for helper in conhelps.filtered(
-            lambda x: ("tmvar" in x.dataset_name and x.is_nusantara_schema)
-        )
-    ]
-
-    # examples of other filters
-    # ====================================================================
-
-    # get all source schema config helpers
-    source_helpers = conhelps.filtered(lambda x: x.config.schema == "source")
-
-    # get all local nusantara config helpers
-    bb_local_helpers = conhelps.filtered(lambda x: x.is_nusantara_schema and x.is_local)
-
-    # nusantara NER public tasks
-    bb_ner_public_helpers = conhelps.filtered(
-        lambda x: (
-            x.is_nusantara_schema
-            and Tasks.NAMED_ENTITY_RECOGNITION in x.tasks
-            and not x.is_local
-        )
-    )
-
-    # n2c2 datasets
-    bb_n2c2_helpers = conhelps.filtered(
-        lambda x: ("n2c2" in x.dataset_name and x.is_nusantara_schema)
-    )
