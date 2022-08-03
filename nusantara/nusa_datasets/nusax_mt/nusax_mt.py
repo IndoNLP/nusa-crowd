@@ -107,7 +107,7 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source" or self.config.schema == "nusantara_t2t":
             features = schemas.text2text_features
         else:
-            raise ValueError(f"Invalid config: {self.config.name}")
+            raise ValueError(f"Invalid config schema: {self.config.schema}")
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -140,7 +140,7 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path) -> Tuple[int, Dict]:
         if self.config.schema != "source" and self.config.schema != "nusantara_t2t":
-            raise ValueError(f"Invalid config: {self.config.name}")
+            raise ValueError(f"Invalid config schema: {self.config.schema}")
 
         df = pd.read_csv(filepath).reset_index()
         if self.config.name == "nusax_mt_source" or self.config.name == "nusax_mt_nusantara_t2t":
