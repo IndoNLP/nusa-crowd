@@ -11,7 +11,7 @@ from nusantara.utils.constants import Tasks
 _CITATION = """\
 """
 
-_DATASETNAME = "id_multilabel_hs"
+_DATASETNAME = "netifier"
 
 _DESCRIPTION = """\
 Netifier dataset is a collection of scraped posts on famous social media sites in Indonesia,
