@@ -12,7 +12,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks
-from nusantara.utils.schemas import kb_features, pairs_features, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features
+from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -33,7 +33,7 @@ _TASK_TO_SCHEMA = {
     Tasks.SENTENCE_ORDERING: "SEQ_LABEL",
     Tasks.QUESTION_ANSWERING: "QA",
     Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
-    Tasks.SEMANTIC_SIMILARITY: "PAIRS",
+    Tasks.SEMANTIC_SIMILARITY: "PAIRS_SCORE",
     Tasks.NEXT_SENTENCE_PREDICTION: "PAIRS",
     Tasks.PARAPHRASING: "T2T",
     Tasks.MACHINE_TRANSLATION: "T2T",
@@ -55,6 +55,7 @@ _SCHEMA_TO_FEATURES = {
     "TEXT": text_features(),
     "TEXT_MULTI": text_multi_features(),
     "PAIRS": pairs_features(),
+    "PAIRS_SCORE": pairs_features_score(),
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
     "ASR": asr_features,
@@ -198,7 +199,7 @@ class TestDataLoader(unittest.TestCase):
             )
 
         # check dataset samples
-        for schema in ['source'] + [f"nusantara_{s.lower()}" for s in self.schemas_to_check]:
+        for schema in ["source"] + [f"nusantara_{s.lower()}" for s in self.schemas_to_check]:
             dataset = datasets.load_dataset(
                 self.PATH,
                 name=f"{self.SUBSET_ID}_{schema}",
@@ -206,7 +207,6 @@ class TestDataLoader(unittest.TestCase):
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
             logger.info(f"Dataset sample [{schema}]\n{dataset[list(dataset.keys())[0]][0]}")
-
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """

@@ -54,10 +54,10 @@ class IdSts(datasets.GeneratorBasedBuilder):
             subset_id="id_sts",
         ),
         NusantaraConfig(
-            name="id_sts_nusantara_pairs",
+            name="id_sts_nusantara_pairs_score",
             version=NUSANTARA_VERSION,
             description="ID_STS Nusantara schema",
-            schema="nusantara_pairs",
+            schema="nusantara_pairs_score",
             subset_id="id_sts",
         ),
     ]
@@ -71,11 +71,11 @@ class IdSts(datasets.GeneratorBasedBuilder):
                 {
                     "text_1": datasets.Value("string"),
                     "text_2": datasets.Value("string"),
-                    "score": datasets.Value("float32"),
+                    "label": datasets.Value("float64"),
                 }
             )
-        elif self.config.schema == "nusantara_pairs":
-            features = schemas.pairs_features()
+        elif self.config.schema == "nusantara_pairs_score":
+            features = schemas.pairs_features_score()
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -93,11 +93,11 @@ class IdSts(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                gen_kwargs={"filepath": train_data_path},
+                gen_kwargs={"filepath": train_data_path, "split": "train"},
             ),
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
-                gen_kwargs={"filepath": test_data_path},
+                gen_kwargs={"filepath": test_data_path, "split": "test"},
             ),
         ]
 
@@ -105,16 +105,16 @@ class IdSts(datasets.GeneratorBasedBuilder):
         """Yields examples as (key, example) tuples."""
         # Dataset does not have id, using row index as id
         df = pd.read_csv(filepath, delimiter="\t").reset_index()
-        df.columns = ["id", "score", "original_text_1", "original_text_2", "text_1", "text_2"]
+        df.columns = ["id", "score", "original_text_1", "original_text_2", "source", "text_1", "text_2"]
 
         if self.config.schema == "source":
             for row in df.itertuples():
-                ex = {"text_1": row.text_1, "text_2": row.text_2, "score": row.score}
+                ex = {"text_1": row.text_1, "text_2": row.text_2, "label": row.score}
                 yield row.id, ex
 
-        elif self.config.schema == "nusantara_text_multi":
+        elif self.config.schema == "nusantara_pairs_score":
             for row in df.itertuples():
-                ex = {"id": str(row.id), "text_1": row.text_1, "text_2": row.text_2, "score": row.score}
+                ex = {"id": str(row.id), "text_1": row.text_1, "text_2": row.text_2, "label": row.score}
                 yield row.id, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
