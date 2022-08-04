@@ -20,7 +20,7 @@ range of increasingly challenging problems in natural language semantics. This i
 from 2012-2016 for Semantic Textual Similarity Task to Indonesian language.
 """
 
-_HOMEPAGE = "https://github.com/ahmadizzan/sts-ind"
+_HOMEPAGE = "https://github.com/ahmadizzan/sts-indo"
 
 _LICENSE = "Unknown"
 
