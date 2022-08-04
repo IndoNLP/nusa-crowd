@@ -29,9 +29,8 @@ of words from Indonesian tweet, InSet was constructed by manually weighting each
 
 _HOMEPAGE = "https://www.researchgate.net/publication/321757985_InSet_Lexicon_Evaluation_of_a_Word_List_for_Indonesian_Sentiment_Analysis_in_Microblogs"
 _LICENSE = "Unknown"
-_URLS = {
-    _DATASETNAME: "https://github.com/fajri91/InSet/archive/refs/heads/master.zip"
-}
+_URLS = {_DATASETNAME: "https://github.com/fajri91/InSet/archive/refs/heads/master.zip"}
+
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
@@ -70,7 +69,6 @@ class InsetLexicon(datasets.GeneratorBasedBuilder):
             labels = [str(label) for label in labels]
             features = schemas.text_features(labels)
 
-
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
             features=features,
@@ -83,9 +81,9 @@ class InsetLexicon(datasets.GeneratorBasedBuilder):
         """Returns SplitGenerators."""
         # Dataset does not have predetermined split, putting all as TRAIN
         urls = _URLS[_DATASETNAME]
-        base_dir = Path(dl_manager.download_and_extract(urls)) / "InSet-master" 
+        base_dir = Path(dl_manager.download_and_extract(urls)) / "InSet-master"
         positive_df = pd.read_csv(base_dir / "positive.tsv", sep="\t")
-        negative_df = pd.read_csv(base_dir / "negative.tsv", sep ="\t")
+        negative_df = pd.read_csv(base_dir / "negative.tsv", sep="\t")
         merged_df = pd.concat([positive_df, negative_df]).reset_index(drop=True)
         merged_data_dir = base_dir / "dataset.tsv"
         merged_df.to_csv(merged_data_dir, sep="\t")
