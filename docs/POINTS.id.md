@@ -2,7 +2,7 @@
 
 Untuk dianggap sebagai co-author, diperlukan 10 poin kontribusi.
 
-> **Catatan**: Tujuan adanya sistem poin kontribusi bukan untuk menghalangi kolaborasi, melainkan untuk mengapresiasi dataset langka dan berkualitas tinggi. 
+> **Catatan**: Tujuan adanya sistem poin kontribusi bukan untuk menghalangi kolaborasi, melainkan untuk mengapresiasi dataset langka dan berkualitas tinggi.
 Oleh karena itu, kami mungkin menurunkan syarat poin untuk mengakomodasi lebih banyak co-author, jika diperlukan.
 
 ## Implementasi Data Loader
@@ -21,9 +21,9 @@ Untuk mendukung pengembangan dataset bahasa daerah:
 - Untuk dataset bahasa Sunda, Jawa, atau Minang, akan diberikan nilai +2
 - Untuk dataset dari bahasa daerah lain, akan diberikan nilai +3
 
-Berdasarkan hasil observasi, kami menemukan bahwa terdapat beberapa jenis task NLP yang banyak ditemukan dalam bahasa-bahasa di Indonesia, antara lain: machine translation (MT), language modeling (LM), sentiment analysis (SA), dan named entity recognition (NER). Untuk mendukung pengembangan korpora NLP dalam task lainnya, semua datasheet yang mencakup task selain yang disebutkan diatas, akan diberikan nilai tambahan +2. 
+Berdasarkan hasil observasi, kami menemukan bahwa terdapat beberapa jenis task NLP yang banyak ditemukan dalam bahasa-bahasa di Indonesia, antara lain: machine translation (MT), language modeling (LM), sentiment analysis (SA), dan named entity recognition (NER). Untuk mendukung pengembangan korpora NLP dalam task lainnya, semua datasheet yang mencakup task selain yang disebutkan diatas, akan diberikan nilai tambahan +2.
 
-Selain daripada itu, dikarenakan keterbatasan korpora NLP di bahasa-bahasa Indonesia yang menggunakan modality lain (speech-text, image-text, multimodal), datasheets yang mencakup modality selain text akan diberikan nilai tambahan +2. 
+Selain daripada itu, dikarenakan keterbatasan korpora NLP di bahasa-bahasa Indonesia yang menggunakan modality lain (speech-text, image-text, multimodal), datasheets yang mencakup modality selain text akan diberikan nilai tambahan +2.
 
 Kami menyadari bahwa kualitas dari sebuah dataset sangatlah beragam. Sebagai bentuk keadilan dalam penilaian dataset, bagi dataset yang tidak memenuhi standar kualitas yang ditentukan, akan diberikan pengurangan nilai sebesar 50%. Ketentuan ini berlaku bagi dataset yang dikumpulkan dengan:
 - Crawling tanpa dilakukan pengecekan ulang secara manual
