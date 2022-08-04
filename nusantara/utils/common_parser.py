@@ -1,3 +1,5 @@
+from typing import Iterable
+
 import pandas as pd
 from conllu import parse
 
@@ -21,29 +23,38 @@ def load_conll_data(file_path):
     return dataset
 
 
-def load_ud_data(filepath):
+def load_ud_data(filepath, filter_kwargs=None, assert_fn=None):
     """
     Load and parse conllu data.
 
     Proposed by @fhudi for issue #34 and #9.
 
     :param filepath: file path
+    :param filter_kwargs: filtering tokens, see conllu.models.TokenList.filter()
+    :param assert_fn: assertion to make sure raw data is in the expected format
     :return: generator with schema following CONLLU
     """
     dataset_raw = parse(open(filepath).read())
-    return map(lambda sent: {**sent.metadata, **pd.DataFrame(sent).to_dict(orient="list")}, dataset_raw)
+
+    filter_kwargs = filter_kwargs or dict()
+    if callable(assert_fn):
+        for token_list in dataset_raw:
+            assert_fn(token_list)
+
+    return map(lambda sent: {**sent.metadata, **pd.DataFrame(sent.filter(**filter_kwargs)).to_dict(orient="list")}, dataset_raw)
 
 
-def load_ud_data_as_nusantara_kb(filepath):
+def load_ud_data_as_nusantara_kb(filepath, dataset_source: Iterable = tuple()):
     """
     Load and parse conllu data, followed by mapping its elements to Nusantara Knowledge Base schema.
 
     Proposed by @fhudi for issue #34 and #9.
 
     :param filepath: file path
+    :param dataset_source: dataset with source schema (output of load_ud_data())
     :return: generator for Nusantara KB schema
     """
-    dataset_source = list(load_ud_data(filepath))
+    dataset_source = dataset_source or list(load_ud_data(filepath))
 
     def as_nusa_kb(tokens):
         sent_id = tokens["sent_id"]
