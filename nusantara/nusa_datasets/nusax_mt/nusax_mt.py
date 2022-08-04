@@ -157,8 +157,8 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
                             "id": str(id_count),
                             "text_1": row[LANGUAGES_MAP[lang_source]],
                             "text_2": row[LANGUAGES_MAP[lang_target]],
-                            "text_1_name": LANGUAGES_MAP[lang_source],
-                            "text_2_name": LANGUAGES_MAP[lang_target],
+                            "text_1_name": lang_source,
+                            "text_2_name": lang_target,
                         }
                         yield id_count, ex
 
@@ -172,7 +172,7 @@ class NusaXMT(datasets.GeneratorBasedBuilder):
                     "id": str(index),
                     "text_1": row[LANGUAGES_MAP[lang_source]],
                     "text_2": row[LANGUAGES_MAP[lang_target]],
-                    "text_1_name": LANGUAGES_MAP[lang_source],
-                    "text_2_name": LANGUAGES_MAP[lang_target],
+                    "text_1_name": lang_source,
+                    "text_2_name": lang_target,
                 }
                 yield str(index), ex
