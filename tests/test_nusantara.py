@@ -12,7 +12,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks, TASK_TO_SCHEMA, VALID_TASKS, VALID_SCHEMAS, SCHEMA_TO_FEATURES, TASK_TO_FEATURES
-from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features
+from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features, image_text_features
 
 sys.path.append(str(Path(__file__).parent.parent))
 
