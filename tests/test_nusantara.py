@@ -199,7 +199,7 @@ class TestDataLoader(unittest.TestCase):
             )
 
         # check dataset samples
-        for schema in ["source"] + [f"nusantara_{s.lower()}" for s in self.schemas_to_check]:
+        for schema in ['source'] + [f"nusantara_{s.lower()}" for s in self.schemas_to_check]:
             dataset = datasets.load_dataset(
                 self.PATH,
                 name=f"{self.SUBSET_ID}_{schema}",
@@ -207,6 +207,7 @@ class TestDataLoader(unittest.TestCase):
                 use_auth_token=self.USE_AUTH_TOKEN,
             )
             logger.info(f"Dataset sample [{schema}]\n{dataset[list(dataset.keys())[0]][0]}")
+
 
     def get_feature_statistics(self, features: Features, schema: str) -> Dict:
         """
