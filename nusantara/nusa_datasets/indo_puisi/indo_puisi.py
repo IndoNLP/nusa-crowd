@@ -17,6 +17,7 @@ _CITATION = """
 """
 
 _DESCRIPTION = """\
+Puisi is an Indonesian poetic form. The dataset was collected by scraping various websites. It contains 7223 Indonesian puisi along with the title and author.
 """
 
 _HOMEPAGE = "https://github.com/ilhamfp/puisi-pantun-generator"
@@ -30,61 +31,18 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 _URLS = {
-    "train": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/train.csv",
-    "validation": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/valid.csv",
-    "test": "https://raw.githubusercontent.com/IndoNLP/nusax/main/datasets/sentiment/{lang}/test.csv",
+    "train": "https://github.com/ilhamfp/puisi-pantun-generator/blob/main/data/puisi.csv",
 }
 
 
-def nusantara_config_constructor(lang, schema, version):
-    """Construct NusantaraConfig with nusax_senti_{lang}_{schema} as the name format"""
-    if schema != "source" and schema != "nusantara_text":
-        raise ValueError(f"Invalid schema: {schema}")
-
-    if lang == "":
-        return NusantaraConfig(
-            name="nusax_senti_{schema}".format(schema=schema),
-            version=datasets.Version(version),
-            description="nusax_senti with {schema} schema for all 12 languages".format(schema=schema),
-            schema=schema,
-            subset_id="nusax_senti",
-        )
-    else:
-        return NusantaraConfig(
-            name="nusax_senti_{lang}_{schema}".format(lang=lang, schema=schema),
-            version=datasets.Version(version),
-            description="nusax_senti with {schema} schema for {lang} language".format(lang=lang, schema=schema),
-            schema=schema,
-            subset_id="nusax_senti",
-        )
-
-
-LANGUAGES_MAP = {
-    "ace": "acehnese",
-    "ban": "balinese",
-    "bjn": "banjarese",
-    "bug": "buginese",
-    "eng": "english",
-    "ind": "indonesian",
-    "jav": "javanese",
-    "mad": "madurese",
-    "min": "minangkabau",
-    "nij": "ngaju",
-    "sun": "sundanese",
-    "bbc": "toba_batak",
-}
-
-
-class NusaXSenti(datasets.GeneratorBasedBuilder):
-    """NusaX-Senti is a 3-labels (positive, neutral, negative) sentiment analysis dataset for 10 Indonesian local languages + Indonesian and English."""
+class IndoPuisi(datasets.GeneratorBasedBuilder):
+    """IndoPuisi contains 7223 Indonesian puisi along with the title and author."""
 
     BUILDER_CONFIGS = (
         [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
-        + [nusantara_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
-        + [nusantara_config_constructor("", "source", _SOURCE_VERSION), nusantara_config_constructor("", "nusantara_text", _NUSANTARA_VERSION)]
     )
 
-    DEFAULT_CONFIG_NAME = "nusax_senti_ind_source"
+    DEFAULT_CONFIG_NAME = "indo_puisi_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
