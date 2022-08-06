@@ -100,14 +100,14 @@ class IndoPuisi(datasets.GeneratorBasedBuilder):
         if self.config.name == "indo_puisi_source":
             for row in df.itertuples():
                 ex = {
-                    "id": str(row.index), 
+                    "id": str(row.index),
                     "puisi": row.puisi,
                     "title": row.title,
                     "author": row.author,
                     "puisi_with_header": row.puisi_with_header,
-                    }
+                }
                 yield row.index, ex
-            
+
         elif self.config.name == "indo_puisi_nusantara_ssp":
             for row in df.itertuples():
                 ex = {"id": str(row.index), "text": row.puisi}
