@@ -1,4 +1,4 @@
-name: Build README
+name: Update README
 on:
   push:
   workflow_dispatch:
@@ -25,5 +25,5 @@ jobs:
         git config --global user.email "readme-bot@indonlp.com"
         git config --global user.name "README-Bot"
         git add -A
-        git commit -m "Updated progress" || exit 0
+        git commit -m "Updated progress bar" || exit 0
         git push

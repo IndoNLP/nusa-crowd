@@ -35,12 +35,14 @@ def calculate_completed_dataset(base_dir="nusantara/nusa_datasets"):
 
 
 if __name__ == "__main__":
+    # read current readme
     readme_path = root / "README.md"
     readme = readme_path.open().read()
 
     readme_id_path = root / "README.id.md"
     readme_id = readme_id_path.open().read()
 
+    # calculate progress
     target = [30, 60, 100, 150]
     count_completed_dataset = calculate_completed_dataset()
     milestones = {k: count_completed_dataset for k in target}
