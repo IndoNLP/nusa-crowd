@@ -45,7 +45,7 @@ if __name__ == "__main__":
     count_completed_dataset = calculate_completed_dataset()
     milestones = {k: count_completed_dataset for k in target}
     progress_bar = build_progress_bar(milestones=milestones)
-    entries_md = "\n".join(progress_bar)
+    entries_md = "\n\n".join(progress_bar)
 
     # Update entries
     rewritten_entries = replace_writing(readme, "milestone", entries_md)
