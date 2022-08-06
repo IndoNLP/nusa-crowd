@@ -24,14 +24,14 @@ _HOMEPAGE = "https://github.com/ilhamfp/puisi-pantun-generator"
 
 _LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
-_SUPPORTED_TASKS = [Tasks.SSP]
+_SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]
 
 _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
 _URLS = {
-    "train": "https://github.com/ilhamfp/puisi-pantun-generator/blob/main/data/puisi.csv",
+    "train": "https://raw.githubusercontent.com/ilhamfp/puisi-pantun-generator/main/data/puisi.csv",
 }
 
 
@@ -39,7 +39,20 @@ class IndoPuisi(datasets.GeneratorBasedBuilder):
     """IndoPuisi contains 7223 Indonesian puisi along with the title and author."""
 
     BUILDER_CONFIGS = (
-        [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP]
+        NusantaraConfig(
+            name="indo_puisi_source",
+            version=_SOURCE_VERSION,
+            description="Indo puisi source schema",
+            schema="source",
+            subset_id="indo_puisi",
+        ),
+        NusantaraConfig(
+            name="indo_puisi_nusantara_ssp",
+            version=_NUSANTARA_VERSION,
+            description="Indo puisi Nusantara schema",
+            schema="nusantara_ssp",
+            subset_id="indo_puisi",
+        ),
     )
 
     DEFAULT_CONFIG_NAME = "indo_puisi_source"
@@ -49,12 +62,16 @@ class IndoPuisi(datasets.GeneratorBasedBuilder):
             features = datasets.Features(
                 {
                     "id": datasets.Value("string"),
-                    "text": datasets.Value("string"),
-                    "label": datasets.Value("string"),
+                    "puisi": datasets.Value("string"),
+                    "title": datasets.Value("string"),
+                    "author": datasets.Value("string"),
+                    "puisi_with_header": datasets.Value("string"),
                 }
             )
-        elif self.config.schema == "nusantara_text":
-            features = schemas.text_features(["negative", "neutral", "positive"])
+        elif self.config.schema == "nusantara_ssp":
+            features = schemas.self_supervised_pretraining.features
+        else:
+            raise ValueError(f"Invalid config schema: {self.config.schema}")
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -66,46 +83,32 @@ class IndoPuisi(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
-        if self.config.name == "nusax_senti_source" or self.config.name == "nusax_senti_nusantara_text":
-            # Load all 12 languages
-            train_csv_path = dl_manager.download_and_extract([_URLS["train"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
-            validation_csv_path = dl_manager.download_and_extract([_URLS["validation"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
-            test_csv_path = dl_manager.download_and_extract([_URLS["test"].format(lang=LANGUAGES_MAP[lang]) for lang in LANGUAGES_MAP])
-        else:
-            lang = self.config.name[12:15]
-            train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=LANGUAGES_MAP[lang])))
-            validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=LANGUAGES_MAP[lang])))
-            test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=LANGUAGES_MAP[lang])))
+        train_csv_path = Path(dl_manager.download(_URLS["train"]))
 
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
                 gen_kwargs={"filepath": train_csv_path},
             ),
-            datasets.SplitGenerator(
-                name=datasets.Split.VALIDATION,
-                gen_kwargs={"filepath": validation_csv_path},
-            ),
-            datasets.SplitGenerator(
-                name=datasets.Split.TEST,
-                gen_kwargs={"filepath": test_csv_path},
-            ),
         ]
 
     def _generate_examples(self, filepath: Path) -> Tuple[int, Dict]:
-        if self.config.schema != "source" and self.config.schema != "nusantara_text":
-            raise ValueError(f"Invalid config: {self.config.name}")
+        if self.config.schema != "source" and self.config.schema != "nusantara_ssp":
+            raise ValueError(f"Invalid config schema: {self.config.schema}")
 
-        if self.config.name == "nusax_senti_source" or self.config.name == "nusax_senti_nusantara_text":
-            ldf = []
-            for fp in filepath:
-                ldf.append(pd.read_csv(fp))
-            df = pd.concat(ldf, axis=0, ignore_index=True).reset_index()
-            # Have to use index instead of id to avoid duplicated key
-            df = df.drop(columns=["id"]).rename(columns={"index": "id"})
-        else:
-            df = pd.read_csv(filepath).reset_index()
-
-        for row in df.itertuples():
-            ex = {"id": str(row.id), "text": row.text, "label": row.label}
-            yield row.id, ex
+        df = pd.read_csv(filepath).reset_index()
+        if self.config.name == "indo_puisi_source":
+            for row in df.itertuples():
+                ex = {
+                    "id": str(row.index), 
+                    "puisi": row.puisi,
+                    "title": row.title,
+                    "author": row.author,
+                    "puisi_with_header": row.puisi_with_header,
+                    }
+                yield row.index, ex
+            
+        elif self.config.name == "indo_puisi_nusantara_ssp":
+            for row in df.itertuples():
+                ex = {"id": str(row.index), "text": row.puisi}
+                yield row.index, ex
