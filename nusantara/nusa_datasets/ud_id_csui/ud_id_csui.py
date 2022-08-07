@@ -209,8 +209,8 @@ class UdIdCsuiDataset(datasets.GeneratorBasedBuilder):
                         "id": d["sent_id"],
                         "text_1": d["text"],
                         "text_2": d["text_en"],
-                        "text_1_name": "id",
-                        "text_2_name": "en",
+                        "text_1_name": "ind",
+                        "text_2_name": "eng",
                     },
                     dataset,
                 )
