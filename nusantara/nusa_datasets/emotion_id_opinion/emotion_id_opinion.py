@@ -15,21 +15,18 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _LANGUAGES = ["ind"]  # We follow ISO639-3 langauge code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
-@inproceedings{saputri2018emotion,
-  title={Emotion classification on indonesian twitter dataset},
-  author={Saputri, Mei Silviana and Mahendra, Rahmad and Adriani, Mirna},
-  booktitle={2018 International Conference on Asian Language Processing (IALP)},
-  pages={90--95},
-  year={2018},
-  organization={IEEE}
-}
-
-@inproceedings{wilie2020indonlu,
-  title={IndoNLU: Benchmark and Resources for Evaluating Indonesian Natural Language Understanding},
-  author={Wilie, Bryan and Vincentio, Karissa and Winata, Genta Indra and Cahyawijaya, Samuel and Li, Xiaohong and Lim, Zhi Yuan and Soleman, Sidik and Mahendra, Rahmad and Fung, Pascale and Bahar, Syafri and others},
-  booktitle={Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing},
-  pages={843--857},
-  year={2020}
+@article{RICCOSAN2022108465,
+title = {Emotion dataset from Indonesian public opinion},
+journal = {Data in Brief},
+volume = {43},
+pages = {108465},
+year = {2022},
+issn = {2352-3409},
+doi = {https://doi.org/10.1016/j.dib.2022.108465},
+url = {https://www.sciencedirect.com/science/article/pii/S2352340922006588},
+author = { Riccosan and Karen Etania Saputra and Galih Dea Pratama and Andry Chowanda},
+keywords = {Emotion classification, Dataset, Tweet, Indonesia},
+abstract = {An opinion is a type of judgment or a person's point of view about something. Twitter is a popular social media platform that includes a lot of public opinions and would be a suitable location to mine data in text form. With its vast population and active Twitter user base, Indonesia has the potential to be a source of opinion data mining. An opinion may be processed and result in the form of a person's emotional response towards something, such as whether they like, hate, love, or are happy about it. Upon that basis, a dataset of Indonesian-language tweets conveying public opinion on various topics was formed. The fact that there are only limited publicly available emotions text datasets in the Indonesian language supports our basis in this research to form our emotion dataset. The gathered data was cleaned and normalized in the pre-processing stage to the necessary form for study on the task of classifying emotions in Indonesian. The data collected is annotated with six emotional labels: anger, fear, joy, love, sad, and neutral.}
 }
 """
 
