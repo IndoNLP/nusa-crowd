@@ -32,8 +32,5 @@ Kami menyadari bahwa kualitas dari sebuah dataset sangatlah beragam. Sebagai ben
 
 > **Catatan**: Jika terdapat lebih dari 1 Author dalam pembangunan dataset, Author utama dapat menominasikan 1 orang Author untuk mendapatkan nilai kontribusi yang sama.
 
-### Proposal Datasheet dari Dataset orang lain
-Mengajukan datasheet dari sebuah dataset yang dibangun orang lain akan mendapatkan nilai +1.
-
 ## Listing Private Dataset
 Mencatatkan dataset yang tertutup akan mendapatkan nilai +1 untuk setiap dataset yang dicatatkan.
