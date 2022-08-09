@@ -101,14 +101,14 @@ class IndoPuisi(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {
                     "id": str(row.index),
-                    "puisi": row.puisi,
+                    "puisi": str(row.puisi).rstrip(),
                     "title": row.title,
                     "author": row.author,
-                    "puisi_with_header": row.puisi_with_header,
+                    "puisi_with_header": str(row.puisi_with_header).rstrip(),
                 }
                 yield row.index, ex
 
         elif self.config.name == "indo_puisi_nusantara_ssp":
             for row in df.itertuples():
-                ex = {"id": str(row.index), "text": row.puisi}
+                ex = {"id": str(row.index), "text": str(row.puisi).rstrip()}
                 yield row.index, ex
