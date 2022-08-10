@@ -3,8 +3,8 @@ from types import SimpleNamespace
 from collections import defaultdict
 from nusantara.utils.schemas import (
     kb_features, qa_features, text2text_features, text_features, 
-    text_multi_features, pairs_features, seq_label_features, 
-    ssp_features, asr_features
+    text_multi_features, pairs_features, pairs_features_score,
+    seq_label_features, ssp_features, asr_features
 )
 
 METADATA: dict = {
