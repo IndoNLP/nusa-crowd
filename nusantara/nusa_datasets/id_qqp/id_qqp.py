@@ -10,14 +10,22 @@ from nusantara.utils import schemas
 import json
 
 _CITATION = """\
-    https://quoradata.quora.com/First-Quora-Dataset-Release-Question-Pairs
+@misc{quoraFirstQuora,
+	author = {},
+	title = {{F}irst {Q}uora {D}ataset {R}elease: {Q}uestion {P}airs --- quoradata.quora.com},
+	howpublished = {\url{https://quoradata.quora.com/First-Quora-Dataset-Release-Question-Pairs}},
+	year = {},
+	note = {[Accessed DD-MM-YYYY]},
+}
 """
 
 _DATASETNAME = "id_qqp"
 
 _DESCRIPTION = """\
-INDOSUM is a new benchmark dataset for Indonesian text summarization. 
-The dataset consists of news articles and manually constructed summaries.
+Quora Question Pairs (QQP) dataset consists of over 400,000 question pairs, 
+and each question pair is annotated with a binary value indicating whether 
+the two questions are paraphrase of each other. This dataset is translated 
+version of QQP to Indonesian Language.
 """
 
 _HOMEPAGE = "https://github.com/louisowen6/quora_paraphrasing_id"
@@ -38,8 +46,13 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class IndoSUM(datasets.GeneratorBasedBuilder):
-    """INDOSUM is a new benchmark dataset for Indonesian text summarization. The dataset consists of news articles and manually constructed summaries."""
+class IdQuoraQuestionPairs(datasets.GeneratorBasedBuilder):
+    """
+    Quora Question Pairs (QQP) dataset consists of over 400,000 question pairs, 
+    and each question pair is annotated with a binary value indicating whether 
+    the two questions are paraphrase of each other. This dataset is translated 
+    version of QQP to Indonesian Language.
+    """
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
