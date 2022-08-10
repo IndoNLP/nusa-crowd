@@ -239,3 +239,38 @@ class NusantaraConfigHelper:
             return self._helpers[key]
         else:
             raise TypeError("Invalid argument type.")
+
+if __name__ == "__main__":
+    conhelps = NusantaraConfigHelper()
+
+    # filter and load datasets
+    # ====================================================================
+    tmvar_datasets = [
+        helper.load_dataset()
+        for helper in conhelps.filtered(
+            lambda x: ("tmvar" in x.dataset_name and x.is_nusantara_schema)
+        )
+    ]
+
+    # examples of other filters
+    # ====================================================================
+
+    # get all source schema config helpers
+    source_helpers = conhelps.filtered(lambda x: x.config.schema == "source")
+
+    # get all local nusantara config helpers
+    bb_local_helpers = conhelps.filtered(lambda x: x.is_nusantara_schema and x.is_local)
+
+    # nusantara NER public tasks
+    bb_ner_public_helpers = conhelps.filtered(
+        lambda x: (
+            x.is_nusantara_schema
+            and Tasks.NAMED_ENTITY_RECOGNITION in x.tasks
+            and not x.is_local
+        )
+    )
+
+    # n2c2 datasets
+    bb_n2c2_helpers = conhelps.filtered(
+        lambda x: ("n2c2" in x.dataset_name and x.is_nusantara_schema)
+    )

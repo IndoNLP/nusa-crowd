@@ -3,8 +3,8 @@ from types import SimpleNamespace
 from collections import defaultdict
 from nusantara.utils.schemas import (
     kb_features, qa_features, text2text_features, text_features, 
-    text_multi_features, pairs_features, pairs_features_score,
-    seq_label_features, ssp_features, asr_features
+    text_multi_features, pairs_features, seq_label_features, 
+    ssp_features, speech_text_features, image_text_features
 )
 
 METADATA: dict = {
@@ -63,7 +63,7 @@ class Tasks(Enum):
     IMAGE_CAPTIONING = "IC"
     STYLIZED_IMAGE_CAPTIONING = "SIC"
     VISUALLY_GROUNDED_REASONING = "VGR"
-
+    
 TASK_TO_SCHEMA = {
     Tasks.DEPENDENCY_PARSING: "KB",
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
@@ -78,6 +78,7 @@ TASK_TO_SCHEMA = {
     Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
     Tasks.SEMANTIC_SIMILARITY: "PAIRS_SCORE",
     Tasks.NEXT_SENTENCE_PREDICTION: "PAIRS",
+    Tasks.SHORT_ANSWER_GRADING: "PAIRS_SCORE",
     Tasks.PARAPHRASING: "T2T",
     Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
@@ -85,7 +86,12 @@ TASK_TO_SCHEMA = {
     Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT_MULTI",
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
     Tasks.SELF_SUPERVISED_PRETRAINING: "SSP",
-    Tasks.SPEECH_RECOGNITION: "ASR",
+    Tasks.SPEECH_RECOGNITION: "SPTEXT",
+    Tasks.SPEECH_TO_TEXT_TRANSLATION: "SPTEXT",
+    Tasks.TEXT_TO_SPEECH: "SPTEXT",
+    Tasks.IMAGE_CAPTIONING: "IMTEXT",
+    Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
+    Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
 }
 
 SCHEMA_TO_TASKS = defaultdict(set)
@@ -106,7 +112,8 @@ SCHEMA_TO_FEATURES = {
     "PAIRS_SCORE": pairs_features_score(),
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
-    "ASR": asr_features,
+    "SPTEXT": speech_text_features,
+    "IMTEXT": image_text_features()
 }
 
 TASK_TO_FEATURES = {

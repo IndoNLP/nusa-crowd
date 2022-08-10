@@ -21,7 +21,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
 def _get_example_text(example: dict) -> str:
     """
     Concatenate all text from passages in an example of a KB schema

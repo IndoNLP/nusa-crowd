@@ -1,1 +1,1 @@
-from nusantara.config_helper import NusantaraMetadata, NusantaraConfigHelper
+from .config_helper import NusantaraMetadata, NusantaraConfigHelper
