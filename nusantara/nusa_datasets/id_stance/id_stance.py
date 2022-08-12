@@ -21,13 +21,20 @@ _CITATION = """\
 }
 """
 _DATASETNAME = "id_stance"
-_DESCRIPTION = "Stance Classification Towards Political Figures on Blog Writing"
+_DESCRIPTION = """\
+Stance Classification Towards Political Figures on Blog Writing.
+This dataset contains dataset from the second research, which is combined from the first research and new dataset.
+The dataset consist of 337 data, about five target and every target have 1 different event.
+Two label are used: 'For' and 'Againts'.
+1. For - the text that is created by author is support the target in an event
+2. Against - the text that is created by author is oppose the target in an event
+"""
 _HOMEPAGE = "https://github.com/reneje/id_stance_dataset_article-Stance-Classification-Towards-Political-Figures-on-Blog-Writing"
 _LICENSE = "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License"
 _URLs = {
     _DATASETNAME: "https://raw.githubusercontent.com/reneje/id_stance_dataset_article-Stance-Classification-Towards-Political-Figures-on-Blog-Writing/master/dataset_stance_2_label_2018_building_by_rini.csv"
 }
-_SUPPORTED_TASKS = [Tasks.SEMANTIC_SIMILARITY]
+_SUPPORTED_TASKS = [Tasks.TEXTUAL_ENTAILMENT]
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
@@ -42,7 +49,7 @@ def parse_list(content):
 
 
 class IdStance(datasets.GeneratorBasedBuilder):
-    """-"""
+    """The ID Stance dataset is annotated with a label whether the article is in favor of the person in the context of the event"""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
@@ -109,7 +116,7 @@ class IdStance(datasets.GeneratorBasedBuilder):
                     "person": row.Tokoh,
                     "event": row.Event,
                     "title": row.Judul_Artikel,
-                    "content": ". ".join(row.Isi_Artikel),
+                    "content": " ".join(row.Isi_Artikel),
                     "stance_final": row.stance_final
                 }
                 yield row.id, ex
