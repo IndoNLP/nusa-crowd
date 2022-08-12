@@ -107,16 +107,16 @@ class IdStance(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path):
         df = pd.read_csv(filepath, sep=";", header="infer", keep_default_na=False).reset_index()
-        df.columns = ["id", "Tokoh", "Event", "Judul_Artikel", "Isi_Artikel", "stance_final", ""]
-        df.Isi_Artikel = df.Isi_Artikel.apply(parse_list)
+        df.columns = ["id", "person", "event", "title", "content", "stance_final", ""]
+        df.content = df.content.apply(parse_list)
 
         if self.config.schema == "source":
             for row in df.itertuples():
                 ex = {
-                    "person": row.Tokoh,
-                    "event": row.Event,
-                    "title": row.Judul_Artikel,
-                    "content": " ".join(row.Isi_Artikel),
+                    "person": row.person,
+                    "event": row.event,
+                    "title": row.title,
+                    "content": " ".join(row.content),
                     "stance_final": row.stance_final
                 }
                 yield row.id, ex
@@ -124,8 +124,8 @@ class IdStance(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {
                     "id": row.id,
-                    "text_1": row.Tokoh + " | " + row.Event,
-                    "text_2": " ".join([row.Judul_Artikel] + row.Isi_Artikel),
+                    "text_1": row.person + " | " + row.event,
+                    "text_2": " ".join([row.title] + row.content),
                     "label": row.stance_final
                 }
                 yield row.id, ex
