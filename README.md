@@ -4,13 +4,15 @@
 
 ![Dataset claimed](https://progress-bar.dev/80/?title=Datasets%20Claimed%20(77%20Datasets%20Claimed))
 
+<!-- milestone starts -->
 ![Milestone 1](https://progress-bar.dev/100/?title=Milestone%201%20(30%20Datasets%20Completed))
 
-![Milestone 2](https://progress-bar.dev/80/?title=Milestone%202%20(60%20Datasets%20Completed))
+![Milestone 2](https://progress-bar.dev/93/?title=Milestone%202%20(60%20Datasets%20Completed))
 
-![Milestone 3](https://progress-bar.dev/48/?title=Milestone%203%20(100%20Datasets%20Completed))
+![Milestone 3](https://progress-bar.dev/56/?title=Milestone%203%20(100%20Datasets%20Completed))
 
-![Milestone 4](https://progress-bar.dev/32/?title=Milestone%204%20(150%20Datasets%20Completed))
+![Milestone 4](https://progress-bar.dev/37/?title=Milestone%204%20(150%20Datasets%20Completed))
+<!-- milestone ends -->
 
 *Baca README ini dalam [Bahasa Indonesia](README.id.md).*
 
@@ -60,7 +62,7 @@ You can upload your dataset publicly first, eg. on Github.
 
 #### Can I create a PR if I have an idea?
 
-If you have an idea to improve or change the code of the nusa-crowd repository, please create an `issue` and ask for `feedback` before starting any PRs. 
+If you have an idea to improve or change the code of the nusa-crowd repository, please create an `issue` and ask for `feedback` before starting any PRs.
 
 #### I am confused, can you help me?
 
