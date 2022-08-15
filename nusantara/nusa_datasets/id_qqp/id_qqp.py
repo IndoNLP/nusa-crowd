@@ -13,7 +13,7 @@ _CITATION = """\
 @misc{quoraFirstQuora,
 	author = {},
 	title = {{F}irst {Q}uora {D}ataset {R}elease: {Q}uestion {P}airs --- quoradata.quora.com},
-	howpublished = {\url{https://quoradata.quora.com/First-Quora-Dataset-Release-Question-Pairs}},
+	howpublished = {https://quoradata.quora.com/First-Quora-Dataset-Release-Question-Pairs},
 	year = 2017,
 	note = {Online},
 }
