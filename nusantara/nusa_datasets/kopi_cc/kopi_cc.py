@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """
-This contains the Indonesian (ind), the Javanese (jav), and the Sundanese (sun) subset.
+KoPI-CC corpus
 
 [nusantara_schema_name] = ssp
 """
