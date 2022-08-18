@@ -187,16 +187,10 @@ class CC100(datasets.GeneratorBasedBuilder):
                     "text": datasets.Value("string"),
                 }
             )
-        elif self.config.schema == "nusantara_ssp":
+        elif self.config.schema == "nusa":
             features = schemas.self_supervised_pretraining.features
 
-        return datasets.DatasetInfo(
-            description=_DESCRIPTION,
-            features=features,
-            homepage=_HOMEPAGE,
-            license=_LICENSE,
-            citation=_CITATION,
-        )
+        a 
 
     def _split_generators(self, dl_manager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
