@@ -23,9 +23,7 @@ separated by double-newlines and paragraphs within the same document separated
 by a newline. The data is generated using the open source CC-Net repository. No
 claims of intellectual property are made on the work of preparation of the
 corpus.
-
 This contains the Indonesian (ind), the Javanese (jav), and the Sundanese (sun) subset.
-
 [nusantara_schema_name] = ssp
 """
 
@@ -84,7 +82,6 @@ _CITATION = """\
     is very competitive with strong monolingual models on the GLUE and XNLI
     benchmarks. We will make our code and models publicly available.",
 }
-
 @inproceedings{wenzek-etal-2020-ccnet,
     title = "{CCN}et: Extracting High Quality Monolingual Datasets from Web Crawl Data",
     author = "Wenzek, Guillaume  and
@@ -187,10 +184,16 @@ class CC100(datasets.GeneratorBasedBuilder):
                     "text": datasets.Value("string"),
                 }
             )
-        elif self.config.schema == "nusa":
+        elif self.config.schema == "nusantara_ssp":
             features = schemas.self_supervised_pretraining.features
 
-        a 
+        return datasets.DatasetInfo(
+            description=_DESCRIPTION,
+            features=features,
+            homepage=_HOMEPAGE,
+            license=_LICENSE,
+            citation=_CITATION,
+        )
 
     def _split_generators(self, dl_manager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
