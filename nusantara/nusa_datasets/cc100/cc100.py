@@ -23,7 +23,9 @@ separated by double-newlines and paragraphs within the same document separated
 by a newline. The data is generated using the open source CC-Net repository. No
 claims of intellectual property are made on the work of preparation of the
 corpus.
+
 This contains the Indonesian (ind), the Javanese (jav), and the Sundanese (sun) subset.
+
 [nusantara_schema_name] = ssp
 """
 
@@ -82,6 +84,7 @@ _CITATION = """\
     is very competitive with strong monolingual models on the GLUE and XNLI
     benchmarks. We will make our code and models publicly available.",
 }
+
 @inproceedings{wenzek-etal-2020-ccnet,
     title = "{CCN}et: Extracting High Quality Monolingual Datasets from Web Crawl Data",
     author = "Wenzek, Guillaume  and
