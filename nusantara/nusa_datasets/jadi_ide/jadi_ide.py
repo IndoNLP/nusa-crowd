@@ -32,7 +32,7 @@ _URLS = {
     _DATASETNAME: "https://github.com/fathanick/Javanese-Dialect-Identification-from-Twitter-Data/raw/main/Update 16K_Dataset.xlsx",
 }
 # TODO check supported tasks
-_SUPPORTED_TASKS = [Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS]
+_SUPPORTED_TASKS = [Tasks.EMOTION_CLASSIFICATION]
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
@@ -64,7 +64,7 @@ class JaDi_Ide(datasets.GeneratorBasedBuilder):
     DEFAULT_CONFIG_NAME = "jadi_ide_source"
 
     def _info(self) -> datasets.DatasetInfo:
-        if self.config.schema == "jadi_ide_source":
+        if self.config.schema == "source":
             features = datasets.Features(
                 {
                     "id": datasets.Value("string"), 
@@ -88,7 +88,7 @@ class JaDi_Ide(datasets.GeneratorBasedBuilder):
         """Returns SplitGenerators."""
         # Dataset does not have predetermined split, putting all as TRAIN
         urls = _URLS[_DATASETNAME]
-        base_dir = Path(dl_manager.download_and_extract(urls))
+        base_dir = Path(dl_manager.download(urls))
         data_files = {"train": base_dir}
 
         return [
@@ -103,25 +103,25 @@ class JaDi_Ide(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
-        df = pd.read_excel(filepath, engine='openpyxl')
+        df = pd.read_excel(filepath)
         df.columns = ["id", "text", "label"]
 
         if self.config.schema == "source":
-            for row in df.itertuples():
+            for idx, row in enumerate(df.itertuples()):
                 ex = {
-                    "id": str(row.id),
+                    "id": str(idx),
                     "text": row.text,
                     "label": row.label,
                 }
-                yield row.id, ex
+                yield idx, ex
 
         elif self.config.schema == "nusantara_text":
-            for row in df.itertuples():
+            for idx, row in enumerate(df.itertuples()):
                 ex = {
-                    "id": str(row.id),
+                    "id": str(idx),
                     "text": row.text,
                     "label": row.label,
                 }
-                yield row.id, ex
+                yield idx, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
