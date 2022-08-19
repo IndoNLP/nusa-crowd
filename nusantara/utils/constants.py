@@ -48,6 +48,11 @@ class Tasks(Enum):
     # Speech Recognition
     SPEECH_RECOGNITION = "ASR"
 
+    # ImageText
+    IMAGE_CAPTIONING = "IC"
+    STYLIZED_IMAGE_CAPTIONING = "SIC"
+    VISUALLY_GROUNDED_REASONING = "VGR"
+
 
 # TASK_TO_SCHEMA = {
 #     Tasks.NAMED_ENTITY_RECOGNITION: "KB",

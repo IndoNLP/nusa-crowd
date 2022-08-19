@@ -12,7 +12,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks
-from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features
+from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features, image_text_features
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -43,6 +43,9 @@ _TASK_TO_SCHEMA = {
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
     Tasks.SELF_SUPERVISED_PRETRAINING: "SSP",
     Tasks.SPEECH_RECOGNITION: "ASR",
+    Tasks.IMAGE_CAPTIONING: "IC",
+    Tasks.STYLIZED_IMAGE_CAPTIONING: "SIC",
+    Tasks.VISUALLY_GROUNDED_REASONING: "VGR",
 }
 
 _VALID_TASKS = set(_TASK_TO_SCHEMA.keys())
@@ -59,6 +62,9 @@ _SCHEMA_TO_FEATURES = {
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
     "ASR": asr_features,
+    "IC": image_text_features(),
+    "SIC": image_text_features(),
+    "VGR": image_text_features(),
 }
 
 _TASK_TO_FEATURES = {

@@ -4,13 +4,15 @@
 
 ![Dataset claimed](https://progress-bar.dev/81/?title=Datasets%20Claimed%20(77%20Datasets%20Claimed))
 
+<!-- milestone starts -->
 ![Milestone 1](https://progress-bar.dev/100/?title=Milestone%201%20(30%20Datasets%20Completed))
 
-![Milestone 2](https://progress-bar.dev/80/?title=Milestone%202%20(60%20Datasets%20Completed))
+![Milestone 2](https://progress-bar.dev/95/?title=Milestone%202%20(60%20Datasets%20Completed))
 
-![Milestone 3](https://progress-bar.dev/48/?title=Milestone%203%20(100%20Datasets%20Completed))
+![Milestone 3](https://progress-bar.dev/57/?title=Milestone%203%20(100%20Datasets%20Completed))
 
-![Milestone 4](https://progress-bar.dev/32/?title=Milestone%204%20(150%20Datasets%20Completed))
+![Milestone 4](https://progress-bar.dev/38/?title=Milestone%204%20(150%20Datasets%20Completed))
+<!-- milestone ends -->
 
 *Read this README in [English](README.md).*
 
