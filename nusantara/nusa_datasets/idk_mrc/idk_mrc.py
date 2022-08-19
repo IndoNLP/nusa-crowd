@@ -209,7 +209,3 @@ class IdkMrc(datasets.GeneratorBasedBuilder):
                         "context": example["context"],
                         "answer": [ans["text"] for ans in qa["answers"]],
                     }
-
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
