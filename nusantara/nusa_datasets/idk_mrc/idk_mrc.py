@@ -37,7 +37,7 @@ _CITATION = """\
 
 _ALL_DATASETS = ["idk_mrc", "trans_squad", "tydiqa", "model_gen", "human_filt"]
 _DATASETNAME = _ALL_DATASETS[0]  # idk_mrc
-_BASELINES = _ALL_DATASETS[1:]  # trans_squad, tydiqa, model_gen, human_filt
+_BASELINES = _ALL_DATASETS[1:]   # trans_squad, tydiqa, model_gen, human_filt
 
 _DESCRIPTION = """\
 I(n)dontKnow-MRC (IDK-MRC) is an Indonesian Machine Reading Comprehension dataset that covers
@@ -49,7 +49,7 @@ Besides IDK-MRC (idk_mrc) dataset, several baseline datasets also provided:
 1. Trans SQuAD (trans_squad): machine translated SQuAD 2.0 (Muis and Purwarianti, 2020)
 2. TyDiQA (tydiqa): Indonesian answerable questions set from the TyDiQA-GoldP (Clark et al., 2020)
 3. Model Gen (model_gen): TyDiQA + the unanswerable questions output from the question generation model
-4. Human Filt (human_filt): Model Gen dataset that has been filterred by human annotator
+4. Human Filt (human_filt): Model Gen dataset that has been filtered by human annotator
 """
 
 _HOMEPAGE = "https://anonymous.4open.science/r/IDK-MRC-EFF0"
@@ -112,7 +112,10 @@ class IdkMrc(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(name, schema, version) for name in _ALL_DATASETS for schema, version in zip(["source", "nusantara_qa"], [_SOURCE_VERSION, _NUSANTARA_VERSION])]
+    BUILDER_CONFIGS = [
+        nusantara_config_constructor(name, schema, version)
+        for name in _ALL_DATASETS for schema, version in zip(["source", "nusantara_qa"], [_SOURCE_VERSION, _NUSANTARA_VERSION])
+    ]
 
     DEFAULT_CONFIG_NAME = "idk_mrc_source"
 
@@ -121,7 +124,19 @@ class IdkMrc(datasets.GeneratorBasedBuilder):
             features = datasets.Features(
                 {
                     "context": datasets.Value("string"),
-                    "qas": [{"id": datasets.Value("string"), "is_impossible": datasets.Value("bool"), "question": datasets.Value("string"), "answers": [{"text": datasets.Value("string"), "answer_start": datasets.Value("int64")}]}],
+                    "qas": [
+                        {
+                            "id": datasets.Value("string"),
+                            "is_impossible": datasets.Value("bool"),
+                            "question": datasets.Value("string"),
+                            "answers": [
+                                {
+                                    "text": datasets.Value("string"),
+                                    "answer_start": datasets.Value("int64")
+                                }
+                            ]
+                        }
+                    ],
                 }
             )
 
