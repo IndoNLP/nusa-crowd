@@ -29,7 +29,7 @@ Total number of data: 10041 (train: 7028, validation: 3012). Provided by Jakarta
 """
 
 _HOMEPAGE = "https://github.com/jakartaresearch/hf-datasets/tree/main/google-play-review/google-play-review"
-_LICENSE = "CC-BY-4.0"
+_LICENSE = "CC-BY 4.0"
 
 _URLS = {
     _DATASETNAME: {
