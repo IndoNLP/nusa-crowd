@@ -149,7 +149,3 @@ class CASA(datasets.GeneratorBasedBuilder):
                     "labels": [label for label in row[3:]],
                 }
                 yield row.index, entry
-
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
