@@ -32,6 +32,7 @@ from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "kopi_cc"
+_LANGUAGES  = "id"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _URL = "https://commoncrawl.org/"
@@ -73,7 +74,7 @@ _DESCRIPTION = """\
 
 """
 
-_HOMEPAGE = ""
+_HOMEPAGE = "https://huggingface.co/datasets/munggok/KoPI-CC"
 
 _LICENSE = "CC0"
 
@@ -121,22 +122,13 @@ def nusantara_config_constructor(snapshot, schema, version):
     if snapshot == "":
         raise ValueError(f"Snapshot is required. Choose one of these Snapshot: {_ALL_CONFIG}.")
     elif snapshot in _SNAP_CONFIG + _ALL_CONFIG:
-        if schema == "nusantara_ssp":
-            return NusantaraConfig(
-                name=f"{snapshot}_{schema}",
-                version=datasets.Version(version),
-                description=f"KoPI-CC with {schema} schema for {snapshot}",
-                schema=schema,
-                subset_id="KoPI-CC",
-            )
-        else:
-            return NusantaraConfig(
-                name=f"{snapshot}_{schema}",
-                version=datasets.Version(version),
-                description=f"KoPI-CC with {schema} schema for {snapshot}",
-                schema=schema,
-                subset_id="KoPI-CC",
-            )
+        return NusantaraConfig(
+            name=f"{_DATASETNAME}_{snapshot}_{schema}",
+            version=datasets.Version(version),
+            description=f"KoPI-CC with {schema} schema for {snapshot}",
+            schema=schema,
+            subset_id="kopi_cc",
+        )
     else:
         raise ValueError(f"Invalid language: {snapshot}. Choose one of these snapshots: {_ALL_CONFIG}.")
 
@@ -171,6 +163,7 @@ class KoPICC(datasets.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
         name = self.config.name.replace("_" + self.config.schema, "")
+        name = name.replace(_DATASETNAME + "_", "")
         split_name = name.split("-")
         if split_name[0] == "all":
             urls = []
