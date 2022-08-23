@@ -8,19 +8,13 @@ from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
 
-# no citation available
 _CITATION = """\
-@article{,
-  author    = {},
-  title     = {},
-  journal   = {},
-  volume    = {},
-  year      = {},
-  url       = {},
-  doi       = {},
-  biburl    = {},
-  bibsource = {}
-}
+@misc{
+   research, 
+   title={Jakartaresearch/google-play-review · datasets at hugging face}, 
+   url={https://huggingface.co/datasets/jakartaresearch/google-play-review},
+   author={Research, Jakarta AI}
+} 
 """
 _DATASETNAME = "id_google_play_review"
 _DESCRIPTION = """\
