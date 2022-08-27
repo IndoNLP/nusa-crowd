@@ -16,13 +16,15 @@ from datasets import load_dataset
 
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, SCHEMA_TO_TASKS
+import pandas as pd
 
 _LARGE_CONFIG_NAMES = [
     
 ]
 
 _RESOURCE_CONFIG_NAMES = [
-
+    'inset_lexicon_nusantara_text',
+    'kamus_alay_nusantara_t2t'
 ]
 
 _CURRENTLY_BROKEN_NAMES = [
@@ -92,7 +94,7 @@ def default_is_keeper(metadata: NusantaraMetadata) -> bool:
 
 class NusantaraConfigHelper:
     """
-    Handles creating and filtering BigBioDatasetConfigHelper instances.
+    Handles creating and filtering NusantaraMetadata instances.
     """
 
     def __init__(
@@ -239,6 +241,109 @@ class NusantaraConfigHelper:
             return self._helpers[key]
         else:
             raise TypeError("Invalid argument type.")
+
+# Metadata Helper
+@dataclass
+class MetaDict:
+    data: dict = None
+    
+class NusantaraMetadataHelper:
+    """
+    Handles creating and filtering NusantaraMetadata instances.
+    """
+
+    def __init__(
+        self,
+        meta_df: Optional[pd.DataFrame] = None,
+        keep_broken: bool = False
+    ):
+        # Load Config Helper
+        self._conhelps = NusantaraConfigHelper()
+        
+        # if meta_df are passed in, just attach and go
+        if meta_df is not None:
+            if keep_broken:
+                self._meta_df = meta_df
+            else:
+                self._meta_df = meta_df[~meta_df.is_broken]
+            return
+        
+        # Load Metadata
+        self._meta_df = pd.read_csv('https://docs.google.com/spreadsheets/d/17o83IvWxmtGLYridZis0nEprHhsZIMeFtHGtXV35h6M/export?format=csv&gid=879729812', skiprows=1)
+        self._meta_df = self._meta_df[self._meta_df['Implemented'] != 0].rename({
+            'No.': 'id', 'Name': 'name', 'Subsets': 'subsets', 'Link': 'source_link', 'Description': 'description',
+            'HF Link': 'hf_link', 'License': 'license', 'Year': 'year', 'Collection Style': 'collection_style',
+            'Language': 'language', 'Dialect': 'dialect', 'Domain': 'domain', 'Form': 'modality', 'Tasks': 'tasks',
+            'Volume': 'volume', 'Unit': 'unit', 'Ethical Risks': 'ethical_risk', 'Provider': 'provider',
+            'Paper Title': 'paper_title', 'Paper Link': 'paper_link', 'Access': 'access', 'Derived From': 'derived_from', 
+            'Test Split': 'is_splitted', 'Notes': 'notes', 'Dataloader': 'dataloader', 'Implemented': 'implemented'
+        }, axis=1)
+        self._meta_df['is_splitted'] = self._meta_df['is_splitted'].apply(lambda x: True if x =='Yes' else False)
+
+        # Merge Metadata with Config
+        name_to_meta_map = {}
+        for cfg_meta in self._conhelps:
+            # Assign metadata to meta dataframe
+            self._meta_df.loc[self._meta_df.dataloader == cfg_meta.dataset_name, [
+                'is_large', 'is_resource', 'is_default', 'is_broken',
+                'is_local', 'citation', 'license', 'homepage', 'tasks'
+            ]] = [
+                cfg_meta.is_large, cfg_meta.is_resource, cfg_meta.is_default, cfg_meta.is_broken, 
+                cfg_meta.is_local, cfg_meta.citation, cfg_meta.license, cfg_meta.homepage, '|'.join([task.value for task in cfg_meta.tasks])
+            ]
+
+            if cfg_meta.dataset_name not in name_to_meta_map:
+                name_to_meta_map[cfg_meta.dataset_name] = {}
+            if cfg_meta.config.schema not in name_to_meta_map[cfg_meta.dataset_name]:
+                name_to_meta_map[cfg_meta.dataset_name][cfg_meta.config.schema] = []
+            name_to_meta_map[cfg_meta.dataset_name][cfg_meta.config.schema].append(cfg_meta)
+        
+        self._meta_df = self._meta_df.fillna(False)
+        for dset_name in name_to_meta_map.keys():
+            self._meta_df.loc[self._meta_df.dataloader == dset_name, 'metadata'] = MetaDict(data=name_to_meta_map[dset_name])
+
+        if not keep_broken:
+            self._meta_df = self._meta_df[~self._meta_df.is_broken]
+    
+    def filtered(
+        self, is_keeper: Callable[[], bool]
+    ) -> "NusantaraConfigHelper":
+        """Return dataset config helpers that match is_keeper."""
+        meta_df = self._meta_df[self._meta_df.apply(is_keeper, axis=1, reduce=True)]
+        return NusantaraMetadataHelper(meta_df=meta_df)
+
+    def filter_and_load(
+        self, is_keeper: Callable[[], bool]
+    ) -> "Dict<str, Dataset>":
+        """Return dataset that match is_keeper."""
+        filtered_helper = self.filtered(is_keeper)
+        for metas in filtered_helper._meta_df.metadata:
+            if schema in metas.data:
+                for meta in metas.data[schema]:
+                    if len(meta.languages) > 1:
+                        if lang in meta.config.name:
+                            datasets[meta.config.name] = meta.load_dataset()
+                    else:
+                        datasets[meta.config.name] = meta.load_dataset()
+                
+    @property
+    def available_dataset_names(self) -> List[str]:
+        return sorted(self._meta_df.name)
+
+#     def __repr__(self):
+#         return self._meta_df.to_string()
+
+#     def __str__(self):
+#         return self.__repr__()
+
+    def __iter__(self):
+        for row in self._meta_df.iterrows():
+            yield row
+
+    def __len__(self):
+        return len(self._meta_df)
+    
+
 
 if __name__ == "__main__":
     conhelps = NusantaraConfigHelper()

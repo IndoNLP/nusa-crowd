@@ -20,6 +20,10 @@ _CITATION = """\
   pages={96-101},
 }
 """
+
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DATASETNAME = "id_stance"
 _DESCRIPTION = """\
 Stance Classification Towards Political Figures on Blog Writing.
