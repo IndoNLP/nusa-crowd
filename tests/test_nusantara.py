@@ -13,7 +13,6 @@ import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks, TASK_TO_SCHEMA, VALID_TASKS, VALID_SCHEMAS, SCHEMA_TO_FEATURES, TASK_TO_FEATURES
 from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, speech_text_features, image_text_features
-(pairs_score); Remove redundancy for ImageText (imtext) schema; Modify TITML-IDN to use sptext schema;)
 
 sys.path.append(str(Path(__file__).parent.parent))
 
