@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple
 import datasets
 
 from nusantara.nusa_datasets.id_short_answer_grading.utils.id_short_answer_grading_utils import \
-    createSaintekAndSoshumDataset
+    create_saintek_and_soshum_dataset
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
@@ -39,9 +39,9 @@ _DESCRIPTION = """\
 Indonesian short answers for Biology and Geography subjects from 534 respondents where the answer grading was done by 7 experts.\
 """
 
-_HOMEPAGE = ""
+_HOMEPAGE = "https://github.com/AgeMagi/tugas-akhir"
 
-_LICENSE = ""
+_LICENSE = "Unknown"
 
 _URLS = {
     "saintek": {
@@ -88,10 +88,10 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
             subset_id="id_short_answer_grading",
         ),
         NusantaraConfig(
-            name="id_short_answer_grading_nusantara_pairs_score",
+            name="id_short_answer_grading_nusantara_pairs",
             version=NUSANTARA_VERSION,
             description="id_short_answer_grading Nusantara schema",
-            schema="nusantara_pairs_score",
+            schema="nusantara_pairs",
             subset_id="id_short_answer_grading",
         ),
     ]
@@ -110,8 +110,8 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
                     "score": datasets.Value("int64"),
                 }
             )
-        elif self.config.schema == "nusantara_pairs_score":
-            features = schemas.pairs_features_score()
+        elif self.config.schema == "nusantara_pairs":
+            features = schemas.pairs_features([0, 1, 2, 3, 4, 5])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -169,7 +169,7 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, saintek_question: Path, soshum_question: Path, saintek_score: Path, soshum_score: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
-        df = createSaintekAndSoshumDataset(saintek_question, soshum_question, saintek_score, soshum_score)
+        df = create_saintek_and_soshum_dataset(saintek_question, soshum_question, saintek_score, soshum_score)
         if self.config.schema == "source":
             for row in df.itertuples():
                 entry = {
@@ -182,13 +182,12 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
                 }
                 yield row.index, entry
 
-        elif self.config.schema == "nusantara_pairs_score":
-            # TODO: yield (key, example) tuples in the nusantara schema
+        elif self.config.schema == "nusantara_pairs":
             for row in df.itertuples():
                 entry = {
                     "id": str(row.index),
                     "text_1": row.pertanyaan,
                     "text_2": row.jawaban,
-                    "label": float(row.score),
+                    "label": row.score,
                 }
                 yield row.index, entry
