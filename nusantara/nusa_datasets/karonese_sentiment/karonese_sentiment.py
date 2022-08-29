@@ -41,6 +41,7 @@ _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
+
 class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
     """Customer Review (Natasha Skincare) is a customers emotion dataset, with amounted to 19,253 samples with the division for each class is 804 joy, 43 surprise, 154 anger, 61 fear, 287 sad, 167 disgust, and 17736 no-emotions."""
 
@@ -69,12 +70,12 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
             features = datasets.Features(
-               {
+                {
                     "No": datasets.Value("string"),
                     "Tweets": datasets.Value("string"),
                     "label": datasets.Value("string"),
                     "Sumber": datasets.Value("string"),
-               }
+                }
             )
         elif self.config.schema == "nusantara_text":
             features = schemas.text_features(["negative", "neutral", "positive"])
