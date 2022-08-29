@@ -49,7 +49,9 @@ _NUSANTARA_VERSION = "1.0.0"
 
 
 class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
-    """Customer Review (Natasha Skincare) is a customers emotion dataset, with amounted to 19,253 samples with the division for each class is 804 joy, 43 surprise, 154 anger, 61 fear, 287 sad, 167 disgust, and 17736 no-emotions."""
+    """Karonese sentiment was crawled from Twitter between 1 January 2021 and 31 October 2021.
+    The dataset consists of 397 negative, 342 neutral, and 260 positive tweets.
+    """
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
