@@ -4,10 +4,11 @@ from typing import Dict, List, Tuple
 import datasets
 import pandas as pd
 
-from nusantara.nusa_datasets.karonese_sentiment.utils.karonese_sentiment_utils import map_label
+from nusantara.nusa_datasets.karonese_sentiment.utils.karonese_sentiment_utils import \
+    map_label
+from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
-from nusantara.utils import schemas
 
 _CITATION = """\
 @article{karo2022sentiment,
@@ -24,7 +25,12 @@ _CITATION = """\
 _DATASETNAME = "karonese_sentiment"
 
 _DESCRIPTION = """\
-Karonese sentiment was crawled from Twitter between 1 January 2021 and 31 October 2021.he first crawling process used several keywords related to the Karonese, such as "deleng sinabung, Sinabung mountain", "mejuah-juah, greeting welcome", "Gundaling", and so on. However, due to the insufficient number of tweets obtained using such keywords, a second crawling process was done based on several hashtags, such as #kalakkaro, # #antonyginting, and #lyodra.
+Karonese sentiment was crawled from Twitter between 1 January 2021 and 31 October 2021.
+The first crawling process used several keywords related to the Karonese, such as
+"deleng sinabung, Sinabung mountain", "mejuah-juah, greeting welcome", "Gundaling",
+and so on. However, due to the insufficient number of tweets obtained using such
+keywords, a second crawling process was done based on several hashtags, such as
+#kalakkaro, # #antonyginting, and #lyodra.
 """
 
 _HOMEPAGE = "http://section.iaesonline.com/index.php/IJEEI/article/view/3565"
