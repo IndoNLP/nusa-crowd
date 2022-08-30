@@ -173,7 +173,7 @@ class KoPICC(datasets.GeneratorBasedBuilder):
                 idx = 1
                 keys = [ur for ur in list(_N_SHARDS_PER_SNAPSHOT.keys()) if _N_SHARDS_PER_SNAPSHOT[ur].get("raw") is not None]
             for m in keys:
-                urls.extend([_URLS[split_name[1]].format(snapshot=m, index=k + idx) for k in range(_N_SHARDS_PER_SNAPSHOT[m].get(split_name[1]))])
+                urls.extend([_URLS[split_name[1]].format(snapshot=m, index=k + 108) for k in range(_N_SHARDS_PER_SNAPSHOT[m].get(split_name[1]))])
         else:
             urls = [_URLS[split_name[1]].format(snapshot=split_name[0], index=k + 1) for k in range(_N_SHARDS_PER_SNAPSHOT[split_name[0]][split_name[1]])]
         path = dl_manager.download(urls)
