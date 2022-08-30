@@ -122,7 +122,7 @@ class KoPICCNEWS(datasets.GeneratorBasedBuilder):
             ),
         ]
 
-    def _generate_examples(self, filepaths, split, type):
+    def _generate_examples(self, filepaths, split):
         """This function returns the examples in the raw (text) form by iterating on all the files."""
         id_ = 0
         for filepath in filepaths:
