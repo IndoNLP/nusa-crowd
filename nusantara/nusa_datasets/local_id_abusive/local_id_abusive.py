@@ -24,7 +24,6 @@ from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
 
-
 _CITATION = """\
 @inproceedings{putri2021abusive,
   title={Abusive language and hate speech detection for Javanese and Sundanese languages in tweets: Dataset and preliminary study},
@@ -59,7 +58,7 @@ _LICENSE = "Unknown"
 _URLS = {
     _DATASETNAME: {
         "jav": "https://raw.githubusercontent.com/Shofianina/local-indonesian-abusive-hate-speech-dataset/main/Javanese.csv",
-        "sun": "https://raw.githubusercontent.com/Shofianina/local-indonesian-abusive-hate-speech-dataset/main/Sundanese.csv"
+        "sun": "https://raw.githubusercontent.com/Shofianina/local-indonesian-abusive-hate-speech-dataset/main/Sundanese.csv",
     }
 }
 
@@ -111,11 +110,13 @@ class LocalIDAbusive(datasets.GeneratorBasedBuilder):
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
-            features = datasets.Features({
-                "isi_tweet": datasets.Value("string"),
-                "uk": datasets.Value("bool"),
-                "hs": datasets.Value("bool"),
-            })
+            features = datasets.Features(
+                {
+                    "isi_tweet": datasets.Value("string"),
+                    "uk": datasets.Value("bool"),
+                    "hs": datasets.Value("bool"),
+                }
+            )
         elif self.config.schema == "nusantara_text_multi":
             features = schemas.text_multi_features([0, 1])
 
@@ -128,7 +129,7 @@ class LocalIDAbusive(datasets.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
-        lang = self.config.name.split('_')[3]
+        lang = self.config.name.split("_")[3]
         urls = _URLS[_DATASETNAME][lang]
         data_dir = dl_manager.download_and_extract(urls)
         return [
@@ -146,11 +147,7 @@ class LocalIDAbusive(datasets.GeneratorBasedBuilder):
         df = pd.read_csv(filepath, sep=",", encoding="ISO-8859-1").reset_index()
         for i, row in enumerate(df.itertuples()):
             if self.config.schema == "source":
-                example = {
-                    "isi_tweet": row.isi_tweet,
-                    "uk": row.uk,
-                    "hs": row.hs
-                }
+                example = {"isi_tweet": row.isi_tweet, "uk": row.uk, "hs": row.hs}
                 yield i, example
             elif self.config.schema == "nusantara_text_multi":
                 example = {
