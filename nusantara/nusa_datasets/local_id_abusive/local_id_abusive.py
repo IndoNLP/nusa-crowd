@@ -55,6 +55,9 @@ _HOMEPAGE = "https://github.com/Shofianina/local-indonesian-abusive-hate-speech-
 
 _LICENSE = "Unknown"
 
+_LANGUAGES = ["ind", "jav", "sun"]
+_LOCAL = False
+
 _URLS = {
     _DATASETNAME: {
         "jav": "https://raw.githubusercontent.com/Shofianina/local-indonesian-abusive-hate-speech-dataset/main/Javanese.csv",
