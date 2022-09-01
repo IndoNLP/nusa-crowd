@@ -9,6 +9,20 @@ from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
 
 _CITATION = """\
+@article{FrogStorytelling,
+  author="Moeljadi, David",
+  title="Usage of Indonesian Possessive Verbal Predicates : A Statistical Analysis Based on Storytelling Survey",
+  journal="Tokyo University Linguistic Papers",
+  ISSN="1345-8663",
+  publisher="東京大学大学院人文社会系研究科・文学部言語学研究室",
+  year="2014",
+  month="sep",
+  volume="35",
+  number="",
+  pages="155-176",
+  URL="https://ci.nii.ac.jp/naid/120005525793/en/",
+  DOI="info:doi/10.15083/00027472",
+}
 """
 _DATASETNAME = "id_frog_story"
 _DESCRIPTION = """\
