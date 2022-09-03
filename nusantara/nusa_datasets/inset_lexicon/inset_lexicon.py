@@ -19,6 +19,9 @@ doi = {10.1109/IALP.2017.8300625}
 }
 """
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DATASETNAME = "inset_lexicon"
 
 _DESCRIPTION = """\
