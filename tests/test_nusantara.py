@@ -12,7 +12,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 import datasets
 from datasets import DatasetDict, Features
 from nusantara.utils.constants import Tasks
-from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, asr_features, image_text_features
+from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, speech_text_features, image_text_features
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -35,6 +35,7 @@ _TASK_TO_SCHEMA = {
     Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
     Tasks.SEMANTIC_SIMILARITY: "PAIRS_SCORE",
     Tasks.NEXT_SENTENCE_PREDICTION: "PAIRS",
+    Tasks.SHORT_ANSWER_GRADING: "PAIRS",
     Tasks.PARAPHRASING: "T2T",
     Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
@@ -42,10 +43,12 @@ _TASK_TO_SCHEMA = {
     Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT_MULTI",
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
     Tasks.SELF_SUPERVISED_PRETRAINING: "SSP",
-    Tasks.SPEECH_RECOGNITION: "ASR",
-    Tasks.IMAGE_CAPTIONING: "IC",
-    Tasks.STYLIZED_IMAGE_CAPTIONING: "SIC",
-    Tasks.VISUALLY_GROUNDED_REASONING: "VGR",
+    Tasks.SPEECH_RECOGNITION: "SPTEXT",
+    Tasks.SPEECH_TO_TEXT_TRANSLATION: "SPTEXT",
+    Tasks.TEXT_TO_SPEECH: "SPTEXT",
+    Tasks.IMAGE_CAPTIONING: "IMTEXT",
+    Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
+    Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
 }
 
 _VALID_TASKS = set(_TASK_TO_SCHEMA.keys())
@@ -61,10 +64,8 @@ _SCHEMA_TO_FEATURES = {
     "PAIRS_SCORE": pairs_features_score(),
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
-    "ASR": asr_features,
-    "IC": image_text_features(),
-    "SIC": image_text_features(),
-    "VGR": image_text_features(),
+    "SPTEXT": speech_text_features,
+    "IMTEXT": image_text_features(),
 }
 
 _TASK_TO_FEATURES = {

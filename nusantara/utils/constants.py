@@ -33,6 +33,7 @@ class Tasks(Enum):
     TEXTUAL_ENTAILMENT = "TE"
     SEMANTIC_SIMILARITY = "STS"
     NEXT_SENTENCE_PREDICTION = "NSP"
+    SHORT_ANSWER_GRADING = "SAG"
 
     # Single Text Generation
     MACHINE_TRANSLATION = "MT"
@@ -45,8 +46,10 @@ class Tasks(Enum):
     # Self Supervised Pretraining
     SELF_SUPERVISED_PRETRAINING = "SSP"
 
-    # Speech Recognition
+    # SpeechText
     SPEECH_RECOGNITION = "ASR"
+    SPEECH_TO_TEXT_TRANSLATION = "STTT"
+    TEXT_TO_SPEECH = "TTS"
 
     # ImageText
     IMAGE_CAPTIONING = "IC"

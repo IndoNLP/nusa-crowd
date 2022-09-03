@@ -14,3 +14,4 @@ librosa
 jsonlines>=3.1.0
 nltk
 zstandard
+torchaudio==0.11
