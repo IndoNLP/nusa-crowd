@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -41,12 +40,12 @@ _DESCRIPTION = """\
 This dataset is for abusive and hate speech detection, using Twitter text containing Javanese and Sundanese words.
 
 (from the publication source)
-The Indonesian local language dataset collection was conducted using Twitter search API to collect the tweets and then 
-implemented using Tweepy Library. The tweets were collected using queries from the list of abusive words in Indonesian 
-tweets. The abusive words were translated into local Indonesian languages, which are Javanese and Sundanese. The 
-translated words are then used as queries to collect tweets containing Indonesian and local languages. The translation 
-process involved native speakers for each local language. The crawling process has collected a total of more than 5000 
-tweets. Then, the crawled data were filtered to get tweets that contain local’s vocabulary and/or sentences in Javanese 
+The Indonesian local language dataset collection was conducted using Twitter search API to collect the tweets and then
+implemented using Tweepy Library. The tweets were collected using queries from the list of abusive words in Indonesian
+tweets. The abusive words were translated into local Indonesian languages, which are Javanese and Sundanese. The
+translated words are then used as queries to collect tweets containing Indonesian and local languages. The translation
+process involved native speakers for each local language. The crawling process has collected a total of more than 5000
+tweets. Then, the crawled data were filtered to get tweets that contain local’s vocabulary and/or sentences in Javanese
 and Sundanese. Next, after the filtering process, the data will be labeled whether the tweets are labeled as hate speech
 and abusive language or not.
 """
@@ -55,7 +54,7 @@ _HOMEPAGE = "https://github.com/Shofianina/local-indonesian-abusive-hate-speech-
 
 _LICENSE = "Unknown"
 
-_LANGUAGES = ["ind", "jav", "sun"]
+_LANGUAGES = ["jav", "sun"]
 _LOCAL = False
 
 _URLS = {
