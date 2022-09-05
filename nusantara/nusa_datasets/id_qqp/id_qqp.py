@@ -19,6 +19,9 @@ _CITATION = """\
 }
 """
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DATASETNAME = "id_qqp"
 
 _DESCRIPTION = """\

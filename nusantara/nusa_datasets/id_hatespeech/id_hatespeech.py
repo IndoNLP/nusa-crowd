@@ -19,6 +19,8 @@ doi = {10.1109/ICACSIS.2017.8355039}
 }
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "id_hatespeech"
 
 _DESCRIPTION = """\

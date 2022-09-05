@@ -16,6 +16,10 @@ _CITATION = """\
    author={Research, Jakarta AI}
 } 
 """
+
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DATASETNAME = "id_google_play_review"
 _DESCRIPTION = """\
 Indonesian Google Play Review, dataset scrapped from e-commerce app on Google Play for sentiment analysis.

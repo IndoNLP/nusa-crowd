@@ -25,6 +25,8 @@ _CITATION = """\
 }
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "indo_general_mt_en_id"
 _DESCRIPTION = """\
 "In the context of Machine Translation (MT) from-and-to English, Bahasa Indonesia has been considered a low-resource language,

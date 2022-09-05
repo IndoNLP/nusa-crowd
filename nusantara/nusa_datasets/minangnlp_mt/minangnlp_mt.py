@@ -22,6 +22,8 @@ _CITATION = """\
 }
 """
 
+_LOCAL = False
+_LANGUAGES = ["min", "ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "minangnlp_mt"
 _DESCRIPTION = """\
 In this work, we create Minangkabau–Indonesian (MIN-ID) parallel corpus by using Wikipedia. We obtain 224,180 Minangkabau and
