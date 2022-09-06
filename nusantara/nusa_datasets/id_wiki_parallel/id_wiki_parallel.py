@@ -44,7 +44,7 @@ _LANGUAGES = ["ind", "jav", "min", "sun"]
 _LOCAL = False
 
 _DESCRIPTION = """\
-This dataset is designed for machine translation task, specifically ind->jav, ind->min, and ind->sun. The data are taken
+This dataset is designed for machine translation task, specifically jav->ind, min->ind, sun->ind, and vice versa. The data are taken
 from sentences in Wikipedia.
 
 (from the publication abstract)
@@ -77,7 +77,7 @@ _NUSANTARA_VERSION = "1.0.0"
 
 class IdWikiParallel(datasets.GeneratorBasedBuilder):
     """
-    This dataset is designed for machine translation task, specifically ind->jav, ind->min, and ind->sun. The data are
+    This dataset is designed for machine translation task, specifically jav->ind, min->ind, sun->ind, and vice versa. The data are
     taken from sentences in Wikipedia."""
 
     ETHNIC_LANGUAGES = [lang for lang in _LANGUAGES if lang != "ind"]
