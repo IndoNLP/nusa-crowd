@@ -50,7 +50,7 @@ def nusantara_config_constructor(lang_source, lang_target, schema, version):
         return NusantaraConfig(
             name="talpco_{schema}".format(schema=schema),
             version=datasets.Version(version),
-            description="talpco with {schema} schema for all 56 language pairs".format(schema=schema),
+            description="talpco with {schema} schema for all 7 language pairs from / to ind language".format(schema=schema),
             schema=schema,
             subset_id="talpco",
         )
