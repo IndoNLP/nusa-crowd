@@ -130,7 +130,7 @@ class TALPCo(datasets.GeneratorBasedBuilder):
                 for language_pair_data in self.generate_language_pair_data(lang_source, lang_target, data):
                     yield language_pair_data
         else:
-            _, lang_source, lang_target, _ = self.config.name.split("_")
+            _, lang_source, lang_target = self.config.name.replace(f"_{self.config.schema}", "").split("_")
             for language_pair_data in self.generate_language_pair_data(lang_source, lang_target, data):
                 yield language_pair_data
 
