@@ -21,6 +21,9 @@ _CITATION = """
 }
 """
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DATASETNAME = "facqa"
 
 _DESCRIPTION = """
@@ -67,7 +70,7 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
             name="facqa_nusantara_qa",
             version=NUSANTARA_VERSION,
             description="FacQA Nusantara schema",
-            schema="nusantara_facqa",
+            schema="nusantara_qa",
             subset_id="facqa",
         ),
     ]
@@ -84,7 +87,7 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
                     "seq_label": [datasets.Value("string")],
                 }
             )
-        elif self.config.schema == "nusantara_facqa":
+        elif self.config.schema == "nusantara_qa":
             features = schemas.qa_features
 
         return datasets.DatasetInfo(

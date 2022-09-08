@@ -14,6 +14,7 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
+
 _CITATION = """\
 @INPROCEEDINGS{8904199,
     author={Purwarianti, Ayu and Crisdayanti, Ida Ayu Putu Ari},

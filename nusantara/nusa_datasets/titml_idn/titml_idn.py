@@ -53,10 +53,10 @@ class TitmlIdn(datasets.GeneratorBasedBuilder):
             subset_id="titml_idn",
         ),
         NusantaraConfig(
-            name="titml_idn_nusantara_asr",
+            name="titml_idn_nusantara_sptext",
             version=datasets.Version(_NUSANTARA_VERSION),
             description="TITML-IDN Nusantara schema",
-            schema="nusantara_asr",
+            schema="nusantara_sptext",
             subset_id="titml_idn",
         ),
     ]
@@ -74,8 +74,8 @@ class TitmlIdn(datasets.GeneratorBasedBuilder):
                     "text": datasets.Value("string"),
                 }
             )
-        elif self.config.schema == "nusantara_asr":
-            features = schemas.asr_features
+        elif self.config.schema == "nusantara_sptext":
+            features = schemas.speech_text_features
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -83,7 +83,7 @@ class TitmlIdn(datasets.GeneratorBasedBuilder):
             homepage=_HOMEPAGE,
             license=_LICENSE,
             citation=_CITATION,
-            task_templates=[datasets.AutomaticSpeechRecognition(audio_file_path_column="audio", transcription_column="text")],
+            task_templates=[datasets.AutomaticSpeechRecognition(audio_column="audio", transcription_column="text")],
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
@@ -98,7 +98,7 @@ class TitmlIdn(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path, n_speakers=20):
 
-        if self.config.schema == "source" or self.config.schema == "nusantara_asr":
+        if self.config.schema == "source" or self.config.schema == "nusantara_sptext":
 
             for speaker_id in range(1, n_speakers + 1):
                 speaker_id = str(speaker_id).zfill(2)
@@ -121,7 +121,7 @@ class TitmlIdn(datasets.GeneratorBasedBuilder):
                                     "text": text,
                                 }
                                 yield audio_id, ex
-                            elif self.config.schema == "nusantara_asr":
+                            elif self.config.schema == "nusantara_sptext":
                                 ex = {
                                     "id": audio_id,
                                     "speaker_id": speaker_id,

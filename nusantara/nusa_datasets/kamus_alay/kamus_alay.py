@@ -22,6 +22,9 @@ pages={226-229},
 doi={10.1109/IALP.2018.8629151}}
 """
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DATASETNAME = "kamus_alay"
 
 _DESCRIPTION = """\

@@ -9,27 +9,28 @@ from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
 
 _CITATION = """
-@inproceedings{azhar2019multi,
-  title={Multi-label Aspect Categorization with Convolutional Neural Networks and Extreme Gradient Boosting},
-  author={A. N. Azhar, M. L. Khodra, and A. P. Sutiono}
-  booktitle={Proceedings of the 2019 International Conference on Electrical Engineering and Informatics (ICEEI)},
-  pages={35--40},
-  year={2019}
+@INPROCEEDINGS{8629181,
+    author={Ilmania, Arfinda and Abdurrahman and Cahyawijaya, Samuel and Purwarianti, Ayu},
+    booktitle={2018 International Conference on Asian Language Processing (IALP)},
+    title={Aspect Detection and Sentiment Classification Using Deep Neural Network for Indonesian Aspect-Based Sentiment Analysis},
+    year={2018},
+    volume={},
+    number={},
+    pages={62-67},
+    doi={10.1109/IALP.2018.8629181
 }
 """
-
 
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 
-_DATASETNAME = "hoasa"
+_DATASETNAME = "casa"
 
 _DESCRIPTION = """
-HoASA: An aspect-based sentiment analysis dataset consisting of hotel reviews collected from the hotel aggregator platform, AiryRooms.
-The dataset covers ten different aspects of hotel quality. Similar to the CASA dataset, each review is labeled with a single sentiment label for each aspect.
-There are four possible sentiment classes for each sentiment label:
-positive, negative, neutral, and positive-negative.
-The positivenegative label is given to a review that contains multiple sentiments of the same aspect but for different objects (e.g., cleanliness of bed and toilet).
+CASA: An aspect-based sentiment analysis dataset consisting of around a thousand car reviews collected from multiple Indonesian online automobile platforms (Ilmania et al., 2018).
+The dataset covers six aspects of car quality.
+We define the task to be a multi-label classification task,
+where each label represents a sentiment for a single aspect with three possible values: positive, negative, and neutral.
 """
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
@@ -37,9 +38,9 @@ _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
 _LICENSE = "CC-BY-SA 4.0"
 
 _URLS = {
-    "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/hoasa_absa-airy/train_preprocess.csv",
-    "validation": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/hoasa_absa-airy/valid_preprocess.csv",
-    "test": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/hoasa_absa-airy/test_preprocess.csv",
+    "train": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/casa_absa-prosa/train_preprocess.csv",
+    "validation": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/casa_absa-prosa/valid_preprocess.csv",
+    "test": "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/casa_absa-prosa/test_preprocess.csv",
 }
 
 _SUPPORTED_TASKS = [Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS]
@@ -49,52 +50,48 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class HoASA(datasets.GeneratorBasedBuilder):
-    """HoASA is an aspect based sentiment analysis dataset"""
+class CASA(datasets.GeneratorBasedBuilder):
+    """CASA is an aspect based sentiment analysis dataset"""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="hoasa_source",
+            name="casa_source",
             version=SOURCE_VERSION,
-            description="HoASA source schema",
+            description="CASA source schema",
             schema="source",
-            subset_id="hoasa",
+            subset_id="casa",
         ),
         NusantaraConfig(
-            name="hoasa_nusantara_text_multi",
+            name="casa_nusantara_text_multi",
             version=NUSANTARA_VERSION,
-            description="HoASA Nusantara schema",
+            description="CASA Nusantara schema",
             schema="nusantara_text_multi",
-            subset_id="hoasa",
+            subset_id="casa",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "hoasa_source"
+    DEFAULT_CONFIG_NAME = "casa_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
             features = datasets.Features(
                 {
                     "index": datasets.Value("int64"),
-                    "review": datasets.Value("string"),
-                    "ac": datasets.Value("string"),
-                    "air_panas": datasets.Value("string"),
-                    "bau": datasets.Value("string"),
-                    "general": datasets.Value("string"),
-                    "kebersihan": datasets.Value("string"),
-                    "linen": datasets.Value("string"),
+                    "sentence": datasets.Value("string"),
+                    "fuel": datasets.Value("string"),
+                    "machine": datasets.Value("string"),
+                    "others": datasets.Value("string"),
+                    "part": datasets.Value("string"),
+                    "price": datasets.Value("string"),
                     "service": datasets.Value("string"),
-                    "sunrise_meal": datasets.Value("string"),
-                    "tv": datasets.Value("string"),
-                    "wifi": datasets.Value("string"),
                 }
             )
 
         elif self.config.schema == "nusantara_text_multi":
-            features = schemas.text_multi_features(["pos", "neut", "neg", "neg_pos"])
+            features = schemas.text_multi_features(["positive", "neutral", "negative"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -144,27 +141,14 @@ class HoASA(datasets.GeneratorBasedBuilder):
         df = pd.read_csv(filepath, sep=",", header="infer").reset_index()
         if self.config.schema == "source":
             for row in df.itertuples():
-                entry = {
-                    "index": row.index,
-                    "review": row.review,
-                    "ac": row.ac,
-                    "air_panas": row.air_panas,
-                    "bau": row.bau,
-                    "general": row.general,
-                    "kebersihan": row.kebersihan,
-                    "linen": row.linen,
-                    "service": row.service,
-                    "sunrise_meal": row.sunrise_meal,
-                    "tv": row.tv,
-                    "wifi": row.wifi,
-                }
+                entry = {"index": row.index, "sentence": row.sentence, "fuel": row.fuel, "machine": row.machine, "others": row.others, "part": row.part, "price": row.price, "service": row.service}
                 yield row.index, entry
 
         elif self.config.schema == "nusantara_text_multi":
             for row in df.itertuples():
                 entry = {
                     "id": str(row.index),
-                    "text": row.review,
+                    "text": row.sentence,
                     "labels": [label for label in row[3:]],
                 }
                 yield row.index, entry

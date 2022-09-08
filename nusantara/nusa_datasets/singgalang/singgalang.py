@@ -42,6 +42,8 @@ _CITATION = """\
   doi={10.1109/ICACSIS.2016.7872784}}
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "singgalang"
 
 _DESCRIPTION = """\
