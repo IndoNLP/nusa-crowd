@@ -22,6 +22,9 @@ from 2012-2016 for Semantic Textual Similarity Task to Indonesian language.
 
 _HOMEPAGE = "https://github.com/ahmadizzan/sts-indo"
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _LICENSE = "Unknown"
 
 _URLS = {

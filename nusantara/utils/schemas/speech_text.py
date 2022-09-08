@@ -1,5 +1,5 @@
 """
-Speech Recognition Schema
+SpeechText Schema
 """
 import datasets
 

@@ -65,6 +65,8 @@ _CITATION = """\
 
 # TODO: create a module level variable with your dataset name (should match script name)
 #  E.g. Hallmarks of Cancer: [dataset_name] --> hallmarks_of_cancer
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "indolem_tweet_ordering"
 
 # TODO: Add description of the dataset here

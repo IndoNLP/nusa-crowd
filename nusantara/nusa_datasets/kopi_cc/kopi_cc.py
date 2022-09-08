@@ -32,7 +32,8 @@ from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "kopi_cc"
-_LANGUAGES  = "ind"
+_LANGUAGES  = ["ind"]
+_LOCAL = False
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _URL = "https://commoncrawl.org/"

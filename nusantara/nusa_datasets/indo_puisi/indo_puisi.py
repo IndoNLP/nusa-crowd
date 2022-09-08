@@ -16,6 +16,9 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _CITATION = """
 """
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _DESCRIPTION = """\
 Puisi is an Indonesian poetic form. The dataset was collected by scraping various websites. It contains 7223 Indonesian puisi along with the title and author.
 """
