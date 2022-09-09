@@ -13,18 +13,29 @@ jobs:
       with:
         python-version: 3.8
         architecture: x64
+    - name: Install dependencies
+      run: pip install -r requirements.txt
     - name: Run nusantara tests
+      id: nusantara_test
       env:
         PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
-      run: echo "$PAYLOAD_CONTEXT"
+        DATASET_NAME: ${{ github.event.client_payload.slash_command.args.named.dataset }}
+      run: |
+       echo "$PAYLOAD_CONTEXT"
+       output=$(python -m tests.test_nusantara nusantara/nusa_datasets/${{ env.DATASET_NAME }}/${{ env.DATASET_NAME }}.py)
+       output="${output//'%'/'%25'}"
+       output="${output//$'\n'/'%0A'}"
+       output="${output//$'\r'/'%0D'}"
+       echo "::set-output name=result::$output"
+       echo "::set-output name=run_url::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
     - name: Add comment result
       uses: peter-evans/create-or-update-comment@v2
       with:
         token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-        issue-number: ${{ github.event.pull_request_number }}
+        issue-number: ${{ github.event.client_payload.pull_request.number }}
         body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
+          ### Run result
+          ${{ steps.nusantara_test.outputs.run_url}}
+          ```
+          ${{ steps.nusantara_test.outputs.result }}
+          ```
