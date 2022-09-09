@@ -6,8 +6,9 @@ on:
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
+    if: >-
+       (github.event.issue.pull_request)
     steps:
-      - uses: actions/checkout@v3
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v3
         with:
