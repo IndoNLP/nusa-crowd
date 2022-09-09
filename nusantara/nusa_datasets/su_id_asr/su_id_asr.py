@@ -9,11 +9,11 @@ from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
-_DATASETNAME = "su_id"
+_DATASETNAME = "su_id_asr"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["sun"]
 _LOCAL = False
 _CITATION = """\
 @inproceedings{sodimana18_sltu,
@@ -38,7 +38,7 @@ _HOMEPAGE = "https://indonlp.github.io/nusa-catalogue/card.html?su_id_asr"
 _LICENSE = "Attribution-ShareAlike 4.0 International."
 
 _URLs = {
-    "su_id": "https://www.openslr.org/resources/36/asr_sundanese_{}.zip",
+    "su_id_asr": "https://www.openslr.org/resources/36/asr_sundanese_{}.zip",
 }
 
 _SUPPORTED_TASKS = [Tasks.SPEECH_RECOGNITION]
@@ -47,27 +47,27 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class SuId(datasets.GeneratorBasedBuilder):
+class SuIdASR(datasets.GeneratorBasedBuilder):
     """su_id contains ~220K utterances for Sundanese ASR training data."""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="su_id_source",
+            name="su_id_asr_source",
             version=datasets.Version(_SOURCE_VERSION),
-            description="SU_ID source schema",
+            description="SU_ID_ASR source schema",
             schema="source",
-            subset_id="su_id",
+            subset_id="su_id_asr",
         ),
         NusantaraConfig(
-            name="su_id_nusantara_sptext",
+            name="su_id_asr_nusantara_sptext",
             version=datasets.Version(_NUSANTARA_VERSION),
-            description="SU_ID Nusantara schema",
+            description="SU_ID_ASR Nusantara schema",
             schema="nusantara_sptext",
-            subset_id="su_id",
+            subset_id="su_id_asr",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "su_id_source"
+    DEFAULT_CONFIG_NAME = "su_id_asr_source"
 
     def _info(self):
         if self.config.schema == "source":
@@ -95,10 +95,10 @@ class SuId(datasets.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         base_path = {}
         for id in range(10):
-            base_path[id] = dl_manager.download_and_extract(_URLs["su_id"].format(str(id)))
+            base_path[id] = dl_manager.download_and_extract(_URLs["su_id_asr"].format(str(id)))
             print(base_path)
         for id in ["a", "b", "c", "d", "e", "f"]:
-            base_path[id] = dl_manager.download_and_extract(_URLs["su_id"].format(str(id)))
+            base_path[id] = dl_manager.download_and_extract(_URLs["su_id_asr"].format(str(id)))
             print(base_path)
         return [
             datasets.SplitGenerator(
