@@ -132,4 +132,3 @@ class SQuADIdDataset(datasets.GeneratorBasedBuilder):
                             count += 1
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
-        print(count)
