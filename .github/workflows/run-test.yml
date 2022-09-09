@@ -1,0 +1,30 @@
+name: Test Dataloader
+on:
+  repository_dispatch:
+    types: [test-command]
+jobs:
+  run_test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+        architecture: x64
+    - name: Run nusantara tests
+      env:
+        PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+      run: echo "$PAYLOAD_CONTEXT"
+    - name: Add comment result
+      uses: peter-evans/create-or-update-comment@v2
+      with:
+        token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        issue-number: ${{ github.event.pull_request_number }}
+        body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - Created by [create-or-update-comment][1]
+
+            [1]: https://github.com/peter-evans/create-or-update-comment
