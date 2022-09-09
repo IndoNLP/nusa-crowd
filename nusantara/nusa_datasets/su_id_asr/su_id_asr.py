@@ -96,10 +96,8 @@ class SuIdASR(datasets.GeneratorBasedBuilder):
         base_path = {}
         for id in range(10):
             base_path[id] = dl_manager.download_and_extract(_URLs["su_id_asr"].format(str(id)))
-            print(base_path)
         for id in ["a", "b", "c", "d", "e", "f"]:
             base_path[id] = dl_manager.download_and_extract(_URLs["su_id_asr"].format(str(id)))
-            print(base_path)
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
