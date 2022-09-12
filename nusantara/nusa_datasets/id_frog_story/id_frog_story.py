@@ -93,15 +93,13 @@ class IdFrogStory(datasets.GeneratorBasedBuilder):
             spoken_file_path = spoken_path / spoken_file_name
             if os.path.isfile(spoken_file_path):
                 with open(spoken_file_path, "r") as fspoken:
-                    for dat in fspoken.read().strip("\n").split("\n\n"):
-                        data.append(dat)
+                    data.extend(fspoken.read().strip("\n").split("\n\n"))
 
         for written_file_name in sorted(os.listdir(written_path)):
             written_file_path = written_path / written_file_name
             if os.path.isfile(written_file_path):
                 with open(written_file_path, "r") as fwritten:
-                    for dat in fwritten.read().strip("\n").split("\n\n"):
-                        data.append(dat)
+                    data.extend(fwritten.read().strip("\n").split("\n\n"))
 
         return [
             datasets.SplitGenerator(
