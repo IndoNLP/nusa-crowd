@@ -30,7 +30,9 @@ Indonesian Frog Storytelling Corpus
 Indonesian written and spoken corpus, based on the twenty-eight pictures. (http://compling.hss.ntu.edu.sg/who/david/corpus/pictures.pdf)
 """
 _HOMEPAGE = "https://github.com/matbahasa/corpus-frog-storytelling"
+_LANGUAGES = ["ind"]
 _LICENSE = "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)"
+_LOCAL = False
 _URLS = {
     _DATASETNAME: "https://github.com/matbahasa/corpus-frog-storytelling/archive/refs/heads/master.zip",
 }
@@ -91,13 +93,15 @@ class IdFrogStory(datasets.GeneratorBasedBuilder):
             spoken_file_path = spoken_path / spoken_file_name
             if os.path.isfile(spoken_file_path):
                 with open(spoken_file_path, "r") as fspoken:
-                    data.append(fspoken.read())
+                    for dat in fspoken.read().strip("\n").split("\n\n"):
+                        data.append(dat)
 
         for written_file_name in sorted(os.listdir(written_path)):
             written_file_path = written_path / written_file_name
             if os.path.isfile(written_file_path):
                 with open(written_file_path, "r") as fwritten:
-                    data.append(fwritten.read())
+                    for dat in fwritten.read().strip("\n").split("\n\n"):
+                        data.append(dat)
 
         return [
             datasets.SplitGenerator(
