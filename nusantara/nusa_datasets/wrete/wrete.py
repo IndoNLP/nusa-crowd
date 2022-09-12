@@ -26,7 +26,16 @@ _CITATION = """\
     pages={1-5},
     doi={10.1109/ICAICTA.2019.8904199}
 }
+
+@inproceedings{wilie2020indonlu,
+  title={IndoNLU: Benchmark and Resources for Evaluating Indonesian Natural Language Understanding},
+  author={Wilie, Bryan and Vincentio, Karissa and Winata, Genta Indra and Cahyawijaya, Samuel and Li, Xiaohong and Lim, Zhi Yuan and Soleman, Sidik and Mahendra, Rahmad and Fung, Pascale and Bahar, Syafri and others},
+  booktitle={Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing},
+  pages={843--857},
+  year={2020}
+}
 """
+
 
 _DESCRIPTION = """\
 WReTE, The Wiki Revision Edits Textual Entailment dataset (Setya and Mahendra, 2018) consists of 450 sentence pairs constructed from Wikipedia revision history. The dataset contains pairs of sentences and binary semantic relations between the pairs. The data are labeled as entailed when the meaning of the second sentence can be derived from the first one, and not entailed otherwise
@@ -48,7 +57,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class WReTE(datasets.GeneratorBasedBuilder):
+class WReT(datasets.GeneratorBasedBuilder):
     """WReTe consists of premise, hypothesis, category, and label. The Data are labeled as entailed when the meaning of the second sentence can be derived from the first one, and not entailed otherwise"""
 
     BUILDER_CONFIGS = [
