@@ -24,6 +24,8 @@ abstract = "News analysis is a popular task in Natural Language Processing (NLP)
 }
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "id_clickbait"
 _DESCRIPTION = """\
 The CLICK-ID dataset is a collection of Indonesian news headlines that was collected from 12 local online news

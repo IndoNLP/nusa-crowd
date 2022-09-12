@@ -22,6 +22,8 @@ _CITATION = """\
   doi={10.1109/IALP.2018.8629109}}
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "indosum"
 
 _DESCRIPTION = """\

@@ -11,7 +11,7 @@ from typing import Iterable, Iterator, List, Optional, Union, Dict
 
 import datasets
 from datasets import DatasetDict, Features
-from nusantara.utils.constants import Tasks
+from nusantara.utils.constants import Tasks, TASK_TO_SCHEMA, VALID_TASKS, VALID_SCHEMAS, SCHEMA_TO_FEATURES, TASK_TO_FEATURES
 from nusantara.utils.schemas import kb_features, pairs_features, pairs_features_score, qa_features, text2text_features, text_features, text_multi_features, seq_label_features, ssp_features, speech_text_features, image_text_features
 
 sys.path.append(str(Path(__file__).parent.parent))
@@ -19,62 +19,6 @@ sys.path.append(str(Path(__file__).parent.parent))
 import logging
 
 logger = logging.getLogger(__name__)
-
-
-_TASK_TO_SCHEMA = {
-    Tasks.DEPENDENCY_PARSING: "KB",
-    Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
-    Tasks.KEYWORD_EXTRACTION: "SEQ_LABEL",
-    Tasks.COREFERENCE_RESOLUTION: "KB",
-    Tasks.DIALOGUE_SYSTEM: "KB",
-    Tasks.NAMED_ENTITY_RECOGNITION: "SEQ_LABEL",
-    Tasks.POS_TAGGING: "SEQ_LABEL",
-    Tasks.KEYWORD_TAGGING: "SEQ_LABEL",
-    Tasks.SENTENCE_ORDERING: "SEQ_LABEL",
-    Tasks.QUESTION_ANSWERING: "QA",
-    Tasks.TEXTUAL_ENTAILMENT: "PAIRS",
-    Tasks.SEMANTIC_SIMILARITY: "PAIRS_SCORE",
-    Tasks.NEXT_SENTENCE_PREDICTION: "PAIRS",
-    Tasks.SHORT_ANSWER_GRADING: "PAIRS_SCORE",
-    Tasks.PARAPHRASING: "T2T",
-    Tasks.MACHINE_TRANSLATION: "T2T",
-    Tasks.SUMMARIZATION: "T2T",
-    Tasks.SENTIMENT_ANALYSIS: "TEXT",
-    Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT_MULTI",
-    Tasks.EMOTION_CLASSIFICATION: "TEXT",
-    Tasks.SELF_SUPERVISED_PRETRAINING: "SSP",
-    Tasks.SPEECH_RECOGNITION: "SPTEXT",
-    Tasks.SPEECH_TO_TEXT_TRANSLATION: "SPTEXT",
-    Tasks.TEXT_TO_SPEECH: "SPTEXT",
-    Tasks.IMAGE_CAPTIONING: "IMTEXT",
-    Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
-    Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
-}
-
-_VALID_TASKS = set(_TASK_TO_SCHEMA.keys())
-_VALID_SCHEMAS = set(_TASK_TO_SCHEMA.values())
-
-_SCHEMA_TO_FEATURES = {
-    "KB": kb_features,
-    "QA": qa_features,
-    "T2T": text2text_features,
-    "TEXT": text_features(),
-    "TEXT_MULTI": text_multi_features(),
-    "PAIRS": pairs_features(),
-    "PAIRS_SCORE": pairs_features_score(),
-    "SEQ_LABEL": seq_label_features(),
-    "SSP": ssp_features,
-    "SPTEXT": speech_text_features,
-    "IMTEXT": image_text_features(),
-}
-
-_TASK_TO_FEATURES = {
-    Tasks.NAMED_ENTITY_RECOGNITION: {"entities"},
-    Tasks.DEPENDENCY_PARSING: {"relations", "entities"},
-    Tasks.COREFERENCE_RESOLUTION: {"entities", "coreferences"},
-    # Tasks.NAMED_ENTITY_DISAMBIGUATION: {"entities", "normalized"},
-    # Tasks.EVENT_EXTRACTION: {"events"}
-}
 
 
 def _get_example_text(example: dict) -> str:
@@ -128,7 +72,7 @@ class TestDataLoader(unittest.TestCase):
             with self.subTest("Check schema validity"):
                 self.test_schema(schema)
 
-            mapped_features = _SCHEMA_TO_FEATURES[schema]
+            mapped_features = SCHEMA_TO_FEATURES[schema]
             split_to_feature_statistics = self.get_feature_statistics(mapped_features, schema)
             for split_name, split in self.datasets_nusantara[schema].items():
                 print(split_name)
@@ -170,11 +114,11 @@ class TestDataLoader(unittest.TestCase):
         print("module", module)
         self._SUPPORTED_TASKS = importlib.import_module(module)._SUPPORTED_TASKS
         logger.info(f"Found _SUPPORTED_TASKS={self._SUPPORTED_TASKS}")
-        invalid_tasks = set(self._SUPPORTED_TASKS) - _VALID_TASKS
+        invalid_tasks = set(self._SUPPORTED_TASKS) - VALID_TASKS
         if len(invalid_tasks) > 0:
-            raise ValueError(f"Found invalid supported tasks {invalid_tasks}. Must be one of {_VALID_TASKS}")
+            raise ValueError(f"Found invalid supported tasks {invalid_tasks}. Must be one of {VALID_TASKS}")
 
-        self._MAPPED_SCHEMAS = set([_TASK_TO_SCHEMA[task] for task in self._SUPPORTED_TASKS])
+        self._MAPPED_SCHEMAS = set([TASK_TO_SCHEMA[task] for task in self._SUPPORTED_TASKS])
         logger.info(f"_SUPPORTED_TASKS implies _MAPPED_SCHEMAS={self._MAPPED_SCHEMAS}")
 
         # check the schemas implied by _SUPPORTED_TASKS
@@ -539,10 +483,10 @@ class TestDataLoader(unittest.TestCase):
         if schema == "KB":
             features = kb_features
             for task in self._SUPPORTED_TASKS:
-                if task in _TASK_TO_FEATURES:
-                    non_empty_features.update(_TASK_TO_FEATURES[task])
+                if task in TASK_TO_FEATURES:
+                    non_empty_features.update(TASK_TO_FEATURES[task])
         else:
-            features = _SCHEMA_TO_FEATURES[schema]
+            features = SCHEMA_TO_FEATURES[schema]
 
         split_to_feature_counts = self.get_feature_statistics(features=features, schema=schema)
         for split_name, split in self.datasets_nusantara[schema].items():
@@ -557,7 +501,7 @@ class TestDataLoader(unittest.TestCase):
                     raise AssertionError(f"Required key '{non_empty_feature}' does not have any instances")
 
             for feature, count in split_to_feature_counts[split_name].items():
-                if count > 0 and feature not in non_empty_features and feature in set().union(*_TASK_TO_FEATURES.values()):
+                if count > 0 and feature not in non_empty_features and feature in set().union(*TASK_TO_FEATURES.values()):
                     logger.warning(f"Found instances of '{feature}' but there seems to be no task in 'SUPPORTED_TASKS' for them. Is 'SUPPORTED_TASKS' correct?")
 
     def _test_is_list(self, msg: str, field: list):
@@ -586,7 +530,7 @@ if __name__ == "__main__":
         type=str,
         default=None,
         required=False,
-        choices=list(_VALID_SCHEMAS),
+        choices=list(VALID_SCHEMAS),
         help="by default, nusantara schemas will be discovered from _SUPPORTED_TASKS. use this to explicitly test only one schema.",
     )
     parser.add_argument(

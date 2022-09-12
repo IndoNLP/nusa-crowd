@@ -28,6 +28,9 @@ Javanese Imdb Movie Reviews Dataset is a Javanese version of the IMDb Movie Revi
 
 _HOMEPAGE = "https://huggingface.co/datasets/w11wo/imdb-javanese"
 
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LOCAL = False
+
 _LICENSE = "Unknown"
 
 _URLS = {
