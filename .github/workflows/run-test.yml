@@ -22,8 +22,9 @@ jobs:
       continue-on-error: true
       env:
         DATASET_NAME: ${{ github.event.client_payload.slash_command.args.named.dataset }}
+        SUBSET_ID: ${{ github.event.client_payload.slash_command.args.named.subset_id }}
       run: |
-       output=$(python -m tests.test_nusantara nusantara/nusa_datasets/${{ env.DATASET_NAME }}/${{ env.DATASET_NAME }}.py)
+       output=$(python -m tests.test_nusantara nusantara/nusa_datasets/${{ env.DATASET_NAME }}/${{ env.DATASET_NAME }}.py --subset_id=${{ env.SUBSET_ID }})
        echo "::set-output name=run_url::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
     - name: Add comment result
       uses: peter-evans/create-or-update-comment@v2
