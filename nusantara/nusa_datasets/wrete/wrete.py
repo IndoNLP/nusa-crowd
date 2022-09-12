@@ -38,7 +38,7 @@ _CITATION = """\
 
 
 _DESCRIPTION = """\
-WReTE, The Wiki Revision Edits Textual Entailment dataset (Setya and Mahendra, 2018) consists of 450 sentence pairs constructed from Wikipedia revision history. The dataset contains pairs of sentences and binary semantic relations between the pairs. The data are labeled as entailed when the meaning of the second sentence can be derived from the first one, and not entailed otherwise
+WReTe, The Wiki Revision Edits Textual Entailment dataset (Setya and Mahendra, 2018) consists of 450 sentence pairs constructed from Wikipedia revision history. The dataset contains pairs of sentences and binary semantic relations between the pairs. The data are labeled as entailed when the meaning of the second sentence can be derived from the first one, and not entailed otherwise
 """
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlu"
@@ -57,21 +57,21 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class WReT(datasets.GeneratorBasedBuilder):
+class WReTe(datasets.GeneratorBasedBuilder):
     """WReTe consists of premise, hypothesis, category, and label. The Data are labeled as entailed when the meaning of the second sentence can be derived from the first one, and not entailed otherwise"""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
             name="wrete_source",
             version=datasets.Version(_SOURCE_VERSION),
-            description="WReTE source schema",
+            description="WReTe source schema",
             schema="source",
             subset_id="wrete",
         ),
         NusantaraConfig(
             name="wrete_nusantara_pairs",
             version=datasets.Version(_NUSANTARA_VERSION),
-            description="WReTE Nusantara schema",
+            description="WReTe Nusantara schema",
             schema="nusantara_pairs",
             subset_id="wrete",
         ),
