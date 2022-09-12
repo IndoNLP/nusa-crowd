@@ -133,7 +133,7 @@ class KorpusNusantara(datasets.GeneratorBasedBuilder):
         for subset in _LANGUAGES[1:]
     ]
 
-    DEFAULT_CONFIG_NAME = "korpus_nusantara_jav_source"
+    DEFAULT_CONFIG_NAME = "korpus_nusantara_jav_ind_source"
 
     def _info(self):
         if self.config.schema == "source":
