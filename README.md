@@ -9,9 +9,9 @@
 
 ![Milestone 2](https://progress-bar.dev/100/?title=Milestone%202%20(60%20Datasets%20Completed))
 
-![Milestone 3](https://progress-bar.dev/72/?title=Milestone%203%20(100%20Datasets%20Completed))
+![Milestone 3](https://progress-bar.dev/75/?title=Milestone%203%20(100%20Datasets%20Completed))
 
-![Milestone 4](https://progress-bar.dev/48/?title=Milestone%204%20(150%20Datasets%20Completed))
+![Milestone 4](https://progress-bar.dev/50/?title=Milestone%204%20(150%20Datasets%20Completed))
 <!-- milestone ends -->
 
 *Baca README ini dalam [Bahasa Indonesia](README.id.md).*
