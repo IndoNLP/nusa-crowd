@@ -43,15 +43,7 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-Analogous to the En ↔ Id and Su ↔ Id datasets, we create a new dataset
-for Javanese and Indonesian translation generated
-from the verse-aligned Bible parallel corpus with
-the same split setting. In terms of size, both the
-Su ↔ Id and Jv ↔ Id datasets are much smaller
-compared to the En ↔ Id dataset, because there are
-Bible chapters for which translations are available
-for Indonesian, albeit not for the local languages.
-"""
+Analogous to the En ↔ Id and Su ↔ Id datasets, we create a new dataset for Javanese and Indonesian translation generated from the verse-aligned Bible parallel corpus with the same split setting. In terms of size, both the Su ↔ Id and Jv ↔ Id datasets are much smaller compared to the En ↔ Id dataset, because there are Bible chapters for which translations are available for Indonesian, albeit not for the local languages."""
 
 _HOMEPAGE = "https://github.com/IndoNLP/indonlg"
 

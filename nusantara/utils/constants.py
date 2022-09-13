@@ -2,8 +2,8 @@ from enum import Enum
 from types import SimpleNamespace
 from collections import defaultdict
 from nusantara.utils.schemas import (
-    kb_features, qa_features, text2text_features, text_features, 
-    text_multi_features, pairs_features, pairs_features_score, seq_label_features, 
+    kb_features, qa_features, text2text_features, text_features,
+    text_multi_features, pairs_features, pairs_features_score, seq_label_features,
     ssp_features, speech_text_features, image_text_features
 )
 
@@ -29,6 +29,7 @@ class Tasks(Enum):
     SENTIMENT_ANALYSIS = "SA"
     ASPECT_BASED_SENTIMENT_ANALYSIS = "ABSA"
     EMOTION_CLASSIFICATION = "EC"
+    HOAX_NEWS_CLASSIFICATION = "HNC"
 
     # Single Text Sequence Labeling
     POS_TAGGING = "POS"
@@ -66,7 +67,7 @@ class Tasks(Enum):
 
     # No nusantara schema
     FACT_CHECKING = "FCT"
-    
+
 TASK_TO_SCHEMA = {
     Tasks.DEPENDENCY_PARSING: "KB",
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
@@ -95,6 +96,7 @@ TASK_TO_SCHEMA = {
     Tasks.IMAGE_CAPTIONING: "IMTEXT",
     Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
     Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
+    Tasks.HOAX_NEWS_CLASSIFICATION: "TEXT",
     Tasks.FACT_CHECKING: None,
 }
 
