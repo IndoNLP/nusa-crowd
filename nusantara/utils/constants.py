@@ -63,6 +63,9 @@ class Tasks(Enum):
     IMAGE_CAPTIONING = "IC"
     STYLIZED_IMAGE_CAPTIONING = "SIC"
     VISUALLY_GROUNDED_REASONING = "VGR"
+
+    # No nusantara schema
+    FACT_CHECKING = "FCT"
     
 TASK_TO_SCHEMA = {
     Tasks.DEPENDENCY_PARSING: "KB",
@@ -92,6 +95,7 @@ TASK_TO_SCHEMA = {
     Tasks.IMAGE_CAPTIONING: "IMTEXT",
     Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
     Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
+    Tasks.FACT_CHECKING: None,
 }
 
 SCHEMA_TO_TASKS = defaultdict(set)

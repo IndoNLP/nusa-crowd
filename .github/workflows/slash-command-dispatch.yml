@@ -1,0 +1,19 @@
+#  https://github.com/peter-evans/slash-command-dispatch
+name: Slash Command Dispatch
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  slashCommandDispatch:
+    runs-on: ubuntu-latest
+    if: >-
+       (github.event.issue.pull_request)
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v3
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          commands: |
+            test
+          permission: none
+
