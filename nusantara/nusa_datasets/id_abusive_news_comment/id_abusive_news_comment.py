@@ -33,13 +33,13 @@ _URLs = {
     "train": "https://github.com/dhamirdesrul/Indonesian-Online-News-Comments/raw/master/Dataset/Abusive%20Language%20Detection%20on%20Indonesian%20Online%20News%20Comments%20Dataset%20.xlsx",
 }
 
-_SUPPORTED_TASKS = [Tasks.EMOTION_CLASSIFICATION]
+_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
 
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class EmoT(datasets.GeneratorBasedBuilder):
+class IdAbusiveNewsComment(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
