@@ -14,13 +14,15 @@
 # limitations under the License.
 """KoPI-NLLB corpus."""
 import json
-from posixpath import split
+
 import datasets
 import zstandard as zstd
+
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
+
 logger = datasets.logging.get_logger(__name__)
 
 _CITATION = """
@@ -36,15 +38,15 @@ KopI(Korpus Perayapan Indonesia)-NLLB, is Indonesian family language(aceh,bali,b
 each language set also filtered using some some deduplicate technique such as exact hash(md5) dedup technique and minhash LSH neardup
 
 """
-_TYPE = ['raw','dedup','neardup']
+_TYPE = ["raw", "dedup", "neardup"]
 
 
-_CONF_LANG = ['ace_Latn','ban_Latn','bjn_Latn','ind_Latn','jav_Latn','min_Latn','sun_Latn']
+_CONF_LANG = ["ace_Latn", "ban_Latn", "bjn_Latn", "ind_Latn", "jav_Latn", "min_Latn", "sun_Latn"]
 
 _CONFIGS = []
 for j in _CONF_LANG:
     for m in _TYPE:
-        _CONFIGS.append(j+'-'+m)
+        _CONFIGS.append(j + "-" + m)
 
 _ALL_CONFIG = ["all-raw", "all-dedup", "all-neardup"] + _CONFIGS
 
@@ -52,13 +54,13 @@ _HOMEPAGE = "https://huggingface.co/datasets/munggok/KoPI-NLLB"
 
 _LICENSE = "ODC_C"
 
-_BASE_URL = 'https://huggingface.co/datasets/munggok/KoPI-NLLB/resolve/main/{tipe}/{lang}.json.zst'
+_BASE_URL = "https://huggingface.co/datasets/munggok/KoPI-NLLB/resolve/main/{tipe}/{lang}.json.zst"
 
 _DATASETNAME = "kopi_nllb"
 
 _SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]
 
-_LANGUAGES  = ["ind","jav","ace","ban","bjn","min","sun"]
+_LANGUAGES = ["ind", "jav", "ace", "ban", "bjn", "min", "sun"]
 
 _NUSANTARA_VERSION = "1.0.0"
 
@@ -94,12 +96,15 @@ def nusantara_config_constructor(lang, schema, version):
 
 class KoPINLLBConfig(datasets.BuilderConfig):
     """BuilderConfig for the Clean KoPI corpus."""
+
     def __init__(self, **kwargs):
         """BuilderConfig for Clean KoPI corpus.
         Args:
             **kwargs: keyword arguments forwarded to super.
         """
         super().__init__(**kwargs)
+
+
 class KoPINLLB(datasets.GeneratorBasedBuilder):
     """KoPI NLLB corpus."""
 
@@ -108,7 +113,7 @@ class KoPINLLB(datasets.GeneratorBasedBuilder):
     def _info(self):
 
         if self.config.schema == "source":
-            features=datasets.Features(
+            features = datasets.Features(
                 {
                     "text": datasets.Value("string"),
                     "url": datasets.Value("string"),
@@ -125,18 +130,18 @@ class KoPINLLB(datasets.GeneratorBasedBuilder):
             license=_LICENSE,
             citation=_CITATION,
         )
+
     def _split_generators(self, dl_manager):
         name = self.config.name.replace("_" + self.config.schema, "")
         name = name.replace(_DATASETNAME + "_", "")
         split_name = name.split("-")
         if split_name[0] == "all":
-            train = [_BASE_URL.format(tipe=split_name[1],lang=m) for m in _CONF_LANG]
+            train = [_BASE_URL.format(tipe=split_name[1], lang=m) for m in _CONF_LANG]
         else:
-            train = [_BASE_URL.format(tipe=split_name[1],lang=split_name[0])]
+            train = [_BASE_URL.format(tipe=split_name[1], lang=split_name[0])]
         train_downloaded_files = dl_manager.download(train)
-        return [
-            datasets.SplitGenerator(name=datasets.Split.TRAIN, gen_kwargs={"filepaths": train_downloaded_files})
-        ]
+        return [datasets.SplitGenerator(name=datasets.Split.TRAIN, gen_kwargs={"filepaths": train_downloaded_files})]
+
     def _generate_examples(self, filepaths):
         """This function returns the examples in the raw (text) form by iterating on all the files."""
         id_ = 0
@@ -152,5 +157,5 @@ class KoPINLLB(datasets.GeneratorBasedBuilder):
                                 yield id_, {"id": str(id_), "text": example["text"]}
                                 id_ += 1
                             else:
-                                yield id_, {'text':example['text'],'url':example['url'],'source':example['source'],'score': float(example['score'])}
+                                yield id_, {"text": example["text"], "url": example["url"], "source": example["source"], "score": float(example["score"])}
                                 id_ += 1
