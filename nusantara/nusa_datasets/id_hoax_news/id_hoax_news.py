@@ -8,7 +8,7 @@ from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
 
-_DATASETNAME = "hoax_news"
+_DATASETNAME = "id_hoax_news"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
@@ -25,7 +25,7 @@ Each data sample is annotated by three reviewers and the final taggings are obta
 
 _HOMEPAGE = "https://data.mendeley.com/datasets/p3hfgr5j3m/1"
 
-_LICENSE = "CC BY 4.0"
+_LICENSE = "Creative Commons Attribution 4.0 International"
 
 _URLs = {
     "train": "https://data.mendeley.com/public-files/datasets/p3hfgr5j3m/files/38bfcff2-8a32-4920-9c26-4f63b5b2dad8/file_downloaded",
@@ -37,26 +37,26 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class HoaxNews(datasets.GeneratorBasedBuilder):
+class IdHoaxNews(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="hoax_news_source",
+            name="id_hoax_news_source",
             version=datasets.Version(_SOURCE_VERSION),
             description="Hoax News source schema",
             schema="source",
-            subset_id="hoax_news",
+            subset_id="id_hoax_news",
         ),
         NusantaraConfig(
-            name="hoax_news_nusantara_text",
+            name="id_hoax_news_nusantara_text",
             version=datasets.Version(_NUSANTARA_VERSION),
             description="Hoax News Nusantara schema",
             schema="nusantara_text",
-            subset_id="hoax_news",
+            subset_id="id_hoax_news",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "hoax_news_source"
+    DEFAULT_CONFIG_NAME = "id_hoax_news_source"
 
     def _info(self):
         if self.config.schema == "source":
