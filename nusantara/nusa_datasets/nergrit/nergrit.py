@@ -12,11 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" NERGrit Dataset"""
+""" NERGrit Dataset """
 
 from pathlib import Path
 from typing import List
+
 import datasets
+
 from nusantara.utils import schemas
 from nusantara.utils.common_parser import load_conll_data
 from nusantara.utils.configs import NusantaraConfig
@@ -74,8 +76,7 @@ class NergritDataset(datasets.GeneratorBasedBuilder):
     def _info(self):
         features = None
         if self.config.schema == "source":
-            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")],
-                                          "ner_tag": [datasets.Value("string")]})
+            features = datasets.Features({"index": datasets.Value("string"), "tokens": [datasets.Value("string")], "ner_tag": [datasets.Value("string")]})
         elif self.config.schema == "nusantara_seq_label":
             features = schemas.seq_label_features(self.label_classes)
 
