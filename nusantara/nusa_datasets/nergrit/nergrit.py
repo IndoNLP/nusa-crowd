@@ -22,23 +22,12 @@ from nusantara.utils.common_parser import load_conll_data
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
 
-# TODO: Add BibTeX citation
 _CITATION = """\
-@article{,
-  author    = {},
-  title     = {},
-  journal   = {},
-  volume    = {},
-  year      = {},
-  url       = {},
-  doi       = {},
-  biburl    = {},
-  bibsource = {}
-}
 """
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "nergrit"
-
 _DESCRIPTION = """\
 This NER dataset is taken from the Grit-ID repository, and the labels are spans in IOB chunking representation.
 The dataset consists of three kinds of named entity tags, PERSON (name of person), PLACE (name of location), and
@@ -46,25 +35,20 @@ ORGANIZATION (name of organization).
 """
 
 _HOMEPAGE = "https://github.com/grit-id/nergrit-corpus"
-
 _LICENSE = "MIT"
-
 _URL_ROOT = "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/nergrit_ner-grit"
 _URLs = {
     "train": f"{_URL_ROOT}/train_preprocess.txt",
     "validation": f"{_URL_ROOT}/valid_preprocess.txt",
     "test": f"{_URL_ROOT}/test_preprocess.txt",
 }
-
 _SUPPORTED_TASKS = [Tasks.NAMED_ENTITY_RECOGNITION]
-
 _SOURCE_VERSION = "1.0.0"
-
 _NUSANTARA_VERSION = "1.0.0"
 
 
 class NergritDataset(datasets.GeneratorBasedBuilder):
-    """NERGrit."""
+    """Indonesian Named Entity Recognition from https://github.com/grit-id/nergrit-corpus."""
 
     label_classes = ["I-PERSON", "B-ORGANISATION", "I-ORGANISATION", "B-PLACE", "I-PLACE", "O", "B-PERSON"]
 
@@ -141,11 +125,3 @@ class NergritDataset(datasets.GeneratorBasedBuilder):
                 yield index, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
-
-
-# TODO: Remove this before making your PR
-if __name__ == "__main__":
-    ds = datasets.load_dataset(__file__, name="nergrit_source")
-    print(ds)
-    for i in range(3):
-        print(ds["train"][i])
