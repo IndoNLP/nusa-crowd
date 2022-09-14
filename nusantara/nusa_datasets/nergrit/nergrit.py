@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" NERGrit Long Dataset"""
+""" NERGrit Dataset"""
 
 from pathlib import Path
 from typing import List
@@ -50,7 +50,11 @@ _HOMEPAGE = "https://github.com/grit-id/nergrit-corpus"
 _LICENSE = "MIT"
 
 _URL_ROOT = "https://raw.githubusercontent.com/IndoNLP/indonlu/master/dataset/nergrit_ner-grit"
-_URLs = {split: f"{_URL_ROOT}/{split}_preprocess.txt" for split in ["train", "validation", "test"]}
+_URLs = {
+    "train": f"{_URL_ROOT}/train_preprocess.txt",
+    "validation": f"{_URL_ROOT}/valid_preprocess.txt",
+    "test": f"{_URL_ROOT}/test_preprocess.txt",
+}
 
 _SUPPORTED_TASKS = [Tasks.NAMED_ENTITY_RECOGNITION]
 
@@ -129,11 +133,11 @@ class NergritDataset(datasets.GeneratorBasedBuilder):
 
         if self.config.schema == "source":
             for index, row in enumerate(conll_dataset):
-                ex = {"index": str(i), "tokens": row["sentence"], "ner_tag": row["label"]}
+                ex = {"index": str(index), "tokens": row["sentence"], "ner_tag": row["label"]}
                 yield index, ex
         elif self.config.schema == "nusantara_seq_label":
             for index, row in enumerate(conll_dataset):
-                ex = {"id": str(i), "tokens": row["sentence"], "labels": row["label"]}
+                ex = {"id": str(index), "tokens": row["sentence"], "labels": row["label"]}
                 yield index, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
