@@ -151,11 +151,9 @@ class KoPINLLB(datasets.GeneratorBasedBuilder):
                 for line in f:
                     if line:
                         example = json.loads(line)
-                        if line:
-                            example = json.loads(line)
-                            if self.config.schema == "nusantara_ssp":
-                                yield id_, {"id": str(id_), "text": example["text"]}
-                                id_ += 1
-                            else:
-                                yield id_, {"text": example["text"], "url": example["url"], "source": example["source"], "score": float(example["score"])}
-                                id_ += 1
+                        if self.config.schema == "nusantara_ssp":
+                            yield id_, {"id": str(id_), "text": example["text"]}
+                            id_ += 1
+                        else:
+                            yield id_, {"text": example["text"], "url": example["url"], "source": example["source"], "score": float(example["score"])}
+                            id_ += 1
