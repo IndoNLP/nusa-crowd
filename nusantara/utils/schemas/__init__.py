@@ -8,6 +8,7 @@ from .text_to_text import features as text2text_features
 from .seq_label import features as seq_label_features
 from .self_supervised_pretraining import features as ssp_features
 from .speech_text import features as speech_text_features
+from .speech_to_speech import features as speech2speech_features
 from .image_text import features as image_text_features
 
-__all__ = ["kb_features", "qa_features", "text2text_features", "text_features", "text_multi_features", "pairs_features", "pairs_features_score", "seq_label_features", "ssp_features", "speech_text_features", "image_text_features"]
+__all__ = ["kb_features", "qa_features", "text2text_features", "text_features", "text_multi_features", "pairs_features", "pairs_features_score", "seq_label_features", "ssp_features", "speech_text_features", "speech2speech_features", "image_text_features"]

@@ -4,7 +4,7 @@ from collections import defaultdict
 from nusantara.utils.schemas import (
     kb_features, qa_features, text2text_features, text_features,
     text_multi_features, pairs_features, pairs_features_score, seq_label_features,
-    ssp_features, speech_text_features, image_text_features
+    ssp_features, speech_text_features, speech2speech_features, image_text_features
 )
 
 METADATA: dict = {
@@ -60,6 +60,9 @@ class Tasks(Enum):
     SPEECH_TO_TEXT_TRANSLATION = "STTT"
     TEXT_TO_SPEECH = "TTS"
 
+    # SpeechSpeech
+    SPEECH_TO_SPEECH_TRANSLATION = "S2ST"
+
     # ImageText
     IMAGE_CAPTIONING = "IC"
     STYLIZED_IMAGE_CAPTIONING = "SIC"
@@ -93,6 +96,7 @@ TASK_TO_SCHEMA = {
     Tasks.SPEECH_RECOGNITION: "SPTEXT",
     Tasks.SPEECH_TO_TEXT_TRANSLATION: "SPTEXT",
     Tasks.TEXT_TO_SPEECH: "SPTEXT",
+    Tasks.SPEECH_TO_SPEECH_TRANSLATION: "S2S",
     Tasks.IMAGE_CAPTIONING: "IMTEXT",
     Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
     Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
@@ -119,6 +123,7 @@ SCHEMA_TO_FEATURES = {
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
     "SPTEXT": speech_text_features,
+    "S2S": speech2speech_features,
     "IMTEXT": image_text_features()
 }
 
