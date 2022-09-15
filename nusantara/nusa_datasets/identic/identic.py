@@ -73,7 +73,9 @@ _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
-LANGUAGES = ["id", "en"]
+_LANGUAGES = ["ind", "eng"]
+
+_LOCAL = False
 
 SOURCE_VARIATION = ["raw", "tokenized", "noclitic"]
 
@@ -118,7 +120,7 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
     # some tagsets are bugged, but are kept in order to preserve the data
     TAGSETS = [
         # en
-        '#',
+        "#",
         "$",
         "''",
         ",",
@@ -231,6 +233,20 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
                 subset_id="identic",
             ),
             NusantaraConfig(
+                name="identic_id_source",
+                version=SOURCE_VERSION,
+                description="identic source schema",
+                schema="source",
+                subset_id="identic",
+            ),
+            NusantaraConfig(
+                name="identic_en_source",
+                version=SOURCE_VERSION,
+                description="identic source schema",
+                schema="source",
+                subset_id="identic",
+            ),
+            NusantaraConfig(
                 name="identic_nusantara_t2t",
                 version=NUSANTARA_VERSION,
                 description="Identic Nusantara schema",
@@ -247,20 +263,36 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
         ]
         + [nusantara_config_constructor(_NUSANTARA_VERSION, var) for var in SOURCE_VARIATION]
         + [nusantara_config_constructor(_NUSANTARA_VERSION, var, "nusantara_t2t") for var in SOURCE_VARIATION]
-        + [nusantara_config_constructor(_NUSANTARA_VERSION, "raw", task="seq_label", lang=lang) for lang in LANGUAGES]
+        + [nusantara_config_constructor(_NUSANTARA_VERSION, "raw", task="seq_label", lang=lang) for lang in ["en", "id"]]
     )
 
     DEFAULT_CONFIG_NAME = "identic_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
-            features = datasets.Features(
-                {
-                    "id": datasets.Value("string"),
-                    "id_sentence": datasets.Value("string"),
-                    "en_sentence": datasets.Value("string"),
-                }
-            )
+            if self.config.name.endswith("id_source") or self.config.name.endswith("en_source"):
+                features = datasets.Features(
+                    {
+                        "id": [datasets.Value("string")],
+                        "form": [datasets.Value("string")],
+                        "lemma": [datasets.Value("string")],
+                        "upos": [datasets.Value("string")],
+                        "xpos": [datasets.Value("string")],
+                        "feats": [datasets.Value("string")],
+                        "head": [datasets.Value("string")],
+                        "deprel": [datasets.Value("string")],
+                        "deps": [datasets.Value("string")],
+                        "misc": [datasets.Value("string")],
+                    }
+                )
+            else:
+                features = datasets.Features(
+                    {
+                        "id": datasets.Value("string"),
+                        "id_sentence": datasets.Value("string"),
+                        "en_sentence": datasets.Value("string"),
+                    }
+                )
 
         elif self.config.schema == "nusantara_t2t":
             features = schemas.text2text_features
@@ -284,13 +316,16 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
 
         name_split = self.config.name.split("_")
 
-        lang = name_split[1] if name_split[1] in LANGUAGES else "id"
+        lang = name_split[1] if name_split[1] in ["en", "id"] else None
 
         if name_split[-1] == "source":
             if len(name_split) == 2:
                 data_dir = base_dir + "/IDENTICv1.0/identic.raw.npp.txt"
             else:
-                data_dir = base_dir + "/IDENTICv1.0/identic.{var}.npp.txt".format(var=name_split[1])
+                if name_split[1] in ["en", "id"]:
+                    data_dir = base_dir + "/IDENTICv1.0/identic.raw.npp.txt"
+                else:
+                    data_dir = base_dir + "/IDENTICv1.0/identic.{var}.npp.txt".format(var=name_split[1])
         elif name_split[-1] == "t2t":
             if len(name_split) == 3:
                 data_dir = base_dir + "/IDENTICv1.0/identic.raw.npp.txt"
@@ -308,14 +343,21 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
             )
         ]
 
-    def _generate_examples(self, filepath: Path, split: str, lang="id") -> Tuple[int, Dict]:
+    def _generate_examples(self, filepath: Path, split: str, lang=None) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
 
         df = self._load_df_from_tsv(filepath)
 
         if self.config.schema == "source":
-            for id, row in df.iterrows():
-                yield id, {"id": row["id"], "id_sentence": row["id_sentence"], "en_sentence": row["en_sentence"]}
+            if lang is None:
+                # T2T source
+                for id, row in df.iterrows():
+                    yield id, {"id": row["id"], "id_sentence": row["id_sentence"], "en_sentence": row["en_sentence"]}
+            else:
+                # conll source
+                path = filepath.parent / "{lang}.npp.conll".format(lang=lang)
+                for key, example in enumerate(load_ud_data(path)):
+                    yield key, example
 
         elif self.config.schema == "nusantara_t2t":
             for id, row in df.iterrows():
@@ -323,11 +365,13 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
                     "id": str(id),
                     "text_1": row["id_sentence"],
                     "text_2": row["en_sentence"],
-                    "text_1_name": "eng",
-                    "text_2_name": "ind",
+                    "text_1_name": "ind",
+                    "text_2_name": "eng",
                 }
 
         elif self.config.schema == "nusantara_seq_label":
+            if lang is None:
+                lang = "id"
             path = filepath.parent / "{lang}.npp.conll".format(lang=lang)
             for key, example in enumerate(load_ud_data_as_pos_tag(path)):
                 yield key, example
