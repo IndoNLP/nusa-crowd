@@ -92,6 +92,7 @@ _SUPPORTED_TASKS = [Tasks.MACHINE_TRANSLATION]  # example: [Tasks.TRANSLATION, T
 #  provided by the original dataset as a version goes.
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
+_LOCAL = False
 
 
 def nusantara_config_constructor(lang, schema, version):
