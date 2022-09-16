@@ -222,7 +222,7 @@ class CVSS(datasets.GeneratorBasedBuilder):
                     "audio_1": original_audio_path,
                     "text_1": original_text,
                     "metadata_1": {
-                        "name": row["client_id"],
+                        "name": "original_" + row["client_id"],
                         "speaker_age": None,
                         "speaker_gender": None,
                     },
@@ -230,7 +230,7 @@ class CVSS(datasets.GeneratorBasedBuilder):
                     "audio_2": translated_audio_path,
                     "text_2": translated_text,
                     "metadata_2": {
-                        "name": None,
+                        "name": 'translation',
                         "speaker_age": None,
                         "speaker_gender": None,
                     },
