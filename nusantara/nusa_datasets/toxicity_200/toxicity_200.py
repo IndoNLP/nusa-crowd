@@ -37,9 +37,8 @@ from zipfile import ZipFile
 
 import datasets
 
-from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
+from nusantara.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME
 
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
@@ -86,7 +85,7 @@ _URLS = {
 }
 _PASS = "tL4nLLb"
 # TODO: add supported task by dataset. One dataset may support multiple tasks
-_SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
+_SUPPORTED_TASKS = []  # [Tasks.SELF_SUPERVISED_PRETRAINING]  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
 
 # TODO: set this to a version that is associated with the dataset. if none exists use "1.0.0"
 #  This version doesn't have to be consistent with semantic versioning. Anything that is
@@ -177,23 +176,25 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             # TODO: Create your source schema here
             # raise NotImplementedError()
             features = datasets.Features({"id": datasets.Value("string"), "toxic_word": [datasets.Value("string")]})
-        elif self.config.schema == "nusantara_ssp":
-            features = schemas.self_supervised_pretraining.features
-            # EX: Arbitrary NER type dataset
-            # features = datasets.Features(
-            #    {
-            #        "doc_id": datasets.Value("string"),
-            #        "text": datasets.Value("string"),
-            #        "entities": [
-            #            {
-            #                "offsets": [datasets.Value("int64")],
-            #                "text": datasets.Value("string"),
-            #                "type": datasets.Value("string"),
-            #                "entity_id": datasets.Value("string"),
-            #            }
-            #        ],
-            #    }
-            # )
+        else:
+            raise NotImplementedError()
+        # elif self.config.schema == "nusantara_ssp":
+        #    features = schemas.self_supervised_pretraining.features
+        # EX: Arbitrary NER type dataset
+        # features = datasets.Features(
+        #    {
+        #        "doc_id": datasets.Value("string"),
+        #        "text": datasets.Value("string"),
+        #        "entities": [
+        #            {
+        #                "offsets": [datasets.Value("int64")],
+        #                "text": datasets.Value("string"),
+        #                "type": datasets.Value("string"),
+        #                "entity_id": datasets.Value("string"),
+        #            }
+        #        ],
+        #    }
+        # )
 
         # Choose the appropriate nusantara schema for your task and copy it here. You can find information on the schemas in the CONTRIBUTING guide.
 
@@ -284,11 +285,11 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             for id, word in enumerate(word_list):
                 row = {"id": str(id), "toxic_word": [word]}
                 yield id, row
-        elif self.config.schema == "nusantara_ssp":
-            # TODO: yield (key, example) tuples in the nusantara schema
-            for id, word in enumerate(word_list):
-                row = {"id": str(id), "text": word}
-                yield id, row
+        # elif self.config.schema == "nusantara_ssp":
+        #    # TODO: yield (key, example) tuples in the nusantara schema
+        #    for id, word in enumerate(word_list):
+        #        row = {"id": str(id), "text": word}
+        #        yield id, row
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
 
