@@ -71,7 +71,7 @@ _HOMEPAGE = "https://github.com/facebookresearch/flores/tree/main/nllb_seed"
 # Note that this doesn't have to be a common open source license.
 # Some datasets have custom licenses. In this case, simply put the full license terms
 # into `_LICENSE`
-_LICENSE = "CC-BY-NC 4.0"
+_LICENSE = "CC-BY-SA 4.0"
 
 # TODO: Add links to the urls needed to download your dataset files.
 #  For local datasets, this variable can be an empty dictionary.
