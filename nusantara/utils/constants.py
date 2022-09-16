@@ -2,9 +2,9 @@ from enum import Enum
 from types import SimpleNamespace
 from collections import defaultdict
 from nusantara.utils.schemas import (
-    kb_features, qa_features, text2text_features, text_features, 
-    text_multi_features, pairs_features, pairs_features_score, seq_label_features, 
-    ssp_features, speech_text_features, image_text_features
+    kb_features, qa_features, text2text_features, text_features,
+    text_multi_features, pairs_features, pairs_features_score, seq_label_features,
+    ssp_features, speech_text_features, speech2speech_features, image_text_features
 )
 
 METADATA: dict = {
@@ -29,6 +29,7 @@ class Tasks(Enum):
     SENTIMENT_ANALYSIS = "SA"
     ASPECT_BASED_SENTIMENT_ANALYSIS = "ABSA"
     EMOTION_CLASSIFICATION = "EC"
+    HOAX_NEWS_CLASSIFICATION = "HNC"
 
     # Single Text Sequence Labeling
     POS_TAGGING = "POS"
@@ -59,11 +60,17 @@ class Tasks(Enum):
     SPEECH_TO_TEXT_TRANSLATION = "STTT"
     TEXT_TO_SPEECH = "TTS"
 
+    # SpeechSpeech
+    SPEECH_TO_SPEECH_TRANSLATION = "S2ST"
+
     # ImageText
     IMAGE_CAPTIONING = "IC"
     STYLIZED_IMAGE_CAPTIONING = "SIC"
     VISUALLY_GROUNDED_REASONING = "VGR"
-    
+
+    # No nusantara schema
+    FACT_CHECKING = "FCT"
+
 TASK_TO_SCHEMA = {
     Tasks.DEPENDENCY_PARSING: "KB",
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
@@ -89,9 +96,12 @@ TASK_TO_SCHEMA = {
     Tasks.SPEECH_RECOGNITION: "SPTEXT",
     Tasks.SPEECH_TO_TEXT_TRANSLATION: "SPTEXT",
     Tasks.TEXT_TO_SPEECH: "SPTEXT",
+    Tasks.SPEECH_TO_SPEECH_TRANSLATION: "S2S",
     Tasks.IMAGE_CAPTIONING: "IMTEXT",
     Tasks.STYLIZED_IMAGE_CAPTIONING: "IMTEXT",
     Tasks.VISUALLY_GROUNDED_REASONING: "IMTEXT",
+    Tasks.HOAX_NEWS_CLASSIFICATION: "TEXT",
+    Tasks.FACT_CHECKING: None,
 }
 
 SCHEMA_TO_TASKS = defaultdict(set)
@@ -113,6 +123,7 @@ SCHEMA_TO_FEATURES = {
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
     "SPTEXT": speech_text_features,
+    "S2S": speech2speech_features,
     "IMTEXT": image_text_features()
 }
 
