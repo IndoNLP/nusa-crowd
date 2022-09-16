@@ -284,8 +284,8 @@ class NLLBSeed(datasets.GeneratorBasedBuilder):
             for id, (src, tgt) in enumerate(zip(lang_text, eng_text)):
                 row = {
                     "id": str(id),
-                    "src": src,
-                    "tgt": tgt,
+                    "src": [src],
+                    "tgt": [tgt],
                 }
                 yield id, row
 
