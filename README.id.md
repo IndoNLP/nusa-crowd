@@ -12,7 +12,6 @@
 ![Milestone 3](https://progress-bar.dev/81/?title=Milestone%203%20(100%20Datasets%20Completed))
 
 ![Milestone 4](https://progress-bar.dev/54/?title=Milestone%204%20(150%20Datasets%20Completed))
-
 <!-- milestone ends -->
 
 *Read this README in [English](README.md).*
