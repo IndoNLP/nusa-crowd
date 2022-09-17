@@ -79,6 +79,35 @@ _LOCAL = False
 
 SOURCE_VARIATION = ["raw", "tokenized", "noclitic"]
 
+tagsets_map = {
+    # ind
+    "07<c>_CO-$": "CO-",
+    "176<c>_CO-$": "CO-",
+    "F--.^com.<f>_F--$": "F--",
+    "F--.^xi<x>_X--$.^b<x>_X--$.^2.<c>_CC-$": "F--",
+    "X--.^0.<c>_CC-$": "X--",
+    "X--.^a.<x>_X--$": "X--",
+    "X--.^b.<x>_X--$": "X--",
+    "X--.^c.<x>_X--$": "X--",
+    "X--.^com.<f>_F--$": "X--",
+    "X--.^gammima<x>_X--$.^ag.<f>_F--$": "X--",
+    "X--.^h.<x>_X--$": "X--",
+    "X--.^i.<x>_X--$": "X--",
+    "X--.^j.<x>_X--$": "X--",
+    "X--.^m.<f>_F--$": "X--",
+    "X--.^n.<x>_X--$": "X--",
+    "X--.^net.<x>_X--$": "X--",
+    "X--.^okezone<x>_X--$.^com.<f>_F--$": "X--",
+    "X--.^p<x>_X--$.^k.<x>_X--$": "X--",
+    "X--.^r.<x>_X--$": "X--",
+    "X--.^s.<x>_X--$": "X--",
+    "X--.^w.<x>_X--$": "X--",
+    "^ke+dua": "CO-",
+    "^ke+p": "X--",
+    "^nya$": "Z--",
+    "duanya<c>_CO-$": "CO-",
+}
+
 
 def nusantara_config_constructor(version, variation=None, task="source", lang="id"):
     if variation not in SOURCE_VARIATION:
@@ -104,10 +133,13 @@ def nusantara_config_constructor(version, variation=None, task="source", lang="i
         )
 
 
-def load_ud_data_as_pos_tag(filepath):
+def load_ud_data_as_pos_tag(filepath, lang):
     dataset_source = list(load_ud_data(filepath))
 
-    return [{"id": str(i + 1), "tokens": row["form"], "labels": row["xpos"]} for (i, row) in enumerate(dataset_source)]
+    if lang == "id":
+        return [{"id": str(i + 1), "tokens": row["form"], "labels": [tagsets_map.get(pos_tag, pos_tag) for pos_tag in row["xpos"]]} for (i, row) in enumerate(dataset_source)]
+    else:
+        return [{"id": str(i + 1), "tokens": row["form"], "labels": row["xpos"]} for (i, row) in enumerate(dataset_source)]
 
 
 class IdenticDataset(datasets.GeneratorBasedBuilder):
@@ -117,7 +149,6 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
     # Details of the tagsets in https://septinalarasati.com/morphind/
-    # some tagsets are bugged, but are kept in order to preserve the data
     TAGSETS = [
         # en
         "#",
@@ -163,8 +194,6 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
         "WRB",
         "``",
         # id
-        "07<c>_CO-$",
-        "176<c>_CO-$",
         "APP",
         "ASP",
         "ASS",
@@ -174,8 +203,6 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
         "CO-",
         "D--",
         "F--",
-        "F--.^com.<f>_F--$",
-        "F--.^xi<x>_X--$.^b<x>_X--$.^2.<c>_CC-$",
         "G--",
         "H--",
         "I--",
@@ -199,28 +226,7 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
         "VSP",
         "W--",
         "X--",
-        "X--.^0.<c>_CC-$",
-        "X--.^a.<x>_X--$",
-        "X--.^b.<x>_X--$",
-        "X--.^c.<x>_X--$",
-        "X--.^com.<f>_F--$",
-        "X--.^gammima<x>_X--$.^ag.<f>_F--$",
-        "X--.^h.<x>_X--$",
-        "X--.^i.<x>_X--$",
-        "X--.^j.<x>_X--$",
-        "X--.^m.<f>_F--$",
-        "X--.^n.<x>_X--$",
-        "X--.^net.<x>_X--$",
-        "X--.^okezone<x>_X--$.^com.<f>_F--$",
-        "X--.^p<x>_X--$.^k.<x>_X--$",
-        "X--.^r.<x>_X--$",
-        "X--.^s.<x>_X--$",
-        "X--.^w.<x>_X--$",
         "Z--",
-        "^ke+dua",
-        "^ke+p",
-        "^nya$",
-        "duanya<c>_CO-$",
     ]
 
     BUILDER_CONFIGS = (
@@ -373,7 +379,7 @@ class IdenticDataset(datasets.GeneratorBasedBuilder):
             if lang is None:
                 lang = "id"
             path = filepath.parent / "{lang}.npp.conll".format(lang=lang)
-            for key, example in enumerate(load_ud_data_as_pos_tag(path)):
+            for key, example in enumerate(load_ud_data_as_pos_tag(path, lang=lang)):
                 yield key, example
 
     @staticmethod
