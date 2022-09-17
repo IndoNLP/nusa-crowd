@@ -3,7 +3,8 @@ from typing import List
 
 import datasets
 import pandas as pd
-import numpy as np
+import codecs
+from collections import namedtuple
 
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
@@ -29,6 +30,7 @@ _CITATION = """\
     url = "http://www.lrec-conf.org/proceedings/lrec2010/pdf/769_Paper.pdf",
     abstract = "In this work we present SENTIWORDNET 3.0, a lexical resource explicitly devised for supporting sentiment classification and opinion mining applications. SENTIWORDNET 3.0 is an improved version of SENTIWORDNET 1.0, a lexical resource publicly available for research purposes, now currently licensed to more than 300 research groups and used in a variety of research projects worldwide. Both SENTIWORDNET 1.0 and 3.0 are the result of automatically annotating all WORDNET synsets according to their degrees of positivity, negativity, and neutrality. SENTIWORDNET 1.0 and 3.0 differ (a) in the versions of WORDNET which they annotate (WORDNET 2.0 and 3.0, respectively), (b) in the algorithm used for automatically annotating WORDNET, which now includes (additionally to the previous semi-supervised learning step) a random-walk step for refining the scores. We here discuss SENTIWORDNET 3.0, especially focussing on the improvements concerning aspect (b) that it embodies with respect to version 1.0. We also report the results of evaluating SENTIWORDNET 3.0 against a fragment of WORDNET 3.0 manually annotated for positivity, negativity, and neutrality; these results indicate accuracy improvements of about 20{\%} with respect to SENTIWORDNET 1.0.",
 }
+
 @misc{moeljadi_2016,
     title={Neocl/Barasa: Indonesian SentiWordNet},
     url={https://github.com/neocl/barasa},
@@ -49,7 +51,8 @@ _HOMEPAGE = "https://github.com/neocl/barasa"
 _LICENSE = "MIT"
 
 _URLs = {
-    "train": "https://github.com/neocl/barasa/raw/master/data/SentiWordNet_3.0.0_20130122.txt",
+    "senti_wordnet": "https://github.com/neocl/barasa/raw/master/data/SentiWordNet_3.0.0_20130122.txt",
+    "tab": "https://github.com/neocl/barasa/raw/55f669ca3e417e7fa8d0ebafb67700b9c9eeff1d/data/wn-msa-all.tab",
 }
 
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
@@ -76,11 +79,12 @@ class Barasa(datasets.GeneratorBasedBuilder):
             features = datasets.Features(
                 {
                     "index": datasets.Value("string"),
-                    "POS": datasets.Value("string"),
+                    "synset": datasets.Value("string"),
                     "PosScore": datasets.Value("float32"),
                     "NegScore": datasets.Value("float32"),
-                    "SynsetTerms": datasets.Value("string"),
-                    "Gloss": datasets.Value("string"),
+                    "language": datasets.Value("string"),
+                    "goodness": datasets.Value("string"),
+                    "lemma": datasets.Value("string"),
                 }
             )
 
@@ -93,35 +97,65 @@ class Barasa(datasets.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
-        train_tsv_path = Path(dl_manager.download_and_extract(_URLs["train"]))
+        sentiWordnet_tsv_path = Path(dl_manager.download_and_extract(_URLs["senti_wordnet"]))
+        tab_path = Path(dl_manager.download_and_extract(_URLs["tab"]))
         data_files = {
-            "train": train_tsv_path,
+            "sentiWordnet": sentiWordnet_tsv_path,
+            "tab": tab_path,
         }
 
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                gen_kwargs={"filepath": data_files["train"]},
+                gen_kwargs={"filepath": [data_files["sentiWordnet"], data_files["tab"]]},
             ),
         ]
 
     def _generate_examples(self, filepath: Path):
-        df = pd.read_csv(
-            filepath, sep="\t", header="infer",
-            skiprows=list(range(26)),
-            dtype={'ID': str}
-        ).reset_index()
+        lines = self.gen_barasa(filepath[0], filepath[1])
 
         if self.config.schema == "source":
-            for row in df.itertuples():
+            for i, row in enumerate(lines):
+                synset, language, goodness, lemma, PosScore, NegScore = row.split('\t')[:6]
+                PosScore = float(PosScore)
+                NegScore = float(NegScore)
                 ex = {
-                    "index": str(row.ID),
-                    "POS": row[1],
-                    "PosScore": row.PosScore,
-                    "NegScore": row.NegScore,
-                    "SynsetTerms": row.SynsetTerms,
-                    "Gloss": row.Gloss,
+                    "index": i,
+                    "synset": synset,
+                    "PosScore": PosScore,
+                    "NegScore": NegScore,
+                    "language": language,
+                    "goodness": goodness,
+                    "lemma": lemma,
                 }
-                yield row.Index, ex
+                yield i, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
+
+    def gen_barasa(self, SENTI_WORDNET_FILE, BAHASA_WORDNET_FILE):
+        SynsetInfo = namedtuple('SynsetInfo', ['synset', 'pos', 'neg'])
+        LemmaInfo  = namedtuple('LemmaInfo', ['lemma', 'pos', 'neg'])
+
+        SYNSET_SCORE = {}
+        LEMMA_SCORE = {}
+
+        with codecs.open(SENTI_WORDNET_FILE, encoding='utf-8', mode='r') as SentiWN:
+            for line in SentiWN.readlines():
+                if line.startswith('#') or len(line.strip()) == 0: # ignore comments
+                    continue
+                # strip off end-of-line, then split
+                pos, snum, pscore, nscore, lemma, definition = line.strip().split('\t')
+                synset = '%s-%s' % (snum, pos)
+                SYNSET_SCORE[synset] = SynsetInfo(synset, pscore, nscore)
+
+        newlines = []
+        with codecs.open(BAHASA_WORDNET_FILE, encoding='utf-8', mode='r') as BahasaWN:
+            for line in BahasaWN.readlines():
+                synset, lang, goodness, lemma = line.strip().split('\t')
+                if synset in SYNSET_SCORE:
+                    sscore = SYNSET_SCORE[synset]
+                    LEMMA_SCORE[lemma] = LemmaInfo(lemma, sscore.pos, sscore.neg)
+                    newline = ("%s\t" * 6) % (synset, lang, goodness, lemma, sscore.pos, sscore.neg)
+                newlines.append(newline)
+
+        return newlines
