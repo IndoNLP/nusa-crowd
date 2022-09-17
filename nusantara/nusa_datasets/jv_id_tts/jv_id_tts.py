@@ -10,7 +10,7 @@ from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
-_DATASETNAME = "jv_id_asr"
+_DATASETNAME = "jv_id_tts"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
@@ -36,7 +36,7 @@ The data set has been manually quality checked, but there might still be errors.
 This dataset was collected by Google in collaboration with Gadjah Mada University in Indonesia.
 """
 
-_HOMEPAGE = "https://indonlp.github.io/nusa-catalogue/card.html?jv_id_asr"
+_HOMEPAGE = "http://openslr.org/41/"
 
 _LICENSE = "See https://www.openslr.org/resources/41/LICENSE file for license information. Attribution-ShareAlike 4.0 (CC BY-SA 4.0)."
 
@@ -53,27 +53,27 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class JvIdASR(datasets.GeneratorBasedBuilder):
-    """jv_id_asr contains high-quality Multi-speaker TTS data for Javanese (jv-ID)."""
+class JvIdTTS(datasets.GeneratorBasedBuilder):
+    """jv_id_tts contains high-quality Multi-speaker TTS data for Javanese (jv-ID)."""
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="jv_id_asr_source",
+            name="jv_id_tts_source",
             version=datasets.Version(_SOURCE_VERSION),
-            description="JV_ID_ASR source schema",
+            description="JV_ID_TTS source schema",
             schema="source",
-            subset_id="jv_id_asr",
+            subset_id="jv_id_tts",
         ),
         NusantaraConfig(
-            name="jv_id_asr_nusantara_sptext",
+            name="jv_id_tts_nusantara_sptext",
             version=datasets.Version(_NUSANTARA_VERSION),
-            description="JV_ID_ASR Nusantara schema",
+            description="JV_ID_TTS Nusantara schema",
             schema="nusantara_sptext",
-            subset_id="jv_id_asr",
+            subset_id="jv_id_tts",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "jv_id_asr_source"
+    DEFAULT_CONFIG_NAME = "jv_id_tts_source"
 
     def _info(self):
         if self.config.schema == "source":
