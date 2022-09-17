@@ -61,7 +61,7 @@ def nusantara_config_constructor(lang, schema, version):
     if lang == "":
         raise ValueError(f"Invalid lang {lang}")
 
-    if schema != "source" and schema != "nusantara_ssp":
+    if schema != "source":
         raise ValueError(f"Invalid schema: {schema}")
 
     return NusantaraConfig(
@@ -83,7 +83,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in _LANGUAGES] + [nusantara_config_constructor(lang, "nusantara_ssp", _SOURCE_VERSION) for lang in _LANGUAGES]
+    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in _LANGUAGES]
 
     DEFAULT_CONFIG_NAME = "toxicity_200_ind_source"
 
@@ -120,7 +120,6 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                # Whatever you put in gen_kwargs will be passed to _generate_examples
                 gen_kwargs={
                     "filepath": {"text_file": os.path.join(text_dir, lang + "_Latn_twl.txt")},
                     "split": "train",
@@ -133,7 +132,6 @@ class NewDataset(datasets.GeneratorBasedBuilder):
         text = open(filepath["text_file"], "r").readlines()
         word_list = list(map(str.strip, text))
         if self.config.schema == "source":
-            # TODO: yield (key, example) tuples in the original dataset schema
             for id, word in enumerate(word_list):
                 row = {"id": str(id), "toxic_word": [word]}
                 yield id, row
