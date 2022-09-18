@@ -88,13 +88,6 @@ class XFact(datasets.GeneratorBasedBuilder):
                 }
             )
 
-        # SOURCE SCHEMA ONLY
-        # For example nusantara_kb, nusantara_t2t
-        # elif self.config.schema == "nusantara_[nusantara_schema_name]":
-        #     # e.g. features = schemas.kb_features
-        #     # TODO: Choose your nusantara schema here
-        #     raise NotImplementedError()
-
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
             features=features,
@@ -139,7 +132,6 @@ class XFact(datasets.GeneratorBasedBuilder):
 
         df = load_x_fact_dataset(filepath)
         if self.config.schema == "source":
-            # TODO: yield (key, example) tuples in the original dataset schema
             for row in df.itertuples():
                 entry = {
                     "language": row.language,
