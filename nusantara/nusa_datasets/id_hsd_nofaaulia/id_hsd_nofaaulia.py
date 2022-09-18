@@ -53,7 +53,7 @@ _DESCRIPTION = """\
 There have been many studies on detecting hate speech in short documents like Twitter data. But to our knowledge, research on long documents is rare, we suppose that the difficulty is increasing due to the possibility of the message of the text may be hidden. In this research, we explore in detecting hate speech on Indonesian long documents using machine learning approach. We build a new Indonesian hate speech dataset from Facebook.
 """
 
-_HOMEPAGE = "https://github.com/nofaulia/hate-speech-detection"
+_HOMEPAGE = "https://dl.acm.org/doi/10.1145/3330482.3330491"
 
 _LICENSE = "Unknown"
 
@@ -61,15 +61,13 @@ _URLS = {
     _DATASETNAME: "https://raw.githubusercontent.com/nofaulia/hate-speech-detection/main/data/dataset.csv",
 }
 
-_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]  # example: [Tasks.TRANSLATION, Tasks.NAMED_ENTITY_RECOGNITION, Tasks.RELATION_EXTRACTION]
+_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
 
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
-
-# TODO: Name the dataset class to match the script name using CamelCase instead of snake_case
-class NewDataset(datasets.GeneratorBasedBuilder):
-    """TODO: Short description of my dataset."""
+class IdHSDNofaaulia(datasets.GeneratorBasedBuilder):
+    """Indonesian hate speech detection for long article."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
@@ -172,7 +170,3 @@ class NewDataset(datasets.GeneratorBasedBuilder):
                 yield row.Index, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
-
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
