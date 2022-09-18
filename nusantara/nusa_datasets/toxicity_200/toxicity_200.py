@@ -77,7 +77,7 @@ def extract_toxic_zip(filepath):
         zip.extractall(path=filepath[:-4], pwd=_PASS.encode("utf-8"))
     return filepath[:-4]
 
-class NewDataset(datasets.GeneratorBasedBuilder):
+class Toxicity200(datasets.GeneratorBasedBuilder):
     """TODO: Short description of my dataset."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
