@@ -32,7 +32,7 @@ from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
 
 _DATASETNAME = "kopi_cc_news"
 _LOCAL = False
-_LANGUAGES = "id"
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _SUPPORTED_TASKS = [Tasks.SELF_SUPERVISED_PRETRAINING]
