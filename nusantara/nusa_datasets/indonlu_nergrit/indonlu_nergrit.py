@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" NERGrit Dataset """
+""" IndoNLU NERGrit Dataset """
 
 from pathlib import Path
 from typing import List
@@ -29,7 +29,7 @@ _CITATION = """\
 
 _LOCAL = False
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
-_DATASETNAME = "nergrit"
+_DATASETNAME = "indonlu_nergrit"
 _DESCRIPTION = """\
 This NER dataset is taken from the Grit-ID repository, and the labels are spans in IOB chunking representation.
 The dataset consists of three kinds of named entity tags, PERSON (name of person), PLACE (name of location), and
@@ -49,29 +49,29 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class NergritDataset(datasets.GeneratorBasedBuilder):
+class IndonluNergritDataset(datasets.GeneratorBasedBuilder):
     """Indonesian Named Entity Recognition from https://github.com/grit-id/nergrit-corpus."""
 
     label_classes = ["I-PERSON", "B-ORGANISATION", "I-ORGANISATION", "B-PLACE", "I-PLACE", "O", "B-PERSON"]
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="nergrit_source",
+            name="indonlu_nergrit_source",
             version=datasets.Version(_SOURCE_VERSION),
-            description="NERGrit source schema",
+            description="IndoNLU NERGrit source schema",
             schema="source",
-            subset_id="nergrit",
+            subset_id="indonlu_nergrit",
         ),
         NusantaraConfig(
-            name="nergrit_nusantara_seq_label",
+            name="indonlu_nergrit_nusantara_seq_label",
             version=datasets.Version(_NUSANTARA_VERSION),
-            description="NERGrit Nusantara schema",
+            description="IndoNLU NERGrit Nusantara schema",
             schema="nusantara_seq_label",
-            subset_id="nergrit",
+            subset_id="indonlu_nergrit",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "nergrit_source"
+    DEFAULT_CONFIG_NAME = "indonlu_nergrit_source"
 
     def _info(self):
         features = None
