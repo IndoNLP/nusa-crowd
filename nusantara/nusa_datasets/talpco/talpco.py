@@ -31,6 +31,7 @@ and their translations into Korean, Burmese (Myanmar; the official language of t
 Malay (the national language of Malaysia, Singapore and Brunei), Indonesian, Thai, Vietnamese and English.
 """
 _HOMEPAGE = "https://github.com/matbahasa/TALPCo"
+_LOCAL = False
 _LANGUAGES = ["eng", "ind", "jpn", "kor", "myn", "tha", "vie", "zsm"]
 _LICENSE = "CC-BY 4.0"
 _URLS = {

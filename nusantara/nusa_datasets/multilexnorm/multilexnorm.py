@@ -28,6 +28,8 @@ we here specifically work on the Indonisian-english language.
 
 _HOMEPAGE = "https://bitbucket.org/robvanderg/multilexnorm/src/master/"
 
+_LOCAL = False
+_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LICENSE = "CC-BY-NC-SA 4.0"
 
 _URLS = {
