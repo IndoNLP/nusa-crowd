@@ -59,6 +59,7 @@ crowdsourced voice recordings. There are 2,900 hours of speech represented in th
 
 _HOMEPAGE = "https://huggingface.co/datasets/covost2"
 
+_LOCAL = False
 _LICENSE = "CC BY-NC 4.0"
 
 COMMONVOICE_URL_TEMPLATE = "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-6.1-2020-12-11/{lang}.tar.gz"

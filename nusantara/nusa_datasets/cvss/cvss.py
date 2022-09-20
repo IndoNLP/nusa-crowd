@@ -55,9 +55,9 @@ languages into English.
 """
 
 _HOMEPAGE = "https://github.com/google-research-datasets/cvss"
-_LANGUAGE = ["ind", "eng"]
-_LANG_CODE = {"ind": "id", "eng": "en"}
 _LOCAL = False
+_LANGUAGES = ["ind", "eng"]
+_LANG_CODE = {"ind": "id", "eng": "en"}
 _LICENSE = "CC-BY 4.0"
 
 _URLS = {_DATASETNAME: "https://storage.googleapis.com/cvss"}
