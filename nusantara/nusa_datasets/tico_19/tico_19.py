@@ -62,7 +62,7 @@ _CITATION = """\
 _LANGUAGES = ["ind", "ara", "spa", "fra", "hin", "por", "rus", "zho", "eng"]
 _LOCAL = False
 _SUPPORTED_LANG_PAIRS = [
-    ("ind", "ara"), ("ind", "spa"), ("ind", "fra"), ("ind", "hin"), ("ind", "por"), ("ind", "rus"), ("ind", "zho"),
+    ("ind", "ara"), ("ind", "spa"), ("ind", "fra"), ("ind", "hin"), ("ind", "por"), ("ind", "rus"), ("ind", "zho"), ("ind", "eng"),
     ("ara", "ind"), ("spa", "ind"), ("fra", "ind"), ("hin", "ind"), ("por", "ind"), ("rus", "ind"), ("zho", "ind"), ("eng", "ind")
 ]
 
@@ -178,13 +178,13 @@ class Tico19(datasets.GeneratorBasedBuilder):
         lang_pairs = _LANG_CODE_MAP[lang_src] + "-" + _LANG_CODE_MAP[lang_tgt]
 
         # dev & test split only applicable to eng-ind language pair
-        if lang_pairs == "en-id":
+        if lang_pairs in ["en-id", "id-en"]:
             data_dir = dl_manager.download_and_extract(_URLS["evaluation"])
             return [
                 datasets.SplitGenerator(
                     name=datasets.Split.TEST,
                     gen_kwargs={
-                        "filepath": os.path.join(data_dir, "tico19-testset", "test", f"test.{lang_pairs}.tsv"),
+                        "filepath": os.path.join(data_dir, "tico19-testset", "test", f"test.en-id.tsv"),
                         "lang_source": lang_src,
                         "lang_target": lang_tgt
                     },
@@ -192,7 +192,7 @@ class Tico19(datasets.GeneratorBasedBuilder):
                 datasets.SplitGenerator(
                     name=datasets.Split.VALIDATION,
                     gen_kwargs={
-                        "filepath": os.path.join(data_dir, "tico19-testset", "dev", f"dev.{lang_pairs}.tsv"),
+                        "filepath": os.path.join(data_dir, "tico19-testset", "dev", f"dev.en-id.tsv"),
                         "lang_source": lang_src,
                         "lang_target": lang_tgt
                     },
@@ -216,17 +216,27 @@ class Tico19(datasets.GeneratorBasedBuilder):
         
         if self.config.schema == "source":
             # eng-ind language pair dataset provided in .tsv format
-            if lang_source == "eng" and lang_target == "ind":
+            if (lang_source == "eng" and lang_target == "ind") or (lang_source == "ind" and lang_target == "eng"):
                 with open(filepath, encoding="utf-8") as f:
                     reader = csv.reader(f, delimiter="\t", quotechar='"')
                     for id_, row in enumerate(reader):
                         if id_ == 0:
                             continue
+                        if lang_source == "eng":
+                            source_lang = row[0]
+                            target_lang = row[1]
+                            source_string = row[2]
+                            target_string = row[3]
+                        else:
+                            source_lang = row[1]
+                            target_lang = row[0]
+                            source_string = row[3]
+                            target_string = row[2]
                         yield id_, {
-                            "sourceLang": row[0],
-                            "targetLang": row[1],
-                            "sourceString": row[2],
-                            "targetString": row[3],
+                            "sourceLang": source_lang,
+                            "targetLang": target_lang,
+                            "sourceString": source_string,
+                            "targetString": target_string,
                             "stringID": row[4],
                             "url": row[5],
                             "license": row[6],
@@ -255,16 +265,22 @@ class Tico19(datasets.GeneratorBasedBuilder):
                     }
 
         elif self.config.schema == "nusantara_t2t":
-            if lang_source == "eng" and lang_target == "ind":
+            if (lang_source == "eng" and lang_target == "ind") or (lang_source == "ind" and lang_target == "eng"):
                 with open(filepath, encoding="utf-8") as f:
                     reader = csv.reader(f, delimiter="\t", quotechar='"')
                     for id_, row in enumerate(reader):
                         if id_ == 0:
                             continue
+                        if lang_source == "eng":
+                            source_string = row[2]
+                            target_string = row[3]
+                        else:
+                            source_string = row[3]
+                            target_string = row[2]
                         yield id_, {
                             "id": row[4],
-                            "text_1": row[2],
-                            "text_2": row[3],
+                            "text_1": source_string,
+                            "text_2": target_string,
                             "text_1_name": lang_source,
                             "text_2_name": lang_target
                         }
