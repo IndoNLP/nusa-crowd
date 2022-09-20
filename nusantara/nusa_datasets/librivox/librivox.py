@@ -13,23 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-This template serves as a starting point for contributing a dataset to the Nusantara Dataset repo.
-
-When modifying it for your dataset, look for TODO items that offer specific instructions.
-
-Full documentation on writing dataset loading scripts can be found here:
-https://huggingface.co/docs/datasets/add_dataset.html
-
-To create a dataset loading script you will create a class and implement 3 methods:
-  * `_info`: Establishes the schema for the dataset, and returns a datasets.DatasetInfo object.
-  * `_split_generators`: Downloads and extracts data for each split (e.g. train/val/test) or associate local data with each split.
-  * `_generate_examples`: Creates examples from data on disk that conform to each schema defined in `_info`.
-
-TODO: Before submitting your script, delete this doc string and replace it with a description of your dataset.
-
-sptext = (kb, pairs, qa, text, t2t, entailment)
-"""
 import os
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -67,13 +50,6 @@ _HOMEPAGE = "https://huggingface.co/indonesian-nlp/librivox-indonesia"
 
 _LICENSE = "CC0"
 
-# TODO: Add links to the urls needed to download your dataset files.
-#  For local datasets, this variable can be an empty dictionary.
-
-# For publicly available datasets you will most likely end up passing these URLs to dl_manager in _split_generators.
-# In most cases the URLs will be the same for the source and nusantara config.
-# However, if you need to access different files for each config you can have multiple entries in this dict.
-# This can be an arbitrarily nested dict/list of URLs (see below in `_split_generators` method)
 _URLS = {
     _DATASETNAME: "https://huggingface.co/datasets/indonesian-nlp/librivox-indonesia/resolve/main/data",
 }
@@ -146,9 +122,8 @@ class Librivox(datasets.GeneratorBasedBuilder):
                     "audio": datasets.features.Audio(sampling_rate=44100)
                 }
             )
-        # For example nusantara_kb, nusantara_t2t
         elif self.config.schema == "nusantara_sptext":
-            features = schemas.speech_text_features          # TODO: Choose your nusantara schema here
+            features = schemas.speech_text_features
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
