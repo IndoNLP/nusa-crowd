@@ -138,10 +138,12 @@ class LibrivoxIndonesia(datasets.GeneratorBasedBuilder):
         urls = _URLS[_DATASETNAME]
 
         audio_path = {}
+        local_extracted_archive = {}
         metadata_path = {}
         splits = ["train", "test"]
         for split in splits:
-            audio_path[split] = dl_manager.download_and_extract(os.path.join(urls, "audio_{split}.tgz".format(split=split)))
+            audio_path[split] = dl_manager.download(os.path.join(urls, "audio_{split}.tgz".format(split=split)))
+            local_extracted_archive[split] = dl_manager.extract(audio_path[split]) if not dl_manager.is_streaming else None
             metadata_path[split] = dl_manager.download_and_extract(
                 os.path.join(urls, "metadata_{split}.csv.gz".format(split=split))
             )
@@ -151,7 +153,8 @@ class LibrivoxIndonesia(datasets.GeneratorBasedBuilder):
                 name=datasets.Split.TRAIN,
                 # Whatever you put in gen_kwargs will be passed to _generate_examples
                 gen_kwargs={
-                    "audio_path": audio_path["train"],
+                    "local_extracted_archive": local_extracted_archive["train"],
+                    "audio_path": dl_manager.iter_archive(audio_path["train"]),
                     "metadata_path": metadata_path["train"],
                     "split": "train",
                 },
@@ -159,14 +162,15 @@ class LibrivoxIndonesia(datasets.GeneratorBasedBuilder):
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,
                 gen_kwargs={
-                    "audio_path": audio_path["test"],
+                    "local_extracted_archive": local_extracted_archive["test"],
+                    "audio_path": dl_manager.iter_archive(audio_path["test"]),
                     "metadata_path": metadata_path["test"],
                     "split": "test",
                 },
             ),
         ]
 
-    def _generate_examples(self, audio_path: Path, metadata_path: Path, split: str) -> Tuple[int, Dict]:
+    def _generate_examples(self, local_extracted_archive: Path, audio_path, metadata_path: Path, split: str) -> Tuple[int, Dict]:
         df = pd.read_csv(
             metadata_path,
             encoding="utf-8"
@@ -175,22 +179,31 @@ class LibrivoxIndonesia(datasets.GeneratorBasedBuilder):
         if lang != "indonesia":
             lang = _LANG_CODE[lang][0]
         path_to_audio = "librivox-indonesia"
+        metadata = {}
         for id, row in df.iterrows():
             if lang == row["language"] or lang == "indonesia":
+                path = os.path.join(path_to_audio, row["path"])
+                metadata[path] = row
+                metadata[path]["id"] = id
+
+        for path, f in audio_path:
+            if path in metadata:
+                row = metadata[path]
+                path = os.path.join(local_extracted_archive, path) if local_extracted_archive else path
                 if self.config.schema == "source":
-                    yield id, {
-                        "path": row["path"],
+                    yield row["id"], {
+                        "path": path,
                         "language": row["language"],
                         "reader": row["reader"],
                         "sentence": row["sentence"],
-                        "audio": os.path.join(audio_path, path_to_audio, row["path"])
+                        "audio": path,
                     }
                 elif self.config.schema == "nusantara_sptext":
-                    yield id, {
-                        "id": id,
+                    yield row["id"], {
+                        "id": row["id"],
                         "speaker_id": row["reader"],
-                        "path": row["path"],
-                        "audio": os.path.join(audio_path, path_to_audio, row["path"]),
+                        "path": path,
+                        "audio": path,
                         "text": row["sentence"],
                         "metadata": {
                             "speaker_age": None,
