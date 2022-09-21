@@ -1,5 +1,5 @@
 """
-Utility for filtering and loading BigBio datasets.
+Utility for filtering and loading Nusantara datasets.
 """
 from collections import Counter
 from importlib.machinery import SourceFileLoader
@@ -104,9 +104,9 @@ class NusantaraConfigHelper:
     ):
 
         path_to_here = pathlib.Path(__file__).parent.absolute()
-        self.path_to_biodatasets = (path_to_here / "nusa_datasets").resolve()
+        self.path_to_nusadatasets = (path_to_here / "nusa_datasets").resolve()
         self.dataloader_scripts = sorted(
-            self.path_to_biodatasets.glob(os.path.join("*", "*.py"))
+            self.path_to_nusadatasets.glob(os.path.join("*", "*.py"))
         )
         self.dataloader_scripts = [
             el for el in self.dataloader_scripts if el.name != "__init__.py"
