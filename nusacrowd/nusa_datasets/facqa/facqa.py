@@ -5,8 +5,7 @@ from typing import Dict, List, Tuple
 import datasets
 import pandas as pd
 
-from nusacrowd.nusa_datasets.facqa.utils.facqa_utils import (getAnswerString,
-                                                             listToString)
+from nusacrowd.nusa_datasets.facqa.utils.facqa_utils import (getAnswerString, listToString)
 from nusacrowd.utils import schemas
 from nusacrowd.utils.configs import NusantaraConfig
 from nusacrowd.utils.constants import Tasks
