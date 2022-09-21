@@ -1,5 +1,5 @@
-from nusantara import NusantaraMetadata, NusantaraConfigHelper
-from nusantara.utils.constants import Tasks
+from nusacrowd import NusantaraMetadata, NusantaraConfigHelper
+from nusacrowd.utils.constants import Tasks
 
 if __name__ == "__main__":
 

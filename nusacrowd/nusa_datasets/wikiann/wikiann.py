@@ -4,9 +4,9 @@ from typing import List
 import datasets
 from datasets import NamedSplit
 
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
+from nusacrowd.utils import schemas
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "wikiann"

@@ -4,9 +4,9 @@ from typing import Dict, List, Tuple
 import datasets
 import pandas as pd
 
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils import schemas
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """
 @INPROCEEDINGS{8629181,

@@ -1,13 +1,13 @@
 import os
 from pathlib import Path
 from typing import Dict, List, Tuple
-from nusantara.utils.constants import Tasks
-from nusantara.utils import schemas
+from nusacrowd.utils.constants import Tasks
+from nusacrowd.utils import schemas
 
 import datasets
 import json
 
-from nusantara.utils.configs import NusantaraConfig
+from nusacrowd.utils.configs import NusantaraConfig
 
 _CITATION = """\
 @article{lin2020xpersona,

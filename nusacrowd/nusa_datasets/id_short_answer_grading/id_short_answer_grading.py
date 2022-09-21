@@ -4,11 +4,11 @@ from typing import Dict, List, Tuple
 
 import datasets
 
-from nusantara.nusa_datasets.id_short_answer_grading.utils.id_short_answer_grading_utils import \
+from nusacrowd.nusa_datasets.id_short_answer_grading.utils.id_short_answer_grading_utils import \
     create_saintek_and_soshum_dataset
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils import schemas
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @article{

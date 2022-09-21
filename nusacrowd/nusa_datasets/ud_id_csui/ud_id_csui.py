@@ -19,10 +19,10 @@ from typing import Dict, List, Tuple
 import datasets
 from conllu import TokenList
 
-from nusantara.utils import schemas
-from nusantara.utils.common_parser import load_ud_data, load_ud_data_as_nusantara_kb
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils import schemas
+from nusacrowd.utils.common_parser import load_ud_data, load_ud_data_as_nusantara_kb
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @article {10.3844/jcssp.2020.1585.1597,

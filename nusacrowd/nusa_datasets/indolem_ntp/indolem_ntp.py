@@ -3,10 +3,10 @@ from typing import Dict, List, Tuple
 
 import json
 import datasets
-from nusantara.utils import schemas
+from nusacrowd.utils import schemas
 
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @article{DBLP:journals/corr/abs-2011-00677,

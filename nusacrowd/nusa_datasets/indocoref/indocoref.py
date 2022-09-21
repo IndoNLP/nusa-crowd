@@ -4,11 +4,11 @@ from typing import Dict, List, Tuple, TypedDict
 
 import datasets
 
-from nusantara.nusa_datasets.indocoref.utils.text_preprocess import \
+from nusacrowd.nusa_datasets.indocoref.utils.text_preprocess import \
     TextPreprocess
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils import schemas
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @inproceedings{artari-etal-2021-multi,

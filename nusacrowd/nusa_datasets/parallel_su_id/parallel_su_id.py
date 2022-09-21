@@ -4,9 +4,9 @@ from typing import List
 import datasets
 import json
 
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
+from nusacrowd.utils import schemas
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 
 _DATASETNAME = "parallel_su_id"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME

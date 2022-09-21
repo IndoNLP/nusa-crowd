@@ -4,8 +4,8 @@ import os
 import re
 import logging
 
-from nusantara.nusa_datasets.indocoref.utils.feature_utils import FeatureUtils, CLITICS
-from nusantara.nusa_datasets.indocoref.utils.file_utils import FileUtils
+from nusacrowd.nusa_datasets.indocoref.utils.feature_utils import FeatureUtils, CLITICS
+from nusacrowd.nusa_datasets.indocoref.utils.file_utils import FileUtils
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)

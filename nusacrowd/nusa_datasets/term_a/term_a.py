@@ -3,10 +3,10 @@ from typing import List
 
 import datasets
 
-from nusantara.utils import schemas
-from nusantara.utils.common_parser import load_conll_data
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
+from nusacrowd.utils import schemas
+from nusacrowd.utils.common_parser import load_conll_data
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
                                        DEFAULT_SOURCE_VIEW_NAME, Tasks)
 
 _DATASETNAME = "term_a"

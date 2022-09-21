@@ -4,9 +4,9 @@ from typing import List
 import datasets
 import pandas as pd
 
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
+from nusacrowd.utils import schemas
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
 
 _DATASETNAME = "emotion_id_opinion"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME

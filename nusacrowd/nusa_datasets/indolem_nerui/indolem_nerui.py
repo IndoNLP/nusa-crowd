@@ -2,11 +2,11 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 import datasets
-from nusantara.utils import schemas
-from nusantara.utils.common_parser import load_conll_data
+from nusacrowd.utils import schemas
+from nusacrowd.utils.common_parser import load_conll_data
 
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @INPROCEEDINGS{8275098,

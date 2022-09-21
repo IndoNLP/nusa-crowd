@@ -20,8 +20,8 @@ from zipfile import ZipFile
 
 import datasets
 
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME
 
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
