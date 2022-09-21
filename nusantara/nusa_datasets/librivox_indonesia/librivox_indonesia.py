@@ -24,6 +24,7 @@ from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 
 import pandas as pd
+
 _CITATION = """\
 @misc{
    research, 
@@ -33,7 +34,7 @@ _CITATION = """\
 } 
 """
 
-_DATASETNAME = "librivox"
+_DATASETNAME = "librivox_indonesia"
 _DESCRIPTION = """\
 The LibriVox Indonesia dataset consists of MP3 audio and a corresponding text file we generated from the public domain audiobooks LibriVox. 
 We collected only languages in Indonesia for this dataset. 
@@ -70,7 +71,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class Librivox(datasets.GeneratorBasedBuilder):
+class LibrivoxIndonesia(datasets.GeneratorBasedBuilder):
     """
     Librivox-indonesia is a speech-to-text dataset in 7 languages available in Indonesia.
     The default dataloader contains all languages, while the other available dataloaders contain a designated language.
@@ -81,35 +82,35 @@ class Librivox(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="librivox_source",
+            name="librivox_indonesia_source",
             version=_SOURCE_VERSION,
-            description="librivox source schema for all languages",
+            description="Librivox-Indonesia source schema for all languages",
             schema="source",
-            subset_id="librivox",
+            subset_id="librivox_indonesia",
         )] + [
         NusantaraConfig(
-            name="librivox_{lang}_source".format(lang=lang),
+            name="librivox_indonesia_{lang}_source".format(lang=lang),
             version=_SOURCE_VERSION,
-            description="librivox source schema for {lang} languages".format(lang=_LANG_CODE[lang][1]),
+            description="Librivox-Indonesia source schema for {lang} languages".format(lang=_LANG_CODE[lang][1]),
             schema="source",
-            subset_id="librivox_{lang}".format(lang=lang),
+            subset_id="librivox_indonesia_{lang}".format(lang=lang),
         ) for lang in _LANGUAGES] + [
         NusantaraConfig(
-            name="librivox_nusantara_sptext",
+            name="librivox_indonesia_nusantara_sptext",
             version=_NUSANTARA_VERSION,
-            description="librivox Nusantara schema for all languages",
+            description="Librivox-Indonesia Nusantara schema for all languages",
             schema="nusantara_sptext",
-            subset_id="librivox",
+            subset_id="librivox_indonesia",
         )] + [
         NusantaraConfig(
-            name="librivox_{lang}_nusantara_sptext".format(lang=lang),
+            name="librivox_indonesia_{lang}_nusantara_sptext".format(lang=lang),
             version=_NUSANTARA_VERSION,
-            description="librivox Nusantara schema for {lang} languages".format(lang=_LANG_CODE[lang][1]),
+            description="Librivox-Indonesia Nusantara schema for {lang} languages".format(lang=_LANG_CODE[lang][1]),
             schema="nusantara_sptext",
-            subset_id="librivox_{lang}".format(lang=lang),
+            subset_id="librivox_indonesia_{lang}".format(lang=lang),
         )for lang in _LANGUAGES]
 
-    DEFAULT_CONFIG_NAME = "librivox_source"
+    DEFAULT_CONFIG_NAME = "librivox_indonesia_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
@@ -171,11 +172,11 @@ class Librivox(datasets.GeneratorBasedBuilder):
             encoding="utf-8"
         )
         lang = self.config.subset_id.split("_")[-1]
-        if lang != "librivox":
+        if lang != "indonesia":
             lang = _LANG_CODE[lang][0]
         path_to_audio = "librivox-indonesia"
         for id, row in df.iterrows():
-            if lang == row["language"] or lang == "librivox":
+            if lang == row["language"] or lang == "indonesia":
                 if self.config.schema == "source":
                     yield id, {
                         "path": row["path"],
