@@ -14,8 +14,8 @@ from dataclasses import field
 import datasets
 from datasets import load_dataset
 
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks, SCHEMA_TO_TASKS
+from utils.configs import NusantaraConfig
+from utils.constants import Tasks, SCHEMA_TO_TASKS
 import pandas as pd
 
 _LARGE_CONFIG_NAMES = [
