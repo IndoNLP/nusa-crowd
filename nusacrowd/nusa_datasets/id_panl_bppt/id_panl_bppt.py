@@ -1,10 +1,10 @@
 import os
-from typing import Dict, List, Tuple, TypedDict
+from typing import Dict, List, Tuple
 
 try:
-    from typing import Literal
+    from typing import Literal, TypedDict
 except ImportError:
-    from typing_extensions import Literal
+    from typing_extensions import Literal, TypedDict
 
 import datasets
 
