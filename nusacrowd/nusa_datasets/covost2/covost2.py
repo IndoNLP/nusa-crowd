@@ -23,8 +23,7 @@ import pandas as pd
 
 from nusacrowd.utils import schemas
 from nusacrowd.utils.configs import NusantaraConfig
-from nusacrowd.utils.constants import (DEFAULT_NUSANTARA_VIEW_NAME,
-                                       DEFAULT_SOURCE_VIEW_NAME, Tasks)
+from nusacrowd.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
 
 _LANGUAGES = ["ind", "eng"]
 _CITATION = """\
@@ -128,7 +127,7 @@ class Covost2(datasets.GeneratorBasedBuilder):
             homepage=_HOMEPAGE,
             license=_LICENSE,
             citation=_CITATION,
-            task_templates=[datasets.AutomaticSpeechRecognition(audio_file_path_column="audio", transcription_column="sentences")],
+            task_templates=[datasets.AutomaticSpeechRecognition(audio_column="audio", transcription_column="sentences")] if (self.config.schema == "nusantara_sptext" or self.config.schema == "source") else None,
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
@@ -223,13 +222,7 @@ class Covost2(datasets.GeneratorBasedBuilder):
                     },
                 }
             elif self.config.schema == "nusantara_t2t":
-                yield id, {
-                    "id": row["path"].replace(".mp3", ""),
-                    "text_1": row["sentence"],
-                    "text_2": row["translation"],
-                    "text_1_name": src_lang,
-                    "text_2_name": tgt_lang
-                }
+                yield id, {"id": row["path"].replace(".mp3", ""), "text_1": row["sentence"], "text_2": row["translation"], "text_1_name": src_lang, "text_2_name": tgt_lang}
             else:
                 raise NotImplementedError(f"Schema '{self.config.schema}' is not defined.")
 
