@@ -3,10 +3,10 @@ from typing import Dict, List, Tuple
 
 import datasets
 
-from nusantara.nusa_datasets.x_fact.utils.x_fact_utils import \
+from nusacrowd.nusa_datasets.x_fact.utils.x_fact_utils import \
     load_x_fact_dataset
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @inproceedings{gupta2021xfact,

@@ -9,9 +9,9 @@ fi
 if [[ "$2" -ne "" ]]; then
     for ((i=0; i < $2; i++ ));
     do
-        python -m tests.test_nusantara_source_only nusantara/nusa_datasets/$1/$1.py --subset_id "$1_fold$i"
+        python -m tests.test_nusantara_source_only nusacrowd/nusa_datasets/$1/$1.py --subset_id "$1_fold$i"
     done
     exit
 fi
 
-python -m tests.test_nusantara_source_only nusantara/nusa_datasets/$1/$1.py
+python -m tests.test_nusantara_source_only nusacrowd/nusa_datasets/$1/$1.py
