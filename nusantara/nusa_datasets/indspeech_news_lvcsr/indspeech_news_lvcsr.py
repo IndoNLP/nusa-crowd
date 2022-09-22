@@ -45,7 +45,7 @@ _CITATION = """\
 }
 
 @article{sakti-s2st-csl-2013,
-    title = "{A-STAR}: Toward Tranlating Asian Spoken Languages",
+    title = "{A-STAR}: Toward Translating Asian Spoken Languages",
     author = "Sakti, Sakriani and Paul, Michael and Finch, Andrew and Sakai, Shinsuke and Thang, Tat Vu, and Kimura, Noriyuki and Hori, Chiori and Sumita, Eiichiro and Nakamura, Satoshi and Park, Jun and Wutiwiwatchai, Chai and Xu, Bo and Riza, Hammam and Arora, Karunesh and Luong, Chi Mai and Li, Haizhou",
     journal = "Special issue on Speech-to-Speech Translation, Computer Speech and Language Journal",
     volume = "27",
