@@ -1,6 +1,11 @@
 import os
 from pathlib import Path
-from typing import Dict, List, Tuple, TypedDict
+from typing import Dict, List, Tuple
+
+try:
+    from typing import TypedDict
+except:
+    from typing_extensions import TypedDict
 
 import datasets
 
