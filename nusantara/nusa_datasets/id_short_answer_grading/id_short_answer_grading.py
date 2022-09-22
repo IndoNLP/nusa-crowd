@@ -40,6 +40,8 @@ Indonesian short answers for Biology and Geography subjects from 534 respondents
 """
 
 _HOMEPAGE = "https://github.com/AgeMagi/tugas-akhir"
+_LOCAL = False
+_LANGUAGES = ["ind"]
 
 _LICENSE = "Unknown"
 
