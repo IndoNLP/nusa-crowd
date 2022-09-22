@@ -38,7 +38,7 @@ _HOMEPAGE = "http://section.iaesonline.com/index.php/IJEEI/article/view/3565"
 _LICENSE = "Unknown"
 
 _URLS = {
-    _DATASETNAME: "https://github.com/imkarokaro123/karonese/raw/main/karonese%20dataset.xlsx",
+    _DATASETNAME: "https://raw.githubusercontent.com/imkarokaro123/karonese/main/karonese_sentiment.csv",
 }
 
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
@@ -59,14 +59,14 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
     BUILDER_CONFIGS = [
         NusantaraConfig(
             name="karonese_sentiment_source",
-            version=datasets.Version(_SOURCE_VERSION),
+            version=SOURCE_VERSION,
             description="Karonese Sentiment source schema",
             schema="source",
             subset_id="karonese_sentiment",
         ),
         NusantaraConfig(
             name="karonese_sentiment_nusantara_text",
-            version=datasets.Version(_NUSANTARA_VERSION),
+            version=NUSANTARA_VERSION,
             description="Karonese Sentiment Nusantara schema",
             schema="nusantara_text",
             subset_id="karonese_sentiment",
@@ -79,10 +79,9 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features(
                 {
-                    "No": datasets.Value("string"),
-                    "Tweets": datasets.Value("string"),
+                    "no": datasets.Value("string"),
+                    "tweet": datasets.Value("string"),
                     "label": datasets.Value("string"),
-                    "Sumber": datasets.Value("string"),
                 }
             )
         elif self.config.schema == "nusantara_text":
@@ -112,8 +111,8 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
-        df = pd.read_excel(filepath).drop("No", axis=1)
-        df.columns = ["text", "label", "source"]
+        df = pd.read_csv(filepath).drop("no", axis=1)
+        df.columns = ["text", "label"]
 
         if self.config.schema == "source":
             for idx, row in df.iterrows():
@@ -121,7 +120,6 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
                     "no": str(idx),
                     "tweet": row.text,
                     "label": row.label,
-                    "source": row.source,
                 }
                 yield idx, example
         elif self.config.schema == "nusantara_text":
