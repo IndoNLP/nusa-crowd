@@ -4,8 +4,6 @@ from typing import Dict, List, Tuple
 import datasets
 import pandas as pd
 
-from nusantara.nusa_datasets.karonese_sentiment.utils.karonese_sentiment_utils import \
-    map_label
 from nusantara.utils import schemas
 from nusantara.utils.configs import NusantaraConfig
 from nusantara.utils.constants import Tasks
