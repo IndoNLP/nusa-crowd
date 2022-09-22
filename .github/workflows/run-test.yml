@@ -17,7 +17,9 @@ jobs:
         architecture: x64
         cache: 'pip'
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        sudo apt-get install libsndfile1
+        pip install -r requirements.txt
     - name: Run nusantara tests
       id: nusantara_test
       continue-on-error: true
