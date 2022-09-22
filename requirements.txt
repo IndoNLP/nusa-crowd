@@ -20,3 +20,4 @@ ffmpeg
 conllu
 openpyxl
 translate-toolkit==3.7.3
+typing_extensions
