@@ -35,7 +35,7 @@ _CITATION = """\
 }
 """
 
-_DATASETNAME = "indsp_teldialog_svcsr"
+_DATASETNAME = "indspeech_teldialog_svcsr"
 
 _DESCRIPTION = """\
 This is the first Indonesian speech dataset for small vocabulary continuous speech recognition (SVCSR).
@@ -60,6 +60,9 @@ These utterances are equally split into training and test sets with 100 speakers
 _HOMEPAGE = "https://github.com/s-sakti/data_indsp_teldialog_svcsr/"
 
 _LICENSE = "CC-BY-NC-SA-4.0"
+
+_LANGUAGES = ["ind"]
+_LOCAL = False
 
 URL_TEMPLATE = "https://raw.githubusercontent.com/s-sakti/data_indsp_teldialog_svcsr/main/"
 _URLS = {
@@ -86,22 +89,22 @@ class INDspeechTELDIALOGSVCSR(datasets.GeneratorBasedBuilder):
 
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name="indsp_teldialog_svcsr_source",
+            name="indspeech_teldialog_svcsr_source",
             version=SOURCE_VERSION,
-            description="indsp_teldialog_svcsr source schema",
+            description="indspeech_teldialog_svcsr source schema",
             schema="source",
-            subset_id="indsp_teldialog_svcsr",
+            subset_id="indspeech_teldialog_svcsr",
         ),
         NusantaraConfig(
-            name="indsp_teldialog_svcsr_nusantara_sptext",
+            name="indspeech_teldialog_svcsr_nusantara_sptext",
             version=NUSANTARA_VERSION,
-            description="indsp_teldialog_svcsr Nusantara schema",
+            description="indspeech_teldialog_svcsr Nusantara schema",
             schema="nusantara_sptext",
-            subset_id="indsp_teldialog_svcsr",
+            subset_id="indspeech_teldialog_svcsr",
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "indsp_teldialog_svcsr_source"
+    DEFAULT_CONFIG_NAME = "indspeech_teldialog_svcsr_source"
 
     def _info(self) -> datasets.DatasetInfo:
 
