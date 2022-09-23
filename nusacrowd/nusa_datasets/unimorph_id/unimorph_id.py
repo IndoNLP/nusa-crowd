@@ -18,7 +18,7 @@ from typing import Dict, List, Tuple
 
 import datasets
 
-from nusantara.utils.configs import NusantaraConfig
+from nusacrowd.utils.configs import NusantaraConfig
 
 _CITATION = """\
 @inproceedings{pimentel-ryskina-etal-2021-sigmorphon,
