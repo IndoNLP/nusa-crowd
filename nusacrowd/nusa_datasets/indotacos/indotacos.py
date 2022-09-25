@@ -87,7 +87,7 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
                 }
             )
         elif self.config.schema == "nusantara_text":
-            features = schemas.pairs_features(self.labels)
+            features = schemas.text_features(self.labels)
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -125,25 +125,22 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 # print(row)
                 ex = {
+                    "id": str(row.Index),
                     "text": row.text,
                     "nomor_putusan": row.nomor_putusan,
                     "tahun_pajak": row.tahun_pajak,
                     "jenis_pajak": row.jenis_pajak,
                     "tahun_putusan": row.tahun_putusan,
                     "pokok_sengketa": row.pokok_sengketa,
-                    "pokok_sengketa": row.pokok_sengketa,
+                    "jenis_putusan": row.jenis_putusan,
                 }
                 yield row.Index, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
                 ex = {
-                    "text": row.text,
-                    "nomor_putusan": row.nomor_putusan,
-                    "tahun_pajak": row.tahun_pajak,
-                    "jenis_pajak": row.jenis_pajak,
-                    "tahun_putusan": row.tahun_putusan,
-                    "pokok_sengketa": row.pokok_sengketa,
-                    "pokok_sengketa": row.pokok_sengketa,
+                    "id": str(row.Index),
+                    "text": {"text": row.text, "nomor_putusan": row.nomor_putusan, "tahun_pajak": row.tahun_pajak, "jenis_pajak": row.jenis_pajak, "tahun_putusan": row.tahun_putusan, "pokok_sengketa": row.pokok_sengketa},
+                    "label": row.jenis_putusan,
                 }
                 yield row.Index, ex
         else:
