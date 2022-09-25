@@ -7,6 +7,8 @@ from nusacrowd.utils.configs import NusantaraConfig
 from nusacrowd.utils.constants import Tasks
 from nusacrowd.utils import schemas
 
+import pandas as pd
+
 _CITATION = """\
     author = "Christian Wibisono"
 """
@@ -99,23 +101,29 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
         url = _URLS["indotacos"]
         # path = dl_manager.download_and_extract(url) + "/indonesia_tax_court_verdict.csv"
 
-        data_files = {"train": "indonesia_tax_court_verdict.csv"}
+        # data_files = {"train": "indonesia_tax_court_verdict.csv"}
 
-        path = dl_manager.download_and_extract(url)
+        path = dl_manager.download(url)["indotacos"]
+        data_files = {"train": path}
+        # path = data
+
+        print(path)
 
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
                 gen_kwargs={
-                    "filepath": path,
-                    "split": "train",
+                    "filepath": data_files["train"],
                 },
-            ),
+            )
         ]
 
     def _generate_examples(self, filepath: Path):
+        df = pd.read_csv(filepath)
+        # print(df)
         if self.config.schema == "source":
             for row in df.itertuples():
+                # print(row)
                 ex = {
                     "text": row.text,
                     "nomor_putusan": row.nomor_putusan,
@@ -125,7 +133,7 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
                     "pokok_sengketa": row.pokok_sengketa,
                     "pokok_sengketa": row.pokok_sengketa,
                 }
-                yield row.id, ex
+                yield row.Index, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
                 ex = {
@@ -137,6 +145,6 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
                     "pokok_sengketa": row.pokok_sengketa,
                     "pokok_sengketa": row.pokok_sengketa,
                 }
-                yield row.id, ex
+                yield row.Index, ex
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
