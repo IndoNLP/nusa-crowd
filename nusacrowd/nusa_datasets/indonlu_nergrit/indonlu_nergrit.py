@@ -25,6 +25,18 @@ from nusacrowd.utils.configs import NusantaraConfig
 from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
+@inproceedings{wilie2020indonlu,
+  title={IndoNLU: Benchmark and Resources for Evaluating Indonesian Natural Language Understanding},
+  author={Bryan Wilie and Karissa Vincentio and Genta Indra Winata and Samuel Cahyawijaya and X. Li and Zhi Yuan Lim and S. Soleman and R. Mahendra and Pascale Fung and Syafri Bahar and A. Purwarianti},
+  booktitle={Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing},
+  year={2020}
+}
+@online{nergrit2019,
+  title={NERGrit Corpus},
+  author={NERGrit Developers},
+  year={2019},
+  url={https://github.com/grit-id/nergrit-corpus}
+}
 """
 
 _LOCAL = False
