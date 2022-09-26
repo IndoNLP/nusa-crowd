@@ -37,7 +37,7 @@ _LOCAL = False
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "nergrit"
 _DESCRIPTION = """\
-Nergrit Corpus is a dataset collection of Indonesian Named Entity Recognition (NER), Statement Extraction, 
+Nergrit Corpus is a dataset collection of Indonesian Named Entity Recognition (NER), Statement Extraction,
 and Sentiment Analysis developed by PT Gria Inovasi Teknologi (GRIT).
 The Named Entity Recognition contains 18 entities as follow:
     'CRD': Cardinal
@@ -74,27 +74,69 @@ class NergritDataset(datasets.GeneratorBasedBuilder):
 
     label_classes = {
         "ner": [
-            "B-CRD", "B-DAT", "B-EVT", "B-FAC", "B-GPE", "B-LAN", "B-LAW", "B-LOC", "B-MON", "B-NOR",
-            "B-ORD", "B-ORG", "B-PER", "B-PRC", "B-PRD", "B-QTY", "B-REG", "B-TIM", "B-WOA",
-            "I-CRD", "I-DAT", "I-EVT", "I-FAC", "I-GPE", "I-LAN", "I-LAW", "I-LOC", "I-MON", "I-NOR",
-            "I-ORD", "I-ORG", "I-PER", "I-PRC", "I-PRD", "I-QTY", "I-REG", "I-TIM", "I-WOA", "O",
+            "B-CRD",
+            "B-DAT",
+            "B-EVT",
+            "B-FAC",
+            "B-GPE",
+            "B-LAN",
+            "B-LAW",
+            "B-LOC",
+            "B-MON",
+            "B-NOR",
+            "B-ORD",
+            "B-ORG",
+            "B-PER",
+            "B-PRC",
+            "B-PRD",
+            "B-QTY",
+            "B-REG",
+            "B-TIM",
+            "B-WOA",
+            "I-CRD",
+            "I-DAT",
+            "I-EVT",
+            "I-FAC",
+            "I-GPE",
+            "I-LAN",
+            "I-LAW",
+            "I-LOC",
+            "I-MON",
+            "I-NOR",
+            "I-ORD",
+            "I-ORG",
+            "I-PER",
+            "I-PRC",
+            "I-PRD",
+            "I-QTY",
+            "I-REG",
+            "I-TIM",
+            "I-WOA",
+            "O",
         ],
         "sentiment": ["B-POS", "B-NEG", "B-NET", "I-POS", "I-NEG", "I-NET", "O"],
         "statement": ["B-BREL", "B-FREL", "B-STAT", "B-WHO", "I-BREL", "I-FREL", "I-STAT", "I-WHO", "O"],
     }
-    BUILDER_CONFIGS = [NusantaraConfig(
+    BUILDER_CONFIGS = [
+        NusantaraConfig(
             name=f"nergrit_{task}_source",
             version=datasets.Version(_SOURCE_VERSION),
             description="NERGrit source schema",
             schema="source",
             subset_id=f"nergrit_{task}",
-        ) for task in label_classes] + [NusantaraConfig(
+        )
+        for task in label_classes
+    ]
+    BUILDER_CONFIGS += [
+        NusantaraConfig(
             name=f"nergrit_{task}_nusantara_seq_label",
             version=datasets.Version(_SOURCE_VERSION),
             description="NERGrit Nusantara schema",
             schema="nusantara_seq_label",
             subset_id=f"nergrit_{task}",
-        ) for task in label_classes]
+        )
+        for task in label_classes
+    ]
 
     DEFAULT_CONFIG_NAME = "nergrit_ner_source"
 
