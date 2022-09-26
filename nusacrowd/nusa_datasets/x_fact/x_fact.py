@@ -27,6 +27,15 @@ X-FACT: the largest publicly available multilingual dataset for factual verifica
 
 _HOMEPAGE = "https://github.com/utahnlp/x-fact"
 
+_LANGUAGES = [
+    'ara', 'aze', 'ben', 'deu', 'spa', 
+    'fas', 'fra', 'guj', 'hin', 'ind', 
+    'ita', 'kat', 'mar', 'nor', 'nld', 
+    'pan', 'pol', 'por', 'ron', 'rus',
+    'sin', 'srp', 'sqi', 'tam', 'tur'
+]
+_LOCAL = False
+
 _LICENSE = "MIT"
 
 _URLS = {
