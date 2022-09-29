@@ -36,7 +36,7 @@ showed that the reason for the misclassified was that most of Indonesian
 language and Javanese language consist of words that were considered as
 positive in both Lexicon model.
 
-[nusantara_schema_name] = text
+[nusantara_schema_name] = (text, t2t)
 """
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -82,10 +82,10 @@ _CITATION = """\
 }
 """
 
-_DATASETNAME = "code_mixed_senti"
+_DATASETNAME = "code_mixed_jv_id"
 
 _DESCRIPTION = """\
-Sentiment analysis for Javanese and Indonesian.
+Sentiment analysis and machine translation data for Javanese and Indonesian.
 """
 
 _HOMEPAGE = "https://iopscience.iop.org/article/10.1088/1742-6596/1869/1/012084"
@@ -96,37 +96,16 @@ _URLS = {
     _DATASETNAME: "https://docs.google.com/spreadsheets/d/1mq2VyPEDfXl7K6p5TbRPsaefYwkuy7RQ/export?format=csv&gid=356398080",
 }
 
-_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
+_SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS, Tasks.MACHINE_TRANSLATION]
 
 _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
-LANGUAGES_MAP = {
-    "ind": "indonesian",
-    "jav": "javanese",
-}
-
 LANGUAGES_COLUMNS = {
-    "ind": ("text_ind", "text_jav"),
-    "jav": ("text_jav", "text_ind"),
+    "id": ("text_ind", "text_jav"),
+    "jv": ("text_jav", "text_ind"),
 }
-
-
-def nusantara_config_constructor(lang, schema, version):
-    """Construct NusantaraConfig with code_mixed_senti_{lang}_{schema} as the name format"""
-    if schema != "source" and schema != "nusantara_text":
-        raise ValueError(f"Invalid schema: {schema}")
-    if lang not in LANGUAGES_MAP:
-        raise ValueError(f"Invalid language: {lang}")
-
-    return NusantaraConfig(
-        name="code_mixed_senti_{lang}_{schema}".format(lang=lang, schema=schema),
-        version=datasets.Version(version),
-        description="code_mixed_senti with {schema} schema for {lang} language".format(lang=lang, schema=schema),
-        schema=schema,
-        subset_id="code_mixed_senti",
-    )
 
 
 class CodeMixedSenti(datasets.GeneratorBasedBuilder):
@@ -135,15 +114,50 @@ class CodeMixedSenti(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in LANGUAGES_MAP] + [nusantara_config_constructor(lang, "nusantara_text", _NUSANTARA_VERSION) for lang in LANGUAGES_MAP]
+    BUILDER_CONFIGS = [
+        NusantaraConfig(
+            name="code_mixed_jv_id_source",
+            version=SOURCE_VERSION,
+            description="code_mixed_jv_id source schema for Javanese and Indonesian",
+            schema="source",
+            subset_id="code_mixed_source",
+        ),
+        NusantaraConfig(
+            name="code_mixed_jv_id_jv_nusantara_text",
+            version=NUSANTARA_VERSION,
+            description="code_mixed_jv_id nusantara_text schema for Javanese",
+            schema="nusantara_text",
+            subset_id="code_mixed_jv",
+        ),
+        NusantaraConfig(
+            name="code_mixed_jv_id_id_nusantara_text",
+            version=NUSANTARA_VERSION,
+            description="code_mixed_jv_id nusantara_text schema for Indonesian",
+            schema="nusantara_text",
+            subset_id="code_mixed_id",
+        ),
+        NusantaraConfig(
+            name="code_mixed_jv_id_nusantara_t2t",
+            version=NUSANTARA_VERSION,
+            description="code_mixed_jv_id nusantara_t2t schema for Javanese and Indonesian",
+            schema="nusantara_t2t",
+            subset_id="code_mixed_jv_id",
+        )
+    ]
 
-    DEFAULT_CONFIG_NAME = "code_mixed_senti_jav_senti"
+    DEFAULT_CONFIG_NAME = "code_mixed_id_jv_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
-            features = datasets.Features({"text": datasets.Value("string"), "label": datasets.Value("int32")})
+            features = datasets.Features({
+                "text_jav": datasets.Value("string"),
+                "text_ind": datasets.Value("string"),
+                "label": datasets.Value("int32")
+            })
         elif self.config.schema == "nusantara_text":
             features = schemas.text_features(["-1", "0", "1"])
+        elif self.config.schema == "nusantara_t2t":
+            features = schemas.text2text_features
 
         return datasets.DatasetInfo(description=_DESCRIPTION, features=features, homepage=_HOMEPAGE, license=_LICENSE, citation=_CITATION,)
 
@@ -156,27 +170,33 @@ class CodeMixedSenti(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
-        prefix_length = len(_DATASETNAME)
-        start = prefix_length + 1
-        end = prefix_length + 1 + 3
-        language = self.config.name[start:end]
-        keep_column, drop_column = LANGUAGES_COLUMNS[language]
-        df = pd.read_csv(filepath, skiprows=1, names=["text_jav", "label", "text_ind"]).drop(columns=[drop_column]).rename(columns={keep_column: "text"})
-
+        df = pd.read_csv(filepath,
+                         skiprows=1,
+                         names=["text_jav", "label", "text_ind"])
         if self.config.schema == "source":
             i = 0
             for row in df.itertuples():
-                ex = {"text": row.text, "label": row.label}
+                ex = {"text_jav": row.text_jav, "text_ind": row.text_ind, "label": row.label}
                 yield i, ex
                 i += 1
-
         elif self.config.schema == "nusantara_text":
+            prefix_length = len(_DATASETNAME)
+            start = prefix_length + 1
+            end = prefix_length + 1 + 2
+            language = self.config.name[start:end]
+            keep_column, drop_column = LANGUAGES_COLUMNS[language]
+            df = df.drop(columns=[drop_column]).rename(columns={keep_column: "text"})
             i = 0
             for row in df.itertuples():
                 ex = {"id": str(i), "text": row.text, "label": str(row.label)}
                 yield i, ex
                 i += 1
-
+        elif self.config.schema == "nusantara_t2t":
+            i = 0
+            for row in df.itertuples():
+                ex = {"id": str(i), "text_1": row.text_jav, "text_2": row.text_ind, "text_1_name": "jav", "text_2_name": "ind"}
+                yield i, ex
+                i += 1
 
 if __name__ == "__main__":
     datasets.load_dataset(__file__)
