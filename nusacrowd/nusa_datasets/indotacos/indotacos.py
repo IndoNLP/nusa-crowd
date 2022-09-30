@@ -31,13 +31,7 @@ _LICENSE = "Creative Common Attribution Share-Alike 4.0 International"
 # In most cases the URLs will be the same for the source and nusantara config.
 # However, if you need to access different files for each config you can have multiple entries in this dict.
 # This can be an arbitrarily nested dict/list of URLs (see below in `_split_generators` method)
-_URLS = {
-    _DATASETNAME: {
-        # "indotacos": "christianwbsn/indotacos"
-        "indotacos": "https://huggingface.co/datasets/christianwbsn/indotacos/resolve/main/indonesia_tax_court_verdict.csv"
-        # ?datasetVersionNumber=1/archive.zip"
-    }
-}
+_URLS = {_DATASETNAME: {"indotacos": "https://huggingface.co/datasets/christianwbsn/indotacos/resolve/main/indonesia_tax_court_verdict.csv"}}
 
 _SUPPORTED_TASKS = [Tasks.TAX_COURT_VERDICT]
 
@@ -47,7 +41,7 @@ _NUSANTARA_VERSION = "1.0.0"
 
 
 class IndoTacos(datasets.GeneratorBasedBuilder):
-    """IndoNLI, a human-elicited NLI dataset for Indonesian containing ~18k sentence pairs annotated by crowd workers."""
+    """IndoTacos, an Indonesian Tax Court verdict summary containing 12283 tax court cases provided by perpajakan.ddtc.co.id."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
@@ -77,13 +71,14 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             features = datasets.Features(
                 {
+                    "id": datasets.Value("int32"),
                     "text": datasets.Value("string"),
                     "nomor_putusan": datasets.Value("string"),
                     "tahun_pajak": datasets.Value("int32"),
                     "jenis_pajak": datasets.Value("string"),
                     "tahun_putusan": datasets.Value("int32"),
                     "pokok_sengketa": datasets.Value("string"),
-                    "pokok_sengketa": datasets.Value("string"),
+                    "jenis_putusan": datasets.Value("string"),
                 }
             )
         elif self.config.schema == "nusantara_text":
@@ -99,15 +94,8 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         url = _URLS["indotacos"]
-        # path = dl_manager.download_and_extract(url) + "/indonesia_tax_court_verdict.csv"
-
-        # data_files = {"train": "indonesia_tax_court_verdict.csv"}
-
         path = dl_manager.download(url)["indotacos"]
         data_files = {"train": path}
-        # path = data
-
-        print(path)
 
         return [
             datasets.SplitGenerator(
@@ -120,12 +108,11 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path):
         df = pd.read_csv(filepath)
-        # print(df)
         if self.config.schema == "source":
+            row_id = 1
             for row in df.itertuples():
-                # print(row)
                 ex = {
-                    "id": str(row.Index),
+                    "id": str(row_id),
                     "text": row.text,
                     "nomor_putusan": row.nomor_putusan,
                     "tahun_pajak": row.tahun_pajak,
@@ -134,14 +121,17 @@ class IndoTacos(datasets.GeneratorBasedBuilder):
                     "pokok_sengketa": row.pokok_sengketa,
                     "jenis_putusan": row.jenis_putusan,
                 }
-                yield row.Index, ex
+                yield row_id, ex
+                row_id += 1
         elif self.config.schema == "nusantara_text":
+            row_id = 1
             for row in df.itertuples():
                 ex = {
-                    "id": str(row.Index),
+                    "id": str(row_id),
                     "text": {"text": row.text, "nomor_putusan": row.nomor_putusan, "tahun_pajak": row.tahun_pajak, "jenis_pajak": row.jenis_pajak, "tahun_putusan": row.tahun_putusan, "pokok_sengketa": row.pokok_sengketa},
                     "label": row.jenis_putusan,
                 }
-                yield row.Index, ex
+                yield row_id, ex
+                row_id += 1
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
