@@ -58,7 +58,7 @@ _URLs = {
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
 
 _SOURCE_VERSION = "1.0.0"
-
+_NUSANTARA_VERSION = None
 
 class Barasa(datasets.GeneratorBasedBuilder):
 

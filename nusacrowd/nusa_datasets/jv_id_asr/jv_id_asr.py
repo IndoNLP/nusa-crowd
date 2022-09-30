@@ -47,7 +47,7 @@ This dataset was collected by Google in collaboration with Reykjavik University 
 """
 
 _HOMEPAGE = "http://openslr.org/35/"
-_LANGUAGE = ["jav"]
+_LANGUAGES = ["jav"]
 _LOCAL = False
 
 _LICENSE = "Attribution-ShareAlike 4.0 International"
