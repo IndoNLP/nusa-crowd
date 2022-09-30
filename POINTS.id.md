@@ -15,7 +15,7 @@ Info lebih lanjut dapat ditemukan [di sini](DATALOADER.md).
 ### Proposal Datasheet sebagai Author Dataset
 Mencatatkan datasheet dari sebuah dataset akan mendapatkan nilai +2.
 
-Untuk mendukung keterbukaan dataset, untuk dataset yang tertutup dan akan diubah aksesnya menjadi publik, maka akan diberikan nilai tambahan +2.
+Untuk mendukung keterbukaan dataset, untuk dataset yang tertutup dan akan diubah aksesnya menjadi publik, maka akan diberikan nilai tambahan +3.
 
 Untuk mendukung pengembangan dataset bahasa daerah:
 - Untuk dataset bahasa Sunda, Jawa, atau Minang, akan diberikan nilai +2
