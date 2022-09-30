@@ -57,6 +57,8 @@ _CITATION = """\
 """
 
 _DATASETNAME = "indspeech_news_lvcsr"
+_LANGUAGES = ["ind"] 
+_LOCAL = False
 
 _DESCRIPTION = """\
 This is the first Indonesian speech dataset for large vocabulary continuous speech recognition (LVCSR) with more than 40 hours of speech and 400 speakers [Sakti et al., 2008]. R&D Division of PT Telekomunikasi Indonesia (TELKOMRisTI) developed the data in 2005-2006, in collaboration with Advanced Telecommunication Research Institute International (ATR) Japan, as the continuation of the Asia-Pacific Telecommunity (APT) project [Sakti et al., 2004]. It has also been successfully used for developing Indonesian LVCSR in the Asian speech translation advanced research (A-STAR) project [Sakti et al., 2013].
@@ -128,7 +130,6 @@ class IndSpeechNewsLVCSR(datasets.GeneratorBasedBuilder):
                 }
             )
         elif self.config.schema == "nusantara_sptext":
-            # e.g. features = schemas.kb_features
             features = schemas.speech_text_features
 
         return datasets.DatasetInfo(
