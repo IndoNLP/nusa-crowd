@@ -9,7 +9,12 @@ from nusacrowd.utils import schemas
 from nusacrowd.utils.configs import NusantaraConfig
 from nusacrowd.utils.constants import DEFAULT_NUSANTARA_VIEW_NAME, DEFAULT_SOURCE_VIEW_NAME, Tasks
 
-# TODO: Add BibTeX citation
+_DATASETNAME = "su_emot"
+_SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
+_UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
+
+_LANGUAGES = ["sun"]
+_LOCAL = False
 _CITATION = """\
 @INPROCEEDINGS{
 9297929,  
@@ -19,17 +24,18 @@ title={Sundanese Twitter Dataset for Emotion Classification},
 year={2020},  
 volume={},  
 number={},  
-pages={391-395},  
+pages={391--395},  
 doi={10.1109/CENIM51130.2020.9297929}
 }
 """
 
-_DATASETNAME = "su_emot"
-
 _DESCRIPTION = """\
-This dataset is designed for Emotion Classification NLP task.
+This is a dataset for emotion classification of Sundanese text. The dataset is gathered from Twitter API between January and March 2019 with 2518 tweets in total. 
+The tweets filtered by using some hashtags which are represented Sundanese emotion, for instance, #persib, #corona, #saredih, #nyakakak, #garoblog, #sangsara, #gumujeng, #bungah, #sararieun, #ceurik, and #hariwang. 
+This dataset contains four distinctive emotions: anger, joy, fear, and sadness. Each tweet is annotated using related emotion. For data
+validation, the authors consulted a Sundanese language teacher for expert validation.
 """
-_HOMEPAGE = ""
+_HOMEPAGE = "https://github.com/virgantara/sundanese-twitter-dataset"
 
 _LICENSE = "UNKNOWN"
 
@@ -45,8 +51,8 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class NewDataset(datasets.GeneratorBasedBuilder):
-    """TODO: Short description of my dataset."""
+class suEmot(datasets.GeneratorBasedBuilder):
+    """This is a dataset for emotion classification of Sundanese text. The dataset is gathered from Twitter API between January and March 2019 with 2518 tweets in total."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
