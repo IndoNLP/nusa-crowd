@@ -57,6 +57,7 @@ IDENTIC is an Indonesian-English parallel corpus for research purposes.
 The corpus is a bilingual corpus paired with English. The aim of this work is to build and provide
 researchers a proper Indonesian-English textual data set and also to promote research in this language pair.
 The corpus contains texts coming from different sources with different genres.
+Additionally, the corpus contains tagged texts that follows MorphInd tagset (Larasati et. al., 2011).
 """
 
 _HOMEPAGE = "https://lindat.mff.cuni.cz/repository/xmlui/handle/11858/00-097C-0000-0005-BF85-F"
@@ -83,8 +84,8 @@ tagsets_map = {
     # ind
     "07<c>_CO-$": "CO-",
     "176<c>_CO-$": "CO-",
-    "F--.^com.<f>_F--$": "F--",
-    "F--.^xi<x>_X--$.^b<x>_X--$.^2.<c>_CC-$": "F--",
+    "F--.^com.<f>_F--$": "X--",
+    "F--.^xi<x>_X--$.^b<x>_X--$.^2.<c>_CC-$": "X--",
     "X--.^0.<c>_CC-$": "X--",
     "X--.^a.<x>_X--$": "X--",
     "X--.^b.<x>_X--$": "X--",
@@ -101,10 +102,10 @@ tagsets_map = {
     "X--.^p<x>_X--$.^k.<x>_X--$": "X--",
     "X--.^r.<x>_X--$": "X--",
     "X--.^s.<x>_X--$": "X--",
-    "X--.^w.<x>_X--$": "X--",
-    "^ke+dua": "CO-",
-    "^ke+p": "X--",
-    "^nya$": "Z--",
+    "X--.^w.<x>_X--$": "D--",
+    "^ke+dua": "D--",
+    "^ke+p": "D--",
+    "^nya$": "D--",
     "duanya<c>_CO-$": "CO-",
 }
 
@@ -143,7 +144,9 @@ def load_ud_data_as_pos_tag(filepath, lang):
 
 
 class IdenticDataset(datasets.GeneratorBasedBuilder):
-    """IDENTIC is an Indonesian-English parallel corpus for research purposes."""
+    """
+    IDENTIC is an Indonesian-English parallel corpus for research purposes. This dataset is used for ind -> eng translation and vice versa, as well for POS-Tagging task.
+    """
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
