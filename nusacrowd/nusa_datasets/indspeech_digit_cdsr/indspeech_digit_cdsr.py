@@ -196,7 +196,7 @@ class INDspeechDIGITCDSR(datasets.GeneratorBasedBuilder):
         with open(utterance_path, "r") as f:
             w = [r.replace("\n", "") for r in f.readlines()]
         f.close()
-        return " ".join(w)
+        return " ".join(w[1:-1])
 
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
