@@ -94,7 +94,7 @@ def nusantara_config_constructor(lang, schema, version):
         raise ValueError(f"Invalid schema: {schema}")
 
     return NusantaraConfig(
-        name="indspeech_newstra_ethnicsr_{lang}_{schema}".format(lang=lang, schema=schema),
+        name="indspeech_newstra_ethnicsr_{lang}_{schema}".format(lang=lang.lower(), schema=schema),
         version=datasets.Version(version),
         description="indspeech_newstra_ethnicsr {schema} schema for {lang} language".format(lang=_lst_LANG[lang], schema=schema),
         schema=schema,
@@ -107,7 +107,7 @@ class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(lang.lower(), "source", _SOURCE_VERSION) for lang in _lst_LANG] + [nusantara_config_constructor(lang.lower(), "nusantara_sptext", _NUSANTARA_VERSION) for lang in _lst_LANG]
+    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in _lst_LANG] + [nusantara_config_constructor(lang, "nusantara_sptext", _NUSANTARA_VERSION) for lang in _lst_LANG]
 
     DEFAULT_CONFIG_NAME = "indspeech_newstra_ethnicsr_jaw_source"
 
