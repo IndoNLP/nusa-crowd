@@ -10,7 +10,11 @@ from nusacrowd.utils import schemas
 import pandas as pd
 
 _CITATION = """\
-    author = "Christian Wibisono"
+    @misc{wibisono2022indotacos,
+        title = {IndoTacos},
+        howpublished = {\\url{https://www.kaggle.com/datasets/christianwbsn/indonesia-tax-court-verdict}},
+        note = {Accessed: 2022-09-22}
+    }
 """
 
 _LOCAL = False
