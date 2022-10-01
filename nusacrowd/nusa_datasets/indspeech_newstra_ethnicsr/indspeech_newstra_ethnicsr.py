@@ -72,12 +72,12 @@ _sp_TEMPLATE = "https://raw.githubusercontent.com/s-sakti/data_indsp_newstra_eth
 _txt_TEMPLATE = "https://github.com/s-sakti/data_indsp_newstra_ethnicsr/raw/main/text/utts_transcript/"  # {lang}/Ind0{index}_{gender}_{lang_code}.zip"
 
 _URLS = {
-    "dataset1_train": {llang: [_lst_HEAD_1_TRAIN + llang + ".lst"] for llang in _lst_LANG},
-    "dataset1_test": {llang: [head1test + llang + ".lst" for head1test in _lst_HEAD_1_TEST] for llang in _lst_LANG},
-    "dataset2_train": {llang: [_lst_HEAD_2 + "train_news_" + llang + ".lst"] for llang in _lst_LANG},
-    "dataset2_test": {llang: [_lst_HEAD_2 + "test_news_" + llang + ".lst"] for llang in _lst_LANG},
-    "speech": {llang: [_sp_TEMPLATE + _lst_LANG[llang] + "/Ind" + str(idx).zfill(3) + "_" + ("M" if idx % 2 == 0 else "F") + "_" + llang + ".zip" for idx in range(1, 11)] for llang in _lst_LANG},
-    "transcript": {llang: [_txt_TEMPLATE + _lst_LANG[llang] + "/Ind" + str(idx).zfill(3) + "_" + ("M" if idx % 2 == 0 else "F") + "_" + llang + ".zip" for idx in range(1, 11)] for llang in _lst_LANG},
+    "dataset1_train": {llang.lower(): [_lst_HEAD_1_TRAIN + llang + ".lst"] for llang in _lst_LANG},
+    "dataset1_test": {llang.lower(): [head1test + llang + ".lst" for head1test in _lst_HEAD_1_TEST] for llang in _lst_LANG},
+    "dataset2_train": {llang.lower(): [_lst_HEAD_2 + "train_news_" + llang + ".lst"] for llang in _lst_LANG},
+    "dataset2_test": {llang.lower(): [_lst_HEAD_2 + "test_news_" + llang + ".lst"] for llang in _lst_LANG},
+    "speech": {llang.lower(): [_sp_TEMPLATE + _lst_LANG[llang] + "/Ind" + str(idx).zfill(3) + "_" + ("M" if idx % 2 == 0 else "F") + "_" + llang + ".zip" for idx in range(1, 11)] for llang in _lst_LANG},
+    "transcript": {llang.lower(): [_txt_TEMPLATE + _lst_LANG[llang] + "/Ind" + str(idx).zfill(3) + "_" + ("M" if idx % 2 == 0 else "F") + "_" + llang + ".zip" for idx in range(1, 11)] for llang in _lst_LANG},
 }
 
 _SUPPORTED_TASKS = [Tasks.SPEECH_RECOGNITION]
@@ -107,9 +107,9 @@ class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in _lst_LANG] + [nusantara_config_constructor(lang, "nusantara_sptext", _NUSANTARA_VERSION) for lang in _lst_LANG]
+    BUILDER_CONFIGS = [nusantara_config_constructor(lang.lower(), "source", _SOURCE_VERSION) for lang in _lst_LANG] + [nusantara_config_constructor(lang.lower(), "nusantara_sptext", _NUSANTARA_VERSION) for lang in _lst_LANG]
 
-    DEFAULT_CONFIG_NAME = "indspeech_newstra_ethnicsr_Snd_source"
+    DEFAULT_CONFIG_NAME = "indspeech_newstra_ethnicsr_jaw_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
@@ -153,7 +153,6 @@ class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
-                # Whatever you put in gen_kwargs will be passed to _generate_examples
                 gen_kwargs={
                     "filepath": {
                         "dataset1": ds1_train_dir,
