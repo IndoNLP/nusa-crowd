@@ -124,7 +124,7 @@ class Wikilingua(datasets.GeneratorBasedBuilder):
             with open(filepath, "rb") as file:
                 indonesian_docs = pickle.load(file)
 
-            _id = 0
+            _id = 1
             for key_link, articles in indonesian_docs.items():
                 for main_point, items in articles.items():
                     example = {"id": _id, "link": key_link, "main_point": main_point, "summary": items["summary"], "document": items["document"], "english_section_name": items["english_section_name"], "english_url": items["english_url"]}
@@ -134,7 +134,7 @@ class Wikilingua(datasets.GeneratorBasedBuilder):
             with open(filepath, "rb") as file:
                 indonesian_docs = pickle.load(file)
 
-            _id = 0
+            _id = 1
             for key_link, articles in indonesian_docs.items():
                 for main_point, items in articles.items():
                     example = {"id": _id, "text_1": items["document"], "text_2": items["summary"], "text_1_name": "document", "text_2_name": "summary"}
