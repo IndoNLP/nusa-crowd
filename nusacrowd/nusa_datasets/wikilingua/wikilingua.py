@@ -133,6 +133,6 @@ class Wikilingua(datasets.GeneratorBasedBuilder):
             _id = 0
             for key_link, articles in indonesian_docs.items():
                 for main_point, items in articles.items():
-                    example = {"id": _id, "text_1": items["summary"], "text_2": items["document"], "text_1_name": "document", "text_2_name": "summary"}
+                    example = {"id": _id, "text_1": items["document"], "text_2": items["summary"], "text_1_name": "document", "text_2_name": "summary"}
                     yield _id, example
                     _id += 1
