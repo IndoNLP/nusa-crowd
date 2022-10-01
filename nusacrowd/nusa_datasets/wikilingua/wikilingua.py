@@ -31,7 +31,11 @@ article.
 
 _HOMEPAGE = "https://github.com/esdurmus/Wikilingua"
 
+_LANGUAGES = ["ind"]
+
 _LICENSE = "CC-BY-NC-SA 3.0"
+
+_LOCAL = False
 
 _URLS = {
     _DATASETNAME: "https://drive.google.com/u/0/uc?id=1PGa8j1_IqxiGTc3SU6NMB38sAzxCPS34&export=download"
