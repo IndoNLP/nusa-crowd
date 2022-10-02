@@ -103,7 +103,12 @@ def nusantara_config_constructor(lang, schema, version, overlap):
     )
 
 class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
-
+    """
+    The dataset contains 2 sub-datasets
+    Dataset 1 has 2250/1000 train/test samples per language
+    Dataset 2 has another 1600/50 train/test per language
+    The 'overlap' keyword in the dataset-name combines both sub-datasets, while 'nooverlap' will only use dataset 1
+    """
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
@@ -179,12 +184,6 @@ class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
-        """
-        The dataset contains 2 sub-datasets
-        Dataset 1 has 2250/1000 train/test samples per language
-        Dataset 2 has another 1600/50 train/test per language
-        The 'overlap' keyword in the dataset-name combines both sub-datasets, while 'nooverlap' will only use dataset 1
-        """
         sample_list=[]
         if self.config.name.split("_")[3] == "nooverlap":
             sample_list = [open(samples).read().splitlines() for samples in filepath["dataset1"]]  # +filepath["dataset2"]]
