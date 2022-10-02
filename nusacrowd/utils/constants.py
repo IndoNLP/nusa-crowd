@@ -2,9 +2,18 @@ from enum import Enum
 from types import SimpleNamespace
 from collections import defaultdict
 from nusacrowd.utils.schemas import (
-    kb_features, qa_features, text2text_features, text_features,
-    text_multi_features, pairs_features, pairs_features_score, seq_label_features,
-    ssp_features, speech_text_features, speech2speech_features, image_text_features
+    kb_features,
+    qa_features,
+    text2text_features,
+    text_features,
+    text_multi_features,
+    pairs_features,
+    pairs_features_score,
+    seq_label_features,
+    ssp_features,
+    speech_text_features,
+    speech2speech_features,
+    image_text_features,
 )
 
 METADATA: dict = {
@@ -19,6 +28,7 @@ NusantaraValues = SimpleNamespace(NULL="<NUSA_NULL_STR>")
 DEFAULT_SOURCE_VIEW_NAME = "source"
 DEFAULT_NUSANTARA_VIEW_NAME = "nusantara"
 
+
 class Tasks(Enum):
     DEPENDENCY_PARSING = "DEP"
     WORD_SENSE_DISAMBIGUATION = "WSD"
@@ -31,6 +41,7 @@ class Tasks(Enum):
     EMOTION_CLASSIFICATION = "EC"
     HOAX_NEWS_CLASSIFICATION = "HNC"
     INTENT_CLASSIFICATION = "INT"
+    TAX_COURT_VERDICT = "TACOS"
 
     # Single Text Sequence Labeling
     POS_TAGGING = "POS"
@@ -73,6 +84,7 @@ class Tasks(Enum):
     # No nusantara schema
     FACT_CHECKING = "FCT"
 
+
 TASK_TO_SCHEMA = {
     Tasks.DEPENDENCY_PARSING: "KB",
     Tasks.WORD_SENSE_DISAMBIGUATION: "KB",
@@ -94,6 +106,7 @@ TASK_TO_SCHEMA = {
     Tasks.MULTILEXNORM: "T2T",
     Tasks.SENTIMENT_ANALYSIS: "TEXT",
     Tasks.ASPECT_BASED_SENTIMENT_ANALYSIS: "TEXT_MULTI",
+    Tasks.TAX_COURT_VERDICT: "TEXT",
     Tasks.EMOTION_CLASSIFICATION: "TEXT",
     Tasks.INTENT_CLASSIFICATION: "TEXT",
     Tasks.SELF_SUPERVISED_PRETRAINING: "SSP",
@@ -128,7 +141,7 @@ SCHEMA_TO_FEATURES = {
     "SSP": ssp_features,
     "SPTEXT": speech_text_features,
     "S2S": speech2speech_features,
-    "IMTEXT": image_text_features()
+    "IMTEXT": image_text_features(),
 }
 
 TASK_TO_FEATURES = {
