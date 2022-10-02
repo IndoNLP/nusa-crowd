@@ -65,6 +65,7 @@ _LICENSE = "CC-BY-NC-SA 4.0"
 
 _lst_TYPE = ["traEth", "traInd"]
 _lst_LANG = {"Bli": "BALI", "Btk": "BATAK", "Jaw": "JAWA", "Snd": "SUNDA"}
+_lst_STD_LANG = {"ban": "Bli", "btk": "Btk", "jav": "Jaw", "sun": "Snd"}
 _lst_HEAD_1_TRAIN = "https://raw.githubusercontent.com/s-sakti/data_indsp_newstra_ethnicsr/main/lst/dataset1_train_news_"
 _lst_HEAD_1_TEST = ["https://raw.githubusercontent.com/s-sakti/data_indsp_newstra_ethnicsr/main/lst/dataset1_test_" + ltype + "_" for ltype in _lst_TYPE]
 _lst_HEAD_2 = "https://raw.githubusercontent.com/s-sakti/data_indsp_newstra_ethnicsr/main/lst/dataset2_"
@@ -86,7 +87,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-def nusantara_config_constructor(lang, schema, version):
+def nusantara_config_constructor(lang, schema, version, overlap):
     if lang == "":
         raise ValueError(f"Invalid lang {lang}")
 
@@ -94,22 +95,22 @@ def nusantara_config_constructor(lang, schema, version):
         raise ValueError(f"Invalid schema: {schema}")
 
     return NusantaraConfig(
-        name="indspeech_newstra_ethnicsr_{lang}_{schema}".format(lang=lang.lower(), schema=schema),
+        name="indspeech_newstra_ethnicsr_{overlap}_{lang}_{schema}".format(lang=lang, schema=schema, overlap=overlap),
         version=datasets.Version(version),
-        description="indspeech_newstra_ethnicsr {schema} schema for {lang} language".format(lang=_lst_LANG[lang], schema=schema),
+        description="indspeech_newstra_ethnicsr {schema} schema for {lang} language with {overlap}ping dataset".format(lang=_lst_LANG[_lst_STD_LANG[lang]], schema=schema, overlap=overlap),
         schema=schema,
-        subset_id="indspeech_newstra_ethnicsr",
+        subset_id="indspeech_newstra_ethnicsr_{overlap}".format(overlap=overlap),
     )
-
 
 class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
-    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION) for lang in _lst_LANG] + [nusantara_config_constructor(lang, "nusantara_sptext", _NUSANTARA_VERSION) for lang in _lst_LANG]
+    BUILDER_CONFIGS = [nusantara_config_constructor(lang, "source", _SOURCE_VERSION, overlap) for lang in _lst_STD_LANG for overlap in ["overlap","nooverlap"]] +\
+                      [nusantara_config_constructor(lang, "nusantara_sptext", _NUSANTARA_VERSION, overlap) for lang in _lst_STD_LANG for overlap in ["overlap","nooverlap"]]
 
-    DEFAULT_CONFIG_NAME = "indspeech_newstra_ethnicsr_jaw_source"
+    DEFAULT_CONFIG_NAME = "indspeech_newstra_ethnicsr_jav_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":
@@ -135,7 +136,7 @@ class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
-        lang = self.config.name.split("_")[3]
+        lang = _lst_STD_LANG[self.config.name.split("_")[4]].lower()
         ds1_train_urls = _URLS["dataset1_train"][lang]
         ds1_test_urls = _URLS["dataset1_test"][lang]
         ds2_train_urls = _URLS["dataset2_train"][lang]
@@ -178,9 +179,19 @@ class INDspeechNEWSTRAEthnicSR(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
-        """Yields examples as (key, example) tuples."""
-        sample_list = [open(samples).read().splitlines() for samples in filepath["dataset1"]]  # +filepath["dataset2"]]
-        sample_list = list(chain(*sample_list))
+        """
+        The dataset contains 2 sub-datasets
+        Dataset 1 has 2250/1000 train/test samples per language
+        Dataset 2 has another 1600/50 train/test per language
+        The 'overlap' keyword in the dataset-name combines both sub-datasets, while 'nooverlap' will only use dataset 1
+        """
+        sample_list=[]
+        if self.config.name.split("_")[3] == "nooverlap":
+            sample_list = [open(samples).read().splitlines() for samples in filepath["dataset1"]]  # +filepath["dataset2"]]
+            sample_list = list(chain(*sample_list))
+        elif self.config.name.split("_")[3] == "overlap":
+            sample_list = [open(samples).read().splitlines() for samples in filepath["dataset1"]+filepath["dataset2"]]
+            sample_list = list(chain(*sample_list))
 
         for id, row in enumerate(sample_list):
             if self.config.schema == "source":
