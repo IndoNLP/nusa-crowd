@@ -1,17 +1,17 @@
 # Welcome to the NusaCrowd!
 
-<h3>113 datasets registered</h3>
+<h3>132 datasets registered</h3>
 
-![Dataset claimed](https://progress-bar.dev/80/?title=Datasets%20Claimed%20(77%20Datasets%20Claimed))
+![Dataset claimed](https://progress-bar.dev/83/?title=Datasets%20Claimed%20(109%20Datasets%20Claimed))
 
 <!-- milestone starts -->
 ![Milestone 1](https://progress-bar.dev/100/?title=Milestone%201%20(30%20Datasets%20Completed))
 
 ![Milestone 2](https://progress-bar.dev/100/?title=Milestone%202%20(60%20Datasets%20Completed))
 
-![Milestone 3](https://progress-bar.dev/79/?title=Milestone%203%20(100%20Datasets%20Completed))
+![Milestone 3](https://progress-bar.dev/98/?title=Milestone%203%20(100%20Datasets%20Completed))
 
-![Milestone 4](https://progress-bar.dev/52/?title=Milestone%204%20(150%20Datasets%20Completed))
+![Milestone 4](https://progress-bar.dev/65/?title=Milestone%204%20(150%20Datasets%20Completed))
 <!-- milestone ends -->
 
 *Baca README ini dalam [Bahasa Indonesia](README.id.md).*

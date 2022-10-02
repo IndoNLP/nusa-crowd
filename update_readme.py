@@ -26,7 +26,7 @@ def build_progress_bar(milestones={}):
     return progress_bar
 
 
-def calculate_completed_dataset(base_dir="nusantara/nusa_datasets"):
+def calculate_completed_dataset(base_dir="nusacrowd/nusa_datasets"):
     count = 0
     for path in os.listdir(base_dir):
         if os.path.isdir(os.path.join(base_dir, path)) and path != "__pycache__":
