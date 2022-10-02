@@ -36,13 +36,13 @@ _CITATION = """\
 }
 """
 _DATASETNAME = "indspeech_digit_cdsr"
-
+_LANGUAGES = ["ind"]
 _DESCRIPTION = """\
 INDspeech_DIGIT_CDSR is the first Indonesian speech dataset for connected digit speech recognition (CDSR). The data was developed by TELKOMRisTI (R&D Division, PT Telekomunikasi Indonesia) in collaboration with Advanced Telecommunication Research Institute International (ATR) Japan and Bandung Institute of Technology (ITB) under the Asia-Pacific Telecommunity (APT) project in 2004 [Sakti et al., 2004]. Although it was originally developed for a telecommunication system for hearing and speaking impaired people, it can be used for other applications, i.e., automatic call centers that recognize telephone numbers.
 """
 
 _HOMEPAGE = "https://github.com/s-sakti/data_indsp_digit_cdsr"
-
+_LOCAL = False
 _LICENSE = "CC-BY-NC-SA-4.0"
 
 _TMP_URL = {
