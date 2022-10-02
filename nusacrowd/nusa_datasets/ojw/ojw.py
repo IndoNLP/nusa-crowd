@@ -76,6 +76,8 @@ _NUSANTARA_VERSION = "1.0.0"
 
 _LOCAL = False
 
+_LANGUAGES = ["kaw"]
+
 
 class OJW(datasets.GeneratorBasedBuilder):
     """Old Javanese Wordnet (OJW) is a dataset that contains Old Javanese words and each variants of the words if available.
