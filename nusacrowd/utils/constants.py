@@ -8,6 +8,7 @@ from nusacrowd.utils.schemas import (
     text_features,
     text_multi_features,
     pairs_features,
+    pairs_multi_features,
     pairs_features_score,
     seq_label_features,
     ssp_features,
@@ -55,6 +56,7 @@ class Tasks(Enum):
     SEMANTIC_SIMILARITY = "STS"
     NEXT_SENTENCE_PREDICTION = "NSP"
     SHORT_ANSWER_GRADING = "SAG"
+    MORPHOLOGICAL_INFLECTION = "MOR"
 
     # Single Text Generation
     MACHINE_TRANSLATION = "MT"
@@ -100,6 +102,7 @@ TASK_TO_SCHEMA = {
     Tasks.SEMANTIC_SIMILARITY: "PAIRS_SCORE",
     Tasks.NEXT_SENTENCE_PREDICTION: "PAIRS",
     Tasks.SHORT_ANSWER_GRADING: "PAIRS_SCORE",
+    Tasks.MORPHOLOGICAL_INFLECTION: "PAIRS_MULTI",
     Tasks.PARAPHRASING: "T2T",
     Tasks.MACHINE_TRANSLATION: "T2T",
     Tasks.SUMMARIZATION: "T2T",
@@ -136,6 +139,7 @@ SCHEMA_TO_FEATURES = {
     "TEXT": text_features(),
     "TEXT_MULTI": text_multi_features(),
     "PAIRS": pairs_features(),
+    "PAIRS_MULTI": pairs_multi_features(),
     "PAIRS_SCORE": pairs_features_score(),
     "SEQ_LABEL": seq_label_features(),
     "SSP": ssp_features,
