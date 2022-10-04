@@ -51,7 +51,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class suEmot(datasets.GeneratorBasedBuilder):
+class SuEmot(datasets.GeneratorBasedBuilder):
     """This is a dataset for emotion classification of Sundanese text. The dataset is gathered from Twitter API between January and March 2019 with 2518 tweets in total."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
@@ -118,14 +118,12 @@ class suEmot(datasets.GeneratorBasedBuilder):
 
         if self.config.schema == "source":
             for row in df.itertuples():
-                ex = {"index": str(row.index), "data": row.data, "label": row.label}
+                ex = {"index": str(row.index+1), "data": row.data, "label": row.label}
                 yield row.index, ex
         elif self.config.schema == "nusantara_text":
             for row in df.itertuples():
-                ex = {"id": str(row.index), "text": row.data, "label": row.label}
+                ex = {"id": str(row.index+1), "text": row.data, "label": row.label}
                 yield row.index, ex
-        else:
-            raise ValueError(f"Invalid config: {self.config.name}")
         
 if __name__ == "__main__":
     datasets.load_dataset(__file__)
