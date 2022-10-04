@@ -22,4 +22,3 @@ openpyxl
 translate-toolkit==3.7.3
 typing_extensions
 scikit-learn==1.1.2
-python==3.10.4
