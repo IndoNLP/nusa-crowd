@@ -124,6 +124,3 @@ class SuEmot(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {"id": str(row.index+1), "text": row.data, "label": row.label}
                 yield row.index, ex
-        
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
