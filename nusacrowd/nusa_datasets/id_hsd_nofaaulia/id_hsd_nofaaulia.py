@@ -123,7 +123,10 @@ class IdHSDNofaaulia(datasets.GeneratorBasedBuilder):
         # The split follows the implementation below
         # https://github.com/IndoNLP/nusa-crowd/blob/master/nusantara/utils/schemas/pairs.py
         # test_size=0.1, random_state=42
-        x_train, x_test, y_train, y_test = train_test_split(df[features], df[target], test_size=0.1, random_state=42)
+        # tested locally using :
+        # scikit-learn 1.1.2
+        # python 3.10.4
+        x_train, x_test, y_train, y_test = train_test_split(df[features].replace(r'\s+|\\n', ' ', regex=True), df[target], test_size=0.1, random_state=42)
 
         x_train.to_csv(data_files["train"], index=False)
         x_test.to_csv(data_files["test"], index=False)
