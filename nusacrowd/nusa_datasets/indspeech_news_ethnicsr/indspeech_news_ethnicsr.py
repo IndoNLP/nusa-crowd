@@ -23,7 +23,7 @@ _CITATION = """\
 
 _LOCAL = False
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
-_DATASETNAME = "indsp_news_ethnicsr"
+_DATASETNAME = "indspeech_news_ethnicsr"
 
 _DESCRIPTION = """
 INDspeech_NEWS_EthnicSR is a collection of Indonesian ethnic speech corpora for Javanese and Sundanese for Indonesian ethnic speech recognition. It was developed in 2012 by the Nara Institute of Science and Technology (NAIST, Japan) in collaboration with the Bandung Institute of Technology (ITB, Indonesia) [Sani et al., 2012].
@@ -42,7 +42,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class indsp_news_ethnicsr(datasets.GeneratorBasedBuilder):
+class indspeech_news_ethnicsr(datasets.GeneratorBasedBuilder):
     """INDspeech_NEWS_EthnicSR is a collection of Indonesian ethnic speech corpora for Javanese and Sundanese for Indonesian ethnic speech recognition. It was developed in 2012 by the Nara Institute of Science and Technology (NAIST, Japan) in collaboration with the Bandung Institute of Technology (ITB, Indonesia) [Sani et al., 2012]."""
 
 
@@ -50,27 +50,27 @@ class indsp_news_ethnicsr(datasets.GeneratorBasedBuilder):
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
     
     BUILDER_CONFIGS = []
-    TYPE_LIST = ['Jawa', "Sunda"]
-    for fold_id in range(1,3):
-        for fold_name in TYPE_LIST:
+    
+    for fold_id in ["overlap", "nooverlap"]:
+        for fold_name in ['jv', "su"]:
             BUILDER_CONFIGS.extend(
                 [NusantaraConfig(
-                    name=f"indsp_news_ethnicsr_{fold_name}_{fold_id}_source",
+                    name=f"indspeech_news_ethnicsr_{fold_name}_{fold_id}_source",
                     version=_SOURCE_VERSION,
-                    description="indsp_news_ethnicsr source schema",
+                    description="indspeech_news_ethnicsr source schema",
                     schema="source",
-                    subset_id=f"indsp_news_ethnicsr_{fold_name}_{fold_id}"
+                    subset_id=f"indspeech_news_ethnicsr_{fold_name}_{fold_id}"
                 ),
                 NusantaraConfig(
-                    name=f"indsp_news_ethnicsr_{fold_name}_{fold_id}_nusantara_sptext",
+                    name=f"indspeech_news_ethnicsr_{fold_name}_{fold_id}_nusantara_sptext",
                     version=_SOURCE_VERSION,
-                    description="indsp_news_ethnicsr Nusantara schema",
+                    description="indspeech_news_ethnicsr Nusantara schema",
                     schema="nusantara_sptext",
-                    subset_id=f"indsp_news_ethnicsr_{fold_name}_{fold_id}"
+                    subset_id=f"indspeech_news_ethnicsr_{fold_name}_{fold_id}"
                 ),]
             ) 
             
-    DEFAULT_CONFIG_NAME = "indsp_news_ethnicsr_Jawa_1_source"
+    DEFAULT_CONFIG_NAME = "indspeech_news_ethnicsr_jv_1_source"
 
     def _info(self) -> datasets.DatasetInfo:
 
@@ -104,22 +104,29 @@ class indsp_news_ethnicsr(datasets.GeneratorBasedBuilder):
         subset_id_list = subset_id.split('_')
         fold_name = subset_id_list[-2]
         fold_id = subset_id_list[-1]
+        if fold_id == "overlap":
+            fold_id = 1
+        elif fold_id == "nooverlap":
+            fold_id = 2
         return fold_name, fold_id
     
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         fold_name, fold_id = self._get_fold_name_id()
-        if fold_name == 'Sunda':
+        if fold_name == 'su':
+            fold_name1 = "Sunda"
             fold_name2 = 'Snd'
+            
         else:
+            fold_name1 = 'Jawa'
             fold_name2 = 'Jaw'
         
         urls = _URLS[_DATASETNAME]
         data_dir = Path(dl_manager.download_and_extract(urls))
 #         print("data_dir", data_dir)
-        text_file = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/text/transcript.txt")
-        wav_folder = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/speech/16kHz/")
-        train_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/lst/dataset{fold_id}_train_news_{fold_name2}.lst")
-        test_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name}/lst/dataset{fold_id}_test_news_{fold_name2}.lst")
+        text_file = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/text/transcript.txt")
+        wav_folder = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/speech/16kHz/")
+        train_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/lst/dataset{fold_id}_train_news_{fold_name2}.lst")
+        test_list = os.path.join(data_dir, f"data_indsp_news_ethnicsr-main/{fold_name1}/lst/dataset{fold_id}_test_news_{fold_name2}.lst")
         
         #unzip        
         for speaker_id in range(1, 11):
@@ -157,7 +164,7 @@ class indsp_news_ethnicsr(datasets.GeneratorBasedBuilder):
     
 
     def _generate_examples(self, wav_folder: Path, text_path: Path, split: str, fold_name: str, file_list: Path) -> Tuple[int, Dict]:
-        if fold_name == 'Sunda':
+        if fold_name == 'su':
             fold_name2 = 'Snd'
         else:
             fold_name2 = 'Jaw'
