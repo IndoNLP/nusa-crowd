@@ -46,7 +46,7 @@ _CITATION = """\
 
 _LOCAL = False
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
-_DATASETNAME = "indsp_teldialog_lvcsr"
+_DATASETNAME = "indspeech_teldialog_lvcsr"
 
 _DESCRIPTION = """
 INDspeech_TELDIALOG_LVCSR is one of the first Indonesian speech datasets for large vocabulary continuous speech recognition (LVCSR) based on telephon application. R&D Division of PT Telekomunikasi Indonesia developed the data in 2005-2006, in collaboration with Advanced Telecommunication Research Institute International (ATR) Japan, as the continuation of the Asia-Pacific Telecommunity (APT) project [Sakti et al., 2004]. It has also been successfully used for developing Indonesian LVCSR in the Asian speech translation advanced research (A-STAR) project [Sakti et al., 2013].
@@ -79,7 +79,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class indsp_teldialog_lvcsr(datasets.GeneratorBasedBuilder):
+class indspeech_teldialog_lvcsr(datasets.GeneratorBasedBuilder):
     """INDspeech_TELDIALOG_LVCSR is one of the first Indonesian speech datasets for large vocabulary continuous speech recognition (LVCSR) based on telephon application. R&D Division of PT Telekomunikasi Indonesia developed the data in 2005-2006, in collaboration with Advanced Telecommunication Research Institute International (ATR) Japan, as the continuation of the Asia-Pacific Telecommunity (APT) project [Sakti et al., 2004]. It has also been successfully used for developing Indonesian LVCSR in the Asian speech translation advanced research (A-STAR) project [Sakti et al., 2013]."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
@@ -87,21 +87,21 @@ class indsp_teldialog_lvcsr(datasets.GeneratorBasedBuilder):
     
     BUILDER_CONFIGS = [
         NusantaraConfig(
-            name=f"indsp_teldialog_lvcsr_source",
+            name=f"indspeech_teldialog_lvcsr_source",
             version=_SOURCE_VERSION,
-            description="indsp_teldialog_lvcsr source schema",
+            description="indspeech_teldialog_lvcsr source schema",
             schema="source",
-            subset_id=f"indsp_teldialog_lvcsr"
+            subset_id=f"indspeech_teldialog_lvcsr"
         ),
         NusantaraConfig(
-            name=f"indsp_teldialog_lvcsr_nusantara_sptext",
+            name=f"indspeech_teldialog_lvcsr_nusantara_sptext",
             version=_SOURCE_VERSION,
-            description="indsp_teldialog_lvcsr Nusantara schema",
+            description="indspeech_teldialog_lvcsr Nusantara schema",
             schema="nusantara_sptext",
-            subset_id=f"indsp_teldialog_lvcsr"
+            subset_id=f"indspeech_teldialog_lvcsr"
         ),]
             
-    DEFAULT_CONFIG_NAME = "indsp_teldialog_lvcsr_source"
+    DEFAULT_CONFIG_NAME = "indspeech_teldialog_lvcsr_source"
 
     def _info(self) -> datasets.DatasetInfo:
 
