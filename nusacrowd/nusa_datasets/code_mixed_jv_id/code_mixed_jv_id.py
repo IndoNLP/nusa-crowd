@@ -102,6 +102,9 @@ _SOURCE_VERSION = "1.0.0"
 
 _NUSANTARA_VERSION = "1.0.0"
 
+_LANGUAGES = ['jav', 'ind']
+_LOCAL = False
+
 LANGUAGES_COLUMNS = {
     "id": ("text_ind", "text_jav"),
     "jv": ("text_jav", "text_ind"),
