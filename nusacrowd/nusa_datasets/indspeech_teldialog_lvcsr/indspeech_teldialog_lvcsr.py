@@ -79,7 +79,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class indspeech_teldialog_lvcsr(datasets.GeneratorBasedBuilder):
+class IndSpeechTelDialLVCSR(datasets.GeneratorBasedBuilder):
     """INDspeech_TELDIALOG_LVCSR is one of the first Indonesian speech datasets for large vocabulary continuous speech recognition (LVCSR) based on telephon application. R&D Division of PT Telekomunikasi Indonesia developed the data in 2005-2006, in collaboration with Advanced Telecommunication Research Institute International (ATR) Japan, as the continuation of the Asia-Pacific Telecommunity (APT) project [Sakti et al., 2004]. It has also been successfully used for developing Indonesian LVCSR in the Asian speech translation advanced research (A-STAR) project [Sakti et al., 2013]."""
 
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)

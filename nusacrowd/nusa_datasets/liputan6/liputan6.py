@@ -42,7 +42,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class liputan6(datasets.GeneratorBasedBuilder):
+class Liputan6(datasets.GeneratorBasedBuilder):
     """A large-scale Indonesian summarization dataset consisting of harvested articles from Liputan6.com, an online news portal, resulting in 215,827 document-summary pairs."""
 
 

@@ -42,7 +42,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class indspeech_news_ethnicsr(datasets.GeneratorBasedBuilder):
+class IndSpeechNewsEthnicSR(datasets.GeneratorBasedBuilder):
     """INDspeech_NEWS_EthnicSR is a collection of Indonesian ethnic speech corpora for Javanese and Sundanese for Indonesian ethnic speech recognition. It was developed in 2012 by the Nara Institute of Science and Technology (NAIST, Japan) in collaboration with the Bandung Institute of Technology (ITB, Indonesia) [Sani et al., 2012]."""
 
 
