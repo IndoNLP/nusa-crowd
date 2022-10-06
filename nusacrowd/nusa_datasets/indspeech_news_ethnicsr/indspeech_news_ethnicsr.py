@@ -70,7 +70,7 @@ class IndSpeechNewsEthnicSR(datasets.GeneratorBasedBuilder):
                 ),]
             ) 
             
-    DEFAULT_CONFIG_NAME = "indspeech_news_ethnicsr_jv_1_source"
+    DEFAULT_CONFIG_NAME = "indspeech_news_ethnicsr_jv_nooverlap_source"
 
     def _info(self) -> datasets.DatasetInfo:
 
