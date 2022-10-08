@@ -36,7 +36,7 @@ _HOMEPAGE = "http://section.iaesonline.com/index.php/IJEEI/article/view/3565"
 _LICENSE = "Unknown"
 
 _URLS = {
-    _DATASETNAME: "https://raw.githubusercontent.com/imkarokaro123/karonese/main/karonese_sentiment.csv",
+    _DATASETNAME: "https://raw.githubusercontent.com/aliakbars/karonese/main/karonese_sentiment.csv",
 }
 
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
@@ -125,7 +125,7 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
                 example = {
                     "id": str(idx),
                     "text": row.text,
-                    "label": map_label(row.label),
+                    "label": row.label,
                 }
                 yield idx, example
         else:
