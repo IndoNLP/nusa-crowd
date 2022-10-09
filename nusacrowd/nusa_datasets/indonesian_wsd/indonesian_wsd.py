@@ -164,7 +164,7 @@ class IndonesianWSD(datasets.GeneratorBasedBuilder):
             key = 0
             for each_data in data:
                 example = {
-                    "label": each_data["label"], # sense_id as label
+                    "label": each_data["sense_id"],
                     "text": each_data["text"]
                 }
                 yield key, example
@@ -177,7 +177,7 @@ class IndonesianWSD(datasets.GeneratorBasedBuilder):
                     "id": str(key+1),
                     "text_1": each_data["sense_id"],
                     "text_1_name": "label",
-                    "text_2": each_data[""],
+                    "text_2": each_data["text"],
                     "text_2_name": "text"
                 }
                 yield key, example
