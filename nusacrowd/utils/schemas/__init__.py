@@ -1,6 +1,6 @@
 from .kb import features as kb_features
 from .pairs import features as pairs_features
-from .pairs import features as pairs_multi_features
+from .pairs_multilabel import features as pairs_multi_features
 from .pairs import features_with_continuous_label as pairs_features_score
 from .qa import features as qa_features
 from .text import features as text_features
