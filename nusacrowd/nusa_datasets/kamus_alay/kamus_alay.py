@@ -151,8 +151,8 @@ class KamusAlay(datasets.GeneratorBasedBuilder):
             for row in df.itertuples():
                 ex = {
                     "id": str(row.id),
-                    "text_1": row.slang,
-                    "text_2": row.formal,
+                    "text_1": row.formal,
+                    "text_2": row.slang,
                     "label": [c for c in (row.category1, row.category2, row.category3) if c != "0"],
                 }
                 yield row.id, ex
