@@ -88,7 +88,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ### Entities
 
-- Examples: [BC5CDR](examples/bc5cdr.py)
+- Examples: [BC5CDR](https://github.com/bigscience-workshop/biomedical/blob/main/examples/bc5cdr.py)
 
 ```
 "entities": [
@@ -104,7 +104,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ### Events
-- Examples: [MLEE](examples/mlee.py)
+- Examples: [MLEE](https://github.com/bigscience-workshop/biomedical/blob/main/examples/mlee.py)
 
 ```
 "events": [
@@ -130,7 +130,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ### Coreferences
 
-- Examples: [n2c2 2011: Coreference Challenge](examples/n2c2_2011.py)
+- Examples: [n2c2 2011: Coreference Challenge](https://github.com/bigscience-workshop/biomedical/blob/main/examples/n2c2_2011.py)
 
 ```
 "coreferences": [
@@ -159,7 +159,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Question Answering
 - [Schema Template](nusantara/utils/schemas/qa.py)
-- Examples: [BioASQ Task B](examples/bioasq.py)
+- Examples: [BioASQ Task B](https://github.com/bigscience-workshop/biomedical/blob/main/examples/bioasq_task_b.py)
 
 ```
 {
@@ -242,7 +242,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ## Textual Entailment
 
 - [Schema Template](nusantara/utils/schemas/entailment.py)
-- Examples: [SciTail](examples/scitail.py)
+- Examples: [SciTail](https://github.com/bigscience-workshop/biomedical/blob/main/examples/scitail.py)
 
 ```
 {
@@ -257,7 +257,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ## Text Pairs
 
 - [Schema Template](nusantara/utils/schemas/pairs.py)
-- Examples: [MQP](examples/mqp.py)
+- Examples: [MQP](https://github.com/bigscience-workshop/biomedical/blob/main/examples/mqp.py)
 
 ```
 {
@@ -273,7 +273,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ## Text to Text
 
 - [Schema Template](nusantara/utils/schemas/text_to_text.py)
-- Examples: [ParaMed](nusantara/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
+- Examples: [ParaMed](https://github.com/bigscience-workshop/biomedical/blob/main/examples/paramed.py)
 
 ```
 {
