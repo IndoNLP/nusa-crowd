@@ -25,7 +25,7 @@ We have defined a set of lightweight, task-specific schema to help simplify prog
 
 ## Knowledge Base
 
-[Schema Template](nusantara/utils/schemas/kb.py)
+[Schema Template](nusacrowd/utils/schemas/kb.py)
 
 This is a simple container format with minimal nesting that supports a range of common knowledge base construction / information extraction tasks.
 
