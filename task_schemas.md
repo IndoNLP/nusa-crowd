@@ -25,7 +25,7 @@ We have defined a set of lightweight, task-specific schema to help simplify prog
 
 ## Knowledge Base
 
-[Schema Template](nusantara/utils/schemas/kb.py)
+[Schema Template](nusacrowd/utils/schemas/kb.py)
 
 This is a simple container format with minimal nesting that supports a range of common knowledge base construction / information extraction tasks.
 
@@ -161,6 +161,9 @@ Passages capture document structure, such as the title and abstact sections of a
 - [Schema Template](nusantara/utils/schemas/qa.py)
 - Examples: [BioASQ Task B](https://github.com/bigscience-workshop/biomedical/blob/main/examples/bioasq_task_b.py)
 
+- [Schema Template](nusacrowd/utils/schemas/qa.py)
+- Examples: [BioASQ Task B](examples/bioasq.py)
+
 ```
 {
 	"id": "0",
@@ -175,8 +178,8 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ## Sequence Labeling
-- [Schema Template](nusantara/utils/schemas/seq_label.py)
-- Examples: [BaPOS] (nusantara/nusa_datasets/bapos/bapos.py)
+- [Schema Template](nusacrowd/utils/schemas/seq_label.py)
+- Examples: [BaPOS](nusacrowd/nusa_datasets/bapos/bapos.py)
 
 ```
 {
@@ -244,6 +247,8 @@ Passages capture document structure, such as the title and abstact sections of a
 - [Schema Template](nusantara/utils/schemas/entailment.py)
 - Examples: [SciTail](https://github.com/bigscience-workshop/biomedical/blob/main/examples/scitail.py)
 
+- Examples: [SciTail](examples/scitail.py)
+
 ```
 {
 	"id": "0",
@@ -258,6 +263,9 @@ Passages capture document structure, such as the title and abstact sections of a
 
 - [Schema Template](nusantara/utils/schemas/pairs.py)
 - Examples: [MQP](https://github.com/bigscience-workshop/biomedical/blob/main/examples/mqp.py)
+
+- [Schema Template](nusacrowd/utils/schemas/pairs.py)
+- Examples: [MQP](examples/mqp.py)
 
 ```
 {
@@ -275,6 +283,9 @@ Passages capture document structure, such as the title and abstact sections of a
 - [Schema Template](nusantara/utils/schemas/text_to_text.py)
 - Examples: [ParaMed](https://github.com/bigscience-workshop/biomedical/blob/main/examples/paramed.py)
 
+- [Schema Template](nusacrowd/utils/schemas/text_to_text.py)
+- Examples: [ParaMed](nusantara/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
+
 ```
 {
 	"id": "0",
@@ -287,8 +298,8 @@ Passages capture document structure, such as the title and abstact sections of a
 
 
 ## Text
-- [Schema Template](nusantara/utils/schemas/text.py)
-- Examples: [SmSA] (nusantara/nusa_datasets/smsa/smsa.py)
+- [Schema Template](nusacrowd/utils/schemas/text.py)
+- Examples: [SmSA](nusacrowd/nusa_datasets/smsa/smsa.py)
 
 ```
 {
@@ -301,8 +312,8 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ## Self-supervised pretraining
-- [Schema Template](nusantara/utils/schemas/self_supervised_pretraining.py)
-- Examples: [CC100] (nusantara/nusa_datasets/cc100/cc100.py)
+- [Schema Template](nusacrowd/utils/schemas/self_supervised_pretraining.py)
+- Examples: [CC100](nusacrowd/nusa_datasets/cc100/cc100.py)
 
 ```
 {
@@ -312,8 +323,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ## Speech recognition
-- [Schema Template](nusantara/utils/schemas/speech_recognition.py)
-- Examples: [Coming soon] (nusantara/nusa_datasets/coming_soon/coming_soon.py)
+- Examples: [Coming soon](nusantara/nusa_datasets/coming_soon/coming_soon.py)
 
 ```
 {
