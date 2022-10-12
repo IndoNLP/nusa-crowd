@@ -143,7 +143,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ### Relations
-- Examples: [BC5CDR](examples/bc5cdr.py)
+- Examples: [BC5CDR](https://github.com/bigscience-workshop/biomedical/blob/main/examples/bc5cdr.py)
 
 ```
 "relations": [
