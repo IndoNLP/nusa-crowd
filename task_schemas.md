@@ -241,10 +241,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Textual Entailment
 
-- [Schema Template](nusantara/utils/schemas/entailment.py)
 - Examples: [SciTail](https://github.com/bigscience-workshop/biomedical/blob/main/examples/scitail.py)
-
-- Examples: [SciTail](examples/scitail.py)
 
 ```
 {
