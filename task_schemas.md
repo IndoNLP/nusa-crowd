@@ -176,7 +176,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Sequence Labeling
 - [Schema Template](nusacrowd/utils/schemas/seq_label.py)
-- Examples: [BaPOS] (nusantara/nusa_datasets/bapos/bapos.py)
+- Examples: [BaPOS] (nusacrowd/nusa_datasets/bapos/bapos.py)
 
 ```
 {
@@ -273,7 +273,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ## Text to Text
 
 - [Schema Template](nusacrowd/utils/schemas/text_to_text.py)
-- Examples: [ParaMed](nusantara/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
+- Examples: [ParaMed](nusacrowd/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
 
 ```
 {
@@ -288,7 +288,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Text
 - [Schema Template](nusacrowd/utils/schemas/text.py)
-- Examples: [SmSA] (nusantara/nusa_datasets/smsa/smsa.py)
+- Examples: [SmSA] (nusacrowd/nusa_datasets/smsa/smsa.py)
 
 ```
 {
@@ -302,7 +302,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Self-supervised pretraining
 - [Schema Template](nusacrowd/utils/schemas/self_supervised_pretraining.py)
-- Examples: [CC100] (nusantara/nusa_datasets/cc100/cc100.py)
+- Examples: [CC100] (nusacrowd/nusa_datasets/cc100/cc100.py)
 
 ```
 {
@@ -313,7 +313,7 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Speech recognition
 - [Schema Template](nusacrowd/utils/schemas/speech_recognition.py)
-- Examples: [Coming soon] (nusantara/nusa_datasets/coming_soon/coming_soon.py)
+- Examples: [Coming soon] (nusacrowd/nusa_datasets/coming_soon/coming_soon.py)
 
 ```
 {
