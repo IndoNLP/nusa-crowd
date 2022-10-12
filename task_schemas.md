@@ -241,6 +241,8 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Textual Entailment
 
+Examples: [SciTail](examples/scitail.py)
+
 ```
 {
 	"id": "0",
