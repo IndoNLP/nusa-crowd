@@ -270,7 +270,7 @@ Passages capture document structure, such as the title and abstact sections of a
 ## Text to Text
 
 - [Schema Template](nusacrowd/utils/schemas/text_to_text.py)
-- Examples: [ParaMed](nusacrowd/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
+- Examples: [ParaMed](nusantara/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
 
 ```
 {
