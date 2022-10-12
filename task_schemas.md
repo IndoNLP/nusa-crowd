@@ -158,11 +158,8 @@ Passages capture document structure, such as the title and abstact sections of a
 ```
 
 ## Question Answering
-- [Schema Template](nusantara/utils/schemas/qa.py)
-- Examples: [BioASQ Task B](https://github.com/bigscience-workshop/biomedical/blob/main/examples/bioasq_task_b.py)
-
 - [Schema Template](nusacrowd/utils/schemas/qa.py)
-- Examples: [BioASQ Task B](examples/bioasq.py)
+- Examples: [BioASQ Task B](https://github.com/bigscience-workshop/biomedical/blob/main/examples/bioasq_task_b.py)
 
 ```
 {
@@ -261,11 +258,8 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Text Pairs
 
-- [Schema Template](nusantara/utils/schemas/pairs.py)
-- Examples: [MQP](https://github.com/bigscience-workshop/biomedical/blob/main/examples/mqp.py)
-
 - [Schema Template](nusacrowd/utils/schemas/pairs.py)
-- Examples: [MQP](examples/mqp.py)
+- Examples: [MQP](https://github.com/bigscience-workshop/biomedical/blob/main/examples/mqp.py)
 
 ```
 {
@@ -280,11 +274,8 @@ Passages capture document structure, such as the title and abstact sections of a
 
 ## Text to Text
 
-- [Schema Template](nusantara/utils/schemas/text_to_text.py)
-- Examples: [ParaMed](https://github.com/bigscience-workshop/biomedical/blob/main/examples/paramed.py)
-
 - [Schema Template](nusacrowd/utils/schemas/text_to_text.py)
-- Examples: [ParaMed](nusantara/nusa_datasets/indo_religious_mt_en_id/indo_religious_mt_en_id.py)
+- Examples: [ParaMed](https://github.com/bigscience-workshop/biomedical/blob/main/examples/paramed.py)
 
 ```
 {
