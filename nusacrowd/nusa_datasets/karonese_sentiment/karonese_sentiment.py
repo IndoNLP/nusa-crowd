@@ -4,9 +4,9 @@ from typing import Dict, List, Tuple
 import datasets
 import pandas as pd
 
-from nusantara.utils import schemas
-from nusantara.utils.configs import NusantaraConfig
-from nusantara.utils.constants import Tasks
+from nusancrowd.utils import schemas
+from nusancrowd.utils.configs import NusantaraConfig
+from nusancrowd.utils.constants import Tasks
 
 _CITATION = """\
 @article{karo2022sentiment,
