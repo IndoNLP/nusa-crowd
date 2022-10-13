@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -42,8 +41,9 @@ _CITATION = """\
 _DATASETNAME = "multilingual_open_relations"
 
 _DESCRIPTION = """\
-Relation extraction is the task of assigning a semantic relationship between a pair of arguments. This dataset provides automatically extracted relations obtained using the algorithm in Faruqui and Kumar (2015).
-Faruqui and Kumar (2015) describe a cross-lingual projection algorithm for multilingual RE that translates text from a foreign language to English, performs relation extraction in English and then projects these relations back to the foreign language.
+Relation extraction is the task of assigning a semantic relationship between a pair of arguments.
+This dataset provides automatically extracted relations obtained using the algorithm in Faruqui and Kumar (2015).
+It use cross-lingual projection algorithm for multilingual RE that translates text from a foreign language to English, performs relation extraction in English and then projects these relations back to the foreign language.
 """
 
 _HOMEPAGE = "https://www.kaggle.com/datasets/shankkumar/multilingualopenrelations15"
@@ -53,7 +53,7 @@ _LICENSE = "Attribution 3.0 Unported (CC BY 3.0)"
 _LANGUAGES = ["ind"]
 
 _URLS = {
-    _DATASETNAME: "local_dataset/multilingual_open_relations-auto-extractions-ind", # TODO: update
+    _DATASETNAME: "local_dataset/multilingual_open_relations-auto-extractions-ind",  # TODO: update
 }
 
 _SUPPORTED_TASKS = [Tasks.RELATION_EXTRACTION]
@@ -92,20 +92,24 @@ class NewDataset(datasets.GeneratorBasedBuilder):
 
         if self.config.schema == "source":
             # TODO: update if necessary
-            features = datasets.Features({
+            features = datasets.Features(
+                {
                     "index": datasets.Value("string"),
                     "wikipedia_url": datasets.Value("string"),
                     "sentence": datasets.Value("string"),
                     "sentence_en": datasets.Value("string"),
-                    "relations": [{
-                        "argument_1": datasets.Value("string"),
-                        "argument_2": datasets.Value("string"),
-                        "relation": datasets.Value("string"),
-                        "argument_1_en": datasets.Value("string"),
-                        "argument_2_en": datasets.Value("string"),
-                        "relation_en": datasets.Value("string"),
-                    }]
-                })
+                    "relations": [
+                        {
+                            "argument_1": datasets.Value("string"),
+                            "argument_2": datasets.Value("string"),
+                            "relation": datasets.Value("string"),
+                            "argument_1_en": datasets.Value("string"),
+                            "argument_2_en": datasets.Value("string"),
+                            "relation_en": datasets.Value("string"),
+                        }
+                    ],
+                }
+            )
 
         elif self.config.schema == "nusantara_kb":
             features = schemas.kb_features
@@ -148,7 +152,7 @@ class NewDataset(datasets.GeneratorBasedBuilder):
             for idx, row in enumerate(rows):
                 row = self._to_nusa_kb_scheme(idx, row)
                 yield idx, row
-                
+
         else:
             raise ValueError(f"Invalid config: {self.config.name}")
 
@@ -176,20 +180,15 @@ class NewDataset(datasets.GeneratorBasedBuilder):
 
         map_url_sentence_to_idx = {}
         data = []
-                
+
         with open(filepath, "r+") as fr:
             for line in fr:
-                row = parse_row(line)                
-                
+                row = parse_row(line)
+
                 url_sentence = f"{row['wikipedia_url']}_{row['sentence']}"
                 if url_sentence not in map_url_sentence_to_idx:
                     map_url_sentence_to_idx[url_sentence] = len(map_url_sentence_to_idx)
-                    data.append({
-                        "wikipedia_url": row["wikipedia_url"],
-                        "sentence": row["sentence"],
-                        "sentence_en": row["sentence_en"],
-                        "relations": []
-                    })
+                    data.append({"wikipedia_url": row["wikipedia_url"], "sentence": row["sentence"], "sentence_en": row["sentence_en"], "relations": []})
                 rel = {
                     "argument_1": row["argument_1"],
                     "argument_2": row["argument_2"],
@@ -200,9 +199,9 @@ class NewDataset(datasets.GeneratorBasedBuilder):
                 }
                 data[map_url_sentence_to_idx[url_sentence]]["relations"].append(rel)
         return data
-    
+
     def _to_nusa_kb_scheme(self, idx, row):
-        
+
         rel_id = 0
         ent_id = 0
 
@@ -215,43 +214,36 @@ class NewDataset(datasets.GeneratorBasedBuilder):
                 "id": i,
                 "type": "",
                 "text": [entity_str],
-                "offsets": [[0, 0]], # TODO: calculate the offset
+                "offsets": [[0, 0]],  # TODO: calculate the offset
                 "normalized": [],
             }
             ent_id += 1
             return i, ent_id, entity
 
-        for rel in row["relations"]:             
+        for rel in row["relations"]:
             id_1, ent_id, ent_1 = get_entity(ent_id, rel["argument_1"])
             id_2, ent_id, ent_2 = get_entity(ent_id, rel["argument_2"])
             entities.append(ent_1)
             entities.append(ent_2)
-            relations.append({
-                "id": f"{idx}_RelID_{rel_id}",
-                "type": rel["relation"],
-                "arg1_id": id_1,
-                "arg2_id": id_2,
-                "normalized": [
-                    {
-                        "db_name": None,
-                        "db_id": None,
-                    }
-                ]
-            })
+            relations.append(
+                {
+                    "id": f"{idx}_RelID_{rel_id}",
+                    "type": rel["relation"],
+                    "arg1_id": id_1,
+                    "arg2_id": id_2,
+                    "normalized": [
+                        {
+                            "db_name": None,
+                            "db_id": None,
+                        }
+                    ],
+                }
+            )
             rel_id += 1
 
         nusa_scheme = {
             "id": str(idx),
-            "passages": [
-                {
-                    "id": f"{idx}_PsgID_0", 
-                    "type": "text", 
-                    "text": [row["sentence"]], 
-                    "offsets": [
-                        [0, len(row["sentence"])]
-                    ]
-                }
-            ],
+            "passages": [{"id": f"{idx}_PsgID_0", "type": "text", "text": [row["sentence"]], "offsets": [[0, len(row["sentence"])]]}],
             "entities": entities,
             "coreferences": [],
             "events": [],
