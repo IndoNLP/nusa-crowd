@@ -115,7 +115,7 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             for idx, row in df.iterrows():
                 example = {
-                    "no": str(idx),
+                    "no": str(idx+1),
                     "tweet": row.text,
                     "label": row.label,
                 }
@@ -123,7 +123,7 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
         elif self.config.schema == "nusantara_text":
             for idx, row in df.iterrows():
                 example = {
-                    "id": str(idx),
+                    "id": str(idx+1),
                     "text": row.text,
                     "label": row.label,
                 }
