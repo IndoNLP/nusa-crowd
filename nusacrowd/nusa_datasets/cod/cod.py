@@ -32,7 +32,10 @@ _HOMEPAGE = "https://github.com/cambridgeltl/COD"
 _LICENSE = "Unknown"
 
 _URLS = {
-    _DATASETNAME: {"validation": "https://raw.githubusercontent.com/cambridgeltl/COD/main/id_dev.json", "test": "https://raw.githubusercontent.com/cambridgeltl/COD/main/id_test.json"},
+    _DATASETNAME: {
+        "validation": "https://raw.githubusercontent.com/cambridgeltl/COD/main/id_dev.json",
+        "test": "https://raw.githubusercontent.com/cambridgeltl/COD/main/id_test.json",
+    },
 }
 
 _SUPPORTED_TASKS = [Tasks.DIALOGUE_SYSTEM]
@@ -74,7 +77,13 @@ class NewDataset(datasets.GeneratorBasedBuilder):
                             "utterance": datasets.Value("string"),
                             "frames": [
                                 {
-                                    "actions": [{"act": datasets.Value("string"), "slot": datasets.Value("string"), "values": [datasets.Value("string")]}],
+                                    "actions": [
+                                        {
+                                            "act": datasets.Value("string"),
+                                            "slot": datasets.Value("string"),
+                                            "values": [datasets.Value("string")],
+                                        }
+                                    ],
                                     "service": datasets.Value("string"),
                                     "slots": [
                                         {
@@ -83,7 +92,13 @@ class NewDataset(datasets.GeneratorBasedBuilder):
                                             "start": datasets.Value("int32"),
                                         }
                                     ],
-                                    "state": {"active_intent": datasets.Value("string"), "requested_slots": [datasets.Value("string")], "slot_values": [{"slot": datasets.Value("string"), "values": [datasets.Value("string")]}]},
+                                    "state": {
+                                        "active_intent": datasets.Value("string"),
+                                        "requested_slots": [datasets.Value("string")],
+                                        "slot_values": [
+                                            {"slot": datasets.Value("string"), "values": [datasets.Value("string")]},
+                                        ],
+                                    },
                                 }
                             ],
                         }
