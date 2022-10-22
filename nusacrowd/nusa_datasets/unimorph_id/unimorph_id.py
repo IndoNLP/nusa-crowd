@@ -18,7 +18,9 @@ from typing import Dict, List, Tuple
 
 import datasets
 
+from nusacrowd.utils import schemas
 from nusacrowd.utils.configs import NusantaraConfig
+from nusacrowd.utils.constants import Tasks
 
 _CITATION = """\
 @inproceedings{pimentel-ryskina-etal-2021-sigmorphon,
@@ -109,7 +111,7 @@ _URLS = {
     _DATASETNAME: "https://raw.githubusercontent.com/unimorph/ind/main/ind",
 }
 
-_SUPPORTED_TASKS = []  # Morphological task is not yet supported by Nusantara (as of 18 Aug 2022)
+_SUPPORTED_TASKS = [Tasks.MORPHOLOGICAL_INFLECTION]
 
 _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
@@ -121,12 +123,48 @@ class UnimorphIdDataset(datasets.GeneratorBasedBuilder):
     SOURCE_VERSION = datasets.Version(_SOURCE_VERSION)
     NUSANTARA_VERSION = datasets.Version(_NUSANTARA_VERSION)
 
+    label_classes = [
+        "",
+        "1",
+        "2",
+        "3",
+        "ACT",
+        "ADJ",
+        "ADV",
+        "APPL",
+        "CAUS",
+        "DEF",
+        "FEM",
+        "FOC",
+        "ITER",
+        "MASC",
+        "N",
+        "NEG",
+        "NEUT",
+        "PASS",
+        "POS",
+        "PSS1S",
+        "PSS2S",
+        "PSS3S",
+        "SG",
+        "SPRL",
+        "TR",
+        "V",
+    ]
+
     BUILDER_CONFIGS = [
         NusantaraConfig(
             name=f"{_DATASETNAME}_source",
             version=SOURCE_VERSION,
             description=f"{_DATASETNAME} source schema",
             schema="source",
+            subset_id=f"{_DATASETNAME}",
+        ),
+        NusantaraConfig(
+            name=f"{_DATASETNAME}_nusantara_pairs_multi",
+            version=SOURCE_VERSION,
+            description=f"{_DATASETNAME} Nusantara schema",
+            schema="nusantara_pairs_multi",
             subset_id=f"{_DATASETNAME}",
         ),
     ]
@@ -143,6 +181,9 @@ class UnimorphIdDataset(datasets.GeneratorBasedBuilder):
                     "tag": [datasets.Value("string")],
                 }
             )
+
+        elif self.config.schema == "nusantara_pairs_multi":
+            features = schemas.pairs_multi_features(self.label_classes)
 
         else:
             raise NotImplementedError(f"Schema '{self.config.schema}' is not defined.")
@@ -189,6 +230,15 @@ class UnimorphIdDataset(datasets.GeneratorBasedBuilder):
         if self.config.schema == "source":
             for key, example in enumerate(dataset):
                 yield key, example
+
+        elif self.config.schema == "nusantara_pairs_multi":
+            for key, ex in enumerate(dataset):
+                yield key, {
+                    "id": str(key),
+                    "text_1": ex["lemma"],
+                    "text_2": ex["form"],
+                    "label": ex["tag"],
+                }
 
         else:
             raise NotImplementedError(f"Schema '{self.config.schema}' is not defined.")
