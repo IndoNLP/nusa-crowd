@@ -20,6 +20,9 @@ _CITATION = """\
 }
 """
 
+_LANGUAGES = ["btx"]
+_LOCAL = False
+
 _DATASETNAME = "karonese_sentiment"
 
 _DESCRIPTION = """\
@@ -71,7 +74,7 @@ class KaroneseSentimentDataset(datasets.GeneratorBasedBuilder):
         ),
     ]
 
-    DEFAULT_CONFIG_NAME = "karonese_sentiment_source"
+    DEFAULT_CONFIG_NAME = "sentiment_nathasa_review_source"
 
     def _info(self) -> datasets.DatasetInfo:
         if self.config.schema == "source":

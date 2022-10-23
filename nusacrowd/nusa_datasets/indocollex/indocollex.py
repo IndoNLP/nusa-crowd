@@ -37,6 +37,9 @@ _CITATION = """\
     pages = "3170--3183",
 }"""
 
+_LANGUAGES = ["ind"]
+_LOCAL = False
+
 _DATASETNAME = "indocollex"
 
 _DESCRIPTION = """\

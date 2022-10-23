@@ -17,6 +17,7 @@ _CITATION = """\
 """
 
 _LANGUAGES = ["ind"]
+_LOCAL = False
 
 _DATASETNAME = "cod"
 
