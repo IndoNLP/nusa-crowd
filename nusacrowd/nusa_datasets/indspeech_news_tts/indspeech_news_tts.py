@@ -76,7 +76,7 @@ _TEST_TASKS = {
 
 _URLS = {"lst_": "https://github.com/s-sakti/data_indsp_news_tts/raw/main/lst/", "speech_": "https://github.com/s-sakti/data_indsp_news_tts/raw/main/speech/", "text_": "https://github.com/s-sakti/data_indsp_news_tts/raw/main/text/orig_transcript"}
 
-_SUPPORTED_TASKS = [Tasks.SPEECH_RECOGNITION]
+_SUPPORTED_TASKS = [Tasks.TEXT_TO_SPEECH]
 
 _SOURCE_VERSION = "1.0.0"
 
