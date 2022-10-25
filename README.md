@@ -1,6 +1,6 @@
 # Welcome to the NusaCrowd!
 
-<h3>132 datasets registered</h3>
+<h3>134 datasets registered</h3>
 
 ![Dataset claimed](https://progress-bar.dev/83/?title=Datasets%20Claimed%20(109%20Datasets%20Claimed))
 
