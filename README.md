@@ -1,4 +1,4 @@
-# Welcome to the NusaCrowd!
+# Welcome to NusaCrowd!
 
 <h3>134 datasets registered</h3>
 
