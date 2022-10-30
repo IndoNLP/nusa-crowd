@@ -47,7 +47,7 @@ _LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 _URLs = {
     "train": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/train_preprocess.tsv",
     "validation": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/valid_preprocess.tsv",
-    "test": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/test_preprocess_masked_label.tsv",
+    "test": "https://github.com/IndoNLP/indonlu/raw/master/dataset/smsa_doc-sentiment-prosa/test_preprocess.tsv",
 }
 
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
