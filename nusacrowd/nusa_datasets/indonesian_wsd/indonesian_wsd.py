@@ -40,7 +40,7 @@ The features being used were some words around the target word (including the wo
 target word, the transitive verb around the target word, and the document context. 
 """
 
-_HOMEPAGE = ""
+_HOMEPAGE = "https://github.com/rmahendra/Indonesian-WSD"
 
 _LICENSE = "Unknown"
 
