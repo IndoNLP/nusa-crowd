@@ -25,14 +25,16 @@ from nusacrowd.utils import schemas
 from nusacrowd.utils.configs import NusantaraConfig
 from nusacrowd.utils.constants import Tasks
 
-# The paper is still under-review
 _CITATION = """\
-@article{idkmrcUnanswerableQuestions,
-  author    = {TBD},
-  title     = {IDK-MRC: Unanswerable Questions for Indonesian Machine Reading Comprehension},
-  year      = {2022},
-  url       = {https://anonymous.4open.science/r/IDK-MRC-EFF0},
+@misc{putri2022idk,
+    doi = {10.48550/ARXIV.2210.13778},
+    url = {https://arxiv.org/abs/2210.13778},
+    author = {Putri, Rifki Afina and Oh, Alice},
+    title = {IDK-MRC: Unanswerable Questions for Indonesian Machine Reading Comprehension},
+    publisher = {arXiv},
+    year = {2022}
 }
+
 """
 
 _LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
@@ -55,20 +57,20 @@ Besides IDK-MRC (idk_mrc) dataset, several baseline datasets also provided:
 4. Human Filt (human_filt): Model Gen dataset that has been filtered by human annotator
 """
 
-_HOMEPAGE = "https://anonymous.4open.science/r/IDK-MRC-EFF0"
+_HOMEPAGE = "https://github.com/rifkiaputri/IDK-MRC"
 
 _LICENSE = "CC-BY-SA 4.0"
 
 _URLS = {
     _DATASETNAME: {
-        "test": _HOMEPAGE + "/dataset/idk_mrc/test.json",
-        "train": _HOMEPAGE + "/dataset/idk_mrc/train.json",
-        "validation": _HOMEPAGE + "/dataset/idk_mrc/valid.json",
+        "test": "https://raw.githubusercontent.com/rifkiaputri/IDK-MRC/master/dataset/idk_mrc/test.json",
+        "train": "https://raw.githubusercontent.com/rifkiaputri/IDK-MRC/master/dataset/idk_mrc/train.json",
+        "validation": "https://raw.githubusercontent.com/rifkiaputri/IDK-MRC/master/dataset/idk_mrc/valid.json",
     },
     "baseline": {
-        "test": _HOMEPAGE + "/dataset/baseline/{name}/test.json",
-        "train": _HOMEPAGE + "/dataset/baseline/{name}/train.json",
-        "validation": _HOMEPAGE + "/dataset/baseline/{name}/valid.json",
+        "test": "https://raw.githubusercontent.com/rifkiaputri/IDK-MRC/master/dataset/baseline/{name}/test.json",
+        "train": "https://raw.githubusercontent.com/rifkiaputri/IDK-MRC/master/dataset/baseline/{name}/train.json",
+        "validation": "https://raw.githubusercontent.com/rifkiaputri/IDK-MRC/master/dataset/baseline/{name}/valid.json",
     },
 }
 
