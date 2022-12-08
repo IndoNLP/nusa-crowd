@@ -153,9 +153,9 @@ class CVSS(datasets.GeneratorBasedBuilder):
         urls = self._get_download_urls(self.config.name[:6])
         data_dir = dl_manager.download_and_extract(urls)
 
-        cv_url = self.cv_URL_TEMPLATE.format(lang=_LANG_CODE[_LANGUAGE[0]])
+        cv_url = self.cv_URL_TEMPLATE.format(lang=_LANG_CODE[_LANGUAGES[0]])
         cv_dir = dl_manager.download_and_extract(cv_url)
-        cv_dir = cv_dir + "/" + "/".join(["cv-corpus-6.1-2020-12-11", _LANG_CODE[_LANGUAGE[0]]])
+        cv_dir = cv_dir + "/" + "/".join(["cv-corpus-6.1-2020-12-11", _LANG_CODE[_LANGUAGES[0]]])
         cv_tsv_dir = os.path.join(cv_dir, "validated.tsv")
 
         return [
