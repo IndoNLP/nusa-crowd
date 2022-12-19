@@ -13,7 +13,7 @@ _DATASETNAME = "korpus_nusantara"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["ind", "jav", "day", "bug", "sun", "mad", "bjn", "bbc", "khek", "msa", "min", "tiociu"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["ind", "jav", "xdy", "bug", "sun", "mad", "bjn", "bbc", "khek", "msa", "min", "tiociu"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
 @article{sujaini2020improving,
