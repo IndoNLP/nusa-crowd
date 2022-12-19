@@ -13,7 +13,7 @@ _DATASETNAME = "korpus_nusantara"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["ind", "jav", "day", "bug", "sun", "mad", "bin", "bbc", "khek", "msa", "min", "tiociu"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["ind", "jav", "day", "bug", "sun", "mad", "bjn", "bbc", "khek", "msa", "min", "tiociu"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 _CITATION = """\
 @article{sujaini2020improving,
@@ -67,7 +67,7 @@ Dayak (day)      : dayak ahe, dayak iban, dayak pesaguan, dayak taman
 Buginese (bug)   : buginese kelolau, buginese wajo
 Sundanese (sun)  : sundanese
 Madurese (mad)   : madurese
-Banjar (bin)     : banjar
+Banjar (bjn)     : banjar
 Batak Toba (bbc) : batak toba
 Khek (khek)      : khek pontianak, kapuas hulu
 Malay (msa)      : melayu kembayan, melayu ketapang, melayu melawi, melayu pontianak, melayu putussibau, melayu sambas, melayu sintang
@@ -81,7 +81,7 @@ Domain2Subsets = {
     "bug": ['bugis kelolao', 'bugis wajo'],
     "sun": ['sunda'],
     "mad": ['madura'],
-    "bin": ['banjar'],
+    "bjn": ['banjar'],
     "bbc": ['Batak'],
     "khek": ['kapuas hulu', 'Khek Pontianak'],
     "msa": ['melayu kembayan', 'melayu ketapang', 'melayu melawi', 'melayu pontianak', 'melayu putussibau', 'melayu sambas', 'melayu sintang'],
