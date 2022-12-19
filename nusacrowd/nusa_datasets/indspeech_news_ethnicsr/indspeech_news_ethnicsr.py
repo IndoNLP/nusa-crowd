@@ -22,7 +22,7 @@ _CITATION = """\
 """
 
 _LOCAL = False
-_LANGUAGES = ["ind"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["sun", "jav"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _DATASETNAME = "indspeech_news_ethnicsr"
 
 _DESCRIPTION = """
