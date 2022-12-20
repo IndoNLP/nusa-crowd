@@ -75,6 +75,19 @@ Kami sangat menghargai bantuan Anda!
 
 Artefak hackathon ini akan dijelaskan dalam makalah penelitian akademis mendatang yang menargetkan machine learning atau NLP audiens. Silakan merujuk ke [bagian ini](#contribution-guidelines) untuk imbalan kontribusi Anda karena membantu Nusantara NLP. Kami menyadari bahwa beberapa dataset memerlukan lebih banyak upaya daripada yang lain, jadi hubungi kami jika Anda memiliki pertanyaan. Tujuan kami adalah menjadi inklusif dengan kredit!
 
+
+## Sitasi NusaCrowd
+```
+@misc{cahyawijaya2022nusacrowd,
+      title={NusaCrowd: Open Source Initiative for Indonesian NLP Resources}, 
+      author={Samuel Cahyawijaya and Holy Lovenia and Alham Fikri Aji and Genta Indra Winata and Bryan Wilie and Rahmad Mahendra and Christian Wibisono and Ade Romadhony and Karissa Vincentio and Fajri Koto and Jennifer Santoso and David Moeljadi and Cahya Wirawan and Frederikus Hudi and Ivan Halim Parmonangan and Ika Alfina and Muhammad Satrio Wicaksono and Ilham Firdausi Putra and Samsul Rahmadani and Yulianti Oenang and Ali Akbar Septiandri and James Jaya and Kaustubh D. Dhole and Arie Ardiyanti Suryani and Rifki Afina Putri and Dan Su and Keith Stevens and Made Nindyatama Nityasya and Muhammad Farid Adilazuarda and Ryan Ignatius and Ryandito Diandaru and Tiezheng Yu and Vito Ghifari and Wenliang Dai and Yan Xu and Dyah Damapuspita and Cuk Tho and Ichwanul Muslim Karo Karo and Tirana Noor Fatyanosa and Ziwei Ji and Pascale Fung and Graham Neubig and Timothy Baldwin and Sebastian Ruder and Herry Sujaini and Sakriani Sakti and Ayu Purwarianti},
+      year={2022},
+      eprint={2212.09648},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
+
 <!--
 ## Ucapan Terima Kasih
 
