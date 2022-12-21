@@ -53,7 +53,7 @@ _SOURCE_VERSION = "1.0.0"
 _NUSANTARA_VERSION = "1.0.0"
 
 
-class NewDataset(datasets.GeneratorBasedBuilder):
+class SampiranDataset(datasets.GeneratorBasedBuilder):
     """Sampiran is a dataset for pantun generation. It consists of 7.8K Indonesian pantun,
     collected from various sources (online)."""
 
