@@ -135,12 +135,13 @@ class FacqaDataset(datasets.GeneratorBasedBuilder):
     def _generate_examples(self, filepath: Path, split: str) -> Tuple[int, Dict]:
         """Yields examples as (key, example) tuples."""
         df = pd.read_csv(filepath, sep=",", header="infer").reset_index()
+        print('df.shape', df.shape)
         if self.config.schema == "source":
             for row in df.itertuples():
                 entry = {"index": row.index, "question": ast.literal_eval(row.question), "passage": ast.literal_eval(row.passage), "seq_label": ast.literal_eval(row.seq_label)}
                 yield row.index, entry
 
-        elif self.config.schema == "nusantara_facqa":
+        elif self.config.schema == "nusantara_qa":
             for row in df.itertuples():
                 entry = {
                     "id": str(row.index),
