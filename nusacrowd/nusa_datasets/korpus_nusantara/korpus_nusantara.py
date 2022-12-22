@@ -77,7 +77,7 @@ Tiociu (tiociu)  : tiociu pontianak
 
 Domain2Subsets = {
     "jav": ['jawa', 'jawa kromo', 'jawa ngoko'],
-    "day": ['dayak ahe', 'dayak iban', 'dayak pesaguan', 'dayak taman'],
+    "xdy": ['dayak ahe', 'dayak iban', 'dayak pesaguan', 'dayak taman'],
     "bug": ['bugis kelolao', 'bugis wajo'],
     "sun": ['sunda'],
     "mad": ['madura'],
