@@ -40,7 +40,7 @@ _URLS = {
     _DATASETNAME: "https://raw.githubusercontent.com/kata-ai/kawat/master/{}/{}",
 }
 
-_SUPPORTED_TASKS = [Tasks.WORD_SENSE_DISAMBIGUATION]
+_SUPPORTED_TASKS = [Tasks.WORD_ANALOGY]
 
 _SOURCE_VERSION = "1.0.0"
 
