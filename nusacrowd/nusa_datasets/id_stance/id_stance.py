@@ -86,7 +86,7 @@ class IdStance(datasets.GeneratorBasedBuilder):
                 }
             )
         elif self.config.schema == "nusantara_pairs":
-            features = schemas.pairs_features(["for", "against", "againts", "no"])
+            features = schemas.pairs_features(["for", "against", "no"])
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -130,7 +130,7 @@ class IdStance(datasets.GeneratorBasedBuilder):
                     "id": row.id,
                     "text_1": row.person + " | " + row.event,
                     "text_2": " ".join([row.title] + row.content),
-                    "label": row.stance_final
+                    "label": 'against' if row.stance_final == 'againts' else row.stance_final
                 }
                 yield row.id, ex
         else:
