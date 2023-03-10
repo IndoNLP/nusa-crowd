@@ -148,7 +148,6 @@ class Liputan6(datasets.GeneratorBasedBuilder):
             if "xtreme_train.json" in filepath:
                 with open(filepath) as f:
                     lines = f.read().split("{")
-#                     print(len(lines))
                     LEN = len(lines)
                     for i, line in enumerate(lines):
                         if 0 < i < LEN-1:
@@ -177,7 +176,6 @@ class Liputan6(datasets.GeneratorBasedBuilder):
             if "xtreme_train.json" in filepath:
                 with open(filepath) as f:
                     lines = f.read().split("{")
-#                     print(len(lines))
                     LEN = len(lines)
                     for i, line in enumerate(lines):
                         if 0 < i < LEN-1:

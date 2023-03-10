@@ -41,6 +41,8 @@ Pantun is a traditional Malay poem consisting of four lines: two lines of delive
 This dataset filtered the gathered Pantun to follow the general rules of Pantun; four lines with ABAB rhyme and eight to twelve syllables per line.
 """
 
+_LANGUAGES = ["ind"]
+_LOCAL = False
 _HOMEPAGE = "https://github.com/ir-nlp-csui/sampiran"
 _LICENSE = "AGPL-3.0"
 
