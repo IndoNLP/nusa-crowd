@@ -129,7 +129,6 @@ class NusaTranslasi(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         src_lang, tgt_lang = self.config.name.split("_")[2:4]
-        print('src_lang, tgt_lang', src_lang, tgt_lang)
         if src_lang == 'ind':
             url = _URLs[tgt_lang]
         else: # if tgt_lang == 'ind':
