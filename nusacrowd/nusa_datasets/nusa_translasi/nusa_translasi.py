@@ -10,7 +10,7 @@ from nusacrowd.utils import schemas
 from nusacrowd.utils.configs import NusantaraConfig
 from nusacrowd.utils.constants import Tasks, DEFAULT_SOURCE_VIEW_NAME, DEFAULT_NUSANTARA_VIEW_NAME
 
-_DATASETNAME = "bible_en_id"
+_DATASETNAME = "nusa_translasi"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
