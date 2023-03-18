@@ -49,7 +49,7 @@ _CITATION = """\
 _LANGUAGES = ["sun"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 
-_DATASETNAME = "pos_sun_mono"
+_DATASETNAME = "postag_su"
 
 _DESCRIPTION = """\
 This dataset contains 3616 lines of Sundanese sentences taken from several online magazines (Mangle, Dewan Dakwah Jabar, and Balebat). \
