@@ -1,8 +1,8 @@
 # Selamat datang di NusaCrowd!
 
-<h3>132datasets telah terdaftar di NusaCrowd</h3>
+<h3>143 datasets telah terdaftar di NusaCrowd</h3>
 
-![Dataset claimed](https://progress-bar.dev/83/?title=Datasets%20Claimed%20(109%20Datasets%20Claimed))
+![Dataset claimed](https://progress-bar.dev/83/?title=Datasets%20Claimed%20(119%20Datasets%20Claimed))
 
 <!-- milestone starts -->
 ![Milestone 1](https://progress-bar.dev/100/?title=Milestone%201%20(30%20Datasets%20Completed))
