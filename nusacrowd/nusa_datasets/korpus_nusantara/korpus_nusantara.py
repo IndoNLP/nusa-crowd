@@ -191,8 +191,7 @@ class KorpusNusantara(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath: Path):
         """Yields examples as (key, example) tuples."""
-        xls = pd.ExcelFile(filepath)
-        dfs = pd.read_excel(xls, sheet_name=None, header=None)
+        dfs = pd.read_excel(filepath, sheet_name=None, header=None)
         src_lang, tgt_lang, df = self.get_domain_data((dfs))
         
         if self.config.schema == "source":

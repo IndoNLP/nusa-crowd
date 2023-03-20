@@ -104,7 +104,7 @@ class Toxicity200(datasets.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
         urls = _URLS[_DATASETNAME]
-        data_dir = Path(dl_manager.download_and_extract(urls)) / "ZIP_NLLB-200_TWL"
+        data_dir = Path(dl_manager.download_and_extract(urls)) / "NLLB-200_TWL"
 
         data_subdir = {
             "ind": os.path.join(data_dir, "ind_Latn_twl.zip"),
@@ -131,6 +131,7 @@ class Toxicity200(datasets.GeneratorBasedBuilder):
         """Yields examples as (key, example) tuples."""
         text = open(filepath["text_file"], "r").readlines()
         word_list = list(map(str.strip, text))
+        print(text[:5])
         if self.config.schema == "source":
             for id, word in enumerate(word_list):
                 row = {"id": str(id), "toxic_word": [word]}

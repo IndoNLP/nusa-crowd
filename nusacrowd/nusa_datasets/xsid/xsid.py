@@ -26,7 +26,7 @@ _LANGUAGES = ["ind"]
 _LICENSE = "CC-BY-SA 4.0"
 _LOCAL = False
 _URLS = {
-    _DATASETNAME: "https://bitbucket.org/robvanderg/xsid/get/bcec49a5ee9fc75811b87a47b9fa973c37d3bfa0.zip",
+    _DATASETNAME: "https://bitbucket.org/robvanderg/xsid/get/04ce1e6c8c28.zip",
 }
 _SUPPORTED_TASKS = [Tasks.INTENT_CLASSIFICATION, Tasks.POS_TAGGING]
 _SOURCE_VERSION = "0.3.0"
@@ -185,7 +185,7 @@ class XSID(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         urls = _URLS[_DATASETNAME]
-        base_path = Path(dl_manager.download_and_extract(urls)) / "robvanderg-xsid-bcec49a5ee9f" / "data" / "xSID-0.3"
+        base_path = Path(dl_manager.download_and_extract(urls)) / "robvanderg-xsid-04ce1e6c8c28" / "data" / "xSID-0.3"
         data_files = {
             "train": base_path / "id.projectedTrain.conll",
             "test": base_path / "id.test.conll",
@@ -208,6 +208,7 @@ class XSID(datasets.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, filepath: Path):
+        print('filepath', filepath)
         if self.config.name == "xsid_source":
             with open(filepath, "r") as file:
                 data = file.read().strip("\n").split("\n\n")
