@@ -38,7 +38,7 @@ sample, our annotation shows 6,290 clickbait and 8,710 non-clickbait.
 _HOMEPAGE = "https://www.sciencedirect.com/science/article/pii/S2352340920311252#!"
 _LICENSE = "Creative Commons Attribution 4.0 International"
 _URLS = {
-    _DATASETNAME: "https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/k42j7x2kpn-1.zip",
+    _DATASETNAME: "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/k42j7x2kpn-1.zip",
 }
 _SUPPORTED_TASKS = [Tasks.SENTIMENT_ANALYSIS]
 _SOURCE_VERSION = "1.0.0"
