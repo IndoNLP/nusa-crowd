@@ -142,7 +142,9 @@ class MultiLexNorm(datasets.GeneratorBasedBuilder):
                 tok = line.strip("\n").split("\t")
 
                 if tok == [""] or tok == []:
-                    ex = {"id": str(i), "src_sent": [x[0] for x in curSent], "norm_sent": [x[1] for x in curSent]}
+                    ex = {"id": str(i), 
+                          "src_sent": " ".join([x[0] for x in curSent]), 
+                          "norm_sent": " ".join([x[1] for x in curSent])}
                     yield i, ex
                     i += 1
                     curSent = []
@@ -160,7 +162,11 @@ class MultiLexNorm(datasets.GeneratorBasedBuilder):
                 tok = line.strip("\n").split("\t")
 
                 if tok == [""] or tok == []:
-                    ex = {"id": str(i), "text_1": [x[0] for x in curSent], "text_2": [x[1] for x in curSent], "text_1_name": "src_sent", "text_2_name": "norm_sent"}
+                    ex = {"id": str(i), 
+                          "text_1": " ".join([x[0] for x in curSent]), 
+                          "text_2": " ".join([x[1] for x in curSent]), 
+                          "text_1_name": "src_sent", 
+                          "text_2_name": "norm_sent"}
                     yield i, ex
                     i += 1
                     curSent = []
