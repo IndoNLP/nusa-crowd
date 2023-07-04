@@ -28,7 +28,7 @@ _CITATION = """\
 @misc{,
 author = {Ria Hari Gusmita, Asep Fajar Firmansyah, Khodijah Khuliyah},
 title = {{IndQNER: a NER Benchmark Dataset on Indonesian Translation of Quran}},
-url = {https://github.com/RiaGusmita/IndQNER},
+url = {https://github.com/dice-group/IndQNER},
 year = {2022}
 }
 """
@@ -57,12 +57,12 @@ The dataset contains 18 named entity categories as follow:
     "Food": Food (such as manna, salwa)
 """
 
-_HOMEPAGE = "https://github.com/RiaGusmita/IndQNER"
+_HOMEPAGE = "https://github.com/dice-group/IndQNER"
 _LICENSE = "Unknown"
 _URLs = {
-    "train": "https://raw.githubusercontent.com/RiaGusmita/IndQNER/master/datasets/train.txt",
-    "validation": "https://raw.githubusercontent.com/RiaGusmita/IndQNER/master/datasets/dev.txt",
-    "test": "https://raw.githubusercontent.com/RiaGusmita/IndQNER/master/datasets/test.txt",
+    "train": "https://raw.githubusercontent.com/dice-group/IndQNER/master/datasets/train.txt",
+    "validation": "https://raw.githubusercontent.com/dice-group/IndQNER/master/datasets/dev.txt",
+    "test": "https://raw.githubusercontent.com/dice-group/IndQNER/master/datasets/test.txt",
 }
 _SUPPORTED_TASKS = [Tasks.NAMED_ENTITY_RECOGNITION]
 _SOURCE_VERSION = "1.0.0"
