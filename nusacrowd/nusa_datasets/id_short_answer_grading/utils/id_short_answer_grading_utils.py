@@ -17,8 +17,8 @@ def create_saintek_and_soshum_dataset(saintek_question: Path, soshum_question: P
     soshum_joined = pd.merge(soshum_question, soshum_score, how='left', on = 'type-problem')
 
     # adding answer key
-    saintek_joined = saintek_joined.append(build_answer_key_score_dataframe(saintek_question), ignore_index=True)
-    soshum_joined = soshum_joined.append(build_answer_key_score_dataframe(soshum_question), ignore_index=True)
+    saintek_joined = pd.concat([saintek_joined, build_answer_key_score_dataframe(saintek_question)], ignore_index=True)
+    soshum_joined = pd.concat([soshum_joined, build_answer_key_score_dataframe(soshum_question)], ignore_index=True)
 
     # re-case-ing (kebab to snake)
     saintek_joined.rename(columns={'type-problem': 'type_problem'}, inplace=True)
