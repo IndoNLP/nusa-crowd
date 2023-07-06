@@ -303,7 +303,7 @@ class NusantaraConfigHelper:
 
                 is_nusantara_schema = config.schema.startswith("nusantara")
                 if is_nusantara_schema:
-                    nusantara_schema_caps = '_'.join(config.schema.split("_")[1:].upper())
+                    nusantara_schema_caps = '_'.join(config.schema.split("_")[1:]).upper()
                     tasks = SCHEMA_TO_TASKS[nusantara_schema_caps] & set(
                         py_module._SUPPORTED_TASKS
                     )
