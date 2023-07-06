@@ -112,7 +112,7 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
                     "score": datasets.Value("int64"),
                 }
             )
-        elif self.config.schema == "nusantara_pairs":
+        elif self.config.schema == "nusantara_pairs_score":
             features = schemas.pairs_features([0, 1, 2, 3, 4, 5])
 
         return datasets.DatasetInfo(
@@ -184,7 +184,7 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
                 }
                 yield row.index, entry
 
-        elif self.config.schema == "nusantara_pairs":
+        elif self.config.schema == "nusantara_pairs_score":
             for row in df.itertuples():
                 entry = {
                     "id": str(row.index),
