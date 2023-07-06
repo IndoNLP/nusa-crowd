@@ -90,10 +90,10 @@ class IdShortAnswerGrading(datasets.GeneratorBasedBuilder):
             subset_id="id_short_answer_grading",
         ),
         NusantaraConfig(
-            name="id_short_answer_grading_nusantara_pairs",
+            name="id_short_answer_grading_nusantara_pairs_score",
             version=NUSANTARA_VERSION,
             description="id_short_answer_grading Nusantara schema",
-            schema="nusantara_pairs",
+            schema="nusantara_pairs_score",
             subset_id="id_short_answer_grading",
         ),
     ]
