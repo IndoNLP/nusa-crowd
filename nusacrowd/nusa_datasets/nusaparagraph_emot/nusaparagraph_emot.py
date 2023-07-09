@@ -13,7 +13,7 @@ _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 _LANGUAGES = [
     “btk”, “bew”, “bug”, “jav”, “mad”, “mak”, “min”, “mui”, “rej”, “sun”
 ]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
-_CITATION = “”"\
+_CITATION = """\
 @misc{winata2022nusax,
       title={NusaX: Multilingual Parallel Sentiment Dataset for 10 Indonesian Local Languages},
       author={Winata, Genta Indra and Aji, Alham Fikri and Cahyawijaya,
@@ -26,11 +26,11 @@ _CITATION = “”"\
       archivePrefix={arXiv},
       primaryClass={cs.CL}
 }
-“”"
-_DESCRIPTION = “”"\
+"""
+_DESCRIPTION = """\
 We introduce a novel high quality human curated corpora, i.e., NusaMenulis, which covers 12 languages spoken in Indonesia. The resource extend the coverage of languages to 5 new languages, i.e., Ambon (abs), Bima (bhp), Makassarese (mak), Palembang / Musi (mui), and Rejang (rej).
 For the emotion recognition task, we cover the 6 basic emotions (Ekman, 1992): fear, disgusted, sad, happy, angry, and surprise, and an additional emotion label: shame (Poulson and of Tasmania. School of Management, 2000.
-“”"
+"""
 _HOMEPAGE = “https://github.com/IndoNLP/nusa-writes/tree/main/data”
 _LICENSE = “Creative Commons Attribution Share-Alike 4.0 International”
 _SUPPORTED_TASKS = [Tasks.EMOTION_CLASSIFICATION]
@@ -45,10 +45,10 @@ _URLS = {
     “https://raw.githubusercontent.com/IndoNLP/nusa-writes/main/data/nusa_alinea-emot-{lang}-test.csv”,
 }
 def nusantara_config_constructor(lang, schema, version):
-    “”"Construct NusantaraConfig with nusaparagraph_emot_{lang}_{schema} as the name format”“”
+    """Construct NusantaraConfig with nusaparagraph_emot_{lang}_{schema} as the name format”""
     if schema != “source” and schema != “nusantara_text”:
         raise ValueError(f”Invalid schema: {schema}“)
-    if lang == “”:
+    if lang == "":
         return NusantaraConfig(
             name=“nusaparagraph_emot_{schema}“.format(schema=schema),
             version=datasets.Version(version),
@@ -82,7 +82,7 @@ LANGUAGES_MAP = {
     “sun”: “sundanese”
 }
 class NusaParagraphEmot(datasets.GeneratorBasedBuilder):
-    “”"NusaParagraph-Emot is a 7-labels (fear, disgusted, sad, happy, angry, surprise, and shame) emotion classification dataset for 10 Indonesian local languages.“”"
+    """NusaParagraph-Emot is a 7-labels (fear, disgusted, sad, happy, angry, surprise, and shame) emotion classification dataset for 10 Indonesian local languages."""
     BUILDER_CONFIGS = ([
         nusantara_config_constructor(lang, “source”, _SOURCE_VERSION)
         for lang in LANGUAGES_MAP
@@ -91,8 +91,8 @@ class NusaParagraphEmot(datasets.GeneratorBasedBuilder):
                                      _NUSANTARA_VERSION)
         for lang in LANGUAGES_MAP
     ] + [
-        nusantara_config_constructor(“”, “source”, _SOURCE_VERSION),
-        nusantara_config_constructor(“”, “nusantara_text”, _NUSANTARA_VERSION)
+        nusantara_config_constructor("", “source”, _SOURCE_VERSION),
+        nusantara_config_constructor("", “nusantara_text”, _NUSANTARA_VERSION)
     ])
     DEFAULT_CONFIG_NAME = “nusaparagraph_emot_ind_source”
     def _info(self) -> datasets.DatasetInfo:
@@ -117,7 +117,7 @@ class NusaParagraphEmot(datasets.GeneratorBasedBuilder):
     def _split_generators(
             self, dl_manager: datasets.DownloadManager
     ) -> List[datasets.SplitGenerator]:
-        “”"Returns SplitGenerators.“”"
+        """Returns SplitGenerators."""
         if self.config.name == “nusaparagraph_emot_source” or self.config.name == “nusaparagraph_emot_nusantara_text”:
             # Load all 12 languages
             train_csv_path = dl_manager.download_and_extract([
