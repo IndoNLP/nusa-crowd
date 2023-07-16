@@ -121,28 +121,28 @@ class NusaParagraphEmot(datasets.GeneratorBasedBuilder):
         if self.config.name == "nusaparagraph_emot_source" or self.config.name == "nusaparagraph_emot_nusantara_text":
             # Load all 12 languages
             train_csv_path = dl_manager.download_and_extract([
-                _URLS["train"].format(lang=LANGUAGES_MAP[lang])
+                _URLS["train"].format(lang=lang)
                 for lang in LANGUAGES_MAP
             ])
             validation_csv_path = dl_manager.download_and_extract([
-                _URLS["validation"].format(lang=LANGUAGES_MAP[lang])
+                _URLS["validation"].format(lang=lang)
                 for lang in LANGUAGES_MAP
             ])
             test_csv_path = dl_manager.download_and_extract([
-                _URLS["test"].format(lang=LANGUAGES_MAP[lang])
+                _URLS["test"].format(lang=lang)
                 for lang in LANGUAGES_MAP
             ])
         else:
             lang = self.config.name[12:15]
             train_csv_path = Path(
                 dl_manager.download_and_extract(
-                    _URLS["train"].format(lang=LANGUAGES_MAP[lang])))
+                    _URLS["train"].format(lang=lang)))
             validation_csv_path = Path(
                 dl_manager.download_and_extract(
-                    _URLS["validation"].format(lang=LANGUAGES_MAP[lang])))
+                    _URLS["validation"].format(lang=lang)))
             test_csv_path = Path(
                 dl_manager.download_and_extract(
-                    _URLS["test"].format(lang=LANGUAGES_MAP[lang])))
+                    _URLS["test"].format(lang=lang)))
         return [
             datasets.SplitGenerator(
                 name=datasets.Split.TRAIN,
