@@ -59,7 +59,7 @@ _URLS = {
     _DATASETNAME: "https://storage.googleapis.com/babert-pretraining/IndoNLG_finals/downstream_task/downstream_task_datasets.zip",
 }
 
-_SUPPORTED_TASKS = [Tasks.MACHINE_TRANSLATION]
+_SUPPORTED_TASKS = [Tasks.DIALOGUE_SYSTEM]
 
 _SOURCE_VERSION = "1.0.0"
 
