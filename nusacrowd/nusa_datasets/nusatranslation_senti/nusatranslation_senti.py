@@ -14,7 +14,7 @@ _DATASETNAME = "nusatranslation_senti"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["btk", "bew", "bug", "jav", "mad", "mak", "min", "mui", "rej", "sun"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["abs", "btk", "bew", "bug", "jav", "mad", "mak", "min", "mui", "rej", "sun"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 
 _CITATION = """\
     @unpublished{anonymous2023nusawrites:,
@@ -163,7 +163,3 @@ class NusaTranslationSenti(datasets.GeneratorBasedBuilder):
         for row in df.itertuples():
             ex = {"id": str(row.id), "text": row.text, "label": row.label}
             yield row.id, ex
-
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
