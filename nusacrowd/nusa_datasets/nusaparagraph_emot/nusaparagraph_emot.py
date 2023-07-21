@@ -23,10 +23,11 @@ _CITATION = """\
 }
 """
 _DESCRIPTION = """\
+Democratizing access to natural language processing (NLP) technology is crucial, especially for underrepresented and extremely low-resource languages. Previous research has focused on developing labeled and unlabeled corpora for these languages through online scraping and document translation. While these methods have proven effective and cost-efficient, we have identified limitations in the resulting corpora, including a lack of lexical diversity and cultural relevance to local communities. To address this gap, we conduct a case study on Indonesian local languages. We compare the effectiveness of online scraping, human translation, and paragraph writing by native speakers in constructing datasets. Our findings demonstrate that datasets generated through paragraph writing by native speakers exhibit superior quality in terms of lexical diversity and cultural content. In addition, we present the NusaWrites benchmark, encompassing 12 underrepresented and extremely low-resource languages spoken by millions of individuals in Indonesia. Our empirical experiment results using existing multilingual large language models conclude the need to extend these models to more underrepresented languages.
 We introduce a novel high quality human curated corpora, i.e., NusaMenulis, which covers 12 languages spoken in Indonesia. The resource extend the coverage of languages to 5 new languages, i.e., Ambon (abs), Bima (bhp), Makassarese (mak), Palembang / Musi (mui), and Rejang (rej).
 For the emotion recognition task, we cover the 6 basic emotions (Ekman, 1992): fear, disgusted, sad, happy, angry, and surprise, and an additional emotion label: shame (Poulson and of Tasmania. School of Management, 2000.
 """
-_HOMEPAGE = "https://github.com/IndoNLP/nusa-writes/tree/main/data"
+_HOMEPAGE = "https://github.com/IndoNLP/nusa-writes"
 _LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 _SUPPORTED_TASKS = [Tasks.EMOTION_CLASSIFICATION]
 _SOURCE_VERSION = "1.0.0"
@@ -128,7 +129,7 @@ class NusaParagraphEmot(datasets.GeneratorBasedBuilder):
                 for lang in LANGUAGES_MAP
             ])
         else:
-            lang = self.config.name[12:15]
+            lang = self.config.name.split('_')[2]
             train_csv_path = Path(
                 dl_manager.download_and_extract(
                     _URLS["train"].format(lang=lang)))
