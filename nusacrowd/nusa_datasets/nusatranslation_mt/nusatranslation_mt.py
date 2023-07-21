@@ -12,7 +12,7 @@ _DATASETNAME = "nusatranslation_mt"
 _SOURCE_VIEW_NAME = DEFAULT_SOURCE_VIEW_NAME
 _UNIFIED_VIEW_NAME = DEFAULT_NUSANTARA_VIEW_NAME
 
-_LANGUAGES = ["btk", "bew", "bug", "jav", "mad", "mak", "min", "mui", "rej", "sun"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
+_LANGUAGES = ["abs", "btk", "bew", "bug", "jav", "mad", "mak", "min", "mui", "rej", "sun"]  # We follow ISO639-3 language code (https://iso639-3.sil.org/code_tables/639/data)
 _LOCAL = False
 
 _CITATION = """\
@@ -31,7 +31,7 @@ _DESCRIPTION = """\
     For the rhetoric mode classification task, we cover 5 rhetoric modes, i.e., narrative, persuasive, argumentative, descriptive, and expository.
 """
 
-_HOMEPAGE = "https://github.com/IndoNLP/nusatranslation/tree/main/datasets/mt"
+_HOMEPAGE = "https://github.com/IndoNLP/nusa-writes/tree/main/data"
 
 _LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
