@@ -180,7 +180,3 @@ class NusaTranslationMT(datasets.GeneratorBasedBuilder):
                     "text_2_name": LANGUAGES_MAP[lang],
                 }
                 yield str(index), ex
-
-
-if __name__ == "__main__":
-    datasets.load_dataset(__file__)
