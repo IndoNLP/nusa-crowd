@@ -31,7 +31,7 @@ _DESCRIPTION = """\
     For the rhetoric mode classification task, we cover 5 rhetoric modes, i.e., narrative, persuasive, argumentative, descriptive, and expository.
 """
 
-_HOMEPAGE = "https://github.com/IndoNLP/nusa-writes/tree/main/data"
+_HOMEPAGE = "https://github.com/IndoNLP/nusa-writes"
 
 _LICENSE = "Creative Commons Attribution Share-Alike 4.0 International"
 
