@@ -198,6 +198,232 @@ _CURRENTLY_BROKEN_NAMES = [
 
 ]
 
+BENCHMARK_DICT = {
+    'IndoNLU': [
+        'emot_nusantara_text',
+        'smsa_nusantara_text',
+        'wrete_nusantara_pairs',
+        'casa_nusantara_text_multi',
+        'hoasa_nusantara_text_multi',
+        'facqa_nusantara_qa',
+        'indonlu_nergrit_nusantara_seq_label',
+        'nerp_nusantara_seq_label',
+        'posp_nusantara_seq_label',
+        'term_a_nusantara_seq_label',
+        'keps_nusantara_seq_label',
+        'idn_tagged_corpus_csui_nusantara_seq_label'
+    ],
+    'IndoNLG': [
+        # MT
+        'bible_en_id_nusantara_t2t',
+        'bible_su_id_nusantara_t2t',
+        'bible_jv_id_nusantara_t2t',
+        'ted_en_id_nusantara_t2t',
+        'indo_general_mt_en_id_nusantara_t2t',
+        'news_en_id_nusantara_t2t',        
+        # Summarization
+        'indosum_fold0_nusantara_t2t',
+        'liputan6_canonical_nusantara_t2t',
+        'liputan6_xtreme_nusantara_t2t',
+        # Chit Chat
+        'xpersona_id_nusantara_t2t',
+        # QA
+        'tydiqa_id_nusantara_qa',
+    ],
+    'IndoLEM': [
+        'indolem_ntp_nusantara_pairs',
+        'indolem_sentiment_nusantara_text',
+        'indolem_ner_ugm_fold0_nusantara_seq_label',
+        'indolem_ner_ugm_fold1_nusantara_seq_label',
+        'indolem_ner_ugm_fold2_nusantara_seq_label',
+        'indolem_ner_ugm_fold3_nusantara_seq_label',
+        'indolem_ner_ugm_fold4_nusantara_seq_label',
+        'indolem_ud_id_gsd_nusantara_kb',
+        'indolem_ud_id_pud_nusantara_kb',
+        'indolem_tweet_ordering_nusantara_seq_label',
+        'indolem_nerui_fold0_nusantara_seq_label',
+        'indolem_nerui_fold1_nusantara_seq_label',
+        'indolem_nerui_fold2_nusantara_seq_label',
+        'indolem_nerui_fold3_nusantara_seq_label',
+        'indolem_nerui_fold4_nusantara_seq_label'
+    ],
+    'NusaX': [
+        # Ind - XXX
+        'nusax_mt_ind_ace_nusantara_t2t',
+        'nusax_mt_ind_ban_nusantara_t2t',
+        'nusax_mt_ind_bjn_nusantara_t2t',
+        'nusax_mt_ind_bug_nusantara_t2t',
+        'nusax_mt_ind_eng_nusantara_t2t',
+        'nusax_mt_ind_jav_nusantara_t2t',
+        'nusax_mt_ind_mad_nusantara_t2t',
+        'nusax_mt_ind_min_nusantara_t2t',
+        'nusax_mt_ind_nij_nusantara_t2t',
+        'nusax_mt_ind_sun_nusantara_t2t',
+        'nusax_mt_ind_bbc_nusantara_t2t',
+        
+        # XXX - Ind
+        'nusax_mt_ace_ind_nusantara_t2t',
+        'nusax_mt_ban_ind_nusantara_t2t',
+        'nusax_mt_bjn_ind_nusantara_t2t',
+        'nusax_mt_bug_ind_nusantara_t2t',
+        'nusax_mt_eng_ind_nusantara_t2t',
+        'nusax_mt_jav_ind_nusantara_t2t',
+        'nusax_mt_mad_ind_nusantara_t2t',
+        'nusax_mt_min_ind_nusantara_t2t',
+        'nusax_mt_nij_ind_nusantara_t2t',
+        'nusax_mt_sun_ind_nusantara_t2t',
+        'nusax_mt_bbc_ind_nusantara_t2t',    
+    ],    
+    'NusaNLU': [
+        'emot_nusantara_text',
+        'emotcmt_nusantara_text',
+        'emotion_id_opinion_nusantara_text',
+        'id_abusive_nusantara_text',
+        'id_google_play_review_nusantara_text',
+        'id_google_play_review_posneg_nusantara_text',
+        'id_hatespeech_nusantara_text',
+        'imdb_jv_nusantara_text',
+        'indolem_sentiment_nusantara_text',
+        'jadi_ide_nusantara_text',
+        'nusax_senti_ace_nusantara_text',
+        'nusax_senti_ban_nusantara_text',
+        'nusax_senti_bjn_nusantara_text',
+        'nusax_senti_bug_nusantara_text',
+        'nusax_senti_eng_nusantara_text',
+        'nusax_senti_ind_nusantara_text',
+        'nusax_senti_jav_nusantara_text',
+        'nusax_senti_mad_nusantara_text',
+        'nusax_senti_min_nusantara_text',
+        'nusax_senti_nij_nusantara_text',
+        'nusax_senti_sun_nusantara_text',
+        'nusax_senti_bbc_nusantara_text',
+        'sentiment_nathasa_review_nusantara_text',
+        'smsa_nusantara_text',    
+        'indolem_ntp_nusantara_pairs',
+        'indonli_nusantara_pairs',
+        'code_mixed_jv_id_jv_nusantara_text',
+        'code_mixed_jv_id_id_nusantara_text',
+        'id_am2ico_nusantara_pairs',
+        'id_abusive_news_comment_nusantara_text',
+        'id_hoax_news_nusantara_text',
+        'id_hsd_nofaaulia_nusantara_text',
+        'id_stance_nusantara_pairs',
+        'indo_law_nusantara_text',
+        'indotacos_nusantara_text',
+        'karonese_sentiment_nusantara_text',
+        'su_emot_nusantara_text',
+        'wrete_nusantara_pairs',
+        'id_short_answer_grading_nusantara_pairs'
+    ],    
+    'NusaNLG': [
+        'bible_en_id_nusantara_t2t',
+        'bible_jv_id_nusantara_t2t',
+        'bible_su_id_nusantara_t2t',
+        'id_panl_bppt_nusantara_t2t',
+        'indo_general_mt_en_id_nusantara_t2t',
+        'indo_religious_mt_en_id_nusantara_t2t',
+        'minangnlp_mt_nusantara_t2t',
+        'news_en_id_nusantara_t2t',
+        'nusax_mt_ace_ind_nusantara_t2t',
+        'nusax_mt_ban_ind_nusantara_t2t',
+        'nusax_mt_bjn_ind_nusantara_t2t',
+        'nusax_mt_bug_ind_nusantara_t2t',
+        'nusax_mt_eng_ind_nusantara_t2t',
+        'nusax_mt_ind_ace_nusantara_t2t',
+        'nusax_mt_ind_ban_nusantara_t2t',
+        'nusax_mt_ind_bjn_nusantara_t2t',
+        'nusax_mt_ind_bug_nusantara_t2t',
+        'nusax_mt_ind_eng_nusantara_t2t',
+        'nusax_mt_ind_jav_nusantara_t2t',
+        'nusax_mt_ind_mad_nusantara_t2t',
+        'nusax_mt_ind_min_nusantara_t2t',
+        'nusax_mt_ind_nij_nusantara_t2t',
+        'nusax_mt_ind_sun_nusantara_t2t',
+        'nusax_mt_ind_bbc_nusantara_t2t',
+        'nusax_mt_jav_ind_nusantara_t2t',
+        'nusax_mt_mad_ind_nusantara_t2t',
+        'nusax_mt_min_ind_nusantara_t2t',
+        'nusax_mt_nij_ind_nusantara_t2t',
+        'nusax_mt_sun_ind_nusantara_t2t',
+        'nusax_mt_bbc_ind_nusantara_t2t',
+        'parallel_su_id_nusantara_t2t',
+        'ted_en_id_nusantara_t2t',
+        'ud_id_csui_nusantara_t2t',
+        'korpus_nusantara_ind_jav_nusantara_t2t',
+        'korpus_nusantara_ind_xdy_nusantara_t2t',
+        'korpus_nusantara_ind_bug_nusantara_t2t',
+        'korpus_nusantara_ind_sun_nusantara_t2t',
+        'korpus_nusantara_ind_mad_nusantara_t2t',
+        'korpus_nusantara_ind_bjn_nusantara_t2t',
+        'korpus_nusantara_ind_bbc_nusantara_t2t',
+        'korpus_nusantara_ind_khek_nusantara_t2t',
+        'korpus_nusantara_ind_msa_nusantara_t2t',
+        'korpus_nusantara_ind_min_nusantara_t2t',
+        'korpus_nusantara_ind_tiociu_nusantara_t2t',
+        'korpus_nusantara_jav_ind_nusantara_t2t',
+        'korpus_nusantara_xdy_ind_nusantara_t2t',
+        'korpus_nusantara_bug_ind_nusantara_t2t',
+        'korpus_nusantara_sun_ind_nusantara_t2t',
+        'korpus_nusantara_mad_ind_nusantara_t2t',
+        'korpus_nusantara_bjn_ind_nusantara_t2t',
+        'korpus_nusantara_bbc_ind_nusantara_t2t',
+        'korpus_nusantara_khek_ind_nusantara_t2t',
+        'korpus_nusantara_msa_ind_nusantara_t2t',
+        'korpus_nusantara_min_ind_nusantara_t2t',
+        'korpus_nusantara_tiociu_ind_nusantara_t2t',
+        'indosum_fold0_nusantara_t2t',
+        'liputan6_canonical_nusantara_t2t',
+        'xl_sum_nusantara_t2t',
+        'id_qqp_nusantara_t2t',
+        'multilexnorm_nusantara_t2t',
+        'paracotta_id_nusantara_t2t',
+        'stif_indonesia_nusantara_t2t',        
+        'xpersona_id_nusantara_t2t'
+        'facqa_nusantara_qa',
+        'idk_mrc_nusantara_qa',
+        'tydiqa_id_nusantara_qa'
+    ],
+    'NusaASR': [
+        # Ind
+        'indspeech_digit_cdsr_nusantara_sptext',
+        'indspeech_news_lvcsr_nusantara_sptext',
+        'indspeech_teldialog_lvcsr_nusantara_sptext',
+        'indspeech_teldialog_svcsr_nusantara_sptext',
+        'librivox_indonesia_ind_nusantara_sptext',
+        'titml_idn_nusantara_sptext'
+        # Sun
+        'indspeech_newstra_ethnicsr_nooverlap_sun_nusantara_sptext',
+        'indspeech_news_ethnicsr_su_nooverlap_nusantara_sptext',
+        'librivox_indonesia_sun_nusantara_sptext',
+        'su_id_asr_nusantara_sptext',
+        # Jav
+        'indspeech_newstra_ethnicsr_nooverlap_jav_nusantara_sptext',
+        'indspeech_news_ethnicsr_jv_nooverlap_nusantara_sptext',
+        'librivox_indonesia_jav_nusantara_sptext',
+        'jv_id_asr_nusantara_sptext',
+        # Ban
+        'indspeech_newstra_ethnicsr_nooverlap_ban_nusantara_sptext',
+        'librivox_indonesia_ban_nusantara_sptext',
+        # Btk
+        'indspeech_newstra_ethnicsr_nooverlap_btk_nusantara_sptext',
+        # Ace
+        'librivox_indonesia_ace_nusantara_sptext',
+        # Bug
+        'librivox_indonesia_bug_nusantara_sptext',
+        # Min
+        'librivox_indonesia_min_nusantara_sptext',
+    ],
+#     'NusaTranslation': [
+    
+#     ],
+#     'NusaParagraph': [
+    
+#     ],
+#     'NusaWrites': [
+    
+#     ],
+}
+
 @dataclass
 class NusantaraMetadata:
     """Metadata for one config of a dataset."""
@@ -406,6 +632,51 @@ class NusantaraConfigHelper:
             return self._helpers[key]
         else:
             raise TypeError("Invalid argument type.")
+    
+    def list_datasets(self, with_config=False):
+        name_to_schema = {}
+        for helper in self:
+            if helper.dataset_name not in name_to_schema:
+                name_to_schema[helper.dataset_name] = []
+            name_to_schema[helper.dataset_name].append(helper.config.name)
+        if not with_config:
+            return list(name_to_schema.keys())
+        else:
+            return name_to_schema
+    
+    def load_dataset(self, dataset_name, schema='nusantara'):
+        return [
+            helper.load_dataset()
+            for helper in self.filtered(
+                lambda x: (
+                    (dataset_name == x.dataset_name) and 
+                    (x.is_nusantara_schema if schema == 'nusantara' else not x.is_nusantara_schema)
+                )
+            )][0]
+
+    def load_datasets(self, dataset_names, schema='nusantara'):
+        return {
+            helper.config.name: helper.load_dataset()
+            for helper in self.filtered(
+                lambda x: (
+                    (x.dataset_name in dataset_names) and 
+                    (x.is_nusantara_schema if schema == 'nusantara' else not x.is_nusantara_schema)
+                )
+            )
+       }
+        
+    def list_benchmarks(self):
+        return list(BENCHMARK_DICT.keys())
+
+    def load_benchmark(self, benchmark_name):
+        return {
+            helper.config.name: helper.load_dataset()
+            for helper in self.filtered(
+                lambda x: (
+                    x.config.name in BENCHMARK_DICT[benchmark_name]
+                )
+            )
+        }
 
 # Metadata Helper
 @dataclass
