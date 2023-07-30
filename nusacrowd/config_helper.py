@@ -12,10 +12,9 @@ from typing import Callable, Iterable, List, Optional, Dict
 from dataclasses import dataclass
 from dataclasses import field
 import datasets
-from datasets import load_dataset
 
-from .utils.configs import NusantaraConfig
-from .utils.constants import Tasks, SCHEMA_TO_TASKS
+from utils.configs import NusantaraConfig
+from utils.constants import Tasks, SCHEMA_TO_TASKS
 import pandas as pd
 
 _LARGE_CONFIG_NAMES = [
@@ -465,7 +464,7 @@ class NusantaraMetadata:
         self,
         **extra_load_dataset_kwargs,
     ):
-        return load_dataset(
+        return datasets.load_dataset(
             path=self.script,
             name=self.config.name,
             **extra_load_dataset_kwargs,
@@ -645,6 +644,7 @@ class NusantaraConfigHelper:
             return name_to_schema
     
     def load_dataset(self, dataset_name, schema='nusantara'):
+<<<<<<< Updated upstream
         return [
             helper.load_dataset()
             for helper in self.filtered(
@@ -653,6 +653,19 @@ class NusantaraConfigHelper:
                     (x.is_nusantara_schema if schema == 'nusantara' else not x.is_nusantara_schema)
                 )
             )][0]
+=======
+        try:        
+            return [
+                helper.load_dataset()
+                for helper in self.filtered(
+                    lambda x: (
+                        (dataset_name == x.dataset_name) and 
+                        (x.is_nusantara_schema if schema == 'nusantara' else not x.is_nusantara_schema)
+                    )
+                )][0]
+        except:
+            raise ValueError(f"Couldn't find dataset with name=`{dataset_name}` and schema=`{schema}`")
+>>>>>>> Stashed changes
 
     def load_datasets(self, dataset_names, schema='nusantara'):
         return {
@@ -779,39 +792,52 @@ class NusantaraMetadataHelper:
     def __len__(self):
         return len(self._meta_df)
     
+###
+# NusaCrowd Interface
+###
 
+def list_datasets(with_config=False):
+    conhelps = NusantaraConfigHelper()
+    return conhelps.list_datasets(with_config=with_config)
+
+def load_dataset(dataset_name, schema='nusantara'):
+    conhelps = NusantaraConfigHelper()
+    return conhelps.load_dataset(dataset_name=dataset_name, schema=schema)
+
+def load_datasets(dataset_names, schema='nusantara'):
+    conhelps = NusantaraConfigHelper()
+    return conhelps.load_datasets(dataset_names=dataset_names, schema=schema)
+
+def list_benchmarks():
+    conhelps = NusantaraConfigHelper()
+    return conhelps.list_benchmarks()
+
+def load_benchmark(benchmark_name):
+    conhelps = NusantaraConfigHelper()
+    return conhelps.load_benchmark(benchmark_name=benchmark_name)
 
 if __name__ == "__main__":
-    conhelps = NusantaraConfigHelper()
+    print(f'LIST DATASETS')
+    dset_names = list_datasets()
+    print(dset_names[:10])
+    print()
 
-    # filter and load datasets
-    # ====================================================================
-    tmvar_datasets = [
-        helper.load_dataset()
-        for helper in conhelps.filtered(
-            lambda x: ("tmvar" in x.dataset_name and x.is_nusantara_schema)
-        )
-    ]
+    print(f'LOAD DATASET `{dset_names[1]}`')
+    dset = load_dataset(dset_names[1])
+    print(dset)
+    print()
+    
+    print(f'LOAD DATASETS [{dset_names[1:4]}]')
+    dsets = load_datasets(dset_names[1:4])
+    print(dsets)
+    print()
+    
+    print(f'LIST BENCHMARKS')
+    benchmark_names = list_benchmarks()
+    print(benchmark_names[:3])
+    print()
 
-    # examples of other filters
-    # ====================================================================
-
-    # get all source schema config helpers
-    source_helpers = conhelps.filtered(lambda x: x.config.schema == "source")
-
-    # get all local nusantara config helpers
-    bb_local_helpers = conhelps.filtered(lambda x: x.is_nusantara_schema and x.is_local)
-
-    # nusantara NER public tasks
-    bb_ner_public_helpers = conhelps.filtered(
-        lambda x: (
-            x.is_nusantara_schema
-            and Tasks.NAMED_ENTITY_RECOGNITION in x.tasks
-            and not x.is_local
-        )
-    )
-
-    # n2c2 datasets
-    bb_n2c2_helpers = conhelps.filtered(
-        lambda x: ("n2c2" in x.dataset_name and x.is_nusantara_schema)
-    )
+    print(f'LOAD BENCHMARK `{benchmark_names[0]}`')
+    benchmark_dsets = load_benchmark(benchmark_names[0])
+    print(benchmark_dsets)
+    print()
