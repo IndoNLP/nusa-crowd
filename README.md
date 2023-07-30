@@ -19,6 +19,42 @@
 Indonesian NLP is underrepresented in research community, and one of the reasons is the lack of access to public datasets ([Aji et al., 2022](https://aclanthology.org/2022.acl-long.500/)). To address this issue, we initiate
 **NusaCrowd**, a joint collaboration to collect NLP datasets for Indonesian languages. Help us collect and centralize Indonesian NLP datasets, and be a co-author of our upcoming paper.
 
+## How to Use
+### Installing NusaCrowd
+To install NusaCrowd, install the `nusacrowd` package in your python environment
+```
+pip install nusacrowd
+```
+
+### Using NusaCrowd
+To use NusaCrowd package, simply import the library in your code:
+```
+import nusacrowd as nc
+````
+
+#### List & Load Dataset Functions
+NusaCrowd provides functions for listing and loading all datasets that are implemented in NusaCrowd
+```
+# List all datasets
+dset_names = nc.list_datasets()
+
+# Load a single dataset based on the dataset name
+smsa_dset = nc.load_dataset('smsa')
+
+# Load multiple datasets based on the dataset names
+dset_dict = nc.load_dataset(['emot', 'smsa'])
+```
+
+#### List & Load Benchmark Functions
+In addition to dataset related functions, NusaCrowd also provides additional functions for listing and loading some Indonesian NLP benchmarks
+```
+# List all benchmarks
+benchmark_names = nc.list_benchmarks()
+
+# Load all dataset in a benchmark
+nusanlu_dsets = nc.load_benchmark('NusaNLU')
+```
+
 ## How to contribute?
 
 You can contribute by proposing **unregistered NLP dataset** on [our record](https://indonlp.github.io/nusa-catalogue/). [Just fill out this form](https://forms.gle/31dMGZik25DPFYFd6), and we will check and approve your entry.
