@@ -13,8 +13,8 @@ from dataclasses import dataclass
 from dataclasses import field
 import datasets
 
-from utils.configs import NusantaraConfig
-from utils.constants import Tasks, SCHEMA_TO_TASKS
+from .utils.configs import NusantaraConfig
+from .utils.constants import Tasks, SCHEMA_TO_TASKS
 import pandas as pd
 
 _LARGE_CONFIG_NAMES = [
@@ -644,16 +644,6 @@ class NusantaraConfigHelper:
             return name_to_schema
     
     def load_dataset(self, dataset_name, schema='nusantara'):
-<<<<<<< Updated upstream
-        return [
-            helper.load_dataset()
-            for helper in self.filtered(
-                lambda x: (
-                    (dataset_name == x.dataset_name) and 
-                    (x.is_nusantara_schema if schema == 'nusantara' else not x.is_nusantara_schema)
-                )
-            )][0]
-=======
         try:        
             return [
                 helper.load_dataset()
@@ -665,7 +655,6 @@ class NusantaraConfigHelper:
                 )][0]
         except:
             raise ValueError(f"Couldn't find dataset with name=`{dataset_name}` and schema=`{schema}`")
->>>>>>> Stashed changes
 
     def load_datasets(self, dataset_names, schema='nusantara'):
         return {
