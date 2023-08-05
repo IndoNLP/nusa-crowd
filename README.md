@@ -42,7 +42,7 @@ dset_names = nc.list_datasets()
 smsa_dset = nc.load_dataset('smsa')
 
 # Load multiple datasets based on the dataset names
-dset_dict = nc.load_dataset(['emot', 'smsa'])
+dset_dict = nc.load_datasets(['emot', 'smsa'])
 ```
 
 #### List & Load Benchmark Functions
