@@ -412,15 +412,24 @@ BENCHMARK_DICT = {
         # Min
         'librivox_indonesia_min_nusantara_sptext',
     ],
-#     'NusaTranslation': [
-    
-#     ],
-#     'NusaParagraph': [
-    
-#     ],
-#     'NusaWrites': [
-    
-#     ],
+    'NusaTranslation': [
+        'nusatranslation_senti_nusantara_text',
+        'nusatranslation_emot_nusantara_text',
+        'nusatranslation_mt_nusantara_t2t',
+    ],
+    'NusaParagraph': [
+        'nusaparagraph_emot_nusantara_text',
+        'nusaparagraph_topic_nusantara_text',
+        'nusaparagraph_rhetoric_nusantara_text',
+    ],
+    'NusaWrites': [
+        'nusatranslation_senti_nusantara_text',
+        'nusatranslation_emot_nusantara_text',
+        'nusatranslation_mt_nusantara_t2t',
+        'nusaparagraph_emot_nusantara_text',
+        'nusaparagraph_topic_nusantara_text',
+        'nusaparagraph_rhetoric_nusantara_text',    
+    ],
 }
 
 @dataclass
