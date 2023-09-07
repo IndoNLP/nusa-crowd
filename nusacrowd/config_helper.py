@@ -654,14 +654,13 @@ class NusantaraConfigHelper:
     
     def load_dataset(self, dataset_name, schema='nusantara'):
         try:        
-            return [
-                helper.load_dataset()
-                for helper in self.filtered(
+            for helper in sorted(self.filtered(
                     lambda x: (
                         (dataset_name == x.dataset_name) and 
                         (x.is_nusantara_schema if schema == 'nusantara' else not x.is_nusantara_schema)
                     )
-                )][0]
+                ), key=lambda x: len(x.config.name)):
+                return helper.load_dataset()
         except:
             raise ValueError(f"Couldn't find dataset with name=`{dataset_name}` and schema=`{schema}`")
 
