@@ -49,30 +49,6 @@ _URLS = {
     "test": "https://raw.githubusercontent.com/IndoNLP/nusa-writes/main/data/nusa_kalimat-mt-{lang}-test.csv",
 }
 
-
-# def nusantara_config_constructor(lang, schema, version):
-#     """Construct NusantaraConfig with nusatranslation_mt_{lang}_{schema} as the name format"""
-#     if schema != "source" and schema != "nusantara_t2t":
-#         raise ValueError(f"Invalid schema: {schema}")
-
-#     if lang == "":
-#         return NusantaraConfig(
-#             name="nusatranslation_mt_{schema}".format(schema=schema),
-#             version=datasets.Version(version),
-#             description="nusatranslation_mt with {schema} schema for all 12 languages".format(schema=schema),
-#             schema=schema,
-#             subset_id="nusatranslation_mt",
-#         )
-#     else:
-#         return NusantaraConfig(
-#             name="nusatranslation_mt_{lang}_{schema}".format(lang=lang, schema=schema),
-#             version=datasets.Version(version),
-#             description="nusatranslation_mt with {schema} schema for {lang} language".format(lang=lang, schema=schema),
-#             schema=schema,
-#             subset_id="nusatranslation_mt",
-#         )
-
-
 LANGUAGES_MAP = {
     "abs": "ambon",
     "btk": "batak",
@@ -152,16 +128,10 @@ class NusaTranslationMT(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: datasets.DownloadManager) -> List[datasets.SplitGenerator]:
         """Returns SplitGenerators."""
-        if self.config.name == "nusatranslation_mt_source" or self.config.name == "nusatranslation_mt_nusantara_t2t":
-            # Load all 12 languages
-            train_csv_path = dl_manager.download_and_extract([_URLS["train"].format(lang=lang) for lang in LANGUAGES_MAP])
-            validation_csv_path = dl_manager.download_and_extract([_URLS["validation"].format(lang=lang) for lang in LANGUAGES_MAP])
-            test_csv_path = dl_manager.download_and_extract([_URLS["test"].format(lang=lang) for lang in LANGUAGES_MAP])
-        else:
-            lang = self.config.name.split("_")[2] if self.config.name.split("_")[2] != "ind" else self.config.name.split("_")[3]
-            train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=lang)))
-            validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=lang)))
-            test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=lang)))
+        lang = self.config.name.split("_")[2] if self.config.name.split("_")[2] != "ind" else self.config.name.split("_")[3]
+        train_csv_path = Path(dl_manager.download_and_extract(_URLS["train"].format(lang=lang)))
+        validation_csv_path = Path(dl_manager.download_and_extract(_URLS["validation"].format(lang=lang)))
+        test_csv_path = Path(dl_manager.download_and_extract(_URLS["test"].format(lang=lang)))
 
         return [
             datasets.SplitGenerator(
