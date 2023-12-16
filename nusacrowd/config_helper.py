@@ -440,9 +440,10 @@ BENCHMARK_DICT = {
         'nusatranslation_emot_sun_nusantara_text',
 
         # NusaTranslation MT Ind-XXX
+        'nusatranslation_mt_ind_abs_nusantara_t2t',
         'nusatranslation_mt_ind_btk_nusantara_t2t',
         'nusatranslation_mt_ind_bew_nusantara_t2t',
-        'nusatranslation_mt_ind_bug_nusantara_t2t',
+        'nusatranslation_mt_ind_bhp_nusantara_t2t',
         'nusatranslation_mt_ind_jav_nusantara_t2t',
         'nusatranslation_mt_ind_mad_nusantara_t2t',
         'nusatranslation_mt_ind_mak_nusantara_t2t',
@@ -452,9 +453,10 @@ BENCHMARK_DICT = {
         'nusatranslation_mt_ind_sun_nusantara_t2t',
 
         # NusaTranslation MT XXX-Ind
+        'nusatranslation_mt_abs_ind_nusantara_t2t',
         'nusatranslation_mt_btk_ind_nusantara_t2t',
         'nusatranslation_mt_bew_ind_nusantara_t2t',
-        'nusatranslation_mt_bug_ind_nusantara_t2t',
+        'nusatranslation_mt_bhp_ind_nusantara_t2t',
         'nusatranslation_mt_jav_ind_nusantara_t2t',
         'nusatranslation_mt_mad_ind_nusantara_t2t',
         'nusatranslation_mt_mak_ind_nusantara_t2t',
@@ -528,9 +530,10 @@ BENCHMARK_DICT = {
         'nusatranslation_emot_sun_nusantara_text',
 
         # NusaTranslation MT Ind-XXX
+        'nusatranslation_mt_ind_abs_nusantara_t2t',
         'nusatranslation_mt_ind_btk_nusantara_t2t',
         'nusatranslation_mt_ind_bew_nusantara_t2t',
-        'nusatranslation_mt_ind_bug_nusantara_t2t',
+        'nusatranslation_mt_ind_bhp_nusantara_t2t',
         'nusatranslation_mt_ind_jav_nusantara_t2t',
         'nusatranslation_mt_ind_mad_nusantara_t2t',
         'nusatranslation_mt_ind_mak_nusantara_t2t',
@@ -540,9 +543,10 @@ BENCHMARK_DICT = {
         'nusatranslation_mt_ind_sun_nusantara_t2t',
 
         # NusaTranslation MT XXX-Ind
+        'nusatranslation_mt_abs_ind_nusantara_t2t',
         'nusatranslation_mt_btk_ind_nusantara_t2t',
         'nusatranslation_mt_bew_ind_nusantara_t2t',
-        'nusatranslation_mt_bug_ind_nusantara_t2t',
+        'nusatranslation_mt_bhp_ind_nusantara_t2t',
         'nusatranslation_mt_jav_ind_nusantara_t2t',
         'nusatranslation_mt_mad_ind_nusantara_t2t',
         'nusatranslation_mt_mak_ind_nusantara_t2t',
